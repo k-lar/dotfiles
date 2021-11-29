@@ -54,7 +54,7 @@
 	export PF_SEP=":"
 
 # Environment variables for rustlang
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
 
 ## Aliases for flutter developement (uncomment to enable)
 #	export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'

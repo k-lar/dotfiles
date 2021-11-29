@@ -19,7 +19,9 @@
 (sleep 2s && picom -b --backend glx) &
 (sleep 3s && xinput set-prop 12 340 1) &
 (sleep 3s && xinput set-prop 11 318 1) &
+(sleep 2s && xinput set-prop 10 343 1) &
 (sleep 3s && xinput set-prop 10 318 1) &
+(sleep 3s && xinput set-prop 12 347 1) &
 (sleep 2s && xinput set-prop 11 320 1) &
 (sleep 2s && setxkbmap si) &
 (sleep 1s && xfce4-panel) &

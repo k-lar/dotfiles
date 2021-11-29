@@ -1,0 +1,33 @@
+#! /bin/sh
+
+# Autostart programs
+killall sxhkd; sxhkd &
+killall picom; picom -b --backend glx &
+killall dunst; dunst &
+killall nitrogen; nitrogen --restore &
+setxkbmap si &
+xinput set-prop 12 340 1 &
+xinput set-prop 11 318 1 &
+xinput set-prop 11 320 1 &
+xinput set-prop 10 318 1 &
+sh -c '/home/klar/.config/polybar/launch.sh' &
+
+# Variable
+alias bc='bspc config'
+alias br='bspc rule'
+
+# Workspaces
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+# Others
+bc border_width         2
+bc window_gap          12
+bc split_ratio          0.52
+bc borderless_monocle   true
+bc gapless_monocle      true
+
+# Rules
+br -a mpv state=floating
+br -a discord state=floating
+br -a feh state=floating
+br -a sxiv state=floating

@@ -23,14 +23,28 @@ super + shift + r
   bspc wm -r
 
 #Hardware
-XF86AudioRaiseVolume
-  pactl set-sink-volume @DEFAULT_SINK@ +5%
-XF86AudioLowerVolume
-  pactl set-sink-volume @DEFAULT_SINK@ -5%
-XF86MonBrightnessUp
-  brightnessctl set +15
-XF86MonBrightnessDown
-  brightnessctl set 15-
+super + ctrl + F3
+  amixer set Master 10%+
+
+super + ctrl + F2
+  amixer set Master 10%-
+
+super + ctrl + F1
+  amixer -D pulse set Master 1+ toggle
+
+super + ctrl + F6
+  brightnessctl set +5%
+
+super + ctrl + F5
+  brightnessctl set 5%-
+
+#Media player controls
+XF86AudioPlay
+	playerctl play-pause
+XF86AudioNext
+	playerctl next
+XF86AudioPrev
+	playerctl previous
 
 #Window Management
 super + Tab

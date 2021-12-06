@@ -27,6 +27,7 @@
 	alias lsn='exa --sort newest'
 	alias htop='btop'
 	alias ssh='kitty +kitten ssh'
+	alias newsboat='newsboat -r'
 
 # Weather report alias:
 	alias weather='curl wttr.in/Ljubljana'

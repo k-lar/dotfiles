@@ -5,6 +5,9 @@ killall sxhkd; sxhkd &
 killall picom; picom -b --backend glx &
 killall dunst; dunst &
 killall nitrogen; nitrogen --restore &
+killall nm-applet; nm-applet &
+killall thunar; thunar --daemon &
+killall mpd; mpd &
 setxkbmap si &
 xinput set-prop 12 340 1 &
 xinput set-prop 11 318 1 &
@@ -31,3 +34,5 @@ br -a mpv state=floating
 br -a discord state=floating
 br -a feh state=floating
 br -a sxiv state=floating
+br -a nm-connection-editor state=floating
+br -a Zathura state=tiled

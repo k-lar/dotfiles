@@ -14,7 +14,7 @@ super + {_,shift + }{1-9,0}
   bspc {desktop -f,node -d} '^{1-9,10}'paces
 
 super + l
-  i3lock -B -k
+  i3lock -B sigma -e
 
 super + shift + e
   bspc quit

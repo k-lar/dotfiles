@@ -16,6 +16,7 @@ Plug 'ernstwi/vim-secret'
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'dkarter/bullets.vim'
+Plug 'ojroques/vim-scrollstatus'
 Plug 'vimwiki/vimwiki'
 
 " Coding plugins
@@ -50,7 +51,13 @@ call plug#end()
 " Lightline colorscheme configuration
 	let g:lightline = {
 		\ 'colorscheme': 'gruvbox',
+		\ 'active': {
+		\   'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype', 'charvaluehex']]
+		\ },
+		\ 'component_function': {'percent': 'ScrollStatus'},
 		\ }
+
+	let g:scrollstatus_size = 12
 
 " Stop vimwiki from taking over markdown files outside wiki directories
 	let g:vimwiki_global_ext = 0

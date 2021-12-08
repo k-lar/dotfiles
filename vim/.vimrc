@@ -37,6 +37,7 @@ call plug#end()
 	set noshowmode " Don't show INSERT mode (for use with lightline)
 	set ignorecase
 	set smartcase
+	set smarttab
 	set scrolloff=1
 	set sidescrolloff=3
 	set mouse=a
@@ -70,7 +71,7 @@ call plug#end()
 	au FileType vimwiki setlocal textwidth=100
 
 " Markdown fenced languages list (syntax highlighting code inside markdown docs)
-	let g:markdown_fenced_languages = ['python', 'html', 'c', 'vim', 'rust', 'bash']
+	let g:markdown_fenced_languages = ['python', 'html', 'c', 'vim', 'rust', 'bash', 'sql']
 
 " Vim autocompletion config (omnifunc)
 	set wildmode=longest,list,full

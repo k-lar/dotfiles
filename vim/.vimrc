@@ -17,6 +17,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'dkarter/bullets.vim'
 Plug 'ojroques/vim-scrollstatus'
+Plug 'rinx/nvim-minimap'
 Plug 'vimwiki/vimwiki'
 
 " Coding plugins
@@ -58,6 +59,12 @@ call plug#end()
 		\ }
 
 	let g:scrollstatus_size = 12
+
+" nvim-minimap configuratio nvim-minimap configuration
+	nnoremap <leader>m :MinimapToggle <cr>
+
+	let g:minimap#window#width = 20
+	let g:minimap#window#height = 20
 
 " Stop vimwiki from taking over markdown files outside wiki directories
 	let g:vimwiki_global_ext = 0

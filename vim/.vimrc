@@ -45,6 +45,12 @@ call plug#end()
 	set mouse=a
 	set path+=**
 
+" Abbreviations / aliases
+	iabbrev ip IP
+	iabbrev ipv6 IPv6
+	iabbrev ipv4 IPv4
+	iabbrev dhcp DHCP
+
 " Colorscheme config (gruvbox)
 	colorscheme gruvbox
 	set background=dark
@@ -171,6 +177,14 @@ call plug#end()
 " Tab controls (Alt+Left/Right)
 	nnoremap <M-Left> :tabprevious<CR>
 	nnoremap <M-Right> :tabnext<CR>
+
+" Easily move lines up and down
+	nnoremap <c-Down> :m .+1<CR>==
+	nnoremap <c-Up> :m .-2<CR>==
+	inoremap <c-Down> <ESC>:m .+1<CR>==gi
+	inoremap <c-Up> <ESC>:m .-2<CR>==gi
+	vnoremap <c-Down> :m '>+1<CR>gv=gv
+	vnoremap <c-Up> :m '<-2<CR>gv=gv
 
 " Telescope (fuzzy finder mappings)
 " Find files using Telescope command-line sugar.

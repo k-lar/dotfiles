@@ -46,7 +46,7 @@ modules-left =  bspwm xwindow
 ;modules-center = previous playpause next spotify
 ; Mpd
 modules-center = time
-modules-right = wlan cpu temperature memory battery pulseaudio powermenu
+modules-right = wlan cpu memory battery pulseaudio powermenu
 
 scroll-up = bspwn-wsnext
 scroll-down = bspwn-wsprev

@@ -193,6 +193,10 @@ call plug#end()
 	nnoremap <leader>fb <cmd>Telescope buffers<cr>
 	nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+" See whitespaces toggle
+	set listchars=tab:>-,trail:·,extends:>,precedes:<
+	map <leader>ws :set list!<CR>
+
 """""" COC Autocompletion configuration
 "" Use tab for trigger completion with characters ahead and navigate.
 "" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.

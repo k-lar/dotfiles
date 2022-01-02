@@ -124,6 +124,7 @@ call plug#end()
 " Enable closing brackets in vim
 	inoremap ( ()<left>
 	inoremap [ []<left>
+	inoremap < <><left>
 
 " Pandoc markdown -> pdf compilation
 	augroup my_markdown
@@ -144,10 +145,10 @@ call plug#end()
 	vnoremap <c-Up> :m '<-2<CR>gv=gv
 
 " Set undo break points for certain characters (sensible undo)
-	inoremap , ,<c-u>u
-	inoremap . .<c-u>u
-	inoremap ! !<c-u>u
-	inoremap ? ?<c-u>u
+	inoremap , ,<c-g>u
+	inoremap . .<c-g>u
+	inoremap ! !<c-g>u
+	inoremap ? ?<c-g>u
 
 " See whitespaces toggle
 	set listchars=tab:>-,trail:·,extends:>,precedes:<

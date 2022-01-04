@@ -88,6 +88,7 @@ call plug#end()
 	au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 	au BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
 	au filetype markdown :iabbrev txtred \textcolor{red}{}<Left>
+	au filetype markdown :iabbrev txtblu \textcolor{blue}{}<Left>
 
 " Larger text width in terminal for easier readability (In markdown files)
 	au FileType markdown setlocal textwidth=100
@@ -129,7 +130,8 @@ call plug#end()
 " Pandoc markdown -> pdf compilation
 	augroup my_markdown
 		autocmd!
-		autocmd FileType markdown nnoremap <F9> :<c-u>silent call system('pandoc -s '.expand('%:p:S').' -o '.expand('%:p:r:S').'.pdf')<cr>
+		autocmd FileType markdown nnoremap <silent><F9> :<c-u>call system('pandoc -s '.expand('%:p:S').' -o '.expand('%:p:r:S').'.pdf')<cr>
+		autocmd FileType markdown nnoremap <silent><F8> :<c-u>call system('zathura '.expand('%:p:r:S').'.pdf')<cr>
 	augroup END
 
 " Tab controls (Alt+Left/Right)
@@ -152,14 +154,14 @@ call plug#end()
 
 " See whitespaces toggle
 	set listchars=tab:>-,trail:·,extends:>,precedes:<
-	map <leader>ws :set list!<CR>
+	map <silent><leader>ws :set list!<CR>
 
 " Folding in vim filetype
 	autocmd FileType vim setlocal foldmethod=marker
 
 " Folding in markdown
 	let g:markdown_folding = 1
-	map <leader>fd :set nofoldenable!<CR>
+	map <silent><leader>fd :set nofoldenable!<CR>
 
 " }}}
 

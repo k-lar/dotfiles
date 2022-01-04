@@ -125,7 +125,6 @@ call plug#end()
 " Enable closing brackets in vim
 	inoremap ( ()<left>
 	inoremap [ []<left>
-	inoremap < <><left>
 
 " Pandoc markdown -> pdf compilation
 	augroup my_markdown

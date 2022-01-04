@@ -221,3 +221,13 @@ call plug#end()
 	nnoremap <leader>fg :Rg<CR>
 " }}}
 
+
+" Very simple TODO management {{{
+	command Todo silent noautocmd vimgrep /TODO:\|FIXME:/j % | vert cwindow | winc =
+
+	inoremap <F4> :Todo<cr>
+	noremap <F4> :Todo<cr>
+	inoremap <F3> :cclose<cr>
+	nnoremap <F3> :cclose<cr>
+" }}}
+

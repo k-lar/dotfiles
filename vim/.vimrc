@@ -181,6 +181,12 @@ call plug#end()
 		autocmd FileType python setlocal makeprg=pylint
 	augroup END
 
+
+	augroup python_run
+		autocmd!
+		autocmd FileType python nnoremap <silent><F5> :!python %<cr>
+	augroup END
+
 " Disables automatic commenting on new line
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " }}}

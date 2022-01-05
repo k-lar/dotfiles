@@ -225,9 +225,8 @@ call plug#end()
 " Very simple TODO management {{{
 	command Todo silent noautocmd vimgrep /\CTODO\+:\|\CFIXME\+:/g % | vert cwindow | winc =
 
-	inoremap <F4> :Todo<cr>
-	noremap <F4> :Todo<cr>
-	inoremap <F3> :cclose<cr>
+	inoremap <F4>  <ESC>:Todo<cr>
+	nnoremap <F4> :Todo<cr>
+	inoremap <F3> <ESC>:cclose<cr>
 	nnoremap <F3> :cclose<cr>
 " }}}
-

@@ -13,6 +13,7 @@ Plug 'junegunn/fzf.vim', { 'on': 'Files' }
 Plug 'fladson/vim-kitty', { 'for': 'kitty' }
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
@@ -34,7 +35,7 @@ call plug#end()
 	filetype plugin on
 	set encoding=utf-8
 	set number relativenumber
-	set clipboard=unnamedplus
+	set clipboard+=unnamedplus
 	set noshowmode " Don't show INSERT mode (for use with lightline)
 	set ignorecase
 	set smartcase
@@ -228,6 +229,23 @@ call plug#end()
 " }}}
 
 
+" Mouse toggle (useful for copying and pasting where vim is not compiled with +clipboard) {{{
+	function! ToggleMouse()
+	    " check if mouse is enabled
+	    if &mouse == 'a'
+	        " disable mouse
+	        set mouse=
+	    else
+	        " enable mouse everywhere
+	        set mouse=a
+	    endif
+	endfunc
+
+	map <leader>M :call ToggleMouse()<CR>
+
+" }}}
+
+
 " Very simple TODO management {{{
 	command Todo silent noautocmd vimgrep /\CTODO\+:\|\CFIXME\+:/g % | vert cwindow | winc =
 
@@ -235,4 +253,11 @@ call plug#end()
 	nnoremap <F4> :Todo<cr>
 	inoremap <F3> <ESC>:cclose<cr>
 	nnoremap <F3> :cclose<cr>
+" }}}
+
+
+" Git Gutter toggle {{{
+	nnoremap <leader>G :GitGutterToggle<CR>
+	let g:gitgutter_enabled = 0
+
 " }}}

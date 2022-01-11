@@ -19,6 +19,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'dkarter/bullets.vim'
 Plug 'rinx/nvim-minimap'
+Plug 'dhruvasagar/vim-table-mode'
 Plug 'vimwiki/vimwiki'
 
 " Coding plugins
@@ -101,6 +102,9 @@ call plug#end()
 " Stop vimwiki from taking over markdown files outside wiki directories
 	let g:vimwiki_global_ext = 0
 
+" vim-table-mode setup for use with markdown (primarily)
+	let g:table_mode_corner='|'
+
 " Automatically deletes all trailing whitespaces on save (except .md files)
 	fun! StripTrailingWhiteSpace()
   	" don't strip on these filetypes
@@ -181,7 +185,6 @@ call plug#end()
 		" Linting Python, the vanilla way
 		autocmd FileType python setlocal makeprg=pylint
 	augroup END
-
 
 	augroup python_run
 		autocmd!

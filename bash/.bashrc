@@ -51,8 +51,8 @@
 	export EDITOR="/usr/bin/nvim"
 
 # pfetch configuration
-	export PF_INFO="ascii title os host kernel uptime pkgs memory"
-	export PF_SEP=":"
+	export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
+	#export PF_SEP=":"
 
 # Environment variables for rustlang
 #. "$HOME/.cargo/env"

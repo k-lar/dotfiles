@@ -21,16 +21,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'junegunn/fzf.vim', { 'on': 'Files' }
 Plug 'fladson/vim-kitty', { 'for': 'kitty' }
+Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
+Plug 'vimwiki/vimwiki', { 'for': 'markdown' }
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
-Plug 'dkarter/bullets.vim'
 Plug 'rinx/nvim-minimap'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'vimwiki/vimwiki'
 
 " Coding plugins
 Plug 'ackyshake/VimCompletesMe'
@@ -71,7 +71,7 @@ call plug#end()
 " Colorscheme config (gruvbox) {{{
 	colorscheme gruvbox
 	set background=dark
-" }}}
+ " }}}
 
 
 " Lightline configuration {{{
@@ -138,10 +138,6 @@ call plug#end()
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitbelow splitright
-
-" Enable closing brackets in vim
-	inoremap ( ()<left>
-	inoremap [ []<left>
 
 " Pandoc markdown -> pdf compilation
 	augroup my_markdown

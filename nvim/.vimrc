@@ -60,6 +60,12 @@ call plug#end()
 " }}}
 
 
+" Journaling {{{
+
+
+" }}}
+
+
 " Abbreviations / aliases {{{
 	iabbrev ip IP
 	iabbrev ipv6 IPv6

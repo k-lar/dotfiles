@@ -61,7 +61,12 @@ call plug#end()
 
 
 " Journaling {{{
+	augroup journal
+    		autocmd!
 
+		" populate journal template
+		autocmd VimEnter */journal/**   0r ~/.config/nvim/templates/journal.skeleton
+	augroup end
 
 " }}}
 

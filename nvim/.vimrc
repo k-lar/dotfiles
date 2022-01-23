@@ -101,10 +101,10 @@ call plug#end()
 " }}}
 
 
-" Remap ESC => CapsLock in vim only / 'silent:' prevents confirmation prompt: {{{
+" Remap ESC => CapsLock in vim only DEPRECATED (Now using systemwide esc>capslock) {{{
 " '1>/dev/null 2>&1 &' sends xmodmap warning on Shift+ZZ/ZQ to /dev/null
-	au VimEnter * silent: !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' 1>/dev/null 2>&1 &
-	au VimLeave * silent: !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock' 1>/dev/null 2>&1 &
+"	au VimEnter * silent: !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' 1>/dev/null 2>&1 &
+"	au VimLeave * silent: !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock' 1>/dev/null 2>&1 &
 " }}}
 
 

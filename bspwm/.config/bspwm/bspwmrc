@@ -8,8 +8,7 @@ killall nitrogen; nitrogen --restore &
 killall nm-applet; nm-applet &
 killall thunar; thunar --daemon &
 killall mpd; mpd &
-setxkbmap si &
-setxkbmap -option caps:swapescape
+setxkbmap si -option caps:swapescape &
 
 xinput set-prop 12 340 1 &
 xinput set-prop 11 318 1 &

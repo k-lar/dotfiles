@@ -11,6 +11,10 @@ super + b
 super + f
   thunar
 
+#Notification center (github.com/phuhl/linux_notification_center)
+super + n
+  kill -s USR1 $(pidof deadd-notification-center)
+
 #Screenshot
 Print
   flameshot gui

@@ -3,7 +3,7 @@
 # Autostart programs
 killall sxhkd; sxhkd &
 killall picom; picom -b --backend glx &
-killall dunst; dunst &
+killall deadd-notification-center; deadd-notification center &
 killall nitrogen; nitrogen --restore &
 killall nm-applet; nm-applet &
 killall thunar; thunar --daemon &

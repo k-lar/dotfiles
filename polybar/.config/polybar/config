@@ -286,7 +286,7 @@ format-full = <label-full>
 
 format-charging-underline = ${colors.foreground}
 format-discharging-underline = ${colors.foreground}
-format-full-prefix = " "
+format-full-prefix = "  "
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 

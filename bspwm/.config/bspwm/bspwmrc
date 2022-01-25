@@ -24,8 +24,9 @@ alias br='bspc rule'
 bspc monitor -d I II III IV V VI VII VIII IX X
 
 # Others
-bc border_width         2
-bc window_gap          12
+bc border_width         0
+bc border_radius        15
+bc window_gap           12
 bc split_ratio          0.52
 bc borderless_monocle   true
 bc gapless_monocle      true

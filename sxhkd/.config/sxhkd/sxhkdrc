@@ -5,6 +5,12 @@ super + Return
 super + @d
   rofi -show run
 
+super + b
+  librewolf
+
+super + f
+  thunar
+
 #Screenshot
 Print
   flameshot gui
@@ -21,6 +27,12 @@ super + shift + e
 
 super + shift + r
   bspc wm -r
+
+super + p
+  feh --bg-fill --randomize ~/gruvbox-walls/*
+
+super + shift + p
+  feh --bg-fill ~/gruvbox-walls/stairs.jpg
 
 #Hardware
 super + ctrl + F3

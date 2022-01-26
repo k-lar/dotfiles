@@ -46,7 +46,7 @@ modules-left =  bspwm xwindow
 ;modules-center = previous playpause next spotify
 ; Mpd
 modules-center = time
-modules-right = wlan cpu memory battery pulseaudio powermenu
+modules-right = eth wlan cpu memory battery pulseaudio powermenu
 
 scroll-up = bspwn-wsnext
 scroll-down = bspwn-wsprev
@@ -150,6 +150,21 @@ ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-color1 = ${colors.foreground}
 
+[module/eth]
+type = internal/network
+interface = enp5s0
+interval = 3.0
+
+format-connected-prefix = " "
+format-connected-prefix-color1 = ${colors.color1-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-color1 = ${colors.color1-alt}
+
 [module/time]
 type = internal/date
 interval = 10
@@ -170,6 +185,7 @@ format-volume = <ramp-volume><label-volume>
 label-volume = %percentage:4:4%%
 use-ui-max = false
 interval = 5
+click-right = pavucontrol
 
 ramp-volume-0 = ""
 ramp-volume-1 = ""

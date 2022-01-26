@@ -54,6 +54,12 @@ super + ctrl + F6
 super + ctrl + F5
   brightnessctl set 5%-
 
+XF86AudioLowerVolume
+  amixer set Master 5%-
+
+XF86AudioRaiseVolume
+  amixer set Master 5%+
+
 #Media player controls
 XF86AudioPlay
 	playerctl play-pause
@@ -66,8 +72,13 @@ XF86AudioPrev
 super + Tab
   bspc node -t {floating,tiled}
 
+#kills window
 super + q
-  bspc node -{c,k}
+  bspc node -c
+
+#kills all instances of program
+super + {_,shift + }q
+    bspc node -k
 
 alt + Tab
   bspc node -f next.local.!hidden.window

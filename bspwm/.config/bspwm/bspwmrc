@@ -2,12 +2,14 @@
 
 # Autostart programs
 killall sxhkd; sxhkd &
-killall picom; picom -b --backend glx &
+killall xrandr; xrandr --output HDMI-1 --mode 1920x1080 --rate 144 &
+killall picom; picom -b --backend glx --refresh-rate 144 --vsync &
 killall deadd-notification-center; deadd-notification center &
 killall nitrogen; nitrogen --restore &
 killall nm-applet; nm-applet &
 killall thunar; thunar --daemon &
 killall mpd; mpd &
+killall discord; discord &
 setxkbmap si -option caps:swapescape &
 
 xinput set-prop 12 340 1 &

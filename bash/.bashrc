@@ -43,6 +43,7 @@
 	alias nsik="cd ~/School/NSIK"
 	alias poi="cd ~/School/POI"
 	alias rob="cd ~/School/ROB"
+	alias kem="cd ~/School/KEM"
 
 # Make grep have color
 	alias grep='grep --color=auto'

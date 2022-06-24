@@ -24,6 +24,7 @@ Plug 'fladson/vim-kitty', { 'for': 'kitty' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'vimwiki/vimwiki', { 'for': 'markdown' }
 Plug 'terryma/vim-expand-region'
+Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
@@ -107,6 +108,8 @@ call plug#end()
 "	au VimLeave * silent: !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock' 1>/dev/null 2>&1 &
 " }}}
 
+" f and t movements (quick-scope plugin) highlight on keypress
+	let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " Markdown syntaxing and QOL featuzres: {{{
 " Front of file (title, author, layout...) color change

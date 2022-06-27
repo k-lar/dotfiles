@@ -11,6 +11,10 @@ super + b
 super + f
   thunar
 
+#Rofi power-menu script
+super + k
+  rofi -show p -modi "p:~/.config/rofi/scripts/rofi-power-menu --choices=shutdown/reboot/suspend/logout"
+
 #Notification center (github.com/phuhl/linux_notification_center)
 super + n
   kill -s USR1 $(pidof deadd-notification-center)

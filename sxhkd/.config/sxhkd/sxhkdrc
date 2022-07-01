@@ -3,7 +3,7 @@ super + Return
   kitty
 
 super + @d
-  rofi -show run
+  rofi -show run -show-icons
 
 super + b
   librewolf

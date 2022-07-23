@@ -28,8 +28,7 @@ Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
-Plug 'itchyny/lightline.vim'
-Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'rinx/nvim-minimap'
 Plug 'dhruvasagar/vim-table-mode'
 
@@ -86,11 +85,18 @@ call plug#end()
  " }}}
 
 
-" Lightline configuration {{{
-	let g:lightline = {
-		\ 'colorscheme': 'gruvbox',
-		\ }
+" Lualine configuration {{{
+lua << EOF
+local custom_gruvbox = require'lualine.themes.gruvbox'
 
+-- Change the background of lualine_a section for insert mode
+custom_gruvbox.insert.a.bg = '#84a799'
+
+require('lualine').setup {
+  options = { theme  = custom_gruvbox },
+  ...
+}
+EOF
 " }}}
 
 
@@ -108,8 +114,11 @@ call plug#end()
 "	au VimLeave * silent: !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock' 1>/dev/null 2>&1 &
 " }}}
 
-" f and t movements (quick-scope plugin) highlight on keypress
+
+" f and t movements (quick-scope plugin) highlight on keypress {{{
 	let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+	" }}}
+
 
 " Markdown syntaxing and QOL featuzres: {{{
 " Front of file (title, author, layout...) color change

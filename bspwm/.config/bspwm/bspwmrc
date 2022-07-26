@@ -2,14 +2,14 @@
 
 # Autostart programs
 killall sxhkd; sxhkd &
-killall xrandr; xrandr --output HDMI-1 --mode 1920x1080 --rate 144 &
-killall picom; picom -b --backend glx --refresh-rate 144 --vsync &
+#killall xrandr; xrandr --output HDMI-1 --mode 1920x1080 --rate 144 &
+killall picom; picom &
 killall deadd-notification-center; deadd-notification center &
 killall nitrogen; nitrogen --restore &
 killall nm-applet; nm-applet &
+killall blueman-applet; blueman-applet &
 killall thunar; thunar --daemon &
 killall mpd; mpd &
-killall discord; discord &
 setxkbmap si -option caps:swapescape &
 
 xinput set-prop 12 340 1 &
@@ -27,7 +27,7 @@ bspc monitor -d I II III IV V VI VII VIII IX X
 
 # Others
 bc border_width         0
-bc border_radius        15
+#bc border_radius        15
 bc window_gap           12
 bc split_ratio          0.52
 bc borderless_monocle   true
@@ -35,8 +35,8 @@ bc gapless_monocle      true
 
 # Rules
 br -a mpv state=floating
-br -a discord state=floating
 br -a feh state=floating
 br -a sxiv state=floating
 br -a nm-connection-editor state=floating
 br -a Zathura state=tiled
+br -a Emacs state=tiled

@@ -19,6 +19,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'folke/zen-mode.nvim'
 Plug 'junegunn/fzf.vim', { 'on': 'Files' }
 Plug 'fladson/vim-kitty', { 'for': 'kitty' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
@@ -26,11 +27,12 @@ Plug 'vimwiki/vimwiki', { 'for': 'markdown' }
 Plug 'terryma/vim-expand-region'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
 Plug 'morhetz/gruvbox'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'rinx/nvim-minimap'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'mhinz/vim-startify'
 
 " Coding plugins
 Plug 'ackyshake/VimCompletesMe'
@@ -57,6 +59,34 @@ call plug#end()
 	set sidescrolloff=3
 	set mouse=a
 	set path+=**
+" }}}
+
+
+" startify config {{{
+let g:startify_custom_header=[
+\'',
+\'  ██╗  ██╗██╗      █████╗ ██████╗       ██╗   ██╗██╗███╗   ███╗',
+\'  ██║ ██╔╝██║     ██╔══██╗██╔══██╗      ██║   ██║██║████╗ ████║',
+\'  █████╔╝ ██║     ███████║██████╔╝█████╗██║   ██║██║██╔████╔██║',
+\'  ██╔═██╗ ██║     ██╔══██║██╔══██╗╚════╝╚██╗ ██╔╝██║██║╚██╔╝██║',
+\'  ██║  ██╗███████╗██║  ██║██║  ██║       ╚████╔╝ ██║██║ ╚═╝ ██║',
+\'  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝        ╚═══╝  ╚═╝╚═╝     ╚═╝',
+\'',
+\]
+
+
+let g:startify_lists = [
+\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+\ { 'type': 'files',     'header': ['   MRU']            },
+\ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+\ { 'type': 'sessions',  'header': ['   Sessions']       },
+\ { 'type': 'commands',  'header': ['   Commands']       },
+\ ]
+
+let g:startify_bookmarks = [
+\ {'v': '~/.vimrc'}, {'b': '~/.bashrc'},
+\ ]
+
 " }}}
 
 
@@ -95,6 +125,24 @@ custom_gruvbox.insert.a.bg = '#84a799'
 require('lualine').setup {
   options = { theme  = custom_gruvbox },
   ...
+}
+EOF
+" }}}
+
+
+" zen-mode configuration {{{
+map <silent> <leader>g :ZenMode<CR>
+
+lua << EOF
+require("zen-mode").setup {
+	window = {
+		backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep same
+    		width = .85, -- width will be 85% of the editor width
+		options = {
+			number = false,
+			relativenumber = false,
+		},
+  	},
 }
 EOF
 " }}}
@@ -149,9 +197,6 @@ EOF
   	%s/\s\+$//e
 	endfun
 	autocmd BufWritePre * :call StripTrailingWhiteSpace()
-
-" Goyo plugin for centering text / better readability
-	map <silent> <leader>g :Goyo \| set linebreak<CR>
 
 " Spell checking in English
 	map <leader>e :setlocal spell! spelllang=en_us<CR>

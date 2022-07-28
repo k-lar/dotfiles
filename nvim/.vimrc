@@ -33,6 +33,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'rinx/nvim-minimap'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-commentary'
 
 " Coding plugins
 Plug 'ackyshake/VimCompletesMe'

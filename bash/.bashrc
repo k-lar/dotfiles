@@ -14,6 +14,9 @@
 # Prompt shell style
 	PS1='[\u@\h \W]\$ '
 
+# Set bash into vim mode
+	set -o vi
+
 # Aliases
 	alias ls='exa -g'
 	alias nnn='nnn -e'
@@ -28,6 +31,7 @@
 	alias htop='btop'
 	alias ssh='kitty +kitten ssh'
 	alias newsboat='newsboat -r'
+	alias rorlike='cd ~/git/rorlike/'
 
 # Weather report alias:
 	alias weather='curl wttr.in/Ljubljana'

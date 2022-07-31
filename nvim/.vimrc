@@ -17,13 +17,12 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 	autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/.vim/plugged')
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+call plug#begin('~/.nvim/plugged')
+" Misc
 Plug 'folke/zen-mode.nvim'
 Plug 'junegunn/fzf.vim', { 'on': 'Files' }
 Plug 'fladson/vim-kitty', { 'for': 'kitty' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
-Plug 'vimwiki/vimwiki', { 'for': 'markdown' }
 Plug 'terryma/vim-expand-region'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-fugitive'
@@ -36,9 +35,17 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-commentary'
 
 " Coding plugins
-Plug 'ackyshake/VimCompletesMe'
 Plug 'mattn/emmet-vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Update parser on update
+
+" Autocompletion
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
 
 call plug#end()
 
@@ -270,6 +277,119 @@ EOF
 
 " Disables automatic commenting on new line
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Tree-sitter config
+lua << EOF
+
+local configs = require'nvim-treesitter.configs'
+configs.setup {
+ensure_installed = { "c", "lua", "python",  "bash", "bibtex", "cpp", "yaml", "vim", "cmake" },
+highlight = { -- enable highlighting
+  enable = true,
+},
+indent = {
+  enable = false, -- default is disabled anyways
+}
+}
+
+EOF
+
+" Mason.nvim config
+lua require("mason").setup()
+
+" LSP config
+" Language servers setup
+lua require'lspconfig'.pyright.setup{}
+lua require'lspconfig'.vimls.setup{}
+
+" Keymaps for LSP
+nnoremap gd :lua vim.lsp.buf.definition()<cr>
+nnoremap gD :lua vim.lsp.buf.declaration()<cr>
+nnoremap gi :lua vim.lsp.buf.implementation()<cr>
+nnoremap gw :lua vim.lsp.buf.document_symbol()<cr>
+nnoremap gw :lua vim.lsp.buf.workspace_symbol()<cr>
+nnoremap gr :lua vim.lsp.buf.references()<cr>
+nnoremap gt :lua vim.lsp.buf.type_definition()<cr>
+nnoremap K  :lua vim.lsp.buf.hover()<cr>
+nnoremap <c-k> :lua vim.lsp.buf.signature_help()<cr>
+nnoremap <leader>af :lua vim.lsp.buf.code_action()<cr>
+nnoremap <leader>rn :lua vim.lsp.buf.rename()<cr>
+
+" }}}
+
+
+" Autocompletion {{{
+lua << EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      -- { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('markdown', {
+    enabled = false,
+  })
+
+  cmp.setup.filetype('vim', {
+    enabled = false,
+  })
+
+  cmp.setup.filetype('norg', {
+    enabled = false,
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  -- cmp.setup.cmdline('/', {
+  --   mapping = cmp.mapping.preset.cmdline(),
+  --   sources = {
+  --     { name = 'buffer' }
+  --   }
+  -- })
+
+  -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  -- cmp.setup.cmdline(':', {
+  --   mapping = cmp.mapping.preset.cmdline(),
+  --   sources = cmp.config.sources({
+  --     { name = 'path' }
+  --   }, {
+  --     { name = 'cmdline' }
+  --   })
+  -- })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['pyright'].setup {
+    capabilities = capabilities
+  }
+EOF
+
+" Disable on certain filetypes
+" autocmd FileType markdown lua require'cmp'.setup.buffer {
+" \   completion = { autocomplete = false }
+" \ }
+
 " }}}
 
 

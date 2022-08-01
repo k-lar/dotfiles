@@ -23,6 +23,10 @@ super + n
 Print
   flameshot gui
 
+#Boomer (Zoomer app)
+super + y
+  boomer
+
 #Color picker (xcolor)
 ctrl + Print
   xcolor

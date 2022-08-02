@@ -10,17 +10,17 @@ let mapleader =" "
 " ======================================
 
 " Download vim-plug if not found
-if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.vim/plugged')
 " Misc
 Plug 'folke/zen-mode.nvim'
-Plug 'junegunn/fzf.vim', { 'on': 'Files' }
+Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'Rg' ] }
 Plug 'fladson/vim-kitty', { 'for': 'kitty' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'terryma/vim-expand-region'
@@ -182,6 +182,7 @@ EOF
 	au BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
 	au filetype markdown :iabbrev txtred \textcolor{red}{}<Left>
 	au filetype markdown :iabbrev txtblu \textcolor{blue}{}<Left>
+	au filetype markdown :iabbrev uline \underline{}<Left>
 
 " Larger text width in terminal for easier readability (In markdown files)
 	au FileType markdown setlocal textwidth=100
@@ -351,11 +352,15 @@ lua << EOF
     enabled = false,
   })
 
-  cmp.setup.filetype('vim', {
-    enabled = false,
+  cmp.setup({
+    enabled =
+      function ()
+        buftype = vim.api.nvim_buf_get_option(0, "buftype")
+	if buftype == "markdown" then return false end -- Turn off when in markdown buffer
+      end
   })
 
-  cmp.setup.filetype('norg', {
+  cmp.setup.filetype('vim', {
     enabled = false,
   })
 

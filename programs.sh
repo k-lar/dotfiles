@@ -56,7 +56,7 @@ read -p "[y/N]: " opt_choice
 
 
 # Which package manager to execute the script with
-PACKAGE_MGR=("pacman" "yay" "paru")
+PACKAGE_MGR=("sudo pacman" "yay" "paru")
 
 echo -e "\nWhich package manager/command would you like to use?"
 
@@ -71,11 +71,11 @@ read -p ": " pkg_choice
 # A bunch of if statements because I have no idea how to make multidimensional
 # arrays work in bash
 if [[ "$aur_choice" != "y" ]] && [[ "$opt_choice" != "y" ]]; then
-  echo -e "sudo ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} --noconfirm\n"
+  echo -e "${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} --noconfirm\n"
   echo "Execute this command?"
   read -p "[y/N]: " confirm_command
   if [ "$confirm_command" == "y" ]; then
-    sudo ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} --noconfirm
+    ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} --noconfirm
   else
     echo "Exited the script"
     exit 0
@@ -84,11 +84,11 @@ fi
 
 
 if [[ "$aur_choice" != "y" ]] && [[ "$opt_choice" == "y" ]]; then
-  echo -e "sudo ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm\n"
+  echo -e "${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm\n"
   echo "Execute this command?"
   read -p "[y/N]: " confirm_command
   if [ "$confirm_command" == "y" ]; then
-    sudo ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm
+    ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm
   else
     echo "Exited the script"
     exit 0
@@ -97,11 +97,11 @@ fi
 
 
 if [[ "$aur_choice" == "y" ]] && [[ "$opt_choice" != "y" ]]; then
-  echo -e "sudo ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} --noconfirm\n"
+  echo -e "${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} --noconfirm\n"
   echo "Execute this command?"
   read -p "[y/N]: " confirm_command
   if [ "$confirm_command" == "y" ]; then
-    sudo ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} --noconfirm
+    ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} --noconfirm
   else
     echo "Exited the script"
     exit 0
@@ -110,11 +110,11 @@ fi
 
 
 if [[ "$aur_choice" == "y" ]] && [[ "$opt_choice" == "y" ]]; then
-  echo -e "sudo ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm\n"
+  echo -e "${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm\n"
   echo "Execute this command?"
   read -p "[y/N]: " confirm_command
   if [ "$confirm_command" == "y" ]; then
-    sudo ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm
+    ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm
   else
     echo "Exited the script"
     exit 0

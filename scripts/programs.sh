@@ -7,17 +7,20 @@
 # ===============================================================================
 
 # List of programs to be downloaded
+# ===============================================================================
 
-PACMAN_PACKAGES=("bspwm" "sxhkd" "neovim" "mpv" "feh" "zathura" "zathura-pdf-poppler"
-"xcolor" "nitrogen" "thunar" "thunar-volman" "gvfs" "gvfs-mtp" "kitty" "when" "git"
-"mtpfs" "rofi" "mpv" "nomacs" "fuse" "xclip" "unrar" "zip" "unzip" "ncdu"
-"lxappearance" "keepass" "file-roller" "exa" "ripgrep" "fzf" "btop"
+CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-poppler" "xcolor" "thunar"
+"thunar-volman" "gvfs" "gvfs-mtp" "kitty" "when" "git" "rofi" "nomacs" "xclip"
+"unrar" "zip" "unzip" "ncdu" "keepass" "file-roller" "exa" "ripgrep" "fzf" "btop"
 "pavucontrol" "flameshot" "bat" "stow")
 
-AUR_PACKAGES=("cava-git" "picom-pijulius-git" "yt-dlp" "onlyoffice-bin" "pfetch"
-"polybar-git" "deadd-notification-center-bin" "boomer-git" "cbonsai" "i3lock-color")
+DE_PACKAGES=("bspwm" "sxhkd" "picom-pijulius-git" "nitrogen" "mtpfs" "polybar-git"
+"deadd-notification-center-bin" "boomer-git" "cava-git" "i3lock-color" "pfetch"
+"lxappearance")
 
-OPTIONAL_PACKAGES=("texlive-core" "pandoc" "texlive-latexextra" "ntfs-3g")
+TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai")
+
+MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp")
 
 # ===============================================================================
 
@@ -39,21 +42,46 @@ echo "List all the packages that can be installed?"
 read -p "[y/N]: " confirm_selection
 if [ "$confirm_selection" == "y" ]; then
   echo -e "\n========================================="
-  echo -e "\e[1mPACMAN_PACKAGES:\e[0m\n${PACMAN_PACKAGES[@]}"
-  echo -e "\e[1mAUR_PACKAGES:\e[0m\n${AUR_PACKAGES[@]}"
-  echo -e "\e[1mOPTIONAL_PACKAGES:\e[0m\n${OPTIONAL_PACKAGES[@]}"
-  echo -e "=========================================\n"
+  echo -e "\e[1mCORE_PACKAGES:\e[0m\n${CORE_PACKAGES[@]}\n"
+  echo -e "\e[1mDE_PACKAGES: (yay or paru needed!)\e[0m\n${DE_PACKAGES[@]}\n"
+  echo -e "\e[1mMISC_PACKAGES: (yay or paru needed!)\e[0m\n${MISC_PKGS[@]}\n"
+  echo -e "\e[1mTERM_OFFICE: (yay or paru needed!)\e[0m\n${TERM_OFFICE[@]}"
+  echo -e "========================================="
 fi
 echo ""
 
 
-# Ask the user if they want to install AUR and optional packages
-echo -e "Include AUR packages?"
-read -p "[y/N]: " aur_choice
-echo ""
-echo -e "Include optional packages?"
-read -p "[y/N]: " opt_choice
+# Ask user what optional packages they want to install
+USR_PACKAGES=()
+for i in "${CORE_PACKAGES[@]}"; do
+  USR_PACKAGES+="$i "
+done
 
+echo -e "Include DE packages?"
+read -p "[y/N]: " de_choice
+if [ "$de_choice" == "y" ]; then
+  for i in "${DE_PACKAGES[@]}"; do
+    USR_PACKAGES+="$i "
+  done
+fi
+echo ""
+
+echo -e "Include misc packages?"
+read -p "[y/N]: " misc_choice
+if [ "$misc_choice" == "y" ]; then
+  for i in "${MISC_PKGS[@]}"; do
+    USR_PACKAGES+="$i "
+  done
+fi
+echo ""
+
+echo -e "Include terminal office packages? "
+read -p "[y/N]: " office_choice
+if [ "$office_choice" == "y" ]; then
+  for i in "${TERM_OFFICE[@]}"; do
+    USR_PACKAGES+="$i "
+  done
+fi
 
 # Which package manager to execute the script with
 PACKAGE_MGR=("sudo pacman" "yay" "paru")
@@ -67,57 +95,12 @@ done
 
 read -p ": " pkg_choice
 
-
-# A bunch of if statements because I have no idea how to make multidimensional
-# arrays work in bash
-if [[ "$aur_choice" != "y" ]] && [[ "$opt_choice" != "y" ]]; then
-  echo -e "${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} --noconfirm\n"
-  echo "Execute this command?"
-  read -p "[y/N]: " confirm_command
-  if [ "$confirm_command" == "y" ]; then
-    ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} --noconfirm
-  else
-    echo "Exited the script"
-    exit 0
-  fi
+echo -e "${PACKAGE_MGR[$pkg_choice]} -S ${USR_PACKAGES[@]} --noconfirm\n"
+echo "Execute this command?"
+read -p "[y/N]: " confirm_command
+if [ "$confirm_command" == "y" ]; then
+  ${PACKAGE_MGR[$pkg_choice]} -S ${USR_PACKAGES[@]} #--noconfirm
+else
+  echo "Exited the script"
+  exit 0
 fi
-
-
-if [[ "$aur_choice" != "y" ]] && [[ "$opt_choice" == "y" ]]; then
-  echo -e "${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm\n"
-  echo "Execute this command?"
-  read -p "[y/N]: " confirm_command
-  if [ "$confirm_command" == "y" ]; then
-    ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm
-  else
-    echo "Exited the script"
-    exit 0
-  fi
-fi
-
-
-if [[ "$aur_choice" == "y" ]] && [[ "$opt_choice" != "y" ]]; then
-  echo -e "${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} --noconfirm\n"
-  echo "Execute this command?"
-  read -p "[y/N]: " confirm_command
-  if [ "$confirm_command" == "y" ]; then
-    ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} --noconfirm
-  else
-    echo "Exited the script"
-    exit 0
-  fi
-fi
-
-
-if [[ "$aur_choice" == "y" ]] && [[ "$opt_choice" == "y" ]]; then
-  echo -e "${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm\n"
-  echo "Execute this command?"
-  read -p "[y/N]: " confirm_command
-  if [ "$confirm_command" == "y" ]; then
-    ${PACKAGE_MGR[$pkg_choice]} -S ${PACMAN_PACKAGES[@]} ${AUR_PACKAGES[@]} ${OPTIONAL_PACKAGES[@]} --noconfirm
-  else
-    echo "Exited the script"
-    exit 0
-  fi
-fi
-

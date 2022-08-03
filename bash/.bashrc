@@ -32,7 +32,7 @@
 	alias ssh='kitty +kitten ssh'
 	alias newsboat='newsboat -r'
 	alias rorlike='cd ~/git/rorlike/'
-	alias powernap='~/.dotfiles/scripts/./powernap'
+	alias powernap='~/.dotfiles/scripts/./powernap.sh'
 
 # Weather report alias:
 	alias weather='curl wttr.in/Ljubljana'

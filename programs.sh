@@ -12,7 +12,7 @@ PACMAN_PACKAGES=("bspwm" "sxhkd" "neovim" "mpv" "feh" "zathura" "zathura-pdf-pop
 "xcolor" "nitrogen" "thunar" "thunar-volman" "gvfs" "gvfs-mtp" "kitty" "when" "git"
 "mtpfs" "rofi" "mpv" "nomacs" "fuse" "xclip" "unrar" "zip" "unzip" "ncdu"
 "lxappearance" "keepass" "file-roller" "exa" "ripgrep" "fzf" "btop"
-"pavucontrol" "flameshot" "bat")
+"pavucontrol" "flameshot" "bat" "stow")
 
 AUR_PACKAGES=("cava-git" "picom-pijulius-git" "yt-dlp" "onlyoffice-bin" "pfetch"
 "polybar-git" "deadd-notification-center-bin" "boomer-git" "cbonsai" "i3lock-color")

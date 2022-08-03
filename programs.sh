@@ -15,7 +15,7 @@ PACMAN_PACKAGES=("bspwm" "sxhkd" "neovim" "mpv" "feh" "zathura" "zathura-pdf-pop
 "pavucontrol" "flameshot" "bat")
 
 AUR_PACKAGES=("cava-git" "picom-pijulius-git" "yt-dlp" "onlyoffice-bin" "pfetch"
-"polybar-git" "deadd-notification-center-bin" "boomer-git" "cbonsai" "i3clock-color")
+"polybar-git" "deadd-notification-center-bin" "boomer-git" "cbonsai" "i3lock-color")
 
 OPTIONAL_PACKAGES=("texlive-core" "pandoc" "texlive-latexextra" "ntfs-3g")
 

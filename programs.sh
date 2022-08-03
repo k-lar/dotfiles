@@ -21,6 +21,20 @@ OPTIONAL_PACKAGES=("texlive-core" "pandoc" "texlive-latexextra" "ntfs-3g")
 
 # ===============================================================================
 
+# Check if yay is installed
+if [[ ! -d "/opt/yay" ]]; then
+    echo "It seems that yay is not installed on your system."
+    read -p  "Would you like to install it? [y/N]: " yay_choice
+    if [ "$yay_choice" == "y" ]; then
+      sudo pacman -S base-devel git &&
+      cd /opt &&
+      sudo git clone https://aur.archlinux.org/yay.git &&
+      sudo chown -R $(whoami):users ./yay &&
+      cd yay &&
+      makepkg -si
+    fi
+fi
+
 echo "List all the packages that can be installed?"
 read -p "[y/N]: " confirm_selection
 if [ "$confirm_selection" == "y" ]; then

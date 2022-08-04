@@ -16,7 +16,7 @@ xinput set-prop 12 340 1 &
 xinput set-prop 11 318 1 &
 xinput set-prop 11 320 1 &
 xinput set-prop 10 318 1 &
-sh -c '/home/klar/.config/polybar/launch.sh' &
+sh -c '~/.config/polybar/launch.sh' &
 
 # Variable
 alias bc='bspc config'

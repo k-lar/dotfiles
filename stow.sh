@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -f "~/.bashrc" ]; then
+if [ -f ~/.bashrc ]; then
     echo -e ".bashrc already exists. Do you want to replace it?"
     read -p "[y/N]: " bashrc_choice
     if [ "$bashrc_choice" == "y" ]; then
@@ -22,3 +22,4 @@ stow rofi
 stow sxhkd
 stow when
 stow zathura
+cp .Xresources ~/

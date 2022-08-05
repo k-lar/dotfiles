@@ -16,7 +16,7 @@ CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-poppler" "xcolor" "th
 
 DE_PACKAGES=("bspwm" "sxhkd" "picom-pijulius-git" "nitrogen" "mtpfs" "polybar-git"
 "deadd-notification-center-bin" "boomer-git" "cava-git" "i3lock-color" "pfetch"
-"lxappearance")
+"lxappearance" "ttf-iosevka-nerd" "ttf-font-awesome" "otf-font-awesome")
 
 TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai")
 

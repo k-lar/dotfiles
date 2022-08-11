@@ -41,7 +41,7 @@ The "use-package" package is needed to keep the configuration cleaner, as it all
     (require 'use-package)
  #+END_SRC
 
- 
+
 * User Interface Configuration
 ** Menu bars and transparency
 I don't want my Emacs to be transparent, since it disturbs my workflow and I think it makes it harder to read the font. After that, I turn off all the unnecessery garbage that Emacs has on my default (menu bar, scroll bar, tool bar, etc.)
@@ -103,15 +103,16 @@ Since I'm used to relative numbers from vim, I'll also use them here (except in 
                       vterm-mode-hook
                       dired-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
-  
+
 #+END_SRC
 
 ** Theme (Gruvbox)
 I'm a sucker for gruvbox and that's why I'm using it here.
 
 #+BEGIN_SRC emacs-lisp
+  (use-package gruvbox-theme)
   (load-theme 'gruvbox-dark-medium t)
-  
+
 #+END_SRC
 
 
@@ -119,33 +120,37 @@ I'm a sucker for gruvbox and that's why I'm using it here.
 Just some sane default settings in terms of practicality and usability for me. Window movement is easier, designated backup folder and =custom_vars.el= file for removing clutter from the config file.
 
 #+BEGIN_SRC emacs-lisp
-    ;; Escape actually quits most prompts now
-    (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  ;; Escape actually quits most prompts now
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-    ;; Never have to answer a prompt with a yes or a no
-    (defalias 'yes-or-no-p 'y-or-n-p)
+  ;; Never have to answer a prompt with a yes or a no
+  (defalias 'yes-or-no-p 'y-or-n-p)
 
-    ;; Move customization variables to a seperate file and load it
-    (setq custom-file (locate-user-emacs-file "custom-vars.el"))
-    (load custom-file 'noerror 'nomessage)
+  ;; Move customization variables to a seperate file and load it
+  (setq custom-file (locate-user-emacs-file "custom-vars.el"))
+  (load custom-file 'noerror 'nomessage)
 
-    ;; Better autocompletion in M-x and C-x
-    (require 'ido)
-    (ido-mode t)
-    (require 'smex)
-    (smex-initialize)
-    (global-set-key (kbd "M-x") 'smex)
-    (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-    (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
+  ;; Better autocompletion in M-x and C-x
+  (require 'ido)
+  (ido-mode t)
+  (use-package smex)
+  ;;(require 'smex)
+  (smex-initialize)
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
 
-    ;; Backup files directory
-    (setq backup-directory-alist '(("." . "~/.emacs_saves")))
+  ;; Backup files directory
+  (setq backup-directory-alist '(("." . "~/.emacs_saves")))
 
-    ;; Don't pop up UI dialogs when prompting
-    (setq use-dialog-box nil)
+  ;; Don't pop up UI dialogs when prompting
+  (setq use-dialog-box nil)
 
-    ;; Revert buffers when the underlying file has changed
-    (global-auto-revert-mode 1)
+  ;; Revert buffers when the underlying file has changed
+  (global-auto-revert-mode 1)
+
+  ;; Don't show loading messeges in minibuffer at startup
+  ;;(load "my-file" nil t)
 
 #+END_SRC
 
@@ -223,7 +228,7 @@ Don't exactly know what org-appear does...
   (use-package org-appear
     :hook (org-mode . org-appear-mode))
 
-  
+
 #+END_SRC
 
 ** Markdown-mode
@@ -245,7 +250,7 @@ The best Git interface known to man.
   ;; Magit configuration
   (use-package magit
     :bind ("C-x g" . magit-status))
-  
+
 #+END_SRC
 
 ** Which-key
@@ -258,7 +263,7 @@ Very helpful package that shows you what keys you can press with the modifier ke
     :diminish which-key-mode
     :config
     (setq which-key-idle-delay 0.5))
-  
+
 #+END_SRC
 
 ** Vterm
@@ -268,7 +273,7 @@ The better terminal for Emacs.
   ;; Install vterm for better built in terminal
   (use-package vterm
     :ensure t)
-  
+
 #+END_SRC
 
 ** Rainbow delimiters

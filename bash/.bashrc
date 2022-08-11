@@ -74,5 +74,13 @@
 #  	export PATH=$PATH:$ANDROID_SDK_ROOT/tools/
 #	export CHROME_EXECUTABLE='/usr/bin/chromium'
 
+# Emacs vterm support
+if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+    function clear(){
+        vterm_printf "51;Evterm-clear-scrollback";
+        tput clear;
+    }
+fi
+
 # Programs to run at start
 	pfetch

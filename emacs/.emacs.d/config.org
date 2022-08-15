@@ -235,16 +235,27 @@ I wanted a simple template for newly created .org files, and it's done in a rela
     :custom
     (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-  (with-eval-after-load 'org-faces
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.1)
-                  (org-level-6 . 1.1)
-                  (org-level-7 . 1.1)
-                  (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "IBM Plex Serif" :weight 'bold :height (cdr face))))
+  ;; Function to setup org fonts
+  (defun klar/org-font-setup ()
+    ;; Set faces for heading levels
+    (dolist (face '((org-level-1 . 1.2)
+                    (org-level-2 . 1.1)
+                    (org-level-3 . 1.05)
+                    (org-level-4 . 1.0)
+                    (org-level-5 . 1.1)
+                    (org-level-6 . 1.1)
+                    (org-level-7 . 1.1)
+                    (org-level-8 . 1.1)))
+      (set-face-attribute (car face) nil :font "IBM Plex Serif" :weight 'regular :height (cdr face)))
+
+    ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
   ;; Improve org mode looks
   (setq org-startup-indented t
@@ -263,11 +274,17 @@ Org-bullets makes org-mode a little prettier, with UTF-8 bullets and other custo
 Don't exactly know what org-appear does...
 
 #+BEGIN_SRC emacs-lisp
+  ;; Org setup
+  (use-package org
+    :config
+    (klar/org-font-setup))
+  
   ;; Pretty bullets
   (use-package org-bullets
-      :hook (org-mode . org-bullets-mode)
-      :custom
-      (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+    :after org
+    :hook (org-mode . org-bullets-mode)
+    :custom
+    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
   ;; Show hidden emphasis markers
   (use-package org-appear

@@ -12,7 +12,7 @@
 CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-poppler" "xcolor" "thunar"
 "thunar-volman" "gvfs" "gvfs-mtp" "kitty" "when" "git" "rofi" "nomacs" "xclip"
 "unrar" "zip" "unzip" "ncdu" "keepass" "file-roller" "exa" "ripgrep" "fzf" "btop"
-"pavucontrol" "flameshot" "bat" "stow")
+"pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs")
 
 DE_PACKAGES=("bspwm" "sxhkd" "picom-pijulius-git" "nitrogen" "mtpfs" "polybar-git"
 "deadd-notification-center-bin" "boomer-git" "cava-git" "i3lock-color" "pfetch"

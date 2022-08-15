@@ -65,7 +65,13 @@ Set everything to use UTF-8 encoding, and use my fonts.
 
 #+BEGIN_SRC emacs-lisp
   ;; Font config
-  (set-face-attribute 'default nil :height 110)
+  (set-face-attribute 'default nil :height 130)
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "IBM Plex Mono" :height 130)
+
+  ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil :font "IBM Plex Serif" :height 145 :weight 'regular)
+  
   ;; Use UTF-8 everywhere
   (prefer-coding-system       'utf-8)
   (set-default-coding-systems 'utf-8)
@@ -133,12 +139,12 @@ Just some sane default settings in terms of practicality and usability for me. W
   ;; Better autocompletion in M-x and C-x
   (require 'ido)
   (ido-mode t)
-  (use-package smex)
-  ;;(require 'smex)
-  (smex-initialize)
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
+  ;;(use-package smex)
+  ;;;;(require 'smex)
+  ;;(smex-initialize)
+  ;;(global-set-key (kbd "M-x") 'smex)
+  ;;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  ;;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
 
   ;; Backup files directory
   (setq backup-directory-alist '(("." . "~/.emacs_saves")))
@@ -154,6 +160,43 @@ Just some sane default settings in terms of practicality and usability for me. W
 
 #+END_SRC
 
+
+
+* Ivy (Better completion)
+
+
+#+BEGIN_SRC emacs-lisp
+  ;; Ivy for better completion and dependency for other packages
+  (use-package ivy
+    :diminish
+    :bind (("C-s" . swiper)
+           :map ivy-minibuffer-map
+           ("TAB" . ivy-alt-done)
+           ("C-l" . ivy-alt-done)
+           ("C-j" . ivy-next-line)
+           ("C-k" . ivy-previous-line)
+           :map ivy-switch-buffer-map
+           ("C-k" . ivy-previous-line)
+           ("C-l" . ivy-done)
+           ("C-d" . ivy-switch-buffer-kill)
+           :map ivy-reverse-i-search-map
+           ("C-k" . ivy-previous-line)
+           ("C-d" . ivy-reverse-i-search-kill))
+    :config
+    (ivy-mode 1))
+
+  (use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
+
+  ;; Counsel for better built-in functions
+  (use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("C-x b" . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history)))
+#+END_SRC
 
 
 * Org-mode
@@ -187,6 +230,7 @@ I wanted a simple template for newly created .org files, and it's done in a rela
   (global-set-key (kbd "C-c c") #'org-capture)
   (setq org-ellipsis " ⤵")
   (use-package org-bullets ;; Pretty bullets
+    :after org
     :hook (org-mode . org-bullets-mode)
     :custom
     (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
@@ -200,7 +244,7 @@ I wanted a simple template for newly created .org files, and it's done in a rela
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Cantarell" :weight 'bold :height (cdr face))))
+    (set-face-attribute (car face) nil :font "IBM Plex Serif" :weight 'bold :height (cdr face))))
 
   ;; Improve org mode looks
   (setq org-startup-indented t
@@ -210,6 +254,7 @@ I wanted a simple template for newly created .org files, and it's done in a rela
         org-image-actual-width '(300))
 
 #+END_SRC
+
 
 
 * Packages
@@ -298,7 +343,6 @@ The leader key package.
 
 #+END_SRC
 
-
 ** Visual Column Fill
 To center text in org-mode.
 
@@ -306,6 +350,8 @@ To center text in org-mode.
   (use-package visual-fill-column
     :hook (org-mode . org-mode-visual-fill))
 #+END_SRC
+
+
 
 
 * EVIL

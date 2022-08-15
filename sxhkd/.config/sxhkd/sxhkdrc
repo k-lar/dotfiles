@@ -11,6 +11,9 @@ super + b
 super + f
   thunar
 
+super + e
+  emacs
+
 #Rofi power-menu script
 super + k
   rofi -show p -modi "p:~/.config/rofi/scripts/rofi-power-menu --choices=shutdown/reboot/suspend/logout"

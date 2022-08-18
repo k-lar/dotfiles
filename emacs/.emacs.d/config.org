@@ -137,8 +137,8 @@ Just some sane default settings in terms of practicality and usability for me. W
   (load custom-file 'noerror 'nomessage)
 
   ;; Better autocompletion in M-x and C-x
-  (require 'ido)
-  (ido-mode t)
+  ;;(require 'ido)
+  ;;(ido-mode t)
   ;;(use-package smex)
   ;;;;(require 'smex)
   ;;(smex-initialize)
@@ -155,9 +155,6 @@ Just some sane default settings in terms of practicality and usability for me. W
   ;; Revert buffers when the underlying file has changed
   (global-auto-revert-mode 1)
 
-  ;; Don't show loading messeges in minibuffer at startup
-  ;;(load "my-file" nil t)
-
 #+END_SRC
 
 
@@ -167,35 +164,54 @@ Just some sane default settings in terms of practicality and usability for me. W
 
 #+BEGIN_SRC emacs-lisp
   ;; Ivy for better completion and dependency for other packages
-  (use-package ivy
-    :diminish
-    :bind (("C-s" . swiper)
-           :map ivy-minibuffer-map
-           ("TAB" . ivy-alt-done)
-           ("C-l" . ivy-alt-done)
-           ("C-j" . ivy-next-line)
-           ("C-k" . ivy-previous-line)
-           :map ivy-switch-buffer-map
-           ("C-k" . ivy-previous-line)
-           ("C-l" . ivy-done)
-           ("C-d" . ivy-switch-buffer-kill)
-           :map ivy-reverse-i-search-map
-           ("C-k" . ivy-previous-line)
-           ("C-d" . ivy-reverse-i-search-kill))
-    :config
-    (ivy-mode 1))
+  ;(use-package ivy
+  ;  :diminish
+  ;  :bind (("C-s" . swiper)
+  ;         :map ivy-minibuffer-map
+  ;         ("TAB" . ivy-alt-done)
+  ;         ("C-l" . ivy-alt-done)
+  ;         ("C-j" . ivy-next-line)
+  ;         ("C-k" . ivy-previous-line)
+  ;         :map ivy-switch-buffer-map
+  ;         ("C-k" . ivy-previous-line)
+  ;         ("C-l" . ivy-done)
+  ;         ("C-d" . ivy-switch-buffer-kill)
+  ;         :map ivy-reverse-i-search-map
+  ;         ("C-k" . ivy-previous-line)
+  ;         ("C-d" . ivy-reverse-i-search-kill))
+  ;  :config
+  ;  (ivy-mode 1))
 
-  (use-package ivy-rich
-  :init
-  (ivy-rich-mode 1))
+  ;(use-package ivy-rich
+  ;  :init
+  ;  (ivy-rich-mode 1))
+
+  (use-package vertico
+    :ensure t
+    :custom
+    (vertico-cycle t)
+    :init
+    (vertico-mode))
+
+  (use-package savehist
+    :init
+    (savehist-mode))
+
+  (use-package marginalia
+    :after vertico
+    :ensure t
+    :custom
+    (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+    :init
+    (marginalia-mode))
 
   ;; Counsel for better built-in functions
-  (use-package counsel
-  :bind (("M-x" . counsel-M-x)
-         ("C-x b" . counsel-ibuffer)
-         ("C-x C-f" . counsel-find-file)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history)))
+  ;(use-package counsel
+  ;:bind (("M-x" . counsel-M-x)
+  ;       ("C-x b" . counsel-ibuffer)
+  ;       ("C-x C-f" . counsel-find-file)
+  ;       :map minibuffer-local-map
+  ;       ("C-r" . 'counsel-minibuffer-history)))
 #+END_SRC
 
 
@@ -210,6 +226,8 @@ I wanted a simple template for newly created .org files, and it's done in a rela
      >"#+TITLE:" _ " " \n
      "#+AUTHOR: ***REMOVED***" \n
      "#+DATE: " (current-time-string) \n
+     "#+OPTIONS: tex:t" \n
+     "#+STARTUP: latexpreview" \n
      )
 
   ;; Org-mode initialization
@@ -234,6 +252,11 @@ I wanted a simple template for newly created .org files, and it's done in a rela
     :hook (org-mode . org-bullets-mode)
     :custom
     (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+  ;; Automatic LaTeX preview off when cursor is above it
+  (use-package org-fragtog
+    :after org
+    :hook (org-mode . org-fragtog-mode))
 
   ;; Function to setup org fonts
   (defun klar/org-font-setup ()
@@ -262,7 +285,12 @@ I wanted a simple template for newly created .org files, and it's done in a rela
         org-pretty-entities t
         org-hide-emphasis-markers t
         org-startup-with-inline-images t
-        org-image-actual-width '(300))
+        org-image-actual-width '(300)
+        org-preview-latex-default-process 'dvisvgm)
+
+  ;; Set LaTeX scaling for Org-Mode
+  (setq klar/org-latex-scale 1.75)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale klar/org-latex-scale))
 
 #+END_SRC
 

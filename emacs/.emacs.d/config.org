@@ -71,7 +71,7 @@ Set everything to use UTF-8 encoding, and use my fonts.
 
   ;; Set the variable pitch face
   (set-face-attribute 'variable-pitch nil :font "IBM Plex Serif" :height 145 :weight 'regular)
-  
+
   ;; Use UTF-8 everywhere
   (prefer-coding-system       'utf-8)
   (set-default-coding-systems 'utf-8)
@@ -217,6 +217,7 @@ Just some sane default settings in terms of practicality and usability for me. W
 
 * Org-mode
 I wanted a simple template for newly created .org files, and it's done in a relatively hacky way because I can't figure out anything better that works.
+Use org-tempo, so you don't have to type out whole code block boilerplate with =<el=, or =<py=, or =<sh= and press TAB to have it insert the thing for you.
 
 #+BEGIN_SRC emacs-lisp
   ;; Org-mode template
@@ -292,6 +293,19 @@ I wanted a simple template for newly created .org files, and it's done in a rela
   (setq klar/org-latex-scale 1.75)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale klar/org-latex-scale))
 
+  ;; Set Org-Babel languages
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((emacs-lisp . t)
+      (python . t)))
+
+  (setq org-confirm-babel-evaluate nil)
+
+  ;; Code block templates
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+
 #+END_SRC
 
 
@@ -305,8 +319,9 @@ Don't exactly know what org-appear does...
   ;; Org setup
   (use-package org
     :config
-    (klar/org-font-setup))
-  
+    (klar/org-font-setup)
+    (require 'org-tempo))
+
   ;; Pretty bullets
   (use-package org-bullets
     :after org

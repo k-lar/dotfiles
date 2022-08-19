@@ -306,6 +306,12 @@ Use org-tempo, so you don't have to type out whole code block boilerplate with =
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
 
+  ;; Org-download for drag-and-dropping images into Emacs
+  (use-package org-download
+    :after org)
+
+  (add-hook 'dired-mode-hook 'org-download-enable)
+
 #+END_SRC
 
 
@@ -320,7 +326,8 @@ Don't exactly know what org-appear does...
   (use-package org
     :config
     (klar/org-font-setup)
-    (require 'org-tempo))
+    (require 'org-tempo)
+    (setq org-startup-with-inline-images t))
 
   ;; Pretty bullets
   (use-package org-bullets

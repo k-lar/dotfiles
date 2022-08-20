@@ -129,6 +129,35 @@ Buffer selection screen which kinda replaces tabs in emacs, but it's still weird
 #+end_src
 
 
+* EVIL
+Compatibility layer to get modal editing that feels like vim. Also using doom packages because they lead development in vim-like features.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Evil mode initialization
+  (use-package evil
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
+
+  ;; Better mode-line
+  (use-package doom-modeline
+    :ensure t
+    :init (doom-modeline-mode 1)
+    :custom ((doom-modeline-height 10))
+    )
+  (setq doom-modeline-modal-icon nil)
+
+  ;; General EVIL keybindings on most popular emacs thingies
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+
+#+END_SRC
+
+
 * QOL Stuff
 Just some sane default settings in terms of practicality and usability for me. Window movement is easier, designated backup folder and =custom_vars.el= file for removing clutter from the config file.
 
@@ -442,30 +471,3 @@ To center text in org-mode.
 
 
 
-* EVIL
-Compatibility layer to get modal editing that feels like vim. Also using doom packages because they lead development in vim-like features.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Evil mode initialization
-  (use-package evil
-    :init
-    (setq evil-want-integration t)
-    (setq evil-want-keybinding nil)
-    :config
-    (evil-mode 1))
-
-  ;; Better mode-line
-  (use-package doom-modeline
-    :ensure t
-    :init (doom-modeline-mode 1)
-    :custom ((doom-modeline-height 10))
-    )
-  (setq doom-modeline-modal-icon nil)
-
-  ;; General EVIL keybindings on most popular emacs thingies
-  (use-package evil-collection
-    :after evil
-    :config
-    (evil-collection-init))
-
-#+END_SRC

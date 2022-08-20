@@ -33,6 +33,7 @@
 	alias newsboat='newsboat -r'
 	alias rorlike='cd ~/git/rorlike/'
 	alias powernap='~/.dotfiles/scripts/./powernap.sh'
+	alias emacs="emacsclient -c -a 'emacs'"
 
 # Weather report alias:
 	alias weather='curl wttr.in/Ljubljana'

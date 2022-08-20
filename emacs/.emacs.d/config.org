@@ -166,7 +166,7 @@ Just some sane default settings in terms of practicality and usability for me. W
 
 
 
-* Ivy (Better completion)
+* Better completion
 
 
 #+BEGIN_SRC emacs-lisp
@@ -211,6 +211,20 @@ Just some sane default settings in terms of practicality and usability for me. W
     (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
     :init
     (marginalia-mode))
+
+  ;; Better searching/matching
+  (use-package orderless
+    :ensure t
+    :init
+    (setq completion-styles '(orderless)
+      completion-category-defaults nil
+      completion-category-overrides '((file (styles . (partial-completion))))))
+
+  ;; Counsel replacement
+  (use-package consult
+    :ensure t
+    :bind ("C-s" . consult-line))
+
 
   ;; Counsel for better built-in functions
   ;(use-package counsel

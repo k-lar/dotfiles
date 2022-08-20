@@ -12,7 +12,7 @@ super + f
   thunar
 
 super + e
-  emacs
+  emacsclient -c -a 'emacs'
 
 #Rofi power-menu script
 super + k

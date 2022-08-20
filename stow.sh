@@ -22,4 +22,5 @@ stow rofi
 stow sxhkd
 stow when
 stow zathura
+stow emacs
 cp .Xresources ~/

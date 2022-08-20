@@ -122,14 +122,10 @@ I'm a sucker for gruvbox and that's why I'm using it here.
 #+END_SRC
 
 ** Buffer selection
+Buffer selection screen which kinda replaces tabs in emacs, but it's still weird for now.
+
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x C-b") 'bs-show)
-  ;; Kill dired buffers
-  (add-to-list 'bs-configurations
-                 '("dired" nil nil nil
-                   (lambda (buf)
-                     (with-current-buffer buf
-                       (not (eq major-mode 'dired-mode)))) nil))
 #+end_src
 
 

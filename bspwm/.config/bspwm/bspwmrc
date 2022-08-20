@@ -11,6 +11,7 @@ killall blueman-applet; blueman-applet &
 killall thunar; thunar --daemon &
 killall mpd; mpd &
 setxkbmap si -option caps:swapescape &
+emacs --daemon &
 
 xinput set-prop 12 340 1 &
 xinput set-prop 11 318 1 &

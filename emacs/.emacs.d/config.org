@@ -42,229 +42,6 @@ The "use-package" package is needed to keep the configuration cleaner, as it all
  #+END_SRC
 
 
-* User Interface Configuration
-** Menu bars and transparency
-I don't want my Emacs to be transparent, since it disturbs my workflow and I think it makes it harder to read the font. After that, I turn off all the unnecessery garbage that Emacs has on my default (menu bar, scroll bar, tool bar, etc.)
-
-#+BEGIN_SRC emacs-lisp
-  ;; Make Emacs not transparent
-  (set-frame-parameter (selected-frame) 'alpha '(100 100))
-  (add-to-list 'default-frame-alist '(alpha 100 100))
-
-  ;; Keyboard-centric user interface
-  (setq inhibit-startup-message t)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (set-fringe-mode 10)
-  (global-visual-line-mode 1)
-#+END_SRC
-
-** Fonts and encoding
-Set everything to use UTF-8 encoding, and use my fonts.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Font config
-  (set-face-attribute 'default nil :height 130)
-  ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "IBM Plex Mono" :height 130)
-
-  ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "IBM Plex Serif" :height 145 :weight 'regular)
-
-  ;; Use UTF-8 everywhere
-  (prefer-coding-system       'utf-8)
-  (set-default-coding-systems 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (setq default-buffer-file-coding-system 'utf-8)
-
-#+END_SRC
-
-** Visible bell
-Emacs has a visual bell when something of note happens in the buffer. By default this flashes the top and bottom lines of the screen which I find distracting. The bell here is configured so that it flashes the modeline text, which is still visible but less distracting and jarring when it happens.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Set up the visible bell (subtle flash in modeline)
-  (setq ring-bell-function
-        (lambda ()
-          (let ((orig-fg (face-foreground 'mode-line)))
-            (set-face-foreground 'mode-line "#F2804F")
-            (run-with-idle-timer 0.1 nil
-                                 (lambda (fg) (set-face-foreground 'mode-line fg))
-                                 orig-fg))))
-
-#+END_SRC
-
-** Relative numbers
-Since I'm used to relative numbers from vim, I'll also use them here (except in certain modes)
-
-#+BEGIN_SRC emacs-lisp
-  ;; Relative numbers (disable it for some modes)
-  (global-display-line-numbers-mode)
-  (setq display-line-numbers-type 'relative)
-  (dolist (mode '(org-mode-hook
-                      term-mode-hook
-                      eshell-mode-hook
-                      vterm-mode-hook
-                      dired-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-#+END_SRC
-
-** Theme (Gruvbox)
-I'm a sucker for gruvbox and that's why I'm using it here.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package gruvbox-theme)
-  (load-theme 'gruvbox-dark-medium t)
-
-#+END_SRC
-
-** Buffer selection
-Buffer selection screen which kinda replaces tabs in emacs, but it's still weird for now.
-
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'bs-show)
-#+end_src
-
-
-* EVIL
-Compatibility layer to get modal editing that feels like vim. Also using doom packages because they lead development in vim-like features.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Evil mode initialization
-  (use-package evil
-    :init
-    (setq evil-want-integration t)
-    (setq evil-want-keybinding nil)
-    :config
-    (evil-mode 1))
-
-  ;; Better mode-line
-  (use-package doom-modeline
-    :ensure t
-    :init (doom-modeline-mode 1)
-    :custom ((doom-modeline-height 10))
-    )
-  (setq doom-modeline-modal-icon nil)
-
-  ;; General EVIL keybindings on most popular emacs thingies
-  (use-package evil-collection
-    :after evil
-    :config
-    (evil-collection-init))
-
-#+END_SRC
-
-
-* QOL Stuff
-Just some sane default settings in terms of practicality and usability for me. Window movement is easier, designated backup folder and =custom_vars.el= file for removing clutter from the config file.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Escape actually quits most prompts now
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-  ;; Never have to answer a prompt with a yes or a no
-  (defalias 'yes-or-no-p 'y-or-n-p)
-
-  ;; Move customization variables to a seperate file and load it
-  (setq custom-file (locate-user-emacs-file "custom-vars.el"))
-  (load custom-file 'noerror 'nomessage)
-
-  ;; Better autocompletion in M-x and C-x
-  ;;(require 'ido)
-  ;;(ido-mode t)
-  ;;(use-package smex)
-  ;;;;(require 'smex)
-  ;;(smex-initialize)
-  ;;(global-set-key (kbd "M-x") 'smex)
-  ;;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-  ;;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
-
-  ;; Backup files directory
-  (setq backup-directory-alist '(("." . "~/.emacs_saves")))
-
-  ;; Don't pop up UI dialogs when prompting
-  (setq use-dialog-box nil)
-
-  ;; Revert buffers when the underlying file has changed
-  (global-auto-revert-mode 1)
-
-#+END_SRC
-
-
-
-* Better completion
-
-
-#+BEGIN_SRC emacs-lisp
-  ;; Ivy for better completion and dependency for other packages
-  ;(use-package ivy
-  ;  :diminish
-  ;  :bind (("C-s" . swiper)
-  ;         :map ivy-minibuffer-map
-  ;         ("TAB" . ivy-alt-done)
-  ;         ("C-l" . ivy-alt-done)
-  ;         ("C-j" . ivy-next-line)
-  ;         ("C-k" . ivy-previous-line)
-  ;         :map ivy-switch-buffer-map
-  ;         ("C-k" . ivy-previous-line)
-  ;         ("C-l" . ivy-done)
-  ;         ("C-d" . ivy-switch-buffer-kill)
-  ;         :map ivy-reverse-i-search-map
-  ;         ("C-k" . ivy-previous-line)
-  ;         ("C-d" . ivy-reverse-i-search-kill))
-  ;  :config
-  ;  (ivy-mode 1))
-
-  ;(use-package ivy-rich
-  ;  :init
-  ;  (ivy-rich-mode 1))
-
-  (use-package vertico
-    :ensure t
-    :custom
-    (vertico-cycle t)
-    :init
-    (vertico-mode))
-
-  (use-package savehist
-    :init
-    (savehist-mode))
-
-  (use-package marginalia
-    :after vertico
-    :ensure t
-    :custom
-    (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
-    :init
-    (marginalia-mode))
-
-  ;; Better searching/matching
-  (use-package orderless
-    :ensure t
-    :init
-    (setq completion-styles '(orderless)
-      completion-category-defaults nil
-      completion-category-overrides '((file (styles . (partial-completion))))))
-
-  ;; Counsel replacement
-  (use-package consult
-    :ensure t
-    :bind ("C-s" . consult-line))
-
-
-  ;; Counsel for better built-in functions
-  ;(use-package counsel
-  ;:bind (("M-x" . counsel-M-x)
-  ;       ("C-x b" . counsel-ibuffer)
-  ;       ("C-x C-f" . counsel-find-file)
-  ;       :map minibuffer-local-map
-  ;       ("C-r" . 'counsel-minibuffer-history)))
-#+END_SRC
-
-
 * Org-mode
 I wanted a simple template for newly created .org files, and it's done in a relatively hacky way because I can't figure out anything better that works.
 Use org-tempo, so you don't have to type out whole code block boilerplate with =<el=, or =<py=, or =<sh= and press TAB to have it insert the thing for you.
@@ -366,6 +143,251 @@ Use org-tempo, so you don't have to type out whole code block boilerplate with =
 
 
 
+* User Interface Configuration
+** Menu bars and transparency
+I don't want my Emacs to be transparent, since it disturbs my workflow and I think it makes it harder to read the font. After that, I turn off all the unnecessery garbage that Emacs has on my default (menu bar, scroll bar, tool bar, etc.)
+
+#+BEGIN_SRC emacs-lisp
+  ;; Make Emacs not transparent
+  (set-frame-parameter (selected-frame) 'alpha '(100 100))
+  (add-to-list 'default-frame-alist '(alpha 100 100))
+
+  ;; Keyboard-centric user interface
+  (setq inhibit-startup-message t)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (set-fringe-mode 10)
+  (global-visual-line-mode 1)
+#+END_SRC
+
+** Fonts and encoding
+Set everything to use UTF-8 encoding, and use my fonts.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Font config
+  (set-face-attribute 'default nil :height 130)
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "IBM Plex Mono" :height 130)
+
+  ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil :font "IBM Plex Serif" :height 145 :weight 'regular)
+
+  ;; Use UTF-8 everywhere
+  (prefer-coding-system       'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8)
+
+#+END_SRC
+
+** Visible bell
+Emacs has a visual bell when something of note happens in the buffer. By default this flashes the top and bottom lines of the screen which I find distracting. The bell here is configured so that it flashes the modeline text, which is still visible but less distracting and jarring when it happens.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Set up the visible bell (subtle flash in modeline)
+  (setq ring-bell-function
+        (lambda ()
+          (let ((orig-fg (face-foreground 'mode-line)))
+            (set-face-foreground 'mode-line "#F2804F")
+            (run-with-idle-timer 0.1 nil
+                                 (lambda (fg) (set-face-foreground 'mode-line fg))
+                                 orig-fg))))
+
+#+END_SRC
+
+** Relative numbers
+Since I'm used to relative numbers from vim, I'll also use them here (except in certain modes)
+
+#+BEGIN_SRC emacs-lisp
+  ;; Relative numbers (disable it for some modes)
+  (global-display-line-numbers-mode)
+  (setq display-line-numbers-type 'relative)
+  (dolist (mode '(org-mode-hook
+                      term-mode-hook
+                      eshell-mode-hook
+                      vterm-mode-hook
+                      dired-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+#+END_SRC
+
+** Theme (Gruvbox)
+I'm a sucker for gruvbox and that's why I'm using it here.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package gruvbox-theme
+    :config
+    (load-theme 'gruvbox-dark-medium t))
+
+  ;; For better contrast, use this instead
+  ;;(use-package ef-themes
+  ;;  :config
+  ;;  (load-theme 'ef-autumn))
+  
+#+END_SRC
+
+
+* EVIL
+Compatibility layer to get modal editing that feels like vim. Also using doom packages because they lead development in vim-like features.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Evil mode initialization
+  (use-package evil
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
+
+  ;; Better mode-line
+  (use-package doom-modeline
+    :ensure t
+    :init (doom-modeline-mode 1)
+    :custom ((doom-modeline-height 10))
+    )
+  (setq doom-modeline-modal-icon nil)
+
+  ;; General EVIL keybindings on most popular emacs thingies
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+
+#+END_SRC
+
+
+* General package (leader)
+The leader key package.
+
+#+BEGIN_SRC emacs-lisp
+  ;; General package (leader key)
+  (use-package general
+    :config
+    (general-create-definer klar/leader-keys
+    :prefix "SPC"))
+
+  (general-define-key
+    :states 'normal
+    :keymaps 'override
+    :prefix "SPC"
+    "f" 'find-file
+    "d" 'dired
+    "b" 'bs-show
+    "t" 'vterm
+    "g" 'magit-status)
+
+#+END_SRC
+
+
+* QOL Stuff
+Just some sane default settings in terms of practicality and usability for me. Window movement is easier, designated backup folder and =custom_vars.el= file for removing clutter from the config file.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Escape actually quits most prompts now
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+  ;; Never have to answer a prompt with a yes or a no
+  (defalias 'yes-or-no-p 'y-or-n-p)
+
+  ;; Move customization variables to a seperate file and load it
+  (setq custom-file (locate-user-emacs-file "custom-vars.el"))
+  (load custom-file 'noerror 'nomessage)
+
+  ;; Better autocompletion in M-x and C-x
+  ;;(require 'ido)
+  ;;(ido-mode t)
+  ;;(use-package smex)
+  ;;;;(require 'smex)
+  ;;(smex-initialize)
+  ;;(global-set-key (kbd "M-x") 'smex)
+  ;;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  ;;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
+
+  ;; Backup files directory
+  (setq backup-directory-alist '(("." . "~/.emacs_saves")))
+
+  ;; Don't pop up UI dialogs when prompting
+  (setq use-dialog-box nil)
+
+  ;; Revert buffers when the underlying file has changed
+  (global-auto-revert-mode 1)
+
+#+END_SRC
+
+
+ 
+* Better completion
+
+
+#+BEGIN_SRC emacs-lisp
+  ;; Ivy for better completion and dependency for other packages
+  ;(use-package ivy
+  ;  :diminish
+  ;  :bind (("C-s" . swiper)
+  ;         :map ivy-minibuffer-map
+  ;         ("TAB" . ivy-alt-done)
+  ;         ("C-l" . ivy-alt-done)
+  ;         ("C-j" . ivy-next-line)
+  ;         ("C-k" . ivy-previous-line)
+  ;         :map ivy-switch-buffer-map
+  ;         ("C-k" . ivy-previous-line)
+  ;         ("C-l" . ivy-done)
+  ;         ("C-d" . ivy-switch-buffer-kill)
+  ;         :map ivy-reverse-i-search-map
+  ;         ("C-k" . ivy-previous-line)
+  ;         ("C-d" . ivy-reverse-i-search-kill))
+  ;  :config
+  ;  (ivy-mode 1))
+
+  ;(use-package ivy-rich
+  ;  :init
+  ;  (ivy-rich-mode 1))
+
+  (use-package vertico
+    :ensure t
+    :custom
+    (vertico-cycle t)
+    :init
+    (vertico-mode))
+
+  (use-package savehist
+    :init
+    (savehist-mode))
+
+  (use-package marginalia
+    :after vertico
+    :ensure t
+    :custom
+    (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+    :init
+    (marginalia-mode))
+
+  ;; Better searching/matching
+  (use-package orderless
+    :ensure t
+    :init
+    (setq completion-styles '(orderless)
+      completion-category-defaults nil
+      completion-category-overrides '((file (styles . (partial-completion))))))
+
+  ;; Counsel replacement
+  (use-package consult
+    :ensure t
+    :bind ("C-s" . consult-line))
+
+
+  ;; Counsel for better built-in functions
+  ;(use-package counsel
+  ;:bind (("M-x" . counsel-M-x)
+  ;       ("C-x b" . counsel-ibuffer)
+  ;       ("C-x C-f" . counsel-find-file)
+  ;       :map minibuffer-local-map
+  ;       ("C-r" . 'counsel-minibuffer-history)))
+#+END_SRC
+
+
 * Packages
 ** Org-mode
 Org-bullets makes org-mode a little prettier, with UTF-8 bullets and other customizations that you can do.
@@ -448,18 +470,6 @@ Rainbow perentheses for clearer coding.
 
 #+END_SRC
 
-** General package (leader)
-The leader key package.
-
-#+BEGIN_SRC emacs-lisp
-  ;; General package (leader key)
-  (use-package general
-    :config
-    (general-create-definer klar/leader-keys
-    :prefix "SPC"))
-
-#+END_SRC
-
 ** Visual Column Fill
 To center text in org-mode.
 
@@ -467,7 +477,6 @@ To center text in org-mode.
   (use-package visual-fill-column
     :hook (org-mode . org-mode-visual-fill))
 #+END_SRC
-
 
 
 

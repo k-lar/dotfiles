@@ -42,6 +42,92 @@ The "use-package" package is needed to keep the configuration cleaner, as it all
  #+END_SRC
 
 
+* User Interface Configuration
+** Menu bars and transparency
+I don't want my Emacs to be transparent, since it disturbs my workflow and I think it makes it harder to read the font. After that, I turn off all the unnecessery garbage that Emacs has on my default (menu bar, scroll bar, tool bar, etc.)
+
+#+BEGIN_SRC emacs-lisp
+  ;; Make Emacs not transparent
+  (set-frame-parameter (selected-frame) 'alpha '(100 100))
+  (add-to-list 'default-frame-alist '(alpha 100 100))
+
+  ;; Keyboard-centric user interface
+  (setq inhibit-startup-message t)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (set-fringe-mode 10)
+  (global-visual-line-mode 1)
+#+END_SRC
+
+** Fonts and encoding
+Set everything to use UTF-8 encoding, and use my fonts.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Font config
+  (set-face-attribute 'default nil :height 130)
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "IBM Plex Mono" :height 130)
+
+  ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil :font "IBM Plex Serif" :height 145 :weight 'regular)
+
+  ;; Use UTF-8 everywhere
+  (prefer-coding-system       'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8)
+
+#+END_SRC
+
+** Visible bell
+Emacs has a visual bell when something of note happens in the buffer. By default this flashes the top and bottom lines of the screen which I find distracting. The bell here is configured so that it flashes the modeline text, which is still visible but less distracting and jarring when it happens.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Set up the visible bell (subtle flash in modeline)
+  (setq ring-bell-function
+        (lambda ()
+          (let ((orig-fg (face-foreground 'mode-line)))
+            (set-face-foreground 'mode-line "#F2804F")
+            (run-with-idle-timer 0.1 nil
+                                 (lambda (fg) (set-face-foreground 'mode-line fg))
+                                 orig-fg))))
+
+#+END_SRC
+
+** Relative numbers
+Since I'm used to relative numbers from vim, I'll also use them here (except in certain modes)
+
+#+BEGIN_SRC emacs-lisp
+  ;; Relative numbers (disable it for some modes)
+  (global-display-line-numbers-mode)
+  (setq display-line-numbers-type 'relative)
+  (dolist (mode '(org-mode-hook
+                      term-mode-hook
+                      eshell-mode-hook
+                      vterm-mode-hook
+                      dired-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+#+END_SRC
+
+** Theme (Gruvbox)
+I'm a sucker for gruvbox and that's why I'm using it here.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package gruvbox-theme
+    :config
+    (load-theme 'gruvbox-dark-medium t))
+
+  ;; For better contrast, use this instead
+  ;;(use-package ef-themes
+  ;;  :config
+  ;;  (load-theme 'ef-autumn))
+  
+#+END_SRC
+
+
 * Org-mode
 I wanted a simple template for newly created .org files, and it's done in a relatively hacky way because I can't figure out anything better that works.
 Use org-tempo, so you don't have to type out whole code block boilerplate with =<el=, or =<py=, or =<sh= and press TAB to have it insert the thing for you.
@@ -141,92 +227,6 @@ Use org-tempo, so you don't have to type out whole code block boilerplate with =
 
 #+END_SRC
 
-
-
-* User Interface Configuration
-** Menu bars and transparency
-I don't want my Emacs to be transparent, since it disturbs my workflow and I think it makes it harder to read the font. After that, I turn off all the unnecessery garbage that Emacs has on my default (menu bar, scroll bar, tool bar, etc.)
-
-#+BEGIN_SRC emacs-lisp
-  ;; Make Emacs not transparent
-  (set-frame-parameter (selected-frame) 'alpha '(100 100))
-  (add-to-list 'default-frame-alist '(alpha 100 100))
-
-  ;; Keyboard-centric user interface
-  (setq inhibit-startup-message t)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (set-fringe-mode 10)
-  (global-visual-line-mode 1)
-#+END_SRC
-
-** Fonts and encoding
-Set everything to use UTF-8 encoding, and use my fonts.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Font config
-  (set-face-attribute 'default nil :height 130)
-  ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "IBM Plex Mono" :height 130)
-
-  ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "IBM Plex Serif" :height 145 :weight 'regular)
-
-  ;; Use UTF-8 everywhere
-  (prefer-coding-system       'utf-8)
-  (set-default-coding-systems 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (setq default-buffer-file-coding-system 'utf-8)
-
-#+END_SRC
-
-** Visible bell
-Emacs has a visual bell when something of note happens in the buffer. By default this flashes the top and bottom lines of the screen which I find distracting. The bell here is configured so that it flashes the modeline text, which is still visible but less distracting and jarring when it happens.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Set up the visible bell (subtle flash in modeline)
-  (setq ring-bell-function
-        (lambda ()
-          (let ((orig-fg (face-foreground 'mode-line)))
-            (set-face-foreground 'mode-line "#F2804F")
-            (run-with-idle-timer 0.1 nil
-                                 (lambda (fg) (set-face-foreground 'mode-line fg))
-                                 orig-fg))))
-
-#+END_SRC
-
-** Relative numbers
-Since I'm used to relative numbers from vim, I'll also use them here (except in certain modes)
-
-#+BEGIN_SRC emacs-lisp
-  ;; Relative numbers (disable it for some modes)
-  (global-display-line-numbers-mode)
-  (setq display-line-numbers-type 'relative)
-  (dolist (mode '(org-mode-hook
-                      term-mode-hook
-                      eshell-mode-hook
-                      vterm-mode-hook
-                      dired-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-#+END_SRC
-
-** Theme (Gruvbox)
-I'm a sucker for gruvbox and that's why I'm using it here.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package gruvbox-theme
-    :config
-    (load-theme 'gruvbox-dark-medium t))
-
-  ;; For better contrast, use this instead
-  ;;(use-package ef-themes
-  ;;  :config
-  ;;  (load-theme 'ef-autumn))
-  
-#+END_SRC
 
 
 * EVIL

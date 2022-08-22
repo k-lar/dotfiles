@@ -96,6 +96,15 @@ Emacs has a visual bell when something of note happens in the buffer. By default
 
 #+END_SRC
 
+** Smoother scrolling
+Using this because emacs likes to jump around a bit after reaching the end of the buffer visible area.
+
+#+begin_src emacs-lisp
+  ;(setq scroll-step 1) Don't use this, it can cause a display lock up!
+  (setq scroll-conservatively 10000)
+  (setq auto-window-vscroll nil)
+#+end_src
+
 ** Relative numbers
 Since I'm used to relative numbers from vim, I'll also use them here (except in certain modes)
 
@@ -276,6 +285,7 @@ The leader key package.
     "d" 'dired
     "b" 'bs-show
     "t" 'vterm
+    "z o" 'zone
     "g" 'magit-status)
 
 #+END_SRC

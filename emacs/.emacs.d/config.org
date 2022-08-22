@@ -397,9 +397,11 @@ Don't exactly know what org-appear does...
   ;; Org setup
   (use-package org
     :config
-    (klar/org-font-setup)
     (require 'org-tempo)
     (setq org-startup-with-inline-images t))
+
+  (add-hook 'org-mode-hook 'klar/org-font-setup)
+
 
   ;; Pretty bullets
   (use-package org-bullets

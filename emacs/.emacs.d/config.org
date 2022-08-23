@@ -264,7 +264,19 @@ Compatibility layer to get modal editing that feels like vim. Also using doom pa
     :config
     (evil-collection-init))
 
+
 #+END_SRC
+
+
+* Undo system
+Set up an undo/redo system and make it work with evil mode (u/ctrl+r)
+
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :ensure t
+    :init (global-undo-tree-mode))
+  (evil-set-undo-system 'undo-tree)
+#+end_src
 
 
 * General package (leader)

@@ -1,11 +1,13 @@
+# Ignore logs
 *.log
-emacs/.emacs.d/auto-save-list/
-emacs/.emacs.d/config.el
-emacs/.emacs.d/custom-vars.el
-emacs/.emacs.d/elpa/
-emacs/.emacs.d/history
-emacs/.emacs.d/ido.last
-emacs/.emacs.d/transient/
+
+# Ignore Emacs clutter files
+emacs/.emacs.d/*
+!emacs/.emacs.d/config.org
+!emacs/.emacs.d/init.el
+*~undo-tree~*
+
+# Ignore MPD clutter files
 mpd/.mpd/mpd.db
 mpd/.mpd/mpd.log
 mpd/.mpd/mpd.pid

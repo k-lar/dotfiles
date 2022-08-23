@@ -8,7 +8,5 @@ emacs/.emacs.d/*
 *~undo-tree~*
 
 # Ignore MPD clutter files
-mpd/.mpd/mpd.db
-mpd/.mpd/mpd.log
-mpd/.mpd/mpd.pid
-mpd/.mpd/mpdstate
+mpd/.mpd/*
+!mpd/.mpd/mpd.conf

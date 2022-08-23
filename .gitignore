@@ -6,3 +6,7 @@ emacs/.emacs.d/elpa/
 emacs/.emacs.d/history
 emacs/.emacs.d/ido.last
 emacs/.emacs.d/transient/
+mpd/.mpd/mpd.db
+mpd/.mpd/mpd.log
+mpd/.mpd/mpd.pid
+mpd/.mpd/mpdstate

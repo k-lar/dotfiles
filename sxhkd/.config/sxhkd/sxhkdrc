@@ -48,10 +48,10 @@ super + shift + r
   bspc wm -r
 
 super + p
-  feh --bg-fill --randomize ~/gruvbox-walls/*
+  feh --bg-fill --randomize ~/Pictures/gruvbox_walls/*
 
 super + shift + p
-  feh --bg-fill ~/gruvbox-walls/stairs.jpg
+  feh --bg-fill ~/Pictures/gruvbox_walls/stairs.jpg
 
 #Hardware
 super + ctrl + F3

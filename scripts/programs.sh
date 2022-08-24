@@ -14,9 +14,10 @@ CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-poppler" "xcolor" "th
 "unrar" "zip" "unzip" "ncdu" "keepass" "file-roller" "exa" "ripgrep" "fzf" "btop"
 "pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs-nativecomp")
 
-DE_PACKAGES=("bspwm" "sxhkd" "picom-pijulius-git" "mtpfs" "polybar-git"
+DE_PACKAGES=("bspwm" "sxhkd" "picom-pijulius-git" "mtpfs" "lightdm" "polybar-git"
 "deadd-notification-center-bin" "boomer-git" "cava-git" "i3lock-color" "pfetch"
-"lxappearance" "ttf-iosevka-nerd" "ttf-font-awesome" "otf-font-awesome" "noto-fonts-main")
+"lightdm-gtk-greeter" "lxappearance" "ttf-iosevka-nerd" "ttf-font-awesome"
+"otf-font-awesome" "noto-fonts-main")
 
 TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai")
 

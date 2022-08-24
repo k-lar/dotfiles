@@ -10,3 +10,6 @@ emacs/.emacs.d/*
 # Ignore MPD clutter files
 mpd/.mpd/*
 !mpd/.mpd/mpd.conf
+
+# Ignore homepage directory
+homepage/

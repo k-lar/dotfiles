@@ -67,6 +67,9 @@ call plug#end()
 	set sidescrolloff=3
 	set mouse=a
 	set path+=**
+	set expandtab
+	set tabstop=4
+	set shiftwidth=4
 " }}}
 
 

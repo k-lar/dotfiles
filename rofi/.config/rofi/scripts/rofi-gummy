@@ -1,0 +1,24 @@
+#! /usr/bin/env bash
+
+option1="  Reduce eye strain"
+option2=" Night light"
+option3="  Dark mode"
+option4="  Night mode"
+option5="  Turn off"
+
+options="$option1\n$option2\n$option3\n$option4\n$option5"
+
+choice=$(echo -e "$options" | rofi -dmenu -i -no-show-icons -lines 5 -width 30 -p " " -location 0 -yoffset 0 -fixed-num-lines true)
+
+case $choice in
+	$option1)
+		gummy -B 0 -b 100 -t 4000 ;;
+	$option2)
+		gummy -B 0 -b 100 -t 3400 ;;
+	$option3)
+		gummy -B 0 -b 60 -t 3400 ;;
+	$option4)
+		gummy -B 0 -b 60 -t 2000 ;;
+	$option5)
+		gummy -B 0 -b 100 -t 6500 ;;
+esac

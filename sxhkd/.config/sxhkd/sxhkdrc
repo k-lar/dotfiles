@@ -18,6 +18,10 @@ super + e
 super + k
   rofi -show p -modi "p:~/.config/rofi/scripts/rofi-power-menu --choices=shutdown/reboot/suspend/logout"
 
+#Rofi brightness / temperature with gummy CLI tool
+super + shift + l
+  sh -c "~/.dotfiles/rofi/.config/rofi/scripts/rofi-gummy"
+
 #Notification center (github.com/phuhl/linux_notification_center)
 super + n
   kill -s USR1 $(pidof deadd-notification-center)

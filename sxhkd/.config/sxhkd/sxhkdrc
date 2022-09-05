@@ -49,7 +49,7 @@ super + shift + e
   bspc quit
 
 super + shift + r
-  bspc wm -r
+  bspc wm -r && sleep 1s && notify-send "Restarted bspwm"
 
 super + p
   feh --bg-fill --randomize ~/Pictures/gruvbox_walls/*

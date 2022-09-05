@@ -10,7 +10,7 @@
 # ===============================================================================
 
 CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-poppler" "xcolor" "thunar"
-"thunar-volman" "gvfs" "gvfs-mtp" "kitty" "when" "git" "rofi" "nomacs" "xclip"
+"thunar-volman" "gvfs" "gvfs-mtp" "kitty" "when" "git" "rofi" "nomacs" "xclip" "pamixer"
 "unrar" "zip" "unzip" "ncdu" "keepass" "file-roller" "exa" "ripgrep" "fzf" "btop"
 "pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs-nativecomp" "network-manager-applet")
 

@@ -12,7 +12,8 @@
 	[[ $- != *i* ]] && return
 
 # Prompt shell style
-	PS1='[\u@\h \W]\$ '
+	# PS1='[\u@\h \W]\$ '
+    PS1="[\W] \[\e[1;33m\]λ \[\e[0m\]"
 
 # Set bash into vim mode
 	set -o vi

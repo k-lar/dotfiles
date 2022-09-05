@@ -23,4 +23,5 @@ stow sxhkd
 stow when
 stow zathura
 stow emacs
+stow dunst
 cp .Xresources ~/

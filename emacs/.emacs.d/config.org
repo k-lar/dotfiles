@@ -19,26 +19,29 @@ I loved the terminal, and I still do. But I figured out with time that no matter
 The "use-package" package is needed to keep the configuration cleaner, as it allows for manipulating options of packages in a way that makes it look more readable and easier to manage. It's also used for automatic installation of other packages in use in this config.
 
 #+BEGIN_SRC emacs-lisp
-      ;; Initialize package sources
-      (require 'package)
+  ;; Initialize package sources
+  (require 'package)
 
-      (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                               ("melpa-stable" . "https://stable.melpa.org/packages/")
-                               ("org" . "https://orgmode.org/elpa/")
-                               ("elpa" . "https://elpa.gnu.org/packages/")))
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("melpa-stable" . "https://stable.melpa.org/packages/")
+                           ("org" . "https://orgmode.org/elpa/")
+                           ("elpa" . "https://elpa.gnu.org/packages/")))
 
-      (package-initialize)
+  (package-initialize)
 
 
 
-    (unless (package-installed-p 'use-package)
-        (package-refresh-contents)
-        (package-install 'use-package) )
+  (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
 
 
   (setq use-package-verbose t)
   (setq use-package-always-ensure t)
     (require 'use-package)
+
+  ;; For adding .el files/plugins directly
+  (add-to-list 'load-path "~/.emacs.d/lisp/")
  #+END_SRC
 
 
@@ -501,6 +504,3 @@ To center text in org-mode.
   (use-package visual-fill-column
     :hook (org-mode . org-mode-visual-fill))
 #+END_SRC
-
-
-

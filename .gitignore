@@ -5,11 +5,17 @@
 emacs/.emacs.d/*
 !emacs/.emacs.d/config.org
 !emacs/.emacs.d/init.el
+!emacs/.emacs.d/lisp/
 *~undo-tree~*
 
 # Ignore MPD clutter files
 mpd/.mpd/*
 !mpd/.mpd/mpd.conf
+
+# Ignore MPV clutter files
+mpv/.config/mpv/*
+!mpv/.config/mpv/input.conf
+!mpv/.config/mpv/mpv.conf
 
 # Ignore homepage directory
 homepage/

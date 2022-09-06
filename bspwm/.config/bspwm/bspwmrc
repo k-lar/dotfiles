@@ -10,9 +10,9 @@ killall picom; picom &
 killall dunst; dunst &
 killall nm-applet; nm-applet &
 killall blueman-applet; blueman-applet &
-killall thunar; thunar --daemon &
 killall mpd; mpd &
 killall gummy; gummy start &
+thunar --daemon &
 feh --bg-fill ~/Pictures/gruvbox_walls/stairs.jpg &
 emacs --daemon &
 

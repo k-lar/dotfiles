@@ -74,12 +74,10 @@ super + ctrl + F5
   brightnessctl set 5%-
 
 XF86AudioLowerVolume
-  #amixer set Master 5%-
-  sh -c "~/.dotfiles/scripts/volume.sh down"
+  amixer set Master 5%-
 
 XF86AudioRaiseVolume
-  #amixer set Master 5%+
-  sh -c "~/.dotfiles/scripts/volume.sh up"
+  amixer set Master 5%+
 
 #Media player controls
 XF86AudioPlay

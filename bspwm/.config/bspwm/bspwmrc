@@ -34,9 +34,9 @@ bc borderless_monocle   true
 bc gapless_monocle      true
 
 # Rules
-br -a mpv state=floating
-br -a feh state=floating
-br -a sxiv state=floating
+# br -a mpv state=floating
+# br -a feh state=floating
+# br -a sxiv state=floating
 br -a nm-connection-editor state=floating
 br -a Zathura state=tiled
 br -a Emacs state=tiled

@@ -17,6 +17,3 @@ mpd/.mpd/*
 mpv/.config/mpv/*
 !mpv/.config/mpv/input.conf
 !mpv/.config/mpv/mpv.conf
-
-# Ignore homepage directory
-homepage/

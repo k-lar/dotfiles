@@ -6,7 +6,7 @@ if [ "$HOSTNAME" = klar-arch ]; then
 fi
 setxkbmap si -option caps:swapescape &
 killall sxhkd; sxhkd &
-killall picom; picom &
+killall picom; sleep 0.1s; picom &
 killall dunst; dunst &
 killall nm-applet; nm-applet &
 killall blueman-applet; blueman-applet &

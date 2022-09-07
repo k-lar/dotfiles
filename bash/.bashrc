@@ -11,6 +11,11 @@
 # If not running interactively, don't do anything
 	[[ $- != *i* ]] && return
 
+# Run tmux at start
+    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+      exec tmux
+    fi
+
 # Prompt shell style
 	# PS1='[\u@\h \W]\$ '
     PS1="[\W] \[\e[1;33m\]λ \[\e[0m\]"
@@ -35,6 +40,7 @@
 	alias rorlike='cd ~/git/rorlike/'
 	alias powernap='~/.dotfiles/scripts/./powernap.sh'
 	alias emacs="emacsclient -c -a 'emacs'"
+    alias clear='clear -x' # Don't clear scrollback history (-x)
 
 # Weather report alias:
 	alias weather='curl wttr.in/Ljubljana'

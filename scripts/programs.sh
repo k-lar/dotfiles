@@ -15,7 +15,7 @@ CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-poppler" "xcolor" "th
 "pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs-nativecomp" "network-manager-applet")
 
 DE_PACKAGES=("bspwm" "sxhkd" "picom-pijulius-git" "mtpfs" "lightdm" "polybar-git"
-"boomer-git" "cava-git" "i3lock-color" "pfetch"
+"boomer-git" "cava-git" "i3lock-color" "pfetch" "ttf-blex-nerd-font-git"
 "lightdm-gtk-greeter" "lxappearance" "ttf-iosevka-nerd" "ttf-font-awesome"
 "otf-font-awesome" "noto-fonts-main" "gummy-git" "dunst")
 

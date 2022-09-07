@@ -24,4 +24,5 @@ stow when
 stow zathura
 stow emacs
 stow dunst
+stow tmux
 cp .Xresources ~/

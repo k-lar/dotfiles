@@ -12,6 +12,8 @@ emacs/.emacs.d/*
 # Ignore MPD clutter files
 mpd/.mpd/*
 !mpd/.mpd/mpd.conf
+!mpd/.mpd/playlists
+!mpd/.mpd/playlists/*
 
 # Ignore MPV clutter files
 mpv/.config/mpv/*

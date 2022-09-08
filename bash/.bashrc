@@ -33,15 +33,6 @@
       tmux_start
     fi
 
-    # if [ ! "$TMUX" ]; then
-    #     tmux attach -t dev || tmux new -s dev
-    #     tmux has-session -t dev
-    #     if [ $? != 0 ]; then
-    #         tmux new-session
-    #     fi
-    # fi
-
-
 # Prompt shell style
 	# PS1='[\u@\h \W]\$ '
     PS1="[\W] \[\e[1;33m\]λ \[\e[0m\]"

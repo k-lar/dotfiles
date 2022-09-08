@@ -19,6 +19,12 @@
         then
           tmux new-session -s dev
         fi
+
+        tmux ls -F '#{session_attached} #{session_name}' | grep "1 * dev"
+        if [ $? = 0 ]; then
+            tmux new-session
+        fi
+
         tmux attach -t dev; exec tmux
     }
 
@@ -27,14 +33,14 @@
       tmux_start
     fi
 
-    # function tmux_start(){
+    # if [ ! "$TMUX" ]; then
+    #     tmux attach -t dev || tmux new -s dev
     #     tmux has-session -t dev
-    #     if [ $? != 0 ]
-    #     then
-    #       tmux new-session -s dev
+    #     if [ $? != 0 ]; then
+    #         tmux new-session
     #     fi
-    #     tmux attach -t dev; exec tmux
-    # }
+    # fi
+
 
 # Prompt shell style
 	# PS1='[\u@\h \W]\$ '

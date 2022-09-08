@@ -14,6 +14,19 @@ super + f
 super + e
   emacsclient -c -a 'emacs'
 
+# Noise
+super + m
+  mpc clear && mpc load brown_noise && mpc play && mpc volume 20
+
+super + comma
+  mpc volume -5
+
+super + period
+  mpc volume +5
+
+super + shift + m
+  mpc toggle
+
 #Rofi power-menu script
 super + k
   rofi -show p -modi "p:~/.config/rofi/scripts/rofi-power-menu --choices=shutdown/reboot/suspend/logout"

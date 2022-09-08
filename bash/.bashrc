@@ -12,9 +12,29 @@
 	[[ $- != *i* ]] && return
 
 # Run tmux at start
+
+    function tmux_start(){
+        tmux has-session -t dev
+        if [ $? != 0 ]
+        then
+          tmux new-session -s dev
+        fi
+        tmux attach -t dev; exec tmux
+    }
+
     if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-      exec tmux
+      # exec tmux
+      tmux_start
     fi
+
+    # function tmux_start(){
+    #     tmux has-session -t dev
+    #     if [ $? != 0 ]
+    #     then
+    #       tmux new-session -s dev
+    #     fi
+    #     tmux attach -t dev; exec tmux
+    # }
 
 # Prompt shell style
 	# PS1='[\u@\h \W]\$ '

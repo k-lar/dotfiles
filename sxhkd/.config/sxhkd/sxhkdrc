@@ -1,6 +1,6 @@
 #Apps
 super + Return
-  alacritty
+  st
 
 super + @d
   rofi -show run -show-icons

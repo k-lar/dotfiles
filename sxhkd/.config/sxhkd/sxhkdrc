@@ -124,3 +124,9 @@ super + shift + {Up,Down,Left,Right}
 super + space
   bspc node -t \~fullscreen
 
+#Preselection
+super + ctrl + {Left,Down,Up,Right}
+  bspc node -p {west,south,north,east}
+
+super + ctrl + space
+  bspc node -p cancel

@@ -26,4 +26,4 @@ stow emacs
 stow dunst
 stow tmux
 stow fontconfig
-cp .Xresources ~/
+stow Xresources

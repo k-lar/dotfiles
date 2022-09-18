@@ -31,11 +31,17 @@ AddReminder() {
         if ! [ "$create_choice" = "n" ]; then
             CreateSource >> "$HOME/.config/brem-reminders"
             chmod +x "$HOME/.config/brem-reminders"
-            printf "echo \"$reminder\"\n" >> "$HOME/.config/brem-reminders"
+            printf "echo \"[1] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
         fi
 
     else
-        printf "echo \"$reminder\"\n" >> "$HOME/.config/brem-reminders"
+        echo_num=1
+        while read line; do
+            if grep -q "echo" <<< "${line}"; then
+                ((echo_num++))
+            fi
+        done < "$HOME/.config/brem-reminders"
+        printf "echo \"[$echo_num] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
     fi
 }
 

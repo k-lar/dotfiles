@@ -56,7 +56,7 @@
 	alias newsboat='newsboat -r'
 	alias rorlike='cd ~/git/rorlike/'
 	alias powernap='~/.dotfiles/scripts/./powernap.sh'
-	alias bnotes='~/.dotfiles/scripts/./bashrc-notes.sh'
+	alias brem='~/.dotfiles/scripts/./brem.sh'
 	alias emacs="emacsclient -c -a 'emacs'"
     alias clear='clear -x' # Don't clear scrollback history (-x)
 
@@ -111,10 +111,5 @@ fi
 # Programs to run at start
 	pfetch
 
-# Include bashrc-notes if they exists
-    if [ -f "$HOME/.config/bashrc-notes" ]; then
-        echo "################ Notes ###############"
-        source "$HOME/.config/bashrc-notes"
-        echo "######################################"
-        echo ""
-    fi
+# Include bash reminders if they exists
+    brem --show

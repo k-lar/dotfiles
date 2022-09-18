@@ -37,8 +37,8 @@ AddReminder() {
     else
         echo_num=1
         while read line; do
-            if grep -q "echo" <<< "${line}"; then
-                ((echo_num++))
+            if echo "${line}" | grep -q "echo"; then
+                echo_num=$((echo_num+1))
             fi
         done < "$HOME/.config/brem-reminders"
         printf "echo \"[$echo_num] - $reminder\"\n" >> "$HOME/.config/brem-reminders"

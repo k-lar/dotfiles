@@ -19,7 +19,8 @@ Help() {
     printf "Usage:\n"
     printf "  brem                    Creates \$HOME/.config/brem-reminders file\n"
     printf "  brem -a                 Add an entry inside the reminders file\n"
-    printf "  brem -r                 Remove an entry inside the reminders file\n"
+    printf "  brem -r [-rn]           Remove an entry inside the reminders file [+renumber]\n"
+    printf "  brem -rn                Renumber entries inside the reminders file\n"
     printf "  brem -R                 Remove \$HOME/.config/brem-reminders file\n"
     printf "  brem --show             Prints your reminders to the terminal\n"
     printf "  brem --add-to-bashrc    Adds reminder autodetection inside .bashrc\n"
@@ -56,7 +57,15 @@ RemoveReminder() {
 }
 
 Renumber() {
-    echo "Not implemented yet"
+    echo_num=1
+    line_num=1
+    while read line; do
+        if echo "${line}" | grep -q "echo"; then
+            sed -E -i "${line_num}s/\[([0-9])+\] -/[$echo_num] -/" "$HOME/.config/brem-reminders"
+            echo_num=$((echo_num+1))
+        fi
+    line_num=$((line_num+1))
+    done < "$HOME/.config/brem-reminders"
 }
 
 case "$1" in
@@ -77,10 +86,14 @@ case "$1" in
             if ! [ "$2" = "" ]; then
                 remove_num="$2"
                 RemoveReminder
+                if [ "$3" = "-rn" ]; then
+                    Renumber
+                fi
             else
                 echo "String empty."
             fi;;
 
+    "-rn"|"--renumber") Renumber;;
 
     "-h"|"--help") Help;;
 

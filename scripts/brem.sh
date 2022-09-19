@@ -49,7 +49,7 @@ AddReminder() {
 
 RemoveReminder() {
     if [ -f "$HOME/.config/brem-reminders" ]; then
-        sed -i "/echo \"\[$remove_num\] \-"/d"" "$HOME/.config/brem-reminders"
+        sed -i "/echo \"\[$remove_num\] -"/d "$HOME/.config/brem-reminders"
     else
         echo "Reminders file doesn't exist!"
     fi

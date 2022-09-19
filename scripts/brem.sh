@@ -1,7 +1,8 @@
 #!/bin/sh
 #
-# TODO: Add an entry numbering system like "[1] - Note text"
 # TODO: Make a rofi/dmenu wrapper for adding entries
+# TODO: Entry deletion
+# TODO: Renumbering function
 
 set -e
 
@@ -18,21 +19,22 @@ Help() {
     printf "Usage:\n"
     printf "  brem                    Creates \$HOME/.config/brem-reminders file\n"
     printf "  brem -a                 Add an entry inside the reminders file\n"
+    printf "  brem -r                 Remove an entry inside the reminders file\n"
     printf "  brem -R                 Remove \$HOME/.config/brem-reminders file\n"
     printf "  brem --show             Prints your reminders to the terminal\n"
     printf "  brem --add-to-bashrc    Adds reminder autodetection inside .bashrc\n"
 }
 
 AddReminder() {
-     if ! [ -f "$HOME/.config/brem-reminders" ]; then
-        echo "Reminders file doesn't exist!"
-        echo "Do you want to create it? [Y/n]: "
-        read -r create_choice
-        if ! [ "$create_choice" = "n" ]; then
-            CreateSource >> "$HOME/.config/brem-reminders"
-            chmod +x "$HOME/.config/brem-reminders"
-            printf "echo \"[1] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
-        fi
+    if ! [ -f "$HOME/.config/brem-reminders" ]; then
+       echo "Reminders file doesn't exist!"
+       echo "Do you want to create it? [Y/n]: "
+       read -r create_choice
+       if ! [ "$create_choice" = "n" ]; then
+           CreateSource >> "$HOME/.config/brem-reminders"
+           chmod +x "$HOME/.config/brem-reminders"
+           printf "echo \"[1] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
+       fi
 
     else
         echo_num=1
@@ -45,8 +47,20 @@ AddReminder() {
     fi
 }
 
+RemoveReminder() {
+    if [ -f "$HOME/.config/brem-reminders" ]; then
+        sed -i "/echo \"\[$remove_num\] \-"/d"" "$HOME/.config/brem-reminders"
+    else
+        echo "Reminders file doesn't exist!"
+    fi
+}
+
+Renumber() {
+    echo "Not implemented yet"
+}
+
 case "$1" in
-    "-R"|"--remove")
+    "-R"|"--reset")
         if [ -f "$HOME/.config/brem-reminders" ]; then
         rm "$HOME/.config/brem-reminders"
         fi;;
@@ -56,8 +70,17 @@ case "$1" in
             reminder="$2"
             AddReminder
         else
-            echo "String empty, cannot create note."
+            echo "String empty, cannot create reminder."
         fi;;
+
+    "-r"|"--remove")
+            if ! [ "$2" = "" ]; then
+                remove_num="$2"
+                RemoveReminder
+            else
+                echo "String empty."
+            fi;;
+
 
     "-h"|"--help") Help;;
 

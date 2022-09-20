@@ -1,8 +1,9 @@
 #!/bin/sh
 #
 # TODO: Make a rofi/dmenu wrapper for adding entries
-# TODO: Entry deletion
-# TODO: Renumbering function
+
+# FOR ROFI INTEGRATION ADD PATH TO brem.sh
+BREM_PATH="$HOME/.dotfiles/scripts/brem.sh"
 
 set -e
 
@@ -49,8 +50,16 @@ AddReminder() {
 }
 
 RemoveReminder() {
+if [ -f "$HOME/.config/brem-reminders" ]; then
+    sed -i "/echo \"\[$remove_num\] -"/d "$HOME/.config/brem-reminders"
+else
+    echo "Reminders file doesn't exist!"
+fi
+}
+
+RofiRemove() {
     if [ -f "$HOME/.config/brem-reminders" ]; then
-        sed -i "/echo \"\[$remove_num\] -"/d "$HOME/.config/brem-reminders"
+        sed -i "/\\$remove_num/d" "$HOME/.config/brem-reminders"
     else
         echo "Reminders file doesn't exist!"
     fi
@@ -66,6 +75,31 @@ Renumber() {
         fi
     line_num=$((line_num+1))
     done < "$HOME/.config/brem-reminders"
+}
+
+RofiMenu() {
+    option1="  Show reminders"
+    option2="+  Add entry"
+    option3="-  Remove entry"
+    option4="#  Renumber"
+    option5="  Exit"
+
+    options="$option1\n$option2\n$option3\n$option4\n$option5"
+
+    choice=$(echo -e "$options" | rofi -dmenu -i -no-show-icons -lines 5 -width 30 -p "brem: " -location 0 -yoffset 0 -fixed-num-lines true)
+
+    case $choice in
+    	$option1)
+    		$BREM_PATH --rofi-show ;;
+    	$option2)
+    		$BREM_PATH --rofi-add ;;
+    	$option3)
+    		$BREM_PATH --rofi-remove ;;
+    	$option4)
+    		$BREM_PATH --rn ;;
+    	$option5)
+    		echo "Exit" ;;
+    esac
 }
 
 case "$1" in
@@ -128,14 +162,18 @@ case "$1" in
 
         fi;;
 
-    "--rofi-reminders") "$HOME/.config/./brem-reminders" | rofi -dmenu -p "Reminders";;
+    "--rofi-show") "$HOME/.config/./brem-reminders" | rofi -dmenu -p "Reminders";;
 
-    "--rofi-add-entry")
-        reminder=""
-        rofi -dmenu -p "Add entry:" < /dev/null
-        # $reminder
+    "--rofi-add")
+        reminder=$(rofi -dmenu -p "Add:" < /dev/null)
+        AddReminder;;
 
-        echo "$reminder";;
+    "--rofi-remove")
+        remove_num=$("$HOME/.config/./brem-reminders" | rofi -dmenu -p "Remove:")
+        RofiRemove;;
+
+    "--rofi-menu")
+        RofiMenu;;
 
        *)
         if ! [ -f "$HOME/.config/brem-reminders" ]; then

@@ -60,7 +60,7 @@ fi
 
 RofiAdd() {
     if ! [ -f "$HOME/.config/brem-reminders" ]; then
-        create_choice=$(printf "Yes\nNo" | rofi -dmenu -p "Create reminders file?" -mesg "Reminders file does not exist!")
+        create_choice=$(printf "Yes\nNo" | rofi -dmenu -p "Create reminders file?" -i -mesg "Reminders file does not exist!")
 
         if ! [ "$create_choice" = "No" ]; then
             CreateSource >> "$HOME/.config/brem-reminders"
@@ -191,7 +191,7 @@ case "$1" in
         RofiAdd;;
 
     "--rofi-remove")
-        remove_num=$("$HOME/.config/./brem-reminders" | rofi -dmenu -p "Remove:")
+        remove_num=$("$HOME/.config/./brem-reminders" | rofi -dmenu -p "Remove:" -only-match)
         RofiRemove;;
 
     "--rofi-menu")

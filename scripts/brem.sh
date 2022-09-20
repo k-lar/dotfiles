@@ -110,11 +110,22 @@ case "$1" in
 
     "--show")
         if [ -f "$HOME/.config/brem-reminders" ]; then
-            echo "################ Reminders ###############"
-            # This sources $HOME/.config/brem-reminders
-            . "$HOME/.config/brem-reminders"
-            echo "##########################################"
-            echo ""
+            echo_num=0
+            while read line; do
+                if echo "${line}" | grep -q "echo"; then
+                    echo_num=$((echo_num+1))
+                fi
+            done < "$HOME/.config/brem-reminders"
+
+            # If there aren't any echos in file, dont print banner
+            if ! [ "$echo_num" = 0 ]; then
+                echo "################ Reminders ###############"
+                # This sources $HOME/.config/brem-reminders
+                . "$HOME/.config/brem-reminders"
+                echo "##########################################"
+                echo ""
+            fi
+
         fi;;
 
        *)

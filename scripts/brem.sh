@@ -1,6 +1,4 @@
 #!/bin/sh
-#
-# TODO: Make a rofi/dmenu wrapper for adding entries
 
 # FOR ROFI INTEGRATION ADD PATH TO brem.sh
 BREM_PATH="$HOME/.dotfiles/scripts/brem.sh"

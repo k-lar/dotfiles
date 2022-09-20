@@ -128,6 +128,8 @@ case "$1" in
 
         fi;;
 
+    "--rofi-reminders") "$HOME/.config/./brem-reminders" | rofi -dmenu -p "Reminders";;
+
        *)
         if ! [ -f "$HOME/.config/brem-reminders" ]; then
             CreateSource >> "$HOME/.config/brem-reminders"

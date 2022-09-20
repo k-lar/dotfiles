@@ -130,6 +130,13 @@ case "$1" in
 
     "--rofi-reminders") "$HOME/.config/./brem-reminders" | rofi -dmenu -p "Reminders";;
 
+    "--rofi-add-entry")
+        reminder=""
+        rofi -dmenu -p "Add entry:" < /dev/null
+        # $reminder
+
+        echo "$reminder";;
+
        *)
         if ! [ -f "$HOME/.config/brem-reminders" ]; then
             CreateSource >> "$HOME/.config/brem-reminders"

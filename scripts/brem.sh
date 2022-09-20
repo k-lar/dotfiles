@@ -57,6 +57,28 @@ else
 fi
 }
 
+
+RofiAdd() {
+    if ! [ -f "$HOME/.config/brem-reminders" ]; then
+        create_choice=$(printf "Yes\nNo" | rofi -dmenu -p "Create reminders file?" -mesg "Reminders file does not exist!")
+
+        if ! [ "$create_choice" = "No" ]; then
+            CreateSource >> "$HOME/.config/brem-reminders"
+            chmod +x "$HOME/.config/brem-reminders"
+            printf "echo \"[1] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
+        fi
+
+    else
+        echo_num=1
+        while read line; do
+            if echo "${line}" | grep -q "echo"; then
+                echo_num=$((echo_num+1))
+            fi
+        done < "$HOME/.config/brem-reminders"
+        printf "echo \"[$echo_num] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
+    fi
+}
+
 RofiRemove() {
     if [ -f "$HOME/.config/brem-reminders" ]; then
         sed -i "/\\$remove_num/d" "$HOME/.config/brem-reminders"
@@ -166,7 +188,7 @@ case "$1" in
 
     "--rofi-add")
         reminder=$(rofi -dmenu -p "Add:" < /dev/null)
-        AddReminder;;
+        RofiAdd;;
 
     "--rofi-remove")
         remove_num=$("$HOME/.config/./brem-reminders" | rofi -dmenu -p "Remove:")

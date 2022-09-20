@@ -108,18 +108,18 @@ RofiMenu() {
 
     options="$option1\n$option2\n$option3\n$option4\n$option5"
 
-    choice=$(echo -e "$options" | rofi -dmenu -i -no-show-icons -lines 5 -width 30 -p "brem: " -location 0 -yoffset 0 -fixed-num-lines true)
+    choice=$(printf "$options" | rofi -dmenu -i -no-show-icons -lines 5 -width 30 -p "brem: " -location 0 -yoffset 0 -fixed-num-lines true)
 
-    case $choice in
-    	$option1)
+    case "$choice" in
+    	"$option1")
     		$BREM_PATH --rofi-show ;;
-    	$option2)
+    	"$option2")
     		$BREM_PATH --rofi-add ;;
-    	$option3)
+    	"$option3")
     		$BREM_PATH --rofi-remove ;;
-    	$option4)
+    	"$option4")
     		$BREM_PATH -rn ;;
-    	$option5)
+    	"$option5")
     		echo "Exit" ;;
     esac
 }

@@ -23,6 +23,11 @@ Help() {
     printf "  brem -R                 Remove \$HOME/.config/brem-reminders file\n"
     printf "  brem --show             Prints your reminders to the terminal\n"
     printf "  brem --add-to-bashrc    Adds reminder autodetection inside .bashrc\n"
+    printf "Usage with rofi:\n"
+    printf "  brem --rofi-menu        Shows all available rofi options in a neat menu\n"
+    printf "  brem --rofi-show        Prints your reminders in a rofi window\n"
+    printf "  brem --rofi-add         Adds entry through rofi\n"
+    printf "  brem --rofi-remove      Remove an entry through a rofi menu\n"
 }
 
 AddReminder() {

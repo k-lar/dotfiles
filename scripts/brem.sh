@@ -96,7 +96,7 @@ RofiMenu() {
     	$option3)
     		$BREM_PATH --rofi-remove ;;
     	$option4)
-    		$BREM_PATH --rn ;;
+    		$BREM_PATH -rn ;;
     	$option5)
     		echo "Exit" ;;
     esac

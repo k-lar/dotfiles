@@ -150,7 +150,7 @@ Use org-tempo, so you don't have to type out whole code block boilerplate with =
     "Insert some org boilerplate"
     "Puts cursor on the _"
      >"#+TITLE:" _ " " \n
-     "#+AUTHOR: ***REMOVED***" \n
+     "#+AUTHOR: " \n
      "#+DATE: " (current-time-string) \n
      "#+OPTIONS: tex:t" \n
      "#+STARTUP: latexpreview" \n

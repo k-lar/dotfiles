@@ -1,9 +1,22 @@
 #!/bin/sh
-
-# FOR ROFI INTEGRATION ADD PATH TO brem.sh
-BREM_PATH="$HOME/.dotfiles/scripts/brem.sh"
-
 set -e
+
+##### BREM PATH LOCATION #####
+# If this does not work, you can write the path to brem.sh yourself.
+
+BREM_PATH="$0"
+if [ ! -e "$BREM_PATH" ]; then
+  case $BREM_PATH in
+    (*/*) exit 1;;
+    (*) BREM_PATH=$(command -v -- "$BREM_PATH") || exit;;
+  esac
+fi
+dir=$(
+  cd -P -- "$(dirname -- "$BREM_PATH")" && pwd -P
+) || exit
+BREM_PATH=$dir/$(basename -- "$BREM_PATH") || exit
+
+##### BREM PATH LOCATION #####
 
 CreateSource() {
     echo "# Entries from bash reminder"

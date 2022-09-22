@@ -1,5 +1,5 @@
 #+TITLE: My Emacs Config
-#+AUTHOR: ***REMOVED***
+#+AUTHOR: K_lar
 #+DATE: Thu Aug 11 06:03:32 2022
 
 * Why Emacs?

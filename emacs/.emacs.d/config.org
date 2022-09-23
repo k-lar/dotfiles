@@ -334,8 +334,13 @@ Just some sane default settings in terms of practicality and usability for me. W
 ;;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
 
-;; Backup files directory
-(setq backup-directory-alist '(("." . "~/.emacs_saves")))
+;; Backup files directory and other backup stuff
+(setq backup-directory-alist `(("." . "~/.emacs_saves")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)
 
 ;; Don't pop up UI dialogs when prompting
 (setq use-dialog-box nil)

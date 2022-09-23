@@ -324,16 +324,6 @@ Just some sane default settings in terms of practicality and usability for me. W
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
 (load custom-file 'noerror 'nomessage)
 
-;; Better autocompletion in M-x and C-x
-;;(require 'ido)
-;;(ido-mode t)
-;;(use-package smex)
-;;;;(require 'smex)
-;;(smex-initialize)
-;;(global-set-key (kbd "M-x") 'smex)
-;;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
-
 ;; Backup files directory and other backup stuff
 (setq backup-directory-alist `(("." . "~/.emacs_saves")))
 (setq backup-by-copying t)
@@ -342,16 +332,54 @@ Just some sane default settings in terms of practicality and usability for me. W
   kept-old-versions 2
   version-control t)
 
+;; Allow colors in compilation buffer
+(use-package ansi-color
+  :config
+  (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
+  (ansi-color-for-comint-mode-on)
+  (setq ansi-color-for-compilation-mode t))
+
+;; Compilation buffers should wrap their lines
+(add-hook 'compilation-mode-hook 'visual-line-mode)
+
+;; URLs should be highlighted and linkified
+(global-goto-address-mode)
+
+;; Use dabbrev for in-buffer abbreviations with C-TAB
+(use-package dabbrev
+  :custom
+  (dabbrev-case-replace nil))
+
+(global-set-key (kbd "C-<tab>") 'dabbrev-expand)
+(define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
+
 ;; Don't pop up UI dialogs when prompting
 (setq use-dialog-box nil)
 
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 
+;; Increase garbage collector threshold
+(setq gc-cons-threshold 15000000)
+
+;; Increase how many elisp bindings can emacs do before throwing an error
+(setq max-specpdl-size 5000)
+
+;; If native-comp has errors, don't show them (I can't do much there)
+(setq native-comp-async-report-warnings-errors 'silent)
+
+;; Select help windows, so you can close them fast with q
+(setq help-window-select t)
+
+;; Make error messeges more agressive
+(setq next-error-messege-highlight t)
+
+;; Don't let minibuffer mess up window tiling
+(setq read-minibuffer-restore-windows t)
+
 #+END_SRC
 
 
- 
 * Better completion
 I'm using a bunch of packages that don't aim to replace the built-in systems of emacs, but instead to build upon them and make them better. I feel like this works better and startup time is slower, even if you have to configure it a bit more.
 

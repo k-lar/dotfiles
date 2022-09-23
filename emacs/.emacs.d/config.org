@@ -426,7 +426,7 @@ Probably the best snippets package that you can get on emacs. Works REALLY well 
 ;; removing 1 space at a time.
 (setq backward-delete-char-untabify-method 'hungry)
 
-;; Stop electric-indent from messing with indentation.
+;; Make electric indent not weird anymore.
 (electric-indent-mode +1)
 (setq-default electric-indent-inhibit t)
 

@@ -302,7 +302,7 @@ The leader key package.
   :prefix "SPC"
   "f" 'find-file
   "d" 'dired
-  "b" 'bs-show
+  "b" 'consult-buffer
   "t" 'vterm
   "z o" 'zone
   "g" 'magit-status)
@@ -414,7 +414,8 @@ I'm using a bunch of packages that don't aim to replace the built-in systems of 
 ;; Counsel replacement
 (use-package consult
   :ensure t
-  :bind ("C-s" . consult-line))
+  :bind
+  ("C-s" . consult-line))
 
 #+END_SRC
 

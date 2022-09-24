@@ -334,6 +334,7 @@ The leader key package.
 
 (general-define-key
   :states 'insert
+  "C-c d" 'klar/insert-current-date
   "M-p" 'evil-paste-before)
 
 #+END_SRC
@@ -388,6 +389,9 @@ Just some sane default settings in terms of practicality and usability for me. W
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 
+;; Emacs has problems with very long lines. so-long detects them and takes appropriate action. Good for minified code and whatnot.
+(global-so-long-mode)
+
 ;; Increase garbage collector threshold
 (setq gc-cons-threshold 15000000)
 
@@ -406,7 +410,36 @@ Just some sane default settings in terms of practicality and usability for me. W
 ;; Don't let minibuffer mess up window tiling
 (setq read-minibuffer-restore-windows t)
 
+;; Make a function to open config.org on a keybind
+(defun open-init-file ()
+  "Open this very file."
+  (interactive)
+  (find-file "~/.emacs.d/config.org"))
+
+(bind-key "C-c e" #'open-init-file)
+
+(setq
+;; I use exa, which doesn't have a --dired flag
+dired-use-ls-dired nil
+dired-create-destination-dirs 'ask
+dired-kill-when-opening-new-dired-buffer t
+dired-do-revert-buffer t
+dired-mark-region t)
+
+;; The new context-menu-mode in Emacs 28 makes right-click a lot more useful. But for terminal emacs, it’s handy to have the menubar at hand.
+(context-menu-mode)
+(bind-key "C-c C-m" #'tmm-menubar)
+
 #+END_SRC
+
+** My functions
+
+#+begin_src emacs-lisp
+(defun klar/insert-current-date ()
+  "Insert the current date (Y-m-d) at point."
+  (interactive)
+  (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
+#+end_src
 
 
 * Better completion

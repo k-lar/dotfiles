@@ -58,6 +58,13 @@ I never want to quit my config file if it won't work, so this is a function to c
 (push #'check-config kill-emacs-query-functions)
 #+end_src
 
+** Diminish
+For hiding minor modes
+#+begin_src emacs-lisp
+(use-package diminish
+  :ensure t)
+#+end_src
+
 
 * User Interface Configuration
 ** Menu bars and transparency
@@ -98,13 +105,6 @@ Set everything to use UTF-8 encoding, and use my fonts.
 (setq default-buffer-file-coding-system 'utf-8)
 
 #+END_SRC
-
-** Diminish
-For hiding minor modes
-#+begin_src emacs-lisp
-(use-package diminish
-  :ensure t)
-#+end_src
 
 ** Visible bell
 Emacs has a visual bell when something of note happens in the buffer. By default this flashes the top and bottom lines of the screen which I find distracting. The bell here is configured so that it flashes the modeline text, which is still visible but less distracting and jarring when it happens.

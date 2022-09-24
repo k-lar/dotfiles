@@ -433,6 +433,8 @@ Just some sane default settings in terms of practicality and usability for me. W
   kept-old-versions 2
   version-control t)
 
+(setq auto-save-file-name-transforms `((".*" "~/.emacs_saves/" t)))
+
 ;; Allow colors in compilation buffer
 (use-package ansi-color
   :config

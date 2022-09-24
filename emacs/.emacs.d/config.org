@@ -341,6 +341,7 @@ The leader key package.
 
 
 * QOL Stuff
+** General stuff
 Just some sane default settings in terms of practicality and usability for me. Window movement is easier, designated backup folder and =custom_vars.el= file for removing clutter from the config file.
 
 #+BEGIN_SRC emacs-lisp
@@ -439,6 +440,10 @@ dired-mark-region t)
   "Insert the current date (Y-m-d) at point."
   (interactive)
   (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
+
+(defun display-startup-echo-area-message ()
+  "Override the normally tedious startup message."
+  (message "Welcome back K_lar."))
 #+end_src
 
 

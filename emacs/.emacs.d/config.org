@@ -323,7 +323,8 @@ The leader key package.
 
 (general-define-key
   :states 'normal
-  "M-p" 'evil-paste-before)
+  "M-p" 'evil-paste-before
+  "C-M-q" 'save-buffers-kill-emacs)
 
 (general-define-key
   :states 'insert

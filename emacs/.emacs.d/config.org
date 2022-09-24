@@ -285,6 +285,10 @@ Compatibility layer to get modal editing that feels like vim. Also using doom pa
   :config
   (evil-collection-init))
 
+;; Evil-commentary is a port of vim-commentary from tpope
+(use-package evil-commentary
+  :after evil
+  :init (evil-commentary-mode))
 
 #+END_SRC
 
@@ -330,8 +334,7 @@ The leader key package.
 (general-define-key
   :states 'normal
   "M-p" 'evil-paste-before
-  "C-M-q" 'save-buffers-kill-emacs
-  "g c c" 'comment-or-uncomment-region)
+  "C-M-q" 'save-buffers-kill-emacs)
 
 (general-define-key
   :states 'insert

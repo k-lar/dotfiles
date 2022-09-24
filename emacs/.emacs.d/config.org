@@ -15,7 +15,8 @@ I loved the terminal, and I still do. But I figured out with time that no matter
 *Org-mode.* That's mostly the reason behind me jumping head first into completely unknown teritorry. Although it isn't the only thing that got my attention. Since it's a GUI program it can magically render images inside plaintext files, it can render math formulas written in latex and other graphical features. I also kinda dig the idea of "living inside your editor". I was trying to achieve that with vim as much as I could, but didn't really notice it. Sadly that isn't possible with vim (yet) because of the philosophical differences the two userbases. Eventually it will get there and I'll cheer it on while the community develops better and better plugins, but I'll be staying here for a while. Org-mode was particularly interesting for me, since I'll be starting college soon and I want/need something more powerful for taking my notes. I feel like org-mode is the single most powerful markup language and I don't get why it isn't ported into other editors.
 
 
-* Initialization and automation (use-package)
+* Initialization and automation
+** Use-package
 The "use-package" package is needed to keep the configuration cleaner, as it allows for manipulating options of packages in a way that makes it look more readable and easier to manage. It's also used for automatic installation of other packages in use in this config.
 
 #+BEGIN_SRC emacs-lisp
@@ -43,6 +44,19 @@ The "use-package" package is needed to keep the configuration cleaner, as it all
 ;; For adding .el files/plugins directly
 (add-to-list 'load-path "~/.emacs.d/lisp/")
  #+END_SRC
+
+** Check config before exiting
+I never want to quit my config file if it won't work, so this is a function to check it.
+
+#+begin_src emacs-lisp
+(defun check-config ()
+  "Warn if exiting Emacs with a config.org that doesn't load."
+  (or
+   (ignore-errors (org-babel-load-file "~/.emacs.d/config.org"))
+   (y-or-n-p "Configuration file may be malformed: really exit?")))
+
+(push #'check-config kill-emacs-query-functions)
+#+end_src
 
 
 * User Interface Configuration

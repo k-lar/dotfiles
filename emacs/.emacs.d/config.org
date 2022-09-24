@@ -75,6 +75,7 @@ I don't want my Emacs to be transparent, since it disturbs my workflow and I thi
 (scroll-bar-mode -1)
 (set-fringe-mode 10)
 (global-visual-line-mode 1)
+(diminish 'visual-line-mode) 
 #+END_SRC
 
 ** Fonts and encoding
@@ -97,6 +98,13 @@ Set everything to use UTF-8 encoding, and use my fonts.
 (setq default-buffer-file-coding-system 'utf-8)
 
 #+END_SRC
+
+** Diminish
+For hiding minor modes
+#+begin_src emacs-lisp
+(use-package diminish
+  :ensure t)
+#+end_src
 
 ** Visible bell
 Emacs has a visual bell when something of note happens in the buffer. By default this flashes the top and bottom lines of the screen which I find distracting. The bell here is configured so that it flashes the modeline text, which is still visible but less distracting and jarring when it happens.
@@ -152,6 +160,61 @@ I'm a sucker for gruvbox and that's why I'm using it here.
 ;;  (load-theme 'ef-autumn))
 
 #+END_SRC
+
+** Mode line
+#+begin_src emacs-lisp
+(use-package telephone-line
+  :init
+  (defface telephone-line-evil-insert
+    '((t (:background "#87afaf" :foreground "#262626" :inherit telephone-line-evil)))
+    "Face used in evil color-coded segments when in Insert state."
+    :group 'telephone-line-evil)
+
+  (defface telephone-line-evil-normal
+    '((t (:background "#afaf87" :foreground "#262626" :inherit telephone-line-evil)))
+    "Face used in evil color-coded segments when in Normal state."
+    :group 'telephone-line-evil)
+  
+  (defface telephone-line-evil-visual
+    '((t (:background "#ff875f" :foreground "#262626" :inherit telephone-line-evil)))
+    "Face used in evil color-coded segments when in Visual{,-Block,-Line} state."
+    :group 'telephone-line-evil)
+  
+  (defface telephone-line-evil-replace
+    '((t (:background "#ff5f5f" :foreground "#262626" :inherit telephone-line-evil)))
+    "Face used in evil color-coded segments when in Replace state."
+    :group 'telephone-line-evil)
+  
+  (defface telephone-line-evil-motion
+    '((t (:background "dark blue" :inherit telephone-line-evil)))
+    "Face used in evil color-coded segments when in Motion state."
+    :group 'telephone-line-evil)
+  
+  (defface telephone-line-evil-operator
+    '((t (:background "violet" :inherit telephone-line-evil)))
+    "Face used in evil color-coded segments when in Operator state."
+    :group 'telephone-line-evil)
+  
+  (defface telephone-line-evil-emacs
+    '((t (:background "orange" :foreground "#262626" :inherit telephone-line-evil)))
+    "Face used in evil color-coded segments when in Emacs state."
+    :group 'telephone-line-evil)
+
+  (setq telephone-line-lhs
+      '((evil   . (telephone-line-evil-tag-segment))
+        (accent . (telephone-line-vc-segment
+                   telephone-line-erc-modified-channels-segment
+                   telephone-line-process-segment))
+        (nil    . (telephone-line-minor-mode-segment
+                   telephone-line-buffer-segment))))
+  (setq telephone-line-rhs
+      '((nil    . (telephone-line-misc-info-segment))
+        (accent . (telephone-line-major-mode-segment))
+        (evil   . (telephone-line-airline-position-segment))))
+  :config
+  (telephone-line-mode t))
+
+#+end_src
 
 
 * Org-mode
@@ -271,23 +334,26 @@ Compatibility layer to get modal editing that feels like vim. Also using doom pa
   :config
   (evil-mode 1))
 
+;; I'm keeping this here just in case telephone line ever breaks.
 ;; Better mode-line
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 10))
-  )
-(setq doom-modeline-modal-icon nil)
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :init (doom-modeline-mode 1)
+;;   :custom ((doom-modeline-height 10))
+;;   )
+;; (setq doom-modeline-modal-icon nil)
 
 ;; General EVIL keybindings on most popular emacs thingies
 (use-package evil-collection
   :after evil
+  :diminish evil-collection-unimpaired-mode
   :config
   (evil-collection-init))
 
 ;; Evil-commentary is a port of vim-commentary from tpope
 (use-package evil-commentary
   :after evil
+  :diminish evil-commentary-mode 
   :init (evil-commentary-mode))
 
 #+END_SRC
@@ -496,6 +562,7 @@ Probably the best snippets package that you can get on emacs. Works REALLY well 
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
+  :diminish yas-minor-mode
   :config
   (yas-global-mode 1))
 #+end_src
@@ -552,7 +619,11 @@ Don't exactly know what org-appear does...
 (use-package org
   :config
   (require 'org-tempo)
-  (setq org-startup-with-inline-images t))
+  (setq org-startup-with-inline-images t)
+  
+  (with-eval-after-load 'org-indent
+    (require 'diminish)
+    (diminish 'org-indent-mode)))
 
 (add-hook 'org-mode-hook 'klar/org-font-setup)
 
@@ -633,3 +704,4 @@ To center text in org-mode.
 (use-package visual-fill-column
   :hook (org-mode . org-mode-visual-fill))
 #+END_SRC
+

@@ -191,7 +191,7 @@ I'm a sucker for gruvbox and that's why I'm using it here.
     :group 'telephone-line-evil)
   
   (defface telephone-line-evil-operator
-    '((t (:background "violet" :inherit telephone-line-evil)))
+    '((t (:background "#afaf87" :foreground "#262626" :inherit telephone-line-evil)))
     "Face used in evil color-coded segments when in Operator state."
     :group 'telephone-line-evil)
   

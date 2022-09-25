@@ -375,6 +375,12 @@ Don't exactly know what org-appear does...
 
 (add-hook 'org-mode-hook 'klar/org-font-setup)
 
+;; org-move-subtree-up
+;; org-move-subtree-down
+(defun after-load-org ()
+  (define-key org-mode-map (kbd "C-M-<up>") 'org-move-subtree-up)
+  (define-key org-mode-map (kbd "C-M-<down>") 'org-move-subtree-down))
+(eval-after-load "org" '(after-load-org))
 
 ;; Pretty bullets
 (use-package org-bullets
@@ -450,8 +456,18 @@ Using elscreen, you can get similar functionality that you can get with vim tabs
   (define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
   (define-key evil-normal-state-map "gT" 'elscreen-previous) ;previous tab
   (define-key evil-normal-state-map "gt" 'elscreen-next) ;next tab
+  (elscreen-toggle-display-tab)
   (elscreen-start)
 )
+#+end_src
+
+*** Drag stuff
+
+#+begin_src emacs-lisp
+(use-package drag-stuff
+  :diminish drag-stuff-mode
+  :init (drag-stuff-global-mode 1)
+  :config (drag-stuff-define-keys))
 #+end_src
 
 
@@ -489,7 +505,8 @@ The leader key package.
   "f" 'find-file
   "d" 'dired
   "b" 'consult-buffer
-  "t" 'vterm
+  "T" 'vterm
+  "t" 'elscreen-toggle-display-tab
   "z o" 'zone
   "g" 'magit-status)
 
@@ -607,6 +624,7 @@ dired-mark-region t)
 (defun display-startup-echo-area-message ()
   "Override the normally tedious startup message."
   (message "Welcome back K_lar."))
+
 #+end_src
 
 

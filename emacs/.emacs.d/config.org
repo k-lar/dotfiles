@@ -253,6 +253,7 @@ I'm a sucker for gruvbox and that's why I'm using it here.
 
 
 * Org-mode
+** Initialization
 I wanted a simple template for newly created .org files, and it's done in a relatively hacky way because I can't figure out anything better that works.
 Use org-tempo, so you don't have to type out whole code block boilerplate with =<el=, or =<py=, or =<sh= and press TAB to have it insert the thing for you.
 
@@ -355,6 +356,39 @@ Use org-tempo, so you don't have to type out whole code block boilerplate with =
 
 #+END_SRC
 
+** Setup
+Org-bullets makes org-mode a little prettier, with UTF-8 bullets and other customizations that you can do.
+Don't exactly know what org-appear does...
+
+#+BEGIN_SRC emacs-lisp
+;; Org setup
+(use-package org
+  :pin org
+  :defer t
+  :config
+  (require 'org-tempo)
+  (setq org-startup-with-inline-images t)
+  
+  (with-eval-after-load 'org-indent
+    (require 'diminish)
+    (diminish 'org-indent-mode)))
+
+(add-hook 'org-mode-hook 'klar/org-font-setup)
+
+
+;; Pretty bullets
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+;; Show hidden emphasis markers
+(use-package org-appear
+  :hook (org-mode . org-appear-mode))
+
+
+#+END_SRC
 
 
 * EVIL
@@ -643,40 +677,6 @@ Probably the best snippets package that you can get on emacs. Works REALLY well 
 
 
 * Packages
-** Org-mode
-Org-bullets makes org-mode a little prettier, with UTF-8 bullets and other customizations that you can do.
-Don't exactly know what org-appear does...
-
-#+BEGIN_SRC emacs-lisp
-;; Org setup
-(use-package org
-  :pin org
-  :defer t
-  :config
-  (require 'org-tempo)
-  (setq org-startup-with-inline-images t)
-  
-  (with-eval-after-load 'org-indent
-    (require 'diminish)
-    (diminish 'org-indent-mode)))
-
-(add-hook 'org-mode-hook 'klar/org-font-setup)
-
-
-;; Pretty bullets
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
-;; Show hidden emphasis markers
-(use-package org-appear
-  :hook (org-mode . org-appear-mode))
-
-
-#+END_SRC
-
 ** Markdown-mode
 For editing markdown files.
 

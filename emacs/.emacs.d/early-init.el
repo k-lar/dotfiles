@@ -10,9 +10,6 @@
 
 (setq package-enable-at-startup nil)
 
-;; So we can detect this having been loaded
-(provide 'early-init)
-
 ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
@@ -22,5 +19,8 @@
 ;; font. By inhibiting this, we easily halve startup times with fonts that are
 ;; larger than the system default.
 (setq frame-inhibit-implied-resize t)
+
+;; So we can detect this having been loaded
+(provide 'early-init)
 
 ;;; early-init.el ends here

@@ -516,19 +516,21 @@ The leader key package.
   "d" 'dired
   "b" 'consult-buffer
   "T" 'vterm
-  "t" 'elscreen-toggle-display-tab
+  "t" 'toggle-frame-tab-bar
   "z o" 'zone
   "g" 'magit-status)
 
 (general-define-key
   :states 'normal
-  "M-p" 'evil-paste-before
+  "M-p" 'evil-paste-after
+  "C-V" 'evil-paste-after
   "C-M-q" 'save-buffers-kill-emacs)
 
 (general-define-key
   :states 'insert
+  "C-V" 'evil-paste-after
   "C-c d" 'klar/insert-current-date
-  "M-p" 'evil-paste-before)
+  "M-p" 'evil-paste-after)
 
 #+END_SRC
 

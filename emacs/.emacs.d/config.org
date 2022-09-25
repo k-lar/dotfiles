@@ -524,6 +524,7 @@ The leader key package.
   :states 'normal
   "M-p" 'evil-paste-after
   "C-V" 'evil-paste-after
+  "SPC G" 'git-gutter-mode
   "C-M-q" 'save-buffers-kill-emacs)
 
 (general-define-key
@@ -755,6 +756,17 @@ The best Git interface known to man.
   :bind ("C-x g" . magit-status))
 
 #+END_SRC
+
+** GitGutter
+Just like in vim
+
+#+begin_src emacs-lisp
+(use-package git-gutter
+  :commands (git-gutter-mode)
+  ;; :config (git-gutter:linum-setup)
+)
+
+#+end_src
 
 ** Which-key
 Very helpful package that shows you what keys you can press with the modifier keys (C-, M-, S-)

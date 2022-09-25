@@ -440,25 +440,35 @@ Compatibility layer to get modal editing that feels like vim. Also using doom pa
 Using elscreen, you can get similar functionality that you can get with vim tabs.
 
 #+begin_src emacs-lisp
-(use-package elscreen
-  :config 
-  ;; (defadvice elscreen-create (before elscreen-start activate))
-  ;; (defadvice elscreen-next (before elscreen-start activate))
-  ;; (defadvice elscreen-previous (before elscreen-start activate))
+;; KEEPING THIS JUST IN CASE
+;; (use-package elscreen
+;;   :config 
+;;   ;; (defadvice elscreen-create (before elscreen-start activate))
+;;   ;; (defadvice elscreen-next (before elscreen-start activate))
+;;   ;; (defadvice elscreen-previous (before elscreen-start activate))
 
-  ;; (defadvice elscreen-previous (around elscreen-create-automatically activate)
-  ;;   (elscreen-create-automatically ad-do-it))
+;;   ;; (defadvice elscreen-previous (around elscreen-create-automatically activate)
+;;   ;;   (elscreen-create-automatically ad-do-it))
 
 
-  (setq elscreen-tab-display-control nil)
-  (setq elscreen-display-screen-number nil)
-  (define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
-  (define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
-  (define-key evil-normal-state-map "gT" 'elscreen-previous) ;previous tab
-  (define-key evil-normal-state-map "gt" 'elscreen-next) ;next tab
-  (elscreen-toggle-display-tab)
-  (elscreen-start)
-)
+;;   (setq elscreen-tab-display-control nil)
+;;   (setq elscreen-display-screen-number nil)
+;;   (define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
+;;   (define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
+;;   (define-key evil-normal-state-map "gT" 'elscreen-previous) ;previous tab
+;;   (define-key evil-normal-state-map "gt" 'elscreen-next) ;next tab
+;;   (elscreen-toggle-display-tab)
+;;   (elscreen-start)
+;; )
+
+(setq tab-bar-show 1)
+(tab-bar-mode)
+(define-key evil-normal-state-map (kbd "C-w t") 'tab-new) ;create tab
+(define-key evil-normal-state-map (kbd "C-w f") 'find-file-other-tab)
+(define-key evil-normal-state-map (kbd "C-w x") 'tab-close) ;kill tab
+(define-key evil-normal-state-map "gT" 'tab-last) ;previous tab
+(define-key evil-normal-state-map "gt" 'tab-next) ;next tab
+
 #+end_src
 
 *** Drag stuff

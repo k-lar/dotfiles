@@ -392,6 +392,7 @@ Don't exactly know what org-appear does...
 
 
 * EVIL
+** EVIL configuration
 Compatibility layer to get modal editing that feels like vim. Also using doom packages because they lead development in vim-like features.
 
 #+BEGIN_SRC emacs-lisp
@@ -427,6 +428,31 @@ Compatibility layer to get modal editing that feels like vim. Also using doom pa
   :init (evil-commentary-mode))
 
 #+END_SRC
+
+** Vim-like features
+*** Vim tabs
+Using elscreen, you can get similar functionality that you can get with vim tabs.
+
+#+begin_src emacs-lisp
+(use-package elscreen
+  :config 
+  ;; (defadvice elscreen-create (before elscreen-start activate))
+  ;; (defadvice elscreen-next (before elscreen-start activate))
+  ;; (defadvice elscreen-previous (before elscreen-start activate))
+
+  ;; (defadvice elscreen-previous (around elscreen-create-automatically activate)
+  ;;   (elscreen-create-automatically ad-do-it))
+
+
+  (setq elscreen-tab-display-control nil)
+  (setq elscreen-display-screen-number nil)
+  (define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;create tab
+  (define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
+  (define-key evil-normal-state-map "gT" 'elscreen-previous) ;previous tab
+  (define-key evil-normal-state-map "gt" 'elscreen-next) ;next tab
+  (elscreen-start)
+)
+#+end_src
 
 
 * Undo system

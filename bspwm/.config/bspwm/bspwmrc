@@ -14,7 +14,7 @@ killall mpd; mpd &
 killall gummy; gummy start &
 thunar --daemon &
 feh --bg-fill ~/Pictures/gruvbox_walls/stairs.jpg &
-emacs --daemon &
+emacs --daemon && notify-send "Emacs daemon started" &
 
 sh -c '~/.config/polybar/launch.sh' &
 

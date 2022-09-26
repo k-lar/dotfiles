@@ -437,7 +437,7 @@ Compatibility layer to get modal editing that feels like vim. Also using doom pa
 
 ** Vim-like features
 *** Vim tabs
-Using elscreen, you can get similar functionality that you can get with vim tabs.
+Using emacs' built-in tabs and they work surprisingly well.
 
 #+begin_src emacs-lisp
 ;; KEEPING THIS JUST IN CASE
@@ -642,6 +642,7 @@ dired-mark-region t)
 
 
 * Better completion
+** Completion
 I'm using a bunch of packages that don't aim to replace the built-in systems of emacs, but instead to build upon them and make them better. I feel like this works better and startup time is slower, even if you have to configure it a bit more.
 
 #+BEGIN_SRC emacs-lisp

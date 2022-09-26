@@ -745,6 +745,21 @@ Probably the best snippets package that you can get on emacs. Works REALLY well 
   :ensure t)
 #+end_src
 
+** Tree-sitter
+Tree-sitter is a tree based syntax highlighting backend that I first used in nvim, and it's way better than syntax highlighting with regex.
+
+#+begin_src emacs-lisp
+(use-package tree-sitter
+  :ensure t
+  :commands (tree-sitter-hl-mode)
+  :init
+  (add-hook 'sh-mode-hook #'tree-sitter-hl-mode)
+  (add-hook 'python-mode-hook #'tree-mode-sitter-hl))
+
+(use-package tree-sitter-langs
+  :ensure t)
+#+end_src
+
 ** Tabs, spaces and whitespaces
 
 #+begin_src emacs-lisp

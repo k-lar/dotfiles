@@ -187,7 +187,12 @@ I'm a sucker for gruvbox and that's why I'm using it here.
 #+BEGIN_SRC emacs-lisp
 (use-package gruvbox-theme
   :config
-  (load-theme 'gruvbox-dark-medium t))
+  (custom-set-faces
+   '(line-number ((t (:background "#262626" :foreground "#7c6f64"))))
+   '(line-number-current-line ((t (:background "#262626" :foreground "#fe8019")))))
+  (load-theme 'gruvbox-dark-medium t)  
+  (set-face-attribute 'fringe nil :background nil)
+  (set-background-color "#262626"))
 
 ;; For better contrast, use this instead
 ;;(use-package ef-themes
@@ -198,8 +203,16 @@ I'm a sucker for gruvbox and that's why I'm using it here.
 
 ** Mode line
 #+begin_src emacs-lisp
+(set-face-background 'mode-line "#3a3a3a")
+(set-face-foreground 'mode-line "white")
+
 (use-package telephone-line
   :init
+  (defface telephone-line-accent-active
+    '((t (:foreground "white" :background "#4e4e4e" :inherit mode-line)))
+    "Accent face for mode-line."
+    :group 'telephone-line)
+
   (defface telephone-line-evil-insert
     '((t (:background "#87afaf" :foreground "#262626" :inherit telephone-line-evil)))
     "Face used in evil color-coded segments when in Insert state."
@@ -523,15 +536,16 @@ The leader key package.
 (general-define-key
   :states 'normal
   "M-p" 'evil-paste-after
-  "C-V" 'evil-paste-after
+  "C-S-v" 'evil-paste-after
   "SPC G" 'git-gutter-mode
   "C-M-q" 'save-buffers-kill-emacs)
 
 (general-define-key
   :states 'insert
-  "C-V" 'evil-paste-after
+  "C-S-v" 'evil-paste-after
   "C-c d" 'klar/insert-current-date
   "M-p" 'evil-paste-after)
+
 
 #+END_SRC
 

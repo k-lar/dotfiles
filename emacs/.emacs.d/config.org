@@ -187,12 +187,12 @@ I'm a sucker for gruvbox and that's why I'm using it here.
 #+BEGIN_SRC emacs-lisp
 (use-package gruvbox-theme
   :config
+  (load-theme 'gruvbox-dark-medium t)
   (custom-set-faces
    '(line-number ((t (:background "#262626" :foreground "#7c6f64"))))
    '(line-number-current-line ((t (:background "#262626" :foreground "#fe8019")))))
-  (load-theme 'gruvbox-dark-medium t)  
-  (set-face-attribute 'fringe nil :background nil)
-  (set-background-color "#262626"))
+  (set-background-color "#262626")
+  (set-face-attribute 'fringe nil :background nil))
 
 ;; For better contrast, use this instead
 ;;(use-package ef-themes

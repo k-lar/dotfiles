@@ -531,6 +531,7 @@ The leader key package.
   "T" 'vterm
   "t" 'toggle-frame-tab-bar
   "z o" 'zone
+  "z a" 'artist-mode
   "g" 'magit-status)
 
 (general-define-key
@@ -637,6 +638,9 @@ dired-mark-region t)
 ;; The new context-menu-mode in Emacs 28 makes right-click a lot more useful. But for terminal emacs, it’s handy to have the menubar at hand.
 (context-menu-mode)
 (bind-key "C-c C-m" #'tmm-menubar)
+
+;; Automatically go into emacs-state when in artist mode
+(add-hook 'artist-mode-hook 'evil-emacs-state)
 
 #+END_SRC
 

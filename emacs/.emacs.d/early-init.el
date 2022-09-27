@@ -9,6 +9,7 @@
 ;;; Code:
 
 (setq package-enable-at-startup nil)
+(setq vc-follow-symlinks t)
 
 ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.
 (push '(menu-bar-lines . 0) default-frame-alist)

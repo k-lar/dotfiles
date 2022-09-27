@@ -4,7 +4,7 @@
 if [ "$HOSTNAME" = klar-arch ]; then
 	killall xrandr; xrandr --output HDMI-1 --mode 1920x1080 --rate 144 &
 fi
-setxkbmap si -option caps:swapescape &
+setxkbmap si -option caps:escape_shifted_capslock &
 killall sxhkd; sxhkd &
 killall picom; sleep 0.1s; picom &
 killall dunst; dunst &

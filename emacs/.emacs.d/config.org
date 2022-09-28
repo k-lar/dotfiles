@@ -186,14 +186,12 @@ I'm a sucker for gruvbox and that's why I'm using it here.
 #+BEGIN_SRC emacs-lisp
 (use-package gruvbox-theme
   :init (load-theme 'gruvbox-dark-medium t)
-  :config
-  (load-theme 'gruvbox-dark-medium t)
-  (custom-set-faces
-   '(default ((t (:background "#262626" :foreground "#ebdbb2"))))
-   '(line-number ((t (:background "#262626" :foreground "#7c6f64"))))
-   '(line-number-current-line ((t (:background "#262626" :foreground "#fe8019"))))
-   '(fringe ((t (:background "#262626"))))
-))
+  :custom-face
+  (default ((t (:background "#262626" :foreground "#ebdbb2"))))
+  (line-number ((t (:background "#262626" :foreground "#7c6f64"))))
+  (line-number-current-line ((t (:background "#262626" :foreground "#fe8019"))))
+  (fringe ((t (:background "#262626"))))
+)
 
 ;; For better contrast, use this instead
 ;;(use-package ef-themes

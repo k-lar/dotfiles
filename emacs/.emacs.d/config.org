@@ -812,6 +812,17 @@ Tree-sitter is a tree based syntax highlighting backend that I first used in nvi
 
 #+end_src
 
+** Color codes
+This package should colorize color names and hex codes in buffers.
+
+#+begin_src emacs-lisp
+(use-package rainbow-mode
+  :diminish rainbow-mode
+  :hook ((css-mode . rainbow-mode)
+         (sh-mode . rainbow-mode)))
+
+#+end_src
+
 
 * Packages
 ** Markdown-mode

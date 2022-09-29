@@ -451,8 +451,9 @@ Compatibility layer to get modal editing that feels like vim. Also using doom pa
 (add-hook 'tetris-mode-hook (lambda () (evil-set-initial-state 'tetris-mode 'emacs)))
 (add-hook 'doctor-mode-hook (lambda () (evil-set-initial-state 'doctor-mode 'emacs)))
 (add-hook 'artist-mode-hook 'evil-emacs-state)
-(add-hook 'bongo-library-mode-hook 'evil-emacs-state)
-
+(add-hook 'emms-playlist-mode-hook (lambda () (evil-set-initial-state 'emms-playlist-mode 'emacs)))
+(add-hook 'emms-browser-mode-hook 'evil-emacs-state)
+;; (add-hook 'emms-browser-mode-hook (lambda () (evil-set-initial-state 'emms-browser-mode 'emacs)))
 
 #+END_SRC
 
@@ -519,15 +520,19 @@ Set up an undo/redo system and make it work with evil mode (u/ctrl+r)
 #+end_src
 
 
-* General package (leader)
+* Keybindings
+** General package (leader)
 The leader key package.
 
 #+BEGIN_SRC emacs-lisp
 ;; General package (leader key)
 (use-package general
   :config
+  (general-auto-unbind-keys)
   (general-create-definer klar/leader-keys
   :prefix "SPC"))
+
+(general-def :states '(normal motion emacs) "SPC" nil)
 
 (general-define-key
   :states 'normal
@@ -536,6 +541,7 @@ The leader key package.
   "f" 'find-file
   "d" 'dired
   "b" 'consult-buffer
+  "B" 'kill-buffer
   "T" 'vterm
   "t" 'toggle-frame-tab-bar
   "z o" 'zone
@@ -557,6 +563,25 @@ The leader key package.
 
 
 #+END_SRC
+
+** Hydra
+For repeatable keybindings like zoom and volume.
+
+#+begin_src emacs-lisp
+(use-package hydra
+  :ensure t)
+
+(defhydra hydra-zoom (global-map "<f2>")
+  "zoom"
+  ("k" text-scale-increase "in")
+  ("j" text-scale-decrease "out"))
+
+(defhydra hydra-emms-volume ()
+  "Volume"
+  ("<up>" emms-player-mpv-raise-volume "10")
+  ("<down>" emms-player-mpv-lower-volume "10"))
+
+#+end_src
 
 
 * QOL Stuff
@@ -912,13 +937,64 @@ To center text in org-mode.
 * Music
 Trying out the "Emacs as an OS" mindset, and having my music player inside Emacs.
 
+** EMMS
+
 #+begin_src emacs-lisp
-(use-package bongo
-  :config
-  (setq bongo-default-directory "~/Music")
-  (setq bongo-logo nil)
-  (setq bongo-insert-whole-directory-trees t)
-  (setq bongo-header-line-mode nil))
+(use-package emms
+  :init
+  (emms-all)
+  (setq emms-player-list '(emms-player-mpv))
+  (setq-default emms-player-mpv-parameters '("--quiet" "--really-quiet" "--no-audio-display" "--force-window=no" "--vo=null"))
+  (setq emms-source-file-default-directory "~/Music/"))
+
+#+end_src
+
+** MPV backend functions
+To control volume of mpv
+
+#+begin_src emacs-lisp
+  (defvar emms-player-mpv-volume 100)
+  (defun emms-player-mpv-get-volume ()
+    "Sets `emms-player-mpv-volume' to the current volume value
+and sends a message of the current volume status."
+  (interactive)
+    (emms-player-mpv-cmd '(get_property volume)
+                         #'(lambda (vol err)
+                             (unless err
+                               (let ((vol (truncate vol)))
+                                 (setq emms-player-mpv-volume vol)
+                                 (message "Music volume: %s%%"
+                                           vol))))))
+
+
+  (defun emms-player-mpv-raise-volume (&optional amount)
+    (interactive)
+    (let* ((amount (or amount 10))
+           (new-volume (+ emms-player-mpv-volume amount)))
+      (if (> new-volume 100)
+          (emms-player-mpv-cmd '(set_property volume 100))
+        (emms-player-mpv-cmd `(add volume ,amount))))
+    (emms-player-mpv-get-volume))
+
+
+  (defun emms-player-mpv-lower-volume (&optional amount)
+    (interactive)
+    (emms-player-mpv-cmd `(add volume ,(- (or amount '10))))
+    (emms-player-mpv-get-volume))
+
+#+end_src
+
+** Keybindings
+#+begin_src emacs-lisp
+(general-define-key
+  :states 'normal
+  :keymaps 'override
+  "SPC m m" 'emms
+  "SPC m b" 'emms-browser
+  "SPC m p" 'emms-pause
+  "SPC v" 'hydra-emms-volume/body
+  )
+
 #+end_src
 
 

@@ -445,6 +445,15 @@ Compatibility layer to get modal editing that feels like vim. Also using doom pa
   :diminish evil-commentary-mode 
   :init (evil-commentary-mode))
 
+;; Try to disable EVIL keybindings on buffers that suck with them
+(add-hook 'Custom-mode-hook (lambda () (evil-set-initial-state 'Custom-mode 'emacs)))
+(add-hook 'snake-mode-hook (lambda () (evil-set-initial-state 'snake-mode 'emacs)))
+(add-hook 'tetris-mode-hook (lambda () (evil-set-initial-state 'tetris-mode 'emacs)))
+(add-hook 'doctor-mode-hook (lambda () (evil-set-initial-state 'doctor-mode 'emacs)))
+(add-hook 'artist-mode-hook 'evil-emacs-state)
+(add-hook 'bongo-library-mode-hook 'evil-emacs-state)
+
+
 #+END_SRC
 
 ** Vim-like features
@@ -639,7 +648,7 @@ dired-mark-region t)
 (bind-key "C-c C-m" #'tmm-menubar)
 
 ;; Automatically go into emacs-state when in artist mode
-(add-hook 'artist-mode-hook 'evil-emacs-state)
+;; (add-hook 'artist-mode-hook 'evil-emacs-state)
 
 #+END_SRC
 
@@ -898,6 +907,19 @@ To center text in org-mode.
   :hook (org-mode . org-mode-visual-fill))
 #+END_SRC
 
+
+
+* Music
+Trying out the "Emacs as an OS" mindset, and having my music player inside Emacs.
+
+#+begin_src emacs-lisp
+(use-package bongo
+  :config
+  (setq bongo-default-directory "~/Music")
+  (setq bongo-logo nil)
+  (setq bongo-insert-whole-directory-trees t)
+  (setq bongo-header-line-mode nil))
+#+end_src
 
 
 * Post Initialization

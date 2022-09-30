@@ -798,6 +798,14 @@ Probably the best snippets package that you can get on emacs. Works REALLY well 
 #+begin_src emacs-lisp
 (use-package go-mode
   :ensure t)
+
+(use-package emmet-mode
+  :commands (emmet-mode)
+  :hook ((css-mode . emmet-mode)
+         (html-mode . emmet-mode)
+         (sgml-mode . emmet-mode)
+         (mhtml-mode . emmet-mode))
+)
 #+end_src
 
 ** Tree-sitter

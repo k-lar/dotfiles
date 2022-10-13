@@ -536,6 +536,7 @@ The leader key package.
   (general-create-definer klar/leader-keys
   :prefix "SPC"))
 
+(global-set-key (kbd "<f5>") #'compile)
 (general-def :states '(normal motion emacs) "SPC" nil)
 
 (general-define-key
@@ -809,6 +810,9 @@ Probably the best snippets package that you can get on emacs. Works REALLY well 
 
 (use-package rust-mode
   :hook (rust-mode . rust-mode))
+
+(use-package csharp-mode
+  :hook (csharp-mode . csharp-mode))
 #+end_src
 
 ** Tree-sitter
@@ -821,6 +825,7 @@ Tree-sitter is a tree based syntax highlighting backend that I first used in nvi
   :init
   (add-hook 'sh-mode-hook #'tree-sitter-hl-mode)
   (add-hook 'python-mode-hook #'tree-mode-sitter-hl)
+  (add-hook 'csharp-mode-hook #'tree-mode-sitter-hl)
   (add-hook 'rust-mode-hook #'tree-mode-sitter-hl))
 
 (use-package tree-sitter-langs

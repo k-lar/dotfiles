@@ -75,15 +75,6 @@ The "use-package" package is needed to keep the configuration cleaner, as it all
   (setq use-package-always-ensure t))
 
 
-
-(add-to-list 'load-path "~/.emacs.d/site-lisp/elpa-mirror")
-(require 'elpa-mirror)
-
-;; Set up local packages as a seperate repository
-(add-to-list 'package-archives
-             '("myelpa" . "~/.emacs.d/myelpa/"))
-
-
 ;; For adding .el files/plugins directly
 (add-to-list 'load-path "~/.emacs.d/lisp/")
  #+END_SRC

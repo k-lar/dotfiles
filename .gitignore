@@ -8,6 +8,10 @@ emacs/.emacs.d/*
 !emacs/.emacs.d/init.el
 !emacs/.emacs.d/lisp
 !emacs/.emacs.d/lisp/*
+!emacs/.emacs.d/site-lisp
+!emacs/.emacs.d/site-lisp/*
+!emacs/.emacs.d/myelpa
+!emacs/.emacs.d/myelpa/*
 *~undo-tree~*
 
 # Ignore MPD clutter files

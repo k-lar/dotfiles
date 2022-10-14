@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # ===============================================================================
 # This shell script downloads all necessary programs that are in use in this repo.

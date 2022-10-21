@@ -11,6 +11,17 @@
 # If not running interactively, don't do anything
 	[[ $- != *i* ]] && return
 
+# History configuration (unlimited history)
+    export HISTFILESIZE=
+    export HISTSIZE=
+    export HISTTIMEFORMAT="%F %T | "
+    export HISTFILE=~/.bash_history
+    export PROMPT_COMMAND='history -a'
+
+# Shell options (shopt)
+    shopt -s cdspell
+    shopt -s histappend
+
 # Run tmux at start
 
     function tmux_start(){
@@ -101,12 +112,12 @@
 #	export CHROME_EXECUTABLE='/usr/bin/chromium'
 
 # Emacs vterm support
-if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
-    function clear(){
-        vterm_printf "51;Evterm-clear-scrollback";
-        tput clear;
-    }
-fi
+    if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+        function clear(){
+            vterm_printf "51;Evterm-clear-scrollback";
+            tput clear;
+        }
+    fi
 
 # Programs to run at start
 	pfetch

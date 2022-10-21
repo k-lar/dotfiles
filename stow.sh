@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -f ~/.bashrc ]; then
     echo -e ".bashrc already exists. Do you want to replace it?"
@@ -8,6 +8,32 @@ if [ -f ~/.bashrc ]; then
         stow bash
     fi
 fi
+
+# Symlink rofi as dmenu
+if [ -f /usr/bin/dmenu ]; then
+    if [ ! -L "/usr/bin/dmenu" ]; then
+        echo -e "Symlink rofi as dmenu?"
+        read -p "[Y/n]: " rofi_choice
+        if [ ! "$rofi_choice" == "n" ]; then
+            sudo ln -s /usr/bin/rofi /usr/bin/dmenu
+            echo "Successfully symlinked rofi as dmenu"
+        fi
+    else
+        echo "Rofi is symlinked as dmenu"
+    fi
+
+else
+    if [ -f /usr/bin/rofi ]; then
+        echo -e "Symlink rofi as dmenu?"
+        read -p "[Y/n]: " rofi_choice
+        if [ ! "$rofi_choice" == "n" ]; then
+            sudo ln -s /usr/bin/rofi /usr/bin/dmenu
+            echo "Successfully symlinked rofi as dmenu"
+        fi
+    fi
+
+fi
+
 
 stow boomer
 stow bspwm

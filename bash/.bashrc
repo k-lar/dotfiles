@@ -22,6 +22,7 @@
     shopt -s cdspell
     shopt -s histappend
     shopt -s checkwinsize
+    stty -ixon # CTRL-s history search
 
 # Run tmux at start
 

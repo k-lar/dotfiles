@@ -42,6 +42,7 @@ stow kitty
 stow mpd
 stow mpv
 stow nvim
+stow nano
 stow picom
 stow polybar
 stow rofi

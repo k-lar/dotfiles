@@ -21,6 +21,7 @@
 # Shell options (shopt)
     shopt -s cdspell
     shopt -s histappend
+    shopt -s checkwinsize
 
 # Run tmux at start
 

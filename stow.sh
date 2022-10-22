@@ -1,6 +1,7 @@
 #!/bin/bash
 
 if [ -f ~/.bashrc ]; then
+
     echo -e ".bashrc already exists. Do you want to replace it?"
     read -p "[y/N]: " bashrc_choice
     if [ "$bashrc_choice" == "y" ]; then
@@ -34,6 +35,27 @@ else
 
 fi
 
+if [ ! -f /usr/bin/stow ]; then
+    perl $HOME/.dotfiles/bin/stow boomer
+    perl $HOME/.dotfiles/bin/stow bspwm
+    perl $HOME/.dotfiles/bin/stow gtk
+    perl $HOME/.dotfiles/bin/stow kitty
+    perl $HOME/.dotfiles/bin/stow mpd
+    perl $HOME/.dotfiles/bin/stow mpv
+    perl $HOME/.dotfiles/bin/stow nvim
+    perl $HOME/.dotfiles/bin/stow nano
+    perl $HOME/.dotfiles/bin/stow picom
+    perl $HOME/.dotfiles/bin/stow polybar
+    perl $HOME/.dotfiles/bin/stow rofi
+    perl $HOME/.dotfiles/bin/stow sxhkd
+    perl $HOME/.dotfiles/bin/stow when
+    perl $HOME/.dotfiles/bin/stow zathura
+    perl $HOME/.dotfiles/bin/stow emacs
+    perl $HOME/.dotfiles/bin/stow dunst
+    perl $HOME/.dotfiles/bin/stow tmux
+    perl $HOME/.dotfiles/bin/stow fontconfig
+    perl $HOME/.dotfiles/bin/stow Xresources
+fi
 
 stow boomer
 stow bspwm

@@ -72,6 +72,11 @@
 	alias brem='~/.dotfiles/scripts/./brem.sh'
 	alias emacs="emacsclient -c -a 'emacs'"
     alias clear='clear -x' # Don't clear scrollback history (-x)
+    alias cd..='cd ..'
+    alias ..='cd ..'
+    alias ....='cd ../../'
+    alias ......='cd ../../../'
+
 
 # Weather report alias:
 	alias weather='curl wttr.in/Ljubljana'

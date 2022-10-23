@@ -7,37 +7,37 @@ timeval=$(tr -d -c 'hms' <<< "$1")
 
 if [ "$timeval" = "h" ];then
     usrtime=$(echo "$usrtime*60" | bc | sed "s/\..*//")
-    if [ "$usrtime" > 5 ];then
+    if [ "$usrtime" -gt 5 ];then
         time2sleep=$(echo "$usrtime-5" | bc | sed "s/\..*//")
         dowarn=1
     else
-        time2sleep=$(echo "$usrtime*60" | bc | sed "s/\..*//")
+        time2sleep="$usrtime"
         dowarn=0
     fi
-    datenext=$(date --date="$usrtime minutes" +"%T")
+    datenext=$(date --date="$time2sleep minutes" +"%T")
 fi
 
 if [ "$timeval" = "m" ];then
     usrtime=$(echo "$usrtime*60" | bc | sed "s/\..*//")
-    if [ "$usrtime" > 300 ];then
-        time2sleep=$(echo "$usrtime-300" | bc | sed "s/\..*//")
-        dowarn=1
-    else
-        time2sleep=$(echo "$usrtime*60" | bc | sed "s/\..*//")
-        dowarn=0
-    fi
-    datenext=$(date --date="$usrtime  seconds" +"%T")
-fi
-
-if [ "$timeval" = "s" ];then
-    if [ "$usrtime" > 300 ];then
+    if [ "$usrtime" -gt 300 ];then
         time2sleep=$(echo "$usrtime-300" | bc | sed "s/\..*//")
         dowarn=1
     else
         time2sleep="$usrtime"
         dowarn=0
     fi
-    datenext=$(date --date="$usrtime seconds" +"%T")
+    datenext=$(date --date="$time2sleep seconds" +"%T")
+fi
+
+if [ "$timeval" = "s" ];then
+    if [ "$usrtime" -gt 300 ];then
+        time2sleep=$(echo "$usrtime-300" | bc | sed "s/\..*//")
+        dowarn=1
+    else
+        time2sleep="$usrtime"
+        dowarn=0
+    fi
+    datenext=$(date --date="$time2sleep seconds" +"%T")
 fi
 
 printf "powernap started at: $date\n"

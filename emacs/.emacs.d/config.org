@@ -544,6 +544,9 @@ The leader key package.
   :keymaps 'override
   :prefix "SPC"
   "f" 'find-file
+  "F F" 'flymake-mode
+  "F <down>" 'flymake-goto-next-error
+  "F <up>" 'flymake-goto-next-error
   "d" 'dired
   "b" 'consult-buffer
   "B" 'kill-buffer
@@ -909,6 +912,25 @@ Just like in vim
   :commands (git-gutter-mode)
   ;; :config (git-gutter:linum-setup)
 )
+
+#+end_src
+
+** Flymake
+
+#+begin_src emacs-lisp
+(use-package flymake-shellcheck
+  :commands flymake-shellcheck-load
+  :init
+  (add-hook 'sh-mode-hook 'flymake-shellcheck-load)
+  (setq flymake-run-in-place nil))
+
+;; For printing error messages inside minibuffer, so you don't have to hover over
+;; with the mouse
+(use-package flymake-cursor
+  :load-path "~/.dotfiles/emacs/.emacs.d/lisp/emacs-flymake-cursor"
+  :config
+  (flymake-cursor-mode))
+(eval-after-load 'flymake '(require 'flymake-cursor))
 
 #+end_src
 

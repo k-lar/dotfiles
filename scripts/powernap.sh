@@ -14,7 +14,7 @@ if [ "$timeval" = "h" ];then
         time2sleep="$usrtime"
         dowarn=0
     fi
-    datenext=$(date --date="$time2sleep minutes" +"%T")
+    datenext=$(date --date="$usrtime minutes" +"%T")
     time2sleep="${time2sleep}m"
 fi
 
@@ -27,7 +27,7 @@ if [ "$timeval" = "m" ];then
         time2sleep="$usrtime"
         dowarn=0
     fi
-    datenext=$(date --date="$time2sleep seconds" +"%T")
+    datenext=$(date --date="$usrtime seconds" +"%T")
     time2sleep="${time2sleep}s"
 fi
 
@@ -39,7 +39,7 @@ if [ "$timeval" = "s" ];then
         time2sleep="$usrtime"
         dowarn=0
     fi
-    datenext=$(date --date="$time2sleep seconds" +"%T")
+    datenext=$(date --date="$usrtime seconds" +"%T")
     time2sleep="${time2sleep}s"
 fi
 

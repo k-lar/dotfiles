@@ -11,6 +11,9 @@
 # If not running interactively, don't do anything
 	[[ $- != *i* ]] && return
 
+# PATH variable
+    export PATH="$HOME/.dotfiles/bin:$PATH"
+
 # History configuration (unlimited history)
     export HISTFILESIZE=
     export HISTSIZE=
@@ -25,7 +28,6 @@
     stty -ixon # CTRL-s history search
 
 # Run tmux at start
-
     function tmux_start(){
         tmux has-session -t dev
         if [ $? != 0 ]
@@ -47,8 +49,8 @@
     fi
 
 # Prompt shell style
-	# PS1='[\u@\h \W]\$ '
     PS1="[\W] \[\e[1;33m\]λ \[\e[0m\]"
+    # PS1='[\u@\h \W]\$ '
 
 # Set bash into vim mode
 	set -o vi
@@ -68,8 +70,6 @@
 	# alias ssh='kitty +kitten ssh'
 	alias newsboat='newsboat -r'
 	alias rorlike='cd ~/git/rorlike/'
-	alias powernap='~/.dotfiles/scripts/./powernap.sh'
-	alias brem='~/.dotfiles/scripts/./brem.sh'
 	alias emacs="emacsclient -c -a 'emacs'"
     alias clear='clear -x' # Don't clear scrollback history (-x)
     alias cd..='cd ..'
@@ -77,22 +77,8 @@
     alias ....='cd ../../'
     alias ......='cd ../../../'
 
-
 # Weather report alias:
 	alias weather='curl wttr.in/Ljubljana'
-
-# School aliases
-	alias school="cd ~/School"
-	alias urnik="sc-im ~/School/urnik.sc"
-	alias slova="cd ~/School/SLO"
-	alias angla="cd ~/School/ANJ"
-	alias uipo="cd ~/School/UIPO"
-	alias uiks="cd ~/School/UIKS"
-	alias soc="cd ~/School/SOC"
-	alias nsik="cd ~/School/NSIK"
-	alias poi="cd ~/School/POI"
-	alias rob="cd ~/School/ROB"
-	alias kem="cd ~/School/KEM"
 
 # Make grep have color
 	alias grep='grep --color=auto'
@@ -102,21 +88,6 @@
 
 # pfetch configuration
 	export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
-	#export PF_SEP=":"
-
-# Environment variables for rustlang
-#. "$HOME/.cargo/env"
-
-## Aliases for flutter developement (uncomment to enable)
-#	export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'
-#	export ANDROID_SDK_ROOT='/opt/android-sdk'
-#	export ANDROID_HOME='/opt/android-sdk'
-#	export PATH=$JAVA_HOME/bin:$PATH
-#	export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
-#	export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin/
-#	export PATH=$PATH:$ANDROID_ROOT/emulator
-#  	export PATH=$PATH:$ANDROID_SDK_ROOT/tools/
-#	export CHROME_EXECUTABLE='/usr/bin/chromium'
 
 # Emacs vterm support
     if [[ "$INSIDE_EMACS" = 'vterm' ]]; then

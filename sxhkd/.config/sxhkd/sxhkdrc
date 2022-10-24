@@ -16,7 +16,7 @@ super + e
 
 # My reminders script
 super + u
-  sh -c "~/.dotfiles/scripts/brem.sh --rofi-menu"
+  sh -c "~/.dotfiles/bin/brem --rofi-menu"
 
 # Noise
 super + m

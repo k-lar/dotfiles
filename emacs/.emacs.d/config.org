@@ -929,7 +929,8 @@ Just like in vim
 (use-package flymake-cursor
   :load-path "~/.dotfiles/emacs/.emacs.d/lisp/emacs-flymake-cursor"
   :config
-  (flymake-cursor-mode))
+  (flymake-cursor-mode)
+  (setq flymake-cursor-error-display-delay 0.4))
 (eval-after-load 'flymake '(require 'flymake-cursor))
 
 #+end_src

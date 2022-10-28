@@ -138,7 +138,7 @@ local custom_gruvbox = require'lualine.themes.gruvbox'
 custom_gruvbox.insert.a.bg = '#84a799'
 
 require('lualine').setup {
-  options = { theme  = custom_gruvbox },
+  options = { theme  = custom_gruvbox, section_separators = '', component_separators = '' },
   ...
 }
 EOF

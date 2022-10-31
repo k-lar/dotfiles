@@ -95,14 +95,6 @@ RofiAdd() {
     fi
 }
 
-RofiRemove() {
-    if [ -f "$HOME/.config/brem-reminders" ]; then
-        sed -i "/\\$remove_num/d" "$HOME/.config/brem-reminders"
-    else
-        echo "Reminders file doesn't exist!"
-    fi
-}
-
 Renumber() {
     echo_num=1
     line_num=1
@@ -207,8 +199,10 @@ case "$1" in
         RofiAdd;;
 
     "--rofi-remove")
-        remove_num=$("$HOME/.config/./brem-reminders" | rofi -dmenu -p "Remove:" -only-match)
-        RofiRemove;;
+        remove_num=$("$HOME/.config/./brem-reminders" | rofi -dmenu -p "Remove:")
+        remove_num=$(echo "${remove_num%%-*}")
+        remove_num=$(echo "$remove_num" | grep -o '[0-9]*')
+        RemoveReminder;;
 
     "--rofi-menu")
         RofiMenu;;

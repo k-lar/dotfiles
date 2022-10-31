@@ -81,6 +81,7 @@ RofiAdd() {
         if ! [ "$create_choice" = "No" ]; then
             CreateSource >> "$HOME/.config/brem-reminders"
             chmod +x "$HOME/.config/brem-reminders"
+            reminder=$(sh -c "echo $reminder")
             printf "echo \"[1] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
         fi
 
@@ -91,6 +92,7 @@ RofiAdd() {
                 echo_num=$((echo_num+1))
             fi
         done < "$HOME/.config/brem-reminders"
+        reminder=$(sh -c "echo $reminder")
         printf "echo \"[$echo_num] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
     fi
 }

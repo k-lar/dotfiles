@@ -30,6 +30,7 @@ Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
 Plug 'morhetz/gruvbox'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'rinx/nvim-minimap'
+Plug 'ggandor/leap.nvim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-commentary'
@@ -285,6 +286,9 @@ EOF
 
 " Disables automatic commenting on new line
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Leap.nvim config
+lua require('leap').add_default_mappings()
 
 " Tree-sitter config
 lua << EOF

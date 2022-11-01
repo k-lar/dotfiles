@@ -101,7 +101,7 @@ Renumber() {
     echo_num=1
     line_num=1
     script_pid="$$"
-    tmpfile=$(mktemp "/tmp/tmp.${script_pid}.XXXXX")
+    tmpfile=$(mktemp "/tmp/tmp.${script_pid}.XXXXX") || { echo "Failed to create tmp file"; exit 1; }
     cat "$HOME/.config/brem-reminders" > "$tmpfile"
 
     while read -r line; do

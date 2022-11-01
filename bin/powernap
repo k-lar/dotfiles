@@ -6,9 +6,9 @@ usrtime=$(tr -d 'hms' <<< "$1")
 timeval=$(tr -d -c 'hms' <<< "$1")
 
 if [ "$timeval" = "h" ];then
-    usrtime=$(echo "$usrtime*60" | bc | sed "s/\..*//")
+    usrtime=$(awk -v value="$usrtime" 'BEGIN {print(value*60)}' | sed "s/\..*//")
     if [ "$usrtime" -gt 5 ];then
-        time2sleep=$(echo "$usrtime-5" | bc | sed "s/\..*//")
+        time2sleep=$(awk -v value="$usrtime" 'BEGIN {print(value-5)}' | sed "s/\..*//")
         dowarn=1
     else
         time2sleep="$usrtime"
@@ -19,9 +19,9 @@ if [ "$timeval" = "h" ];then
 fi
 
 if [ "$timeval" = "m" ];then
-    usrtime=$(echo "$usrtime*60" | bc | sed "s/\..*//")
+    usrtime=$(awk -v value="$usrtime" 'BEGIN {print(value*60)}' | sed "s/\..*//")
     if [ "$usrtime" -gt 300 ];then
-        time2sleep=$(echo "$usrtime-300" | bc | sed "s/\..*//")
+        time2sleep=$(awk -v value="$usrtime" 'BEGIN {print(value-300)}' | sed "s/\..*//")
         dowarn=1
     else
         time2sleep="$usrtime"
@@ -33,7 +33,7 @@ fi
 
 if [ "$timeval" = "s" ];then
     if [ "$usrtime" -gt 300 ];then
-        time2sleep=$(echo "$usrtime-300" | bc | sed "s/\..*//")
+        time2sleep=$(awk -v value="$usrtime" 'BEGIN {print(value-300)}' | sed "s/\..*//")
         dowarn=1
     else
         time2sleep="$usrtime"

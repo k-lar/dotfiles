@@ -51,17 +51,17 @@ AddReminder() {
        if ! [ "$create_choice" = "n" ]; then
            CreateSource >> "$HOME/.config/brem-reminders"
            chmod +x "$HOME/.config/brem-reminders"
-           printf "echo \"[1] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
+           printf 'echo \"[1] - %s\"\n' "$reminder" >> "$HOME/.config/brem-reminders"
        fi
 
     else
         echo_num=1
-        while read line; do
+        while read -r line; do
             if echo "${line}" | grep -q "echo"; then
                 echo_num=$((echo_num+1))
             fi
         done < "$HOME/.config/brem-reminders"
-        printf "echo \"[$echo_num] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
+        printf 'echo \"[%s] - %s\"\n' "$echo_num" "$reminder" >> "$HOME/.config/brem-reminders"
     fi
 }
 
@@ -82,25 +82,25 @@ RofiAdd() {
             CreateSource >> "$HOME/.config/brem-reminders"
             chmod +x "$HOME/.config/brem-reminders"
             reminder=$(sh -c "echo $reminder")
-            printf "echo \"[1] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
+            printf 'echo \"[1] - %s\"\n' "$reminder" >> "$HOME/.config/brem-reminders"
         fi
 
     else
         echo_num=1
-        while read line; do
+        while read -r line; do
             if echo "${line}" | grep -q "echo"; then
                 echo_num=$((echo_num+1))
             fi
         done < "$HOME/.config/brem-reminders"
         reminder=$(sh -c "echo $reminder")
-        printf "echo \"[$echo_num] - $reminder\"\n" >> "$HOME/.config/brem-reminders"
+        printf 'echo \"[%s] - %s\"\n' "$echo_num" "$reminder" >> "$HOME/.config/brem-reminders"
     fi
 }
 
 Renumber() {
     echo_num=1
     line_num=1
-    while read line; do
+    while read -r line; do
         if echo "${line}" | grep -q "echo"; then
             sed -E -i "${line_num}s/\[([0-9])+\] -/[$echo_num] -/" "$HOME/.config/brem-reminders"
             echo_num=$((echo_num+1))
@@ -118,7 +118,7 @@ RofiMenu() {
 
     options="$option1\n$option2\n$option3\n$option4\n$option5"
 
-    choice=$(printf "$options" | rofi -dmenu -i -no-show-icons -lines 5 -width 30 -p "brem: " -location 0 -yoffset 0 -fixed-num-lines true)
+    choice=$(printf '%b' "$options" | rofi -dmenu -i -no-show-icons -lines 5 -width 30 -p "brem: " -location 0 -yoffset 0 -fixed-num-lines true)
 
     case "$choice" in
     	"$option1")
@@ -177,7 +177,7 @@ case "$1" in
     "--show")
         if [ -f "$HOME/.config/brem-reminders" ]; then
             echo_num=0
-            while read line; do
+            while read -r line; do
                 if echo "${line}" | grep -q "echo"; then
                     echo_num=$((echo_num+1))
                 fi
@@ -202,7 +202,7 @@ case "$1" in
 
     "--rofi-remove")
         remove_num=$("$HOME/.config/./brem-reminders" | rofi -dmenu -p "Remove:")
-        remove_num=$(echo "${remove_num%%-*}")
+        remove_num=${remove_num%%-*}
         remove_num=$(echo "$remove_num" | grep -o '[0-9]*')
         RemoveReminder;;
 

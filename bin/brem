@@ -2,7 +2,7 @@
 set -e
 
 ##### BREM PATH LOCATION #####
-# If this does not work, you can write the path to brem.sh yourself.
+# If this does not work, you can write the path to brem yourself.
 
 BREM_PATH="$0"
 if [ ! -e "$BREM_PATH" ]; then
@@ -25,7 +25,7 @@ CreateSource() {
 
 
 Help() {
-    printf "For this program to work correctly, add this line to the bottom of your .bashrc file:\n"
+    printf "For this program to work as intended, add this line to the bottom of your .bashrc file:\n"
     printf "  brem --show\n"
     printf "Or use the flag --add-to-bashrc to do it for you\n"
     printf "Usage:\n"

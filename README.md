@@ -1,6 +1,6 @@
 # Dotfiles
 
-My personal configuration files
+My personal configuration files, but I guess you can use them too if you'd like 
 
 ## Installation
 

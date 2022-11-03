@@ -2,6 +2,8 @@
 
 My personal configuration files, but I guess you can use them too if you'd like 
 
+![Hi there](/uploads/e6b4124de77bbc0cf3f682f89e156e04/hi_there.gif)
+
 ## Installation
 
 I wrote my own installation script to make it easier to install on a fresh arch install.  
@@ -44,10 +46,15 @@ cd ..
 - Panel/Bar: Polybar
 - Dotfiles "manager": Stow
 
+![Vibing](/uploads/64003ec095d10615a1d4dc1d864060b3/vibing.png)
+
 ## Editor
 
-- NeoVim (for scripting and programming)
-- Emacs (For writing documents and tinkering)
+- NeoVim (for scripting and programming)  
+![Editing with nvim](/uploads/d494e0de1e03dddbd445ef0cb5a0b1d1/editing_vim.png)  
+
+- Emacs (For writing documents and tinkering)  
+![Emacs with btop](/uploads/7e28969078a3c5eaa70c43132b9e25a0/emacs_btop_git.png)  
 
 ## My scripts/programs
 
@@ -57,11 +64,13 @@ cd ..
 
 - `volume.sh`  
   A simple script that pops up a notification whenever you change volume with a keyboard shortcut.  
+  ![volume.sh](/uploads/628a0dbaacb5c6b26e56a399b63561bb/volume.gif)  
 
 - `brem`  
   My own notes/reminders program written in POSIX sh. I have a different repository for the
   standalone script and I mirror it here. (I don't feel like using submodules for something like
   this) You can find the repo [here](https://gitlab.com/k_lar/brem).  
+  ![brem](/uploads/5906f9d2e7f1e5e0779f9eab46df1409/brem.png)  
 
 - `powernap`  
   I wrote this program for a very dumb reason. It's also probably some of the worst code you've ever
@@ -83,12 +92,14 @@ cd ..
 
 - Power-menu script  
   A mildly modified version of [this](https://github.com/jluttine/rofi-power-menu) script.  
+  ![power-menu](/uploads/8fb22e60c0b1af90db97625afce592aa/power-menu.png)  
 
 - Rofi-gummy (temperature and brightness manager)  
   A rofi wrapper for some basic temperature and brightness presets I use at night to not completely
   ruin my eyes. It's using [gummy](https://github.com/Fushko/gummy) as its backend. It handles both
   temperature and brightness at the same time and I find it more convenient than using something
   like redshift and xbrightness or brightnessctl.  
+  ![rofi-gummy](/uploads/4e9c70aec2deba35e5a3a0150ff61312/rofi-gummy.png)  
 
 
 ## Font

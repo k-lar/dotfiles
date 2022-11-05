@@ -75,12 +75,10 @@ cd ..
   ![brem](/uploads/5906f9d2e7f1e5e0779f9eab46df1409/brem.png)  
 
 - `powernap`  
-  I wrote this program for a very dumb reason. It's also probably some of the worst code you've ever
-  seen. I'm not proud of this but it is mine, so I have to apologize to anyone who wants to take a
-  look at it. Basically it's the equivalent of this: `sleep $1 && poweroff` but with the ability to
-  tell you when the script was started and when the computer will shut down. If you give it more
-  than 5 mins to shut down, when there is only 5 mins remaining, it will trigger a notification
-  warning you.  
+  I wrote this program for a very dumb reason. I've rewritten it now and it's finally presentable!
+  Basically it's the equivalent of this: `sleep $1 && poweroff` but with the ability to tell you
+  when the script was started and when the computer will shut down. If you give it more than 5 mins
+  to shut down, when there is only 5 mins remaining, it will trigger a notification warning you.  
 
 - `tmux-sessionizer`  
   This is a neat script ~~stolen~~ taken from ThePrimeagen. It creates a tmux workspace/session with

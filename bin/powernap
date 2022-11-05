@@ -1,54 +1,40 @@
 #!/bin/bash
 
-date=$(date +"%T")
+set -e
+shopt -s extglob
 
-usrtime=$(tr -d 'hms' <<< "$1")
-timeval=$(tr -d -c 'hms' <<< "$1")
+# requires bash >=4.4
+printf -v startTime '%(%H:%M)T'
+printf -v startTimeTs '%(%s)T'
 
-if [ "$timeval" = "h" ];then
-    usrtime=$(awk -v value="$usrtime" 'BEGIN {print(value*60)}' | sed "s/\..*//")
-    if [ "$usrtime" -gt 5 ];then
-        time2sleep=$(awk -v value="$usrtime" 'BEGIN {print(value-5)}' | sed "s/\..*//")
-        dowarn=1
-    else
-        time2sleep="$usrtime"
-        dowarn=0
-    fi
-    datenext=$(date --date="$usrtime minutes" +"%T")
-    time2sleep="${time2sleep}m"
+time="${1//[hms]}"
+timeval="${1//[!hms]}"
+dowarn=0
+
+# always convert to seconds
+case "$timeval" in
+    h)
+        time=$(awk -v value="$time" 'BEGIN {print(value*3600)}')  ;;
+    m)
+        time=$(awk -v value="$time" 'BEGIN {print(value*60)}')  ;;
+    s) ;;
+
+    *) echo "ERROR: Could not read time argument" && exit 1 ;;
+esac
+
+if (( time > 300 )); then
+    dowarn=1
+    ((sleepTime=time - 300))
+else
+    sleepTime="$time"
 fi
 
-if [ "$timeval" = "m" ];then
-    usrtime=$(awk -v value="$usrtime" 'BEGIN {print(value*60)}' | sed "s/\..*//")
-    if [ "$usrtime" -gt 300 ];then
-        time2sleep=$(awk -v value="$usrtime" 'BEGIN {print(value-300)}' | sed "s/\..*//")
-        dowarn=1
-    else
-        time2sleep="$usrtime"
-        dowarn=0
-    fi
-    datenext=$(date --date="$usrtime seconds" +"%T")
-    time2sleep="${time2sleep}s"
-fi
+printf 'powernap started at %s\n' "$startTime"
+printf 'Your pc will poweroff at %s\n' "$( printf '%(%H:%M)T' "$((startTimeTs + time))" )"
 
-if [ "$timeval" = "s" ];then
-    if [ "$usrtime" -gt 300 ];then
-        time2sleep=$(awk -v value="$usrtime" 'BEGIN {print(value-300)}' | sed "s/\..*//")
-        dowarn=1
-    else
-        time2sleep="$usrtime"
-        dowarn=0
-    fi
-    datenext=$(date --date="$usrtime seconds" +"%T")
-    time2sleep="${time2sleep}s"
-fi
+sleep "$sleepTime"
 
-printf "powernap started at: $date\n"
-printf "Your PC will poweroff at $datenext\n"
-
-sleep "$time2sleep"
-
-if [ "$dowarn" = 1 ];then
+if (( dowarn )); then
     notify-send --app-name=powernap --expire-time=300000 --urgency=critical "PC will shut down in 5m"
     echo "PC will shut down in 5m"
     sleep 5m

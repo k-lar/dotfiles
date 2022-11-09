@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 if [ ! -f /usr/bin/stow ]; then
     stow="perl $HOME/.dotfiles/bin/stow"
@@ -42,6 +43,10 @@ fi
 for dir in ~/.dotfiles/*/; do
     [ -d "$dir" ] || continue
     dir="$(basename "$dir")"
-    "$stow" "$dir"
+
+    case "$dir" in
+        misc|bin|scripts) printf 'Skipping %s\n' "$dir";;
+        *) "$stow" "$dir";;
+    esac
 done
 

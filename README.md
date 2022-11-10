@@ -45,8 +45,9 @@ cd ..
 - Terminal multiplexer: Tmux
 - Panel/Bar: Polybar
 - Dotfiles "manager": Stow
-    * I bundle stow with my dotfiles so even if I'm without internet, I can still manage my
-    dotfiles effectively. Is this stupid? Maybe.  
+    * I bundle [stash](https://github.com/shawnohare/stash) with my dotfiles so even
+    if I'm without internet, I can still manage my dotfiles effectively.
+    Is this stupid? Maybe.  
 
 ![Vibing](/uploads/64003ec095d10615a1d4dc1d864060b3/vibing.png)
 

@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 
 # Autostart programs
 if [ "$HOSTNAME" = klar-arch ]; then
@@ -17,7 +17,7 @@ thunar --daemon &
 feh --bg-fill ~/Pictures/gruvbox_walls/stairs.jpg &
 emacs --daemon && notify-send "Emacs daemon started" &
 
-sh -c '~/.config/polybar/launch.sh' &
+sh -c '$HOME/.config/polybar/launch.sh' &
 
 # Variable
 alias bc='bspc config'

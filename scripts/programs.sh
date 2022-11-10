@@ -21,7 +21,7 @@ DE_PACKAGES=("bspwm" "sxhkd" "picom-pijulius-git" "mtpfs" "lightdm" "polybar-git
 
 TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai" "mdp")
 
-MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp")
+MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash")
 
 # ===============================================================================
 

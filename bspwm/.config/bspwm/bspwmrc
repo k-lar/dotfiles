@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 # Autostart programs
+HOSTNAME=$(hostname)
 if [ "$HOSTNAME" = klar-arch ]; then
 	killall xrandr; xrandr --output HDMI-1 --mode 1920x1080 --rate 144 &
 fi

@@ -27,6 +27,11 @@
     shopt -s checkwinsize
     stty -ixon # CTRL-s history search
 
+# Source files to get bash completions
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        source /usr/share/bash-completion/bash_completion
+    fi
+
 # Run tmux at start
     function tmux_start(){
         tmux has-session -t dev

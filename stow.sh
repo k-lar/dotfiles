@@ -2,8 +2,8 @@
 set -e
 
 if [ ! -f /usr/bin/stow ]; then
-    stow="perl $HOME/.dotfiles/bin/stow"
-    echo "Using bundled stow"
+    stow="$HOME/.dotfiles/bin/./stash"
+    echo "Using bundled stash"
 else
     stow="/usr/bin/stow"
     echo "Using locally installed stow"

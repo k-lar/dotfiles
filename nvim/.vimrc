@@ -260,6 +260,9 @@ EOF
 	let g:markdown_folding = 1
 	map <silent><leader>fd :set nofoldenable!<CR>
 
+" Turn .zshrc syntax highlighting on (sh)
+	au BufNewFile,BufFilePre,BufRead *.zshrc set filetype=sh
+
 " }}}
 
 

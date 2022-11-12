@@ -23,6 +23,11 @@ CreateSource() {
     echo ""
 }
 
+# Return 0 if file $1 exists and ending by end of line character,
+# else return 1
+check_ending_eol() {
+    [ -s "$1" ] && [ -z "$(tail -c 1 "$1")" ]
+}
 
 Help() {
     printf "For this program to work as intended, add this line to the bottom of your .bashrc file:\n"
@@ -35,7 +40,7 @@ Help() {
     printf "  brem -rn                Renumber entries inside the reminders file\n"
     printf "  brem -R                 Remove \$HOME/.config/brem-reminders file\n"
     printf "  brem --show             Prints your reminders to the terminal\n"
-    printf "  brem --add-to-bashrc    Adds reminder autodetection inside .bashrc\n"
+    printf "  brem --add-to-sh        Adds reminder autodetection inside bash|zsh|fish\n"
     printf "Usage with rofi:\n"
     printf "  brem --rofi-menu        Shows all available rofi options in a neat menu\n"
     printf "  brem --rofi-show        Prints your reminders in a rofi window\n"
@@ -171,16 +176,48 @@ case "$1" in
 
     "-h"|"--help") Help;;
 
-    "--add-to-bashrc")
-        echo "THIS WILL MODIFY YOUR .bashrc FILE."
-        echo "This will add reminders autodetection to the bottom of .bashrc"
-        echo "Are you sure this is what you want? [y/N]: "
-        read -r bashrc_choice
+    "--add-to-sh"|"-add-to-bashrc") # --add-to-bashrc is deprecated and will be removed in the future
+        echo "THIS WILL MODIFY YOUR SHELL'S CONFIG FILE."
+        echo "It will append \"brem --show\" to the end of the file"
+        echo "Pick a shell:"
+        echo "[1] - bash   (.bashrc)"
+        echo "[2] - zsh    (.zshrc)"
+        echo "[3] - fish   (.config/fish/config.fish)"
+        echo "[4] - custom (specify path)"
+        printf ": "; read -r sh_choice
 
-        if [ "$bashrc_choice" = "y" ]; then
-        printf "# Initialize bash reminders\nbrem --show" >> "$HOME/.bashrc"
-        echo "Completed successfully"
-        fi;;
+        case "$sh_choice" in
+            1|bash)
+            [ ! -f "$HOME"/.bashrc ] && echo "ERROR: .bashrc not found!" && exit 1
+            printf '\n# Initialize bash reminders\nbrem --show' >> "$HOME"/.bashrc
+            echo "Successfully added brem to .bashrc"
+            exit 0
+            ;;
+
+            2|zsh)
+            [ ! -f "$HOME"/.zshrc ] && echo "ERROR: .zshrc not found!" && exit 1
+            printf "\n# Initialize bash reminders\nbrem --show" >> "$HOME"/.zshrc
+            echo "Successfully added brem to .zshrc"
+            exit 0
+            ;;
+
+            3|fish)
+            [ ! -f "$HOME"/.config/fish/config.fish ] && echo "ERROR: config.fish not found!" && exit 1
+            printf "\n# Initialize bash reminders\nbrem --show" >> "$HOME"/.config/fish/config.fish
+            echo "Successfully added brem to .config/fish/config.fish"
+            exit 0
+            ;;
+
+            4|custom)
+            printf "Path to config file (absolute path):\n> "; read -r custom_path
+            [ ! -f "$custom_path" ] && printf 'ERROR: %s not found!\n' "$custom_path" && exit 1
+            printf "\n# Initialize bash reminders\nbrem --show" >> "$custom_path"
+            printf 'Successfully added brem to %s' "$custom_path"
+            exit 0
+            ;;
+
+            *) echo "Invalid option." && exit 1;;
+        esac;;
 
     "--show")
         if [ -f "$HOME/.config/brem-reminders" ]; then

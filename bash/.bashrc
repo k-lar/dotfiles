@@ -64,9 +64,9 @@
 	alias ls='exa -g'
 	alias nnn='nnn -e'
 	alias cat="bat"
-	alias vim='nvim'
-	alias vimrc="vim ~/.vimrc"
-	alias bashrc="vim ~/.bashrc"
+	alias v='nvim'
+	alias vimrc="v ~/.vimrc"
+	alias bashrc="v ~/.bashrc"
 	alias bonsai='cbonsai -l -i -t 1.5 -m "  Še malo"'
 	alias clock='tty-clock -c -f %F'
 	alias mutt='neomutt'

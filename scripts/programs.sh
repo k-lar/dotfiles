@@ -12,17 +12,18 @@
 CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor" "thunar"
 "thunar-volman" "gvfs" "gvfs-mtp" "alacritty" "when" "git" "rofi" "nomacs" "xclip" "pamixer"
 "unrar" "zip" "unzip" "ncdu" "keepass" "file-roller" "exa" "ripgrep" "fzf" "btop" "tmux" "xcape"
-"pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs-nativecomp" "network-manager-applet"
-"bash-completion")
+"pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs-nativecomp"
+"network-manager-applet" "bash-completion")
 
 DE_PACKAGES=("bspwm" "sxhkd" "picom-pijulius-git" "mtpfs" "lightdm" "polybar-git"
 "boomer-git" "cava-git" "i3lock-color" "pfetch" "ttf-blex-nerd-font-git"
 "lightdm-gtk-greeter" "lxappearance" "ttf-iosevka-nerd" "ttf-font-awesome"
-"otf-font-awesome" "noto-fonts-main" "gummy-git" "dunst")
+"otf-font-awesome" "noto-fonts-main" "gummy-git" "dunst" "gruvbox-dark-icons-gtk"
+"gruvbox-dark-gtk")
 
 TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai" "mdp")
 
-MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash" "zsh")
+MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash" "zsh" "inetutils")
 
 # ===============================================================================
 

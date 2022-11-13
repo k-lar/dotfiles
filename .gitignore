@@ -24,3 +24,6 @@ mpd/.mpd/*
 mpv/.config/mpv/*
 !mpv/.config/mpv/input.conf
 !mpv/.config/mpv/mpv.conf
+
+# Ignore autoload from nvim
+nvim/.config/nvim/autoload/*

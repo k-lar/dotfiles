@@ -23,12 +23,6 @@ CreateSource() {
     echo ""
 }
 
-# Return 0 if file $1 exists and ending by end of line character,
-# else return 1
-check_ending_eol() {
-    [ -s "$1" ] && [ -z "$(tail -c 1 "$1")" ]
-}
-
 Help() {
     printf "For this program to work as intended, add this line to the bottom of your .bashrc file:\n"
     printf "  brem --show\n"
@@ -66,7 +60,7 @@ AddReminder() {
                 echo_num=$((echo_num+1))
             fi
         done < "$HOME/.config/brem-reminders"
-        printf 'echo \"[%s] - %s\"\n' "$echo_num" "$reminder" >> "$HOME/.config/brem-reminders"
+        printf 'echo "[%s] - %s"\n' "$echo_num" "$reminder" >> "$HOME/.config/brem-reminders"
     fi
 }
 
@@ -87,7 +81,7 @@ RofiAdd() {
             CreateSource >> "$HOME/.config/brem-reminders"
             chmod +x "$HOME/.config/brem-reminders"
             reminder=$(sh -c "echo $reminder")
-            printf 'echo \"[1] - %s\"\n' "$reminder" >> "$HOME/.config/brem-reminders"
+            printf 'echo "[1] - %s"\n' "$reminder" >> "$HOME/.config/brem-reminders"
         fi
 
     else
@@ -98,7 +92,7 @@ RofiAdd() {
             fi
         done < "$HOME/.config/brem-reminders"
         reminder=$(sh -c "echo $reminder")
-        printf 'echo \"[%s] - %s\"\n' "$echo_num" "$reminder" >> "$HOME/.config/brem-reminders"
+        printf 'echo "[%s] - %s"\n' "$echo_num" "$reminder" >> "$HOME/.config/brem-reminders"
     fi
 }
 

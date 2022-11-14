@@ -12,10 +12,14 @@
     HISTFILE=~/.zsh_history
     HISTSIZE=5000
     SAVEHIST=10000000000
+
+# Options
     unsetopt beep
-    zstyle :compinstall filename '/home/klar/.zshrc'
+    unsetopt autoremoveslash
+    setopt globdots
 
 # Completion
+    zstyle :compinstall filename '/home/klar/.zshrc'
     autoload -Uz compinit
     compinit
 

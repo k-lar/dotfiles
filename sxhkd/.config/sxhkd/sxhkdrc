@@ -18,6 +18,10 @@ super + e
 super + u
   sh -c "~/.dotfiles/bin/brem --rofi-menu"
 
+# My toggle esc2caps script
+super + shift + t
+  sh -c "~/.dotfiles/scripts/toggle_esc2caps.sh"
+
 # Noise
 super + m
   mpc clear && mpc load brown_noise && mpc play && mpc volume 20

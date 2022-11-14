@@ -26,9 +26,8 @@ Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'terryma/vim-expand-region'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-fugitive'
-" Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
+Plug 'morhetz/gruvbox'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'sainnhe/gruvbox-material'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'rinx/nvim-minimap'
 Plug 'ggandor/leap.nvim'
@@ -127,11 +126,7 @@ let g:startify_bookmarks = [
 
 
 " Colorscheme config (gruvbox) {{{
-    let g:gruvbox_material_foreground = 'original'
-    let g:gruvbox_material_disable_italic_comment = 1
-    let g:gruvbox_material_enable_bold = 1
-    let g:gruvbox_material_better_performance = 1
-	colorscheme gruvbox-material
+	colorscheme gruvbox
 	set background=dark
  " }}}
 

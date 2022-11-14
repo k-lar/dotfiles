@@ -26,8 +26,9 @@ Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'terryma/vim-expand-region'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
-Plug 'morhetz/gruvbox'
+" Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'sainnhe/gruvbox-material'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'rinx/nvim-minimap'
 Plug 'ggandor/leap.nvim'
@@ -126,7 +127,11 @@ let g:startify_bookmarks = [
 
 
 " Colorscheme config (gruvbox) {{{
-	colorscheme gruvbox
+    let g:gruvbox_material_foreground = 'original'
+    let g:gruvbox_material_disable_italic_comment = 1
+    let g:gruvbox_material_enable_bold = 1
+    let g:gruvbox_material_better_performance = 1
+	colorscheme gruvbox-material
 	set background=dark
  " }}}
 
@@ -298,7 +303,7 @@ lua << EOF
 
     local configs = require'nvim-treesitter.configs'
     configs.setup {
-    ensure_installed = { "c", "lua", "python",  "bash", "bibtex", "cpp", "yaml", "vim", "cmake" },
+    ensure_installed = { "c", "lua", "python",  "bash", "bibtex", "cpp", "yaml", "vim", "cmake", "latex" },
     highlight = { -- enable highlighting
       enable = true,
     },
@@ -376,7 +381,11 @@ EOF
 
 
 " Git Gutter toggle {{{
-	nnoremap <leader>G :GitGutterToggle<CR>
-	let g:gitgutter_enabled = 0
+lua << EOF
+    require('gitsigns').setup {
+        signcolumn = false
+    }
+EOF
+	nnoremap <leader>G :Gitsigns toggle_signs<CR>
 
 " }}}

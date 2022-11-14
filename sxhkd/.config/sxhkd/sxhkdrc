@@ -19,7 +19,7 @@ super + u
   sh -c "~/.dotfiles/bin/brem --rofi-menu"
 
 # My toggle esc2caps script
-super + shift + t
+super + shift + c
   sh -c "~/.dotfiles/scripts/toggle_esc2caps.sh"
 
 # Noise

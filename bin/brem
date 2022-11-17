@@ -92,7 +92,7 @@ RofiAdd() {
         if ! [ "$create_choice" = "No" ]; then
             CreateSource
             reminder=$(sh -c "echo \"$reminder\"")
-            printf 'echo "[1] - %s"\n' "$rweminder" >> "$rempath"
+            printf 'echo "[1] - %s"\n' "$reminder" >> "$rempath"
         fi
 
     else
@@ -247,6 +247,7 @@ while [ "$#" -gt 0 ]; do
 
                 # If there aren't any echos in file, dont print banner
                 if ! [ "$echo_num" = 0 ]; then
+
                     echo "################ Reminders ###############"
                     . "$rempath"
                     echo "##########################################"

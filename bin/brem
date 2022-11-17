@@ -91,8 +91,8 @@ RofiAdd() {
 
         if ! [ "$create_choice" = "No" ]; then
             CreateSource
-            reminder=$(sh -c "echo $reminder")
-            printf 'echo "[1] - %s"\n' "$reminder" >> "$rempath"
+            reminder=$(sh -c "echo \"$reminder\"")
+            printf 'echo "[1] - %s"\n' "$rweminder" >> "$rempath"
         fi
 
     else
@@ -102,7 +102,7 @@ RofiAdd() {
                 echo_num=$((echo_num+1))
             fi
         done < "$rempath"
-        reminder=$(sh -c "echo $reminder")
+        reminder=$(sh -c "echo \"$reminder\"")
         printf 'echo "[%s] - %s"\n' "$echo_num" "$reminder" >> "$rempath"
     fi
 }

@@ -32,7 +32,7 @@ Help() {
     printf "Usage:\n"
     printf "  brem                    Creates \$HOME/.config/brem-reminders file\n"
     printf "  brem -a                 Add an entry inside the reminders file\n"
-    printf "  brem -r                 Remove an entry inside the reminders file\n"
+    printf "  brem -r                 Remove an entry [or multiple entries, seperated with \",\"]\n"
     printf "  brem -rn                Renumber entries inside the reminders file\n"
     printf "  brem -R                 Remove \$HOME/.config/brem-reminders file\n"
     printf "  brem --show             Prints your reminders to the terminal\n"

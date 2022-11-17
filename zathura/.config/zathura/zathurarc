@@ -39,3 +39,8 @@ set recolor-darkcolor           "#ebdbb2" # fg
 set recolor                     "true"
 # set recolor-keephue             true      # keep original color
 
+# Startup options
+set selection-clipboard clipboard
+set adjust-open width
+map B jumplist backward
+map b jumplist forward

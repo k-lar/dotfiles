@@ -66,20 +66,26 @@ AddReminder() {
 }
 
 RemoveReminder() {
-if [ "${#remove_num}" -gt 1 ]; then
+if [ "${#remove_num}" -gt 0 ]; then
     remove_nums=$(echo "$remove_num" | tr ',' ' ')
     for i in $remove_nums; do
         remove_num="$i"
         Removal
     done
 fi
-
-Removal
 }
 
 Removal() {
 if [ -f "$rempath" ]; then
-    sed -i "/echo \"\[$remove_num\] -"/d "$rempath"
+    tmpfilerem=$(mktemp "/tmp/tmp.rem${script_pid}.XXXXX") || { echo "Failed to create tmp file"; exit 1; }
+    sed -i "/echo \"\[$remove_num\] -/w $tmpfilerem" "$rempath"
+    if [ -s "$tmpfilerem" ];then
+        sed -i "/echo \"\[$remove_num\] -"/d "$rempath"
+        rm "$tmpfilerem"
+    else
+        printf 'Entry [%s] not found.\n' "$remove_num"
+        rm "$tmpfilerem"
+    fi
 else
     echo "Reminders file doesn't exist!"
 fi

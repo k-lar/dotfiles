@@ -11,10 +11,10 @@ let mapleader =" "
 
 " Download vim-plug if not found
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
-	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
-	autocmd VimEnter * PlugInstall
+    echo "Downloading junegunn/vim-plug to manage plugins..."
+    silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+    autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -23,6 +23,8 @@ Plug 'folke/zen-mode.nvim'
 Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'Rg' ] }
 Plug 'fladson/vim-kitty', { 'for': 'kitty' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'michaelb/sniprun', { 'do': 'bash install.sh' }
 Plug 'terryma/vim-expand-region'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-fugitive'
@@ -47,33 +49,33 @@ call plug#end()
 
 
 " Some basics: {{{
-	syntax on
-	filetype plugin on
-	set encoding=utf-8
-	set number relativenumber
-	set clipboard+=unnamedplus
-	set noshowmode " Don't show INSERT mode (for use with lightline)
-	set ignorecase
-	set smartcase
-	set smarttab
-	set scrolloff=1
-	set sidescrolloff=3
-	set mouse=a
-	set path+=**
-	set expandtab
-	set tabstop=4
-	set shiftwidth=4
+    syntax on
+    filetype plugin on
+    set encoding=utf-8
+    set number relativenumber
+    set clipboard+=unnamedplus
+    set noshowmode " Don't show INSERT mode (for use with lightline)
+    set ignorecase
+    set smartcase
+    set smarttab
+    set scrolloff=1
+    set sidescrolloff=3
+    set mouse=a
+    set path+=**
+    set expandtab
+    set tabstop=4
+    set shiftwidth=4
 " }}}
 
 
 " Tmux status bar toggle on VimEnter {{{
     if has_key(environ(), 'TMUX')
-      augroup tmux_something
-        autocmd VimResume  * call system('tmux set status off')
-        autocmd VimEnter   * call system('tmux set status off')
-        autocmd VimLeave   * call system('tmux set status on')
-        autocmd VimSuspend * call system('tmux set status on')
-      augroup END
+        augroup tmux_something
+            autocmd VimResume  * call system('tmux set status off')
+            autocmd VimEnter   * call system('tmux set status off')
+            autocmd VimLeave   * call system('tmux set status on')
+            autocmd VimSuspend * call system('tmux set status on')
+        augroup END
     endif
 "}}}
 
@@ -262,6 +264,26 @@ EOF
 
 " Turn .zshrc syntax highlighting on (sh)
 	au BufNewFile,BufFilePre,BufRead *.zshrc set filetype=sh
+
+" Sniprun configuration
+lua << EOF
+
+    require('sniprun').setup({
+    display = {
+       "Classic",  --# display results in the command-line  area
+       "VirtualText",
+    },
+    snipruncolors = {
+        SniprunVirtualTextOk = {bg="#427b58",fg="#000000",ctermbg="DarkGreen",cterfg="Black"},
+        },
+    })
+
+EOF
+
+" Run code snippets inside nvim (and markdown code blocks with sniprun)
+    nnoremap <leader>r :SnipRun<CR>
+    nnoremap <leader>R :SnipClose<CR>
+    vnoremap <leader>r :'<,'>SnipRun<CR>
 
 " }}}
 

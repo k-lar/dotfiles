@@ -80,7 +80,9 @@ if [ -f "$rempath" ]; then
     tmpfilerem=$(mktemp "/tmp/tmp.rem${script_pid}.XXXXX") || { echo "Failed to create tmp file"; exit 1; }
     sed -i "/echo \"\[$remove_num\] -/w $tmpfilerem" "$rempath"
     if [ -s "$tmpfilerem" ];then
-        sed -i "/echo \"\[$remove_num\] -"/d "$rempath"
+        # I have absolutely no idea how this works, BUT IT DOES.
+        # Only deletes the first line that matches a pattern.
+        sed -i "x;/./{x;b};x;/echo \"\[$remove_num\] -/{h;d}" "$rempath"
         rm "$tmpfilerem"
     else
         printf 'Entry [%s] not found.\n' "$remove_num"

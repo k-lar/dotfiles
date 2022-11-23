@@ -12,7 +12,7 @@
 	[[ $- != *i* ]] && return
 
 # PATH variable
-    export PATH="$HOME/.dotfiles/bin:$PATH"
+    export PATH="$HOME/.dotfiles/bin:/home/klar/.local/bin:$PATH"
 
 # History configuration (unlimited history)
     export HISTFILESIZE=

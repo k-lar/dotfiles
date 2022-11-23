@@ -64,7 +64,7 @@
 	alias grep='grep --color=auto'
 
 # System exports
-    export PATH="$HOME/.dotfiles/bin:$PATH"
+    export PATH="$HOME/.dotfiles/bin:/home/klar/.local/bin:$PATH"
 	export EDITOR="/usr/bin/nvim"
 	export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
 

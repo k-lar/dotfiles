@@ -20,6 +20,11 @@ BREM_PATH=$dir/$(basename -- "$BREM_PATH") || exit
 
 rempath="$HOME/.config/brem-reminders"
 
+GetVersion() {
+    version="v1.3.1"
+    printf '%s\n' "$version"
+}
+
 CreateSource() {
     printf "# Entries from bash reminder\n" >> "$rempath"
     chmod +x "$rempath"
@@ -37,6 +42,7 @@ Help() {
     printf "  brem -R                 Remove \$HOME/.config/brem-reminders file\n"
     printf "  brem --show             Prints your reminders to the terminal\n"
     printf "  brem --add-to-sh        Adds reminder autodetection inside bash|zsh|fish\n"
+    printf "  brem --version          Prints what version of brem you have installed\n"
     printf "Usage with rofi:\n"
     printf "  brem --rofi-menu        Shows all available rofi options in a neat menu\n"
     printf "  brem --rofi-show        Prints your reminders in a rofi window\n"
@@ -148,13 +154,13 @@ RofiMenu() {
 
     case "$choice" in
     	"$option1")
-    		$BREM_PATH --rofi-show ;;
+    		"$BREM_PATH" --rofi-show ;;
     	"$option2")
-    		$BREM_PATH --rofi-add ;;
+    		"$BREM_PATH" --rofi-add ;;
     	"$option3")
-    		$BREM_PATH --rofi-remove ;;
+    		"$BREM_PATH" --rofi-remove ;;
     	"$option4")
-    		$BREM_PATH -rn ;;
+    		"$BREM_PATH" -rn ;;
     	"$option5")
     		echo "Exit" ;;
     esac
@@ -201,7 +207,7 @@ while [ "$#" -gt 0 ]; do
 
         "-h"|"--help") Help;;
 
-        "--add-to-sh"|"-add-to-bashrc") # --add-to-bashrc is deprecated and will be removed in the future
+        "--add-to-sh"|"--add-to-bashrc") # --add-to-bashrc is deprecated and will be removed in the future
             echo "THIS WILL MODIFY YOUR SHELL'S CONFIG FILE."
             echo "It will append \"brem --show\" to the end of the file"
             echo "Pick a shell:"
@@ -279,7 +285,10 @@ while [ "$#" -gt 0 ]; do
         "--rofi-menu")
             RofiMenu;;
 
-           *) printf 'Unknown argument passed: %s\n' "$1"; exit 1
+        "--version")
+            GetVersion;;
+
+           *) printf 'Unknown argument passed: %s\n' "$1"; exit 1;;
 
     esac
     shift

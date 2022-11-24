@@ -21,7 +21,7 @@ BREM_PATH=$dir/$(basename -- "$BREM_PATH") || exit
 rempath="$HOME/.config/brem-reminders"
 
 GetVersion() {
-    version="v1.3.1"
+    version="v1.4.0"
     printf '%s\n' "$version"
 }
 
@@ -30,10 +30,63 @@ CreateSource() {
     chmod +x "$rempath"
 }
 
+LongestLn() {
+    longest_length=0
+    IFS=
+    while read -r line; do
+        if [ "${#line}" -gt "${longest_length}" ]; then
+            longest_length="${#line}"
+        fi
+    done < "$rempath"
+    printf '%s' "$longest_length"
+}
+
+DrawFrame() {
+    # This is pretty bad.
+    # TODO: make this not suck.
+    longest_ln=$(($(LongestLn)-7)) # remove all chars outside of string
+    bottom_frame="$longest_ln"
+    half_frame=$((bottom_frame/2-6))
+
+    if [ "$bottom_frame" -gt 13 ] && [ "$bottom_frame" -le 80 ]; then
+        left_frame=0
+        while [ "$left_frame" -lt "$half_frame" ]; do
+            printf '#'
+            left_frame=$((left_frame+1))
+        done
+        printf " Reminders "
+        right_frame=0
+        while [ "$right_frame" -lt "$half_frame" ]; do
+            printf '#'
+            right_frame=$((right_frame+1))
+        done
+        printf "\n"
+        # shellcheck disable=SC1090
+        . "$rempath"
+        bottom_frame=$((left_frame+right_frame+11))
+        i=0
+        while [ "$i" -lt "$bottom_frame" ]; do
+            printf '#'
+            i=$((i+1))
+        done
+        printf "\n\n"
+    elif [ "$bottom_frame" -gt 80 ]; then # max adjustment in dynamic border
+        echo "################################## Reminders ##################################"
+        # shellcheck disable=SC1090
+        . "$rempath"
+        echo "###############################################################################"
+    else
+        echo "# Reminders #" # min adjustment in dynamic border
+        # shellcheck disable=SC1090
+        . "$rempath"
+        echo "#############"
+    fi
+}
+
 Help() {
     printf "For this program to work as intended, add this line to the bottom of your .bashrc file:\n"
     printf "  brem --show\n"
-    printf "Or use the flag --add-to-bashrc to do it for you\n"
+    printf "Or use the flag --add-to-sh to do it for you\n"
     printf "Usage:\n"
     printf "  brem                    Creates \$HOME/.config/brem-reminders file\n"
     printf "  brem -a                 Add an entry inside the reminders file\n"
@@ -207,7 +260,7 @@ while [ "$#" -gt 0 ]; do
 
         "-h"|"--help") Help;;
 
-        "--add-to-sh"|"--add-to-bashrc") # --add-to-bashrc is deprecated and will be removed in the future
+        "--add-to-sh")
             echo "THIS WILL MODIFY YOUR SHELL'S CONFIG FILE."
             echo "It will append \"brem --show\" to the end of the file"
             echo "Pick a shell:"
@@ -261,13 +314,8 @@ while [ "$#" -gt 0 ]; do
 
                 # If there aren't any echos in file, dont print banner
                 if ! [ "$echo_num" = 0 ]; then
-
-                    echo "################ Reminders ###############"
-                    . "$rempath"
-                    echo "##########################################"
-                    echo ""
+                    DrawFrame
                 fi
-
             fi;;
 
         "--rofi-show") "$rempath" | rofi -dmenu -p "Reminders";;

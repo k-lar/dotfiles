@@ -79,23 +79,24 @@ DrawFrame() {
 }
 
 Help() {
-    printf "For this program to work as intended, add this line to the bottom of your .bashrc file:\n"
-    printf "  brem --show\n"
-    printf "Or use the flag --add-to-sh to do it for you\n"
-    printf "Usage:\n"
-    printf "  brem                    Creates \$HOME/.config/brem-reminders file\n"
-    printf "  brem -a                 Add an entry inside the reminders file\n"
-    printf "  brem -r                 Remove an entry [or multiple entries, seperated with \",\"]\n"
-    printf "  brem -rn                Renumber entries inside the reminders file\n"
-    printf "  brem -R                 Remove \$HOME/.config/brem-reminders file\n"
-    printf "  brem --show             Prints your reminders to the terminal\n"
-    printf "  brem --add-to-sh        Adds reminder autodetection inside bash|zsh|fish\n"
-    printf "  brem --version          Prints what version of brem you have installed\n"
-    printf "Usage with rofi:\n"
-    printf "  brem --rofi-menu        Shows all available rofi options in a neat menu\n"
-    printf "  brem --rofi-show        Prints your reminders in a rofi window\n"
-    printf "  brem --rofi-add         Adds entry through rofi\n"
-    printf "  brem --rofi-remove      Remove an entry through a rofi menu\n"
+    printf "%b" \
+    "For this program to work as intended, add this line to the bottom of your .bashrc file:\n" \
+    "  brem --show\n" \
+    "Or use the flag --add-to-sh to do it for you\n" \
+    "Usage:\n" \
+    "  brem                    Creates \$HOME/.config/brem-reminders file\n" \
+    "  brem -a                 Add an entry inside the reminders file\n" \
+    "  brem -r                 Remove an entry [or multiple entries, seperated with \",\"]\n" \
+    "  brem -rn                Renumber entries inside the reminders file\n" \
+    "  brem -R                 Remove \$HOME/.config/brem-reminders file\n" \
+    "  brem --show             Prints your reminders to the terminal\n" \
+    "  brem --add-to-sh        Adds reminder autodetection inside bash|zsh|fish\n" \
+    "  brem --version          Prints what version of brem you have installed\n" \
+    "Usage with rofi:\n" \
+    "  brem --rofi-menu        Shows all available rofi options in a neat menu\n" \
+    "  brem --rofi-show        Prints your reminders in a rofi window\n" \
+    "  brem --rofi-add         Adds entry through rofi\n" \
+    "  brem --rofi-remove      Remove an entry through a rofi menu\n"
 }
 
 AddReminder() {

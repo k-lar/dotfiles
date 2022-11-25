@@ -21,7 +21,7 @@ BREM_PATH=$dir/$(basename -- "$BREM_PATH") || exit
 rempath="$HOME/.config/brem-reminders"
 
 GetVersion() {
-    version="v1.4.0"
+    version="v1.4.1"
     printf '%s\n' "$version"
 }
 
@@ -42,34 +42,29 @@ LongestLn() {
 }
 
 DrawFrame() {
-    # This is pretty bad.
-    # TODO: make this not suck.
     longest_ln=$(($(LongestLn)-7)) # remove all chars outside of string
     bottom_frame="$longest_ln"
     half_frame=$((bottom_frame/2-6))
 
     if [ "$bottom_frame" -gt 13 ] && [ "$bottom_frame" -le 80 ]; then
-        left_frame=0
-        while [ "$left_frame" -lt "$half_frame" ]; do
-            printf '#'
-            left_frame=$((left_frame+1))
+        side_frame=0
+        while [ "$side_frame" -lt "$half_frame" ]; do
+            side="${side}#"
+            side_frame=$((side_frame+1))
         done
-        printf " Reminders "
-        right_frame=0
-        while [ "$right_frame" -lt "$half_frame" ]; do
-            printf '#'
-            right_frame=$((right_frame+1))
-        done
-        printf "\n"
-        # shellcheck disable=SC1090
-        . "$rempath"
-        bottom_frame=$((left_frame+right_frame+11))
+
+        bottom_frame=$((side_frame*2+11))
         i=0
         while [ "$i" -lt "$bottom_frame" ]; do
-            printf '#'
+            bottom="${bottom}#"
             i=$((i+1))
         done
-        printf "\n\n"
+
+        printf '%s Reminders %s\n' "$side" "$side"
+        # shellcheck disable=SC1090
+        . "$rempath"
+        printf '%s\n\n' "$bottom"
+
     elif [ "$bottom_frame" -gt 80 ]; then # max adjustment in dynamic border
         echo "################################## Reminders ##################################"
         # shellcheck disable=SC1090
@@ -125,31 +120,31 @@ AddReminder() {
 }
 
 RemoveReminder() {
-if [ "${#remove_num}" -gt 0 ]; then
-    remove_nums=$(echo "$remove_num" | tr ',' ' ')
-    for i in $remove_nums; do
-        remove_num="$i"
-        Removal
-    done
-fi
+    if [ "${#remove_num}" -gt 0 ]; then
+        remove_nums=$(echo "$remove_num" | tr ',' ' ')
+        for i in $remove_nums; do
+            remove_num="$i"
+            Removal
+        done
+    fi
 }
 
 Removal() {
-if [ -f "$rempath" ]; then
-    tmpfilerem=$(mktemp "/tmp/tmp.rem${script_pid}.XXXXX") || { echo "Failed to create tmp file"; exit 1; }
-    sed -i "/echo \"\[$remove_num\] -/w $tmpfilerem" "$rempath"
-    if [ -s "$tmpfilerem" ];then
-        # I have absolutely no idea how this works, BUT IT DOES.
-        # Only deletes the first line that matches a pattern.
-        sed -i "x;/./{x;b};x;/echo \"\[$remove_num\] -/{h;d}" "$rempath"
-        rm "$tmpfilerem"
+    if [ -f "$rempath" ]; then
+        tmpfilerem=$(mktemp "/tmp/tmp.rem${script_pid}.XXXXX") || { echo "Failed to create tmp file"; exit 1; }
+        sed -i "/echo \"\[$remove_num\] -/w $tmpfilerem" "$rempath"
+        if [ -s "$tmpfilerem" ];then
+            # I have absolutely no idea how this works, BUT IT DOES.
+            # Only deletes the first line that matches a pattern.
+            sed -i "x;/./{x;b};x;/echo \"\[$remove_num\] -/{h;d}" "$rempath"
+            rm "$tmpfilerem"
+        else
+            printf 'Entry [%s] not found.\n' "$remove_num"
+            rm "$tmpfilerem"
+        fi
     else
-        printf 'Entry [%s] not found.\n' "$remove_num"
-        rm "$tmpfilerem"
+        echo "Reminders file doesn't exist!"
     fi
-else
-    echo "Reminders file doesn't exist!"
-fi
 }
 
 RofiAdd() {
@@ -219,6 +214,7 @@ RofiMenu() {
     esac
 }
 
+Main() {
 # If brem is run without args, create $rempath if nonexistant and show help if it exists
 if [ "$#" -eq 0 ]; then
     if [ ! -f "$rempath" ]; then
@@ -341,3 +337,6 @@ while [ "$#" -gt 0 ]; do
     esac
     shift
 done
+}
+
+Main "$@"

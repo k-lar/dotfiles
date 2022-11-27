@@ -23,7 +23,6 @@ Plug 'folke/zen-mode.nvim'
 Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'Rg' ] }
 Plug 'fladson/vim-kitty', { 'for': 'kitty' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'michaelb/sniprun', { 'do': 'bash install.sh' }
 Plug 'terryma/vim-expand-region'
 Plug 'unblevable/quick-scope'
@@ -128,7 +127,7 @@ let g:startify_bookmarks = [
 
 
 " Colorscheme config (gruvbox) {{{
-	colorscheme gruvbox
+    colorscheme gruvbox
 	set background=dark
  " }}}
 
@@ -203,6 +202,9 @@ EOF
 
 " Stop vimwiki from taking over markdown files outside wiki directories
 	let g:vimwiki_global_ext = 0
+
+" Stop bullets.vim from renumbering items
+    let g:bullets_renumber_on_change = 0
 
 " vim-table-mode setup for use with markdown (primarily)
 	let g:table_mode_corner='|'
@@ -320,7 +322,7 @@ lua << EOF
 
     local configs = require'nvim-treesitter.configs'
     configs.setup {
-    ensure_installed = { "c", "lua", "python",  "bash", "bibtex", "cpp", "yaml", "vim", "cmake", "latex" },
+    ensure_installed = { "c", "lua", "python",  "bash", "bibtex", "cpp", "yaml", "vim", "cmake", "latex", "go", },
     highlight = { -- enable highlighting
       enable = true,
     },

@@ -21,6 +21,9 @@ DE_PACKAGES=("bspwm" "sxhkd" "picom-pijulius-git" "mtpfs" "lightdm" "polybar-git
 "otf-font-awesome" "noto-fonts-main" "gummy-git" "dunst" "gruvbox-dark-icons-gtk"
 "gruvbox-dark-gtk")
 
+WAYLAND_PKGS=("hyprland-bin" "hyprpicker-git" "wl-clipboard" "rofi-lbonn-wayland-git"
+"foot" "waybar" "swaylock-effects" "swaybg")
+
 TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai" "mdp")
 
 MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash" "zsh" "inetutils")
@@ -57,6 +60,10 @@ if [ "$confirm_selection" == "y" ]; then
     printf '%s ' "${MISC_PKGS[@]}"
     printf "\n"
 
+    printf "\e[1mWAYLAND_PKGS:\n\e[0m"
+    printf '%s ' "${WAYLAND_PKGS[@]}"
+    printf "\n"
+
     printf "\e[1mTERM_OFFICE:\n\e[0m"
     printf '%s ' "${TERM_OFFICE[@]}"
     printf "\n"
@@ -75,6 +82,15 @@ echo -e "Include DE packages?"
 read -r -p "[y/N]: " de_choice
 if [ "$de_choice" == "y" ]; then
     for i in "${DE_PACKAGES[@]}"; do
+        USR_PACKAGES+=("$i")
+    done
+fi
+echo ""
+
+echo -e "Include wayland packages?"
+read -r -p "[y/N]: " wl_choice
+if [ "$wl_choice" == "y" ]; then
+    for i in "${WAYLAND_PKGS[@]}"; do
         USR_PACKAGES+=("$i")
     done
 fi

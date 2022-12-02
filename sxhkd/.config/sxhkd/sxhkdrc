@@ -14,6 +14,10 @@ super + f
 super + e
   emacsclient -c -a 'emacs'
 
+# My caffeine script
+super + c
+  sh -c "~/.dotfiles/scripts/toggle_caffeine.sh"
+
 # My reminders script
 super + u
   sh -c "~/.dotfiles/bin/brem --rofi-menu"

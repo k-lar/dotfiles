@@ -10,18 +10,20 @@
     "modules-right": ["pulseaudio", "custom/spacer", "network", "custom/spacer", "cpu", "custom/spacer", "memory", "custom/spacer", "temperature", "custom/spacer", "backlight", "custom/spacer",],
     // Modules configuration
     "wlr/workspaces": {
-         /* "disable-scroll": true, */
+         "on-click": "activate",
+         "on-scroll-up": "hyprctl dispatch workspace e+1",
+         "on-scroll-down": "hyprctl dispatch workspace e-1",
          "all-outputs": true,
          /* "format": "{name}  {icon}", */
          "format": "{icon} ",
          "format-icons": {
-             "1": "",
+             "1": "",
              "2": "",
              "3": "",
              "4": "",
              "5": "",
              "8": "",
-             "9": "",
+             "9": "",
              "urgent": "",
              "focused": "",
              "default": ""

@@ -14,7 +14,7 @@
 Arc-Dark Color Scheme
 */
 @define-color background  #1d2021;
-@define-color background2 #282828;
+@define-color background2 #262626;
 @define-color shutdown  #cc241d;
 @define-color background3 #458588;
 @define-color text    #ebdbb2;
@@ -59,10 +59,10 @@ Arc-Dark Color Scheme
 #waybar {
     background: @background;
     color: #bebebe;
-    font-family: Google Sans Medium, "Font Awesome 6 Free Regular", Material Design Icons Desktop;
-    font-size: 12px;
-    border-radius: 8px;
-    border: 2px solid @text;
+    font-family: Iosevka Nerd Font, "Font Awesome 6 Free Regular", Material Design Icons Desktop;
+    font-size: 14px;
+    /* border-radius: 8px; */
+    /* border: 2px solid @text; */
 
 }
 
@@ -74,7 +74,6 @@ Arc-Dark Color Scheme
 #custom-keyboard-layout,
 #memory,
 #mode,
-#custom-weather,
 #network,
 #pulseaudio,
 #temperature,
@@ -89,15 +88,6 @@ Arc-Dark Color Scheme
 /* -----------------------------------------------------------------------------
  * Modules styles
  * -------------------------------------------------------------------------- */
-
-#custom-spotify {
-    font-family:Google Sans Medium, "Font Awesome 6 Free";
-    padding: 0 10px;
-    margin-left: 4px;
-    background-color: @background;
-    color: @text;
-    border-radius: 8px;
-}
 
 #tray, #notification{
     background-color: @background;

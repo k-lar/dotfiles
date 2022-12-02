@@ -27,3 +27,6 @@ mpv/.config/mpv/*
 
 # Ignore autoload from nvim
 nvim/.config/nvim/autoload/*
+
+# Ignore rofi theme changes
+rofi/.config/rofi/config.rasi

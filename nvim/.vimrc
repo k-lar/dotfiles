@@ -317,6 +317,10 @@ EOF
 " Leap.nvim config
 lua require('leap').add_default_mappings()
 
+" Emmet / HTML settings
+    let g:user_emmet_mode="n"
+    let g:user_emmet_leader_key=","
+
 " Tree-sitter config
 lua << EOF
 

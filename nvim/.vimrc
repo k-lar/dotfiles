@@ -186,12 +186,13 @@ EOF
 
 
 " Markdown syntaxing and QOL featuzres: {{{
-" Front of file (title, author, layout...) color change
+" Front of file (title, author, layout...) color change and don't error single underscore
 	au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 	au BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
 	au filetype markdown :iabbrev txtred \textcolor{red}{}<Left>
 	au filetype markdown :iabbrev txtblu \textcolor{blue}{}<Left>
 	au filetype markdown :iabbrev uline \underline{}<Left>
+    au BufNewFile,BufRead,BufEnter *.md syn match markdownIgnore "\w\@<=\w\@="
 
 " Larger text width in terminal for easier readability (In markdown files)
 	au FileType markdown setlocal textwidth=100

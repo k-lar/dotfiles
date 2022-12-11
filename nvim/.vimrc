@@ -59,6 +59,7 @@ call plug#end()
     set ignorecase
     set smartcase
     set smarttab
+    set smartindent
     set scrolloff=1
     set sidescrolloff=3
     set mouse=a

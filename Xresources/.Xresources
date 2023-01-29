@@ -34,3 +34,14 @@
 ! LightGrey + White
 *color7:  #a89984
 *color15: #ebdbb2
+
+! ---- xterm configuration ----
+XTerm*faceName: Monospace
+XTerm*faceSize: 11
+XTerm.vt100.locale: false
+XTerm.vt100.selectToClipboard: true
+XTerm.vt100.utf8: true
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+XTerm.vt100.metaSendsEscape: true
+

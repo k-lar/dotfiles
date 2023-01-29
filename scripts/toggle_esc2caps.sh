@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TOGGLE="$HOME/.toggle_caps2esc"
+TOGGLE="$HOME/.dotfiles/options/.toggle_caps2esc"
 
 if [ ! -e "$TOGGLE" ]; then
     touch "$TOGGLE"

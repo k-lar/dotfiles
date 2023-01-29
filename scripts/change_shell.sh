@@ -16,26 +16,26 @@ else
     case "$shell_choice" in
         1)
         sh -c "chsh -s /bin/bash"
-        if [ ! -e $HOME/.config/tmux/shell_choice.conf ]; then
-            mkdir -p $HOME/.config/tmux/
-            touch $HOME/.config/tmux/shell_choice.conf
-            echo "set-option -g default-shell /bin/bash" > $HOME/.config/tmux/shell_choice.conf
+        if [ ! -e "$HOME"/.config/tmux/shell_choice.conf ]; then
+            mkdir -p "$HOME"/.config/tmux/
+            touch "$HOME"/.config/tmux/shell_choice.conf
+            echo "set-option -g default-shell /bin/bash" > "$HOME"/.config/tmux/shell_choice.conf
             echo "Sucessfully set shell to: /bin/bash"
         else
-            echo "set-option -g default-shell /bin/bash" > $HOME/.config/tmux/shell_choice.conf
+            echo "set-option -g default-shell /bin/bash" > "$HOME"/.config/tmux/shell_choice.conf
             echo "Sucessfully set shell to: /bin/bash"
         fi
         ;;
 
         2)
         sh -c "chsh -s /bin/zsh"
-        if [ ! -e $HOME/.config/tmux/shell_choice.conf ]; then
-            mkdir -p $HOME/.config/tmux/
-            touch $HOME/.config/tmux/shell_choice.conf
-            echo "set-option -g default-shell /bin/zsh" > $HOME/.config/tmux/shell_choice.conf
+        if [ ! -e "$HOME"/.config/tmux/shell_choice.conf ]; then
+            mkdir -p "$HOME"/.config/tmux/
+            touch "$HOME"/.config/tmux/shell_choice.conf
+            echo "set-option -g default-shell /bin/zsh" > "$HOME"/.config/tmux/shell_choice.conf
             echo "Sucessfully set shell to: /bin/zsh"
         else
-            echo "set-option -g default-shell /bin/zsh" > $HOME/.config/tmux/shell_choice.conf
+            echo "set-option -g default-shell /bin/zsh" > "$HOME"/.config/tmux/shell_choice.conf
             echo "Sucessfully set shell to: /bin/zsh"
         fi
         ;;

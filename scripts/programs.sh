@@ -5,7 +5,6 @@
 # FOR PERSONAL USE ONLY.
 # Distributions currently supported: Arch
 # ===============================================================================
-
 # List of programs to be downloaded
 # ===============================================================================
 
@@ -26,7 +25,8 @@ WAYLAND_PKGS=("hyprland-bin" "hyprpicker-git" "wl-clipboard" "rofi-lbonn-wayland
 
 TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai" "mdp")
 
-MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng" "ctags" "cscope" "global")
+MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng" "ctags"
+"cscope" "global")
 
 # ===============================================================================
 

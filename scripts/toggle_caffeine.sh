@@ -3,7 +3,7 @@
 # Dependency:  caffeine-ng from aur
 # https://github.com/caffeine-ng/caffeine-ng
 
-TOGGLE="$HOME/.toggle_caffeine"
+TOGGLE="$HOME/.dotfiles/options/.toggle_caffeine"
 
 if [ ! -e "$TOGGLE" ]; then
     touch "$TOGGLE"

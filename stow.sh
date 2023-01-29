@@ -44,7 +44,7 @@ for dir in ~/.dotfiles/*/; do
     dir="$(basename "$dir")"
 
     case "$dir" in
-        misc|bin|scripts) printf 'Skipping %s\n' "$dir";;
+        misc|bin|scripts|options) printf 'Skipping %s\n' "$dir";;
         *) "$stow" "$dir";;
     esac
 done

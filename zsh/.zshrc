@@ -67,6 +67,7 @@
     export PATH="$HOME/.dotfiles/bin:/home/klar/.local/bin:$PATH"
 	export EDITOR="/usr/bin/nvim"
 	export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
+    export BROWSER=librewolf
 
 # Source zsh files (plugins)
     source $HOME/.zsh/zsh-vi-mode.plugin.zsh

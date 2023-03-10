@@ -8,6 +8,9 @@ super + @d
 super + b
   librewolf
 
+super + shift + b
+  chromium
+
 super + f
   thunar
 

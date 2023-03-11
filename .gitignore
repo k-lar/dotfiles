@@ -30,3 +30,6 @@ nvim/.config/nvim/autoload/*
 
 # Ignore rofi theme changes
 rofi/.config/rofi/config.rasi
+
+# Ignore all updates to autostart file
+options/autostart

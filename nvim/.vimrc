@@ -241,7 +241,9 @@ EOF
 
 " Tab controls (Alt+Left/Right)
 	nnoremap <M-Left> :tabprevious<CR>
+	inoremap <M-Left> <ESC>:tabprevious<CR>
 	nnoremap <M-Right> :tabnext<CR>
+	inoremap <M-Right> <ESC>:tabnext<CR>
 
 " Easily move lines up and down
 	nnoremap <c-Down> :m .+1<CR>==
@@ -271,7 +273,10 @@ EOF
 " Turn .zshrc syntax highlighting on (sh)
 	au BufNewFile,BufFilePre,BufRead *.zshrc set filetype=sh
 
-" Sniprun configuration
+" }}}
+
+
+" Sniprun configuration {{{
 lua << EOF
 
     require('sniprun').setup({
@@ -291,7 +296,10 @@ EOF
     nnoremap <leader>R :SnipClose<CR>
     vnoremap <leader>r :'<,'>SnipRun<CR>
 
-" Ctags and gtags configuration
+" }}}
+
+
+" Ctags and gtags configuration {{{
     " enable gtags module
     let g:gutentags_modules = ['ctags', 'gtags_cscope']
 

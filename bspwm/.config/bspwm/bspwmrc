@@ -6,8 +6,7 @@ if [ "$HOSTNAME" = klar-arch ]; then
     monitor=$(xrandr | awk '/\<connected\>/ {print $1}')
 	killall xrandr; xrandr --output "$monitor" --mode 1920x1080 --rate 144 &
 fi
-# setxkbmap si -option caps:escape_shifted_capslock &
-# setxkbmap si -option 'caps:swapescape' -option 'caps:ctrl_modifier'; xmodmap -e 'keycode 255 = Escape'; xcape -e '#66=Escape' &
+
 setxkbmap -layout si,ru -variant ,phonetic -option 'caps:swapescape' -option 'caps:ctrl_modifier' -option 'grp:alt_space_toggle'; xmodmap -e 'keycode 255 = Escape'; xcape -e '#66=Escape' &
 killall sxhkd; sxhkd &
 killall picom; sleep 0.1s; picom &
@@ -16,6 +15,11 @@ killall nm-applet; nm-applet &
 killall blueman-applet; blueman-applet &
 killall mpd; mpd &
 killall gummy; gummy start &
+
+if [ ! -e /dev/shm/.autostarted_bspwm ]; then
+    sh -c "$HOME/.dotfiles/scripts/autostart.sh" &
+fi
+
 thunar --daemon &
 feh --bg-fill ~/Pictures/gruvbox_walls/stairs.jpg &
 emacs --daemon && notify-send --icon=/usr/share/emacs/28.2/etc/images/icons/hicolor/scalable/apps/emacs.ico "Emacs daemon started" &
@@ -38,9 +42,6 @@ bc borderless_monocle   true
 bc gapless_monocle      true
 
 # Rules
-# br -a mpv state=floating
-# br -a feh state=floating
-# br -a sxiv state=floating
 br -a nm-connection-editor state=floating
 br -a Zathura state=tiled
 br -a Emacs state=tiled

@@ -8,6 +8,6 @@ while read -r program || [ -n "$program" ]; do
     fi
     sh -c "$program" &
 
-done < "$HOME/.dotfiles/options/autostart"
+done < "$HOME/.config/autostart"
 
 touch /dev/shm/.autostarted_bspwm

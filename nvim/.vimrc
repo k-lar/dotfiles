@@ -1,5 +1,5 @@
 "  _    _            ( )               _
-" | |__| | __ _  _ _  \| ___     __ __(_) _ __   _ _  __
+"|__| | __ _  _ _  \| ___     __ __(_) _ __   _ _  __
 " | / /| |/ _` || '_|   (_-/     \ V /| || '  \ | '_|/ _|
 " |_\_\|_|\__/_||_|     /__/      \_/ |_||_|_|_||_|  \__|
 "
@@ -35,6 +35,7 @@ Plug 'ggandor/leap.nvim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-commentary'
+Plug 'echasnovski/mini.indentscope'
 
 " Coding plugins
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -417,6 +418,33 @@ lua << EOF
     }
 
 EOF
+
+" }}}
+
+
+" My compile command {{{
+function! Build()
+    let current_file_dir = execute(":!printf %:p:h")
+    let buildscript = current_file_dir . "/build.sh"
+    if execute('":!empty(glob("' . buildscript . '"))"') == 0
+        echo "Build file was found!"
+        " execute(':tabe  ' . buildscript)
+        echo buildscript
+    elseif execute('":!empty(glob("' . buildscript . '"))"') == 1
+        echo "Build file not found."
+    else
+        echo "Build function error"
+    endif
+    " echo buildscript
+
+endfunction
+
+" }}}
+
+
+" Indent scope (animate indent scope) {{{
+    lua require('mini.indentscope').setup()
+    au filetype startify :lua vim.b.miniindentscope_disable = true
 
 " }}}
 

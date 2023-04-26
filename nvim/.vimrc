@@ -41,8 +41,6 @@ Plug 'echasnovski/mini.indentscope'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'ackyshake/VimCompletesMe'
 Plug 'mattn/emmet-vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
 
 call plug#end()
 
@@ -296,78 +294,6 @@ EOF
     nnoremap <leader>r :SnipRun<CR>
     nnoremap <leader>R :SnipClose<CR>
     vnoremap <leader>r :'<,'>SnipRun<CR>
-
-" }}}
-
-
-" Ctags and gtags configuration {{{
-    " enable gtags module
-    let g:gutentags_modules = ['ctags', 'gtags_cscope']
-
-    " config project root markers.
-    let g:gutentags_project_root = ['.root', 'package.json', '.git']
-    " let g:gutentags_project_root = ['.root']
-
-    " generate datebases in my cache directory, prevent gtags files polluting my project
-    let g:gutentags_cache_dir = expand('~/.cache/tags')
-    lua vim.cmd([[command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')]])
-    let g:gutentags_plus_switch = 1
-    let g:gutentags_define_advanced_commands = 1
-    let g:gutentags_add_default_project_roots = 0
-    let g:gutentags_generate_on_new = 1
-    let g:gutentags_generate_on_missing = 1
-    let g:gutentags_generate_on_write = 1
-    let g:gutentags_generate_on_empty_buffer = 0
-    let g:gutentags_ctags_extra_args = [
-      \ '--tag-relative=yes',
-      \ '--fields=+ailmnS',
-      \ ]
-    let g:gutentags_ctags_exclude = [
-          \ '*.git', '*.svg', '*.hg',
-          \ '*/tests/*',
-          \ 'build',
-          \ 'dist',
-          \ '*sites/*/files/*',
-          \ 'node_modules',
-          \ 'bower_components',
-          \ 'cache',
-          \ 'compiled',
-          \ 'docs',
-          \ 'example',
-          \ 'bundle',
-          \ 'vendor',
-          \ '*.md',
-          \ '*-lock.json',
-          \ '*.lock',
-          \ '*bundle*.js',
-          \ '*build*.js',
-          \ '.*rc*',
-          \ '*.json',
-          \ '*.min.*',
-          \ '*.map',
-          \ '*.bak',
-          \ '*.zip',
-          \ '*.pyc',
-          \ '*.class',
-          \ '*.sln',
-          \ '*.Master',
-          \ '*.csproj',
-          \ '*.tmp',
-          \ '*.csproj.user',
-          \ '*.cache',
-          \ '*.pdb',
-          \ 'tags*',
-          \ 'cscope.*',
-          \ '*.css',
-          \ '*.less',
-          \ '*.scss',
-          \ '*.exe', '*.dll',
-          \ '*.mp3', '*.ogg', '*.flac',
-          \ '*.swp', '*.swo',
-          \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
-          \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
-          \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
-          \ ]
 
 " }}}
 

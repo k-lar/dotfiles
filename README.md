@@ -2,7 +2,7 @@
 
 My personal configuration files, but I guess you can use them too if you'd like 
 
-![Hi there](/uploads/e6b4124de77bbc0cf3f682f89e156e04/hi_there.gif)
+![Hi there](https://gitlab.com/k_lar/dotfiles/uploads/e6b4124de77bbc0cf3f682f89e156e04/hi_there.gif)
 
 ## Installation
 
@@ -35,7 +35,7 @@ cd ..
 ## Programs
 
 - WM: [BSPWM](https://github.com/baskerville/bspwm) (Binary Space Partitioning Window Manager)
-- Compositor: Picom [(pijulius fork)](https://github.com/pijulius/picom)
+- Compositor: Picom [(FT-Labs fork)](https://github.com/FT-Labs/picom)
 - Hotkey daemon: [sxhkd](https://github.com/baskerville/sxhkd)
 - Notification daemon: [dunst](https://github.com/dunst-project/dunst)
 - Music player: ncmpcpp + mpd
@@ -49,15 +49,15 @@ cd ..
     if I'm without internet, I can still manage my dotfiles effectively.
     Is this stupid? Maybe.  
 
-![Vibing](/uploads/64003ec095d10615a1d4dc1d864060b3/vibing.png)
+![Vibing](https://gitlab.com/k_lar/dotfiles/uploads/64003ec095d10615a1d4dc1d864060b3/vibing.png)
 
 ## Editor
 
 - NeoVim (for scripting and programming)  
-![Editing with nvim](/uploads/d494e0de1e03dddbd445ef0cb5a0b1d1/editing_vim.png)  
+![Editing with nvim](https://gitlab.com/k_lar/dotfiles/uploads/d494e0de1e03dddbd445ef0cb5a0b1d1/editing_vim.png)  
 
 - Emacs (For writing documents and tinkering)  
-![Emacs with btop](/uploads/7e28969078a3c5eaa70c43132b9e25a0/emacs_btop_git.png)  
+![Emacs with btop](https://gitlab.com/k_lar/dotfiles/uploads/7e28969078a3c5eaa70c43132b9e25a0/emacs_btop_git.png)  
 
 ## My scripts/programs
 
@@ -67,13 +67,13 @@ cd ..
 
 - `volume.sh`  
   A simple script that pops up a notification whenever you change volume with a keyboard shortcut.  
-  ![volume.sh](/uploads/628a0dbaacb5c6b26e56a399b63561bb/volume.gif)  
+  ![volume.sh](https://gitlab.com/k_lar/dotfiles/uploads/628a0dbaacb5c6b26e56a399b63561bb/volume.gif)  
 
 - `brem`  
   My own notes/reminders program written in POSIX sh. I have a different repository for the
   standalone script and I mirror it here. (I don't feel like using submodules for something like
   this) You can find the repo [here](https://gitlab.com/k_lar/brem).  
-  ![brem](/uploads/5906f9d2e7f1e5e0779f9eab46df1409/brem.png)  
+  ![brem](https://gitlab.com/k_lar/dotfiles/uploads/5906f9d2e7f1e5e0779f9eab46df1409/brem.png)  
 
 - `powernap`  
   I wrote this program for a very dumb reason. I've rewritten it now and it's finally presentable!
@@ -93,14 +93,14 @@ cd ..
 
 - Power-menu script  
   A mildly modified version of [this](https://github.com/jluttine/rofi-power-menu) script.  
-  ![power-menu](/uploads/8fb22e60c0b1af90db97625afce592aa/power-menu.png)  
+  ![power-menu](https://gitlab.com/k_lar/dotfiles/uploads/8fb22e60c0b1af90db97625afce592aa/power-menu.png)  
 
 - Rofi-gummy (temperature and brightness manager)  
   A rofi wrapper for some basic temperature and brightness presets I use at night to not completely
   ruin my eyes. It's using [gummy](https://github.com/Fushko/gummy) as its backend. It handles both
   temperature and brightness at the same time and I find it more convenient than using something
   like redshift and xbrightness or brightnessctl.  
-  ![rofi-gummy](/uploads/4e9c70aec2deba35e5a3a0150ff61312/rofi-gummy.png)  
+  ![rofi-gummy](https://gitlab.com/k_lar/dotfiles/uploads/4e9c70aec2deba35e5a3a0150ff61312/rofi-gummy.png)  
 
 
 ## Font

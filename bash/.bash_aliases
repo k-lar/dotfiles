@@ -3,7 +3,7 @@
 	alias nnn='nnn -e'
 	alias cat="bat"
 	alias v='nvim'
-	alias vimrc="v ~/.vimrc"
+	alias vimrc="v ~/.dotfiles/nvim/.config/nvim/init.lua"
 	alias bashrc="v ~/.bashrc"
     alias zshrc="v ~/.zshrc"
 	alias bonsai='cbonsai -l -i -t 1.5 -m "  Še malo"'

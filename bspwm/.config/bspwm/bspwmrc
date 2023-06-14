@@ -2,9 +2,9 @@
 
 # Autostart programs
 HOSTNAME=$(hostname)
-if [ "$HOSTNAME" = klar-arch ]; then
+if [ "$HOSTNAME" = "klar-arch" ]; then
     monitor=$(xrandr | awk '/\<connected\>/ {print $1}')
-	killall xrandr; xrandr --output "$monitor" --mode 1920x1080 --rate 144 &
+    killall xrandr; sleep 0.1s; xrandr --output "$monitor" --mode 1920x1080 --rate 144 &
 fi
 
 setxkbmap -layout si,ru -variant ,phonetic -option 'caps:swapescape' -option 'caps:ctrl_modifier' -option 'grp:alt_space_toggle'; xmodmap -e 'keycode 255 = Escape'; xcape -e '#66=Escape' &

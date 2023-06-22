@@ -174,7 +174,7 @@ Since I'm used to relative numbers from vim, I'll also use them here (except in 
 (dolist (mode '(org-mode-hook
                     term-mode-hook
                     eshell-mode-hook
-                    vterm-mode-hook
+                    eat-mode-hook
                     dired-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -550,7 +550,7 @@ The leader key package.
   "d" 'dired
   "b" 'consult-buffer
   "B" 'kill-buffer
-  "T" 'vterm
+  "T" 'eat
   "t" 'toggle-frame-tab-bar
   "z o" 'zone
   "z a" 'artist-mode
@@ -948,15 +948,13 @@ Very helpful package that shows you what keys you can press with the modifier ke
 
 #+END_SRC
 
-** Vterm
-The better terminal for Emacs.
+** Eat (emulate a terminal)
+A better terminal than anything that is built-in, but faster and smoother in every way.
 
-#+BEGIN_SRC emacs-lisp
-;; Install vterm for better built in terminal
-(use-package vterm
+#+begin_src emacs-lisp
+(use-package eat
   :ensure t)
-
-#+END_SRC
+#+end_src
 
 ** Rainbow delimiters
 Rainbow perentheses for clearer coding.

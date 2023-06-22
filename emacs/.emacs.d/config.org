@@ -116,7 +116,7 @@ I don't want my Emacs to be transparent, since it disturbs my workflow and I thi
 (scroll-bar-mode -1)
 (set-fringe-mode 10)
 (global-visual-line-mode 1)
-(diminish 'visual-line-mode) 
+(diminish 'visual-line-mode)
 #+END_SRC
 
 ** Fonts and encoding
@@ -221,27 +221,27 @@ I'm a sucker for gruvbox and that's why I'm using it here.
     '((t (:background "#afaf87" :foreground "#262626" :inherit telephone-line-evil)))
     "Face used in evil color-coded segments when in Normal state."
     :group 'telephone-line-evil)
-  
+
   (defface telephone-line-evil-visual
     '((t (:background "#ff875f" :foreground "#262626" :inherit telephone-line-evil)))
     "Face used in evil color-coded segments when in Visual{,-Block,-Line} state."
     :group 'telephone-line-evil)
-  
+
   (defface telephone-line-evil-replace
     '((t (:background "#ff5f5f" :foreground "#262626" :inherit telephone-line-evil)))
     "Face used in evil color-coded segments when in Replace state."
     :group 'telephone-line-evil)
-  
+
   (defface telephone-line-evil-motion
     '((t (:background "dark blue" :inherit telephone-line-evil)))
     "Face used in evil color-coded segments when in Motion state."
     :group 'telephone-line-evil)
-  
+
   (defface telephone-line-evil-operator
     '((t (:background "#afaf87" :foreground "#262626" :inherit telephone-line-evil)))
     "Face used in evil color-coded segments when in Operator state."
     :group 'telephone-line-evil)
-  
+
   (defface telephone-line-evil-emacs
     '((t (:background "orange" :foreground "#262626" :inherit telephone-line-evil)))
     "Face used in evil color-coded segments when in Emacs state."
@@ -380,7 +380,7 @@ Don't exactly know what org-appear does...
   :config
   (require 'org-tempo)
   (setq org-startup-with-inline-images t)
-  
+
   (with-eval-after-load 'org-indent
     (require 'diminish)
     (diminish 'org-indent-mode)))
@@ -446,7 +446,7 @@ Compatibility layer to get modal editing that feels like vim. Also using doom pa
 ;; Evil-commentary is a port of vim-commentary from tpope
 (use-package evil-commentary
   :after evil
-  :diminish evil-commentary-mode 
+  :diminish evil-commentary-mode
   :init (evil-commentary-mode))
 
 ;; Try to disable EVIL keybindings on buffers that suck with them
@@ -468,7 +468,7 @@ Using emacs' built-in tabs and they work surprisingly well.
 #+begin_src emacs-lisp
 ;; KEEPING THIS JUST IN CASE
 ;; (use-package elscreen
-;;   :config 
+;;   :config
 ;;   ;; (defadvice elscreen-create (before elscreen-start activate))
 ;;   ;; (defadvice elscreen-next (before elscreen-start activate))
 ;;   ;; (defadvice elscreen-previous (before elscreen-start activate))
@@ -559,13 +559,13 @@ The leader key package.
 (general-define-key
   :states 'normal
   "M-p" 'evil-paste-after
-  "C-S-v" 'evil-paste-after
+  "C-S-v" 'evil-paste-before
   "SPC G" 'git-gutter-mode
   "C-M-q" 'save-buffers-kill-emacs)
 
 (general-define-key
   :states 'insert
-  "C-S-v" 'evil-paste-after
+  "C-S-v" 'evil-paste-before
   "C-c d" 'klar/insert-current-date
   "M-p" 'evil-paste-after)
 

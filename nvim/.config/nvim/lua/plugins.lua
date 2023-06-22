@@ -10,7 +10,7 @@ configs.setup {
         "c", "lua", "python",
         "bash", "bibtex", "cpp",
         "yaml", "vim", "cmake", "latex",
-        "go",
+        "go", "typescript", "javascript"
     },
 
     highlight = { -- enable highlighting
@@ -68,3 +68,19 @@ g.user_emmet_leader_key = ","
 -- Bullets.vim
 g.bullets_renumber_on_change = 0
 
+-- mini.move plugin setup
+require('mini.move').setup({
+  mappings = {
+    -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+    left = '<C-Left>',
+    right = '<C-Right>',
+    down = '<C-Down>',
+    up = '<C-Up>',
+
+    -- Move current line in Normal mode
+    line_left = '<C-Left>',
+    line_right = '<C-Right>',
+    line_down = '<C-Down>',
+    line_up = '<C-Up>',
+  },
+})

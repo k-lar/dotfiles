@@ -31,6 +31,7 @@ require('packer').startup(function(use)
     use 'echasnovski/mini.indentscope'
     use 'folke/which-key.nvim'
     use 'nvim-treesitter/playground'
+    use 'echasnovski/mini.move'
 
     -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
     local has_plugins, plugins = pcall(require, 'custom.plugins')

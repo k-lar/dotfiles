@@ -7,9 +7,14 @@ shopt -s extglob
 printf -v startTime '%(%H:%M)T'
 printf -v startTimeTs '%(%s)T'
 
+power_command="poweroff"
 time="${1//[hms]}"
 timeval="${1//[!hms]}"
 dowarn=0
+
+if [ "$2" == "-s" ] || [ "$2" == "--sleep" ]; then
+    power_command="systemctl suspend"
+fi
 
 # always convert to seconds
 case "$timeval" in
@@ -40,4 +45,5 @@ if (( dowarn )); then
     sleep 5m
 fi
 
-poweroff
+# poweroff
+sh -c "$power_command"

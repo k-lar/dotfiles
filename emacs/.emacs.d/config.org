@@ -579,11 +579,6 @@ For repeatable keybindings like zoom and volume.
 (use-package hydra
   :ensure t)
 
-(defhydra hydra-zoom (global-map "<f2>")
-  "zoom"
-  ("k" text-scale-increase "in")
-  ("j" text-scale-decrease "out"))
-
 (defhydra hydra-emms-volume ()
   "Volume"
   ("<up>" emms-player-mpv-raise-volume "10")

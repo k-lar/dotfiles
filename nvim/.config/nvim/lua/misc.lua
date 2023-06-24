@@ -14,3 +14,20 @@ map '<leader>s' ':setlocal spell! spelllang=sl<CR>' {silent = true} -- Slovene
 nnoremap "<M-Left>" ":tabprevious<CR>"
 nnoremap "<M-Right>" ":tabnext<CR>"
 
+-- Highlight on yank
+local group = vim.api.nvim_create_augroup('user_cmds', {clear = true})
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight on yank',
+  group = group,
+  callback = function()
+    vim.highlight.on_yank({higroup = 'Visual', timeout = 200})
+  end,
+})
+
+-- Quick exit from help docs
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {'help', 'man'},
+  group = group,
+  command = 'nnoremap <buffer> q <cmd>quit<cr>'
+})

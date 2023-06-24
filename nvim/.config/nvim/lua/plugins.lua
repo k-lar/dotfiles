@@ -30,6 +30,9 @@ require('gitsigns').setup {
     signcolumn = false
 }
 nnoremap '<leader>G' ':Gitsigns toggle_signs<CR>' -- SPC-Shift-g toggle gitsigns
+nnoremap '<leader>gp' ':Gitsigns prev_hunk<CR>'
+nnoremap '<leader>gn' ':Gitsigns next_hunk<CR>'
+nnoremap '<leader>ph' ':Gitsigns preview_hunk<CR>'
 
 -- Fuzzy finding
 local actions = require "fzf-lua.actions"

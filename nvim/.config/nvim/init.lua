@@ -7,7 +7,7 @@
 ]]--
 
 -- Bootstrap and set up plugins
-require("packer-config")
+require("lazy-config")
 
 -- Various utilities and aliases for lua
 require("utils")

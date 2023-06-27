@@ -27,6 +27,7 @@ mpv/.config/mpv/*
 
 # Ignore autoload from nvim
 nvim/.config/nvim/autoload/*
+nvim/.config/nvim/lazy-lock.json
 
 # Ignore rofi theme changes
 rofi/.config/rofi/config.rasi

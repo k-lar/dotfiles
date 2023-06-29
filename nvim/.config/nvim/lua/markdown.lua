@@ -2,11 +2,11 @@ require("utils")
 
 -- Pandoc markdown -> pdf compilation
 vim.cmd[[
-	augroup my_markdown
-		autocmd!
-		autocmd FileType markdown nnoremap <silent><F9> :<c-u>call system('pandoc -s '.expand('%:p:S').' -o '.expand('%:p:r:S').'.pdf')<cr>
-		autocmd FileType markdown nnoremap <silent><F8> :<c-u>call system('zathura '.expand('%:p:r:S').'.pdf &')<cr>
-	augroup END
+    augroup my_markdown
+        autocmd!
+        autocmd FileType markdown nnoremap <silent><F9> :<c-u>call system('pandoc -s '.expand('%:p:S').' -o '.expand('%:p:r:S').'.pdf')<cr>
+        autocmd FileType markdown nnoremap <silent><F8> :<c-u>call system('zathura '.expand('%:p:r:S').'.pdf &')<cr>
+    augroup END
 ]]
 
 -- Markdown syntax and configuration

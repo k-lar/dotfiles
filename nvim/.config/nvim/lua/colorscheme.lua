@@ -13,6 +13,10 @@ vim.cmd("colorscheme gruvbox-pale")
 
 -- Lualine setup
 require('lualine').setup {
-    options = { theme  = "gruvbox-dark-pale", section_separators = '', component_separators = '' },
+    options = {
+        theme  = "gruvbox-dark-pale",
+        section_separators = '',
+        component_separators = ''
+    },
 }
 

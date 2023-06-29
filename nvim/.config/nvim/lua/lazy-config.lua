@@ -27,8 +27,7 @@ require('lazy').setup({
     {'dkarter/bullets.vim', lazy = true},
     {'nvim-treesitter/playground', lazy = true},
 
-    {
-        -- Highlight, edit, and navigate code
+    { -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
     }

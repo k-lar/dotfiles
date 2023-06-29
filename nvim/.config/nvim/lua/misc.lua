@@ -36,12 +36,24 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Use b for () and B for {}
 -- Example: cib, diB
 vim.keymap.set("o", "ar", "a]") -- [r]ectangular bracket
-vim.keymap.set("o", "ac", "a}") -- [c]urly brace
-vim.keymap.set("o", "am", "aW") -- [m]assive word (= no shift needed)
-vim.keymap.set("o", "aq", 'a"') -- [q]uote
-vim.keymap.set("o", "az", "a'") -- [z]ingle quote
+vim.keymap.set("v", "ar", "a]")
 vim.keymap.set("o", "ir", "i]")
+vim.keymap.set("v", "ir", "i]")
+
+vim.keymap.set("o", "ac", "a}") -- [c]urly brace
+vim.keymap.set("v", "ac", "a}")
 vim.keymap.set("o", "ic", "i}")
+vim.keymap.set("v", "ic", "i}")
+
+vim.keymap.set("o", "am", "aW") -- [m]assive word (= no shift needed)
 vim.keymap.set("o", "im", "iW")
+
+vim.keymap.set("o", "aq", 'a"') -- [q]uote
+vim.keymap.set("v", "aq", 'a"')
 vim.keymap.set("o", "iq", 'i"')
+vim.keymap.set("v", "iq", 'i"')
+
+vim.keymap.set("o", "az", "a'") -- [z]ingle quote
+vim.keymap.set("v", "az", "a'")
 vim.keymap.set("o", "iz", "i'")
+vim.keymap.set("v", "iz", "i'")

@@ -57,3 +57,7 @@ vim.keymap.set("o", "az", "a'") -- [z]ingle quote
 vim.keymap.set("v", "az", "a'")
 vim.keymap.set("o", "iz", "i'")
 vim.keymap.set("v", "iz", "i'")
+
+-- Create "line" objects
+vim.keymap.set("x", "il", "g_o0")
+vim.keymap.set("o", "il", ":normal vil<CR>")

@@ -61,3 +61,6 @@ vim.keymap.set("v", "iz", "i'")
 -- Create "line" objects
 vim.keymap.set("x", "il", "g_o0")
 vim.keymap.set("o", "il", ":normal vil<CR>")
+
+-- Easier end of line movement in visual mode
+vim.keymap.set("v", "E", "$")

@@ -1,7 +1,7 @@
 require("utils")
 
--- Enable Comment.nvim
-require('Comment').setup()
+-- Enable mini.comment plugin
+require('mini.comment').setup()
 
 -- Configure Treesitter
 local configs = require'nvim-treesitter.configs'

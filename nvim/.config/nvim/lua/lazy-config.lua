@@ -21,7 +21,7 @@ require('lazy').setup({
     'echasnovski/mini.indentscope',
     'folke/which-key.nvim',
     'echasnovski/mini.move',
-    'numToStr/Comment.nvim',
+    'echasnovski/mini.comment',
     'ggandor/leap.nvim',
     {'dhruvasagar/vim-table-mode', lazy = true},
     {'dkarter/bullets.vim', lazy = true},
@@ -30,5 +30,6 @@ require('lazy').setup({
     { -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
+        lazy = true,
     }
 }, {})

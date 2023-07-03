@@ -87,3 +87,6 @@ require('mini.move').setup({
     line_up = '<C-Up>',
   },
 })
+
+-- mini.surround plugin setup
+require('mini.surround').setup()

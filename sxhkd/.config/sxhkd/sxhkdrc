@@ -107,6 +107,9 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
   amixer set Master 5%+
 
+XF86AudioMute
+  amixer -D pulse set Master 1+ toggle
+
 #Media player controls
 XF86AudioPlay
 	playerctl play-pause

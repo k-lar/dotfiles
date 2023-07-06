@@ -4,7 +4,7 @@
 HOSTNAME=$(hostname)
 if [ "$HOSTNAME" = "klar-arch" ]; then
     monitor=$(xrandr | awk '/\<connected\>/ {print $1}')
-    killall xrandr; sleep 0.1s; xrandr --output "$monitor" --mode 1920x1080 --rate 144 &
+    killall xrandr; sleep 0.1s; xrandr --output "$monitor" --mode 1920x1080 --rate 60 &
 fi
 
 setxkbmap -layout si,ru -variant ,phonetic -option 'caps:swapescape' -option 'caps:ctrl_modifier' -option 'grp:alt_space_toggle'; xmodmap -e 'keycode 255 = Escape'; xcape -e '#66=Escape' &
@@ -18,6 +18,10 @@ killall gummy; gummy start &
 
 if [ ! -e /dev/shm/.autostarted_bspwm ]; then
     sh -c "$HOME/.dotfiles/scripts/autostart.sh" &
+fi
+
+if [ ! -e /dev/shm/.polkit_running ]; then
+    sh -c "$HOME/.dotfiles/scripts/run_polkit.sh" &
 fi
 
 thunar --daemon &
@@ -35,7 +39,6 @@ bspc monitor -d I II III IV V VI VII VIII IX X
 
 # Others
 bc border_width         0
-#bc border_radius        15
 bc window_gap           12
 bc split_ratio          0.52
 bc borderless_monocle   true

@@ -12,7 +12,7 @@ CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor" "thun
 "thunar-volman" "gvfs" "gvfs-mtp" "alacritty" "when" "git" "rofi" "nomacs" "xclip" "pamixer"
 "unrar" "zip" "unzip" "ncdu" "keepass" "file-roller" "exa" "ripgrep" "fzf" "btop" "tmux" "xcape"
 "pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs-nativecomp" "gnome-disk-utility"
-"network-manager-applet" "bash-completion")
+"network-manager-applet" "bash-completion" "alsa-utils" "polkit" "xfce-polkit")
 
 DE_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "mtpfs" "lightdm" "polybar"
 "boomer-git" "cava-git" "i3lock-color" "pfetch" "ttf-blex-nerd-font-git"

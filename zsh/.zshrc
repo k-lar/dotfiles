@@ -74,6 +74,11 @@
       tmux_start
     fi
 
+# A better man function
+    function better_man() {
+        /bin/man "$1" || "$1" --help 2>&1 | less
+    }
+
 # Emacs vterm support
     if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
         function clear(){

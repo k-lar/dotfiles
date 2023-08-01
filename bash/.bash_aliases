@@ -6,6 +6,7 @@
 	alias vimrc="v ~/.dotfiles/nvim/.config/nvim/init.lua"
 	alias bashrc="v ~/.bashrc"
     alias zshrc="v ~/.zshrc"
+    alias man="better_man"
 	alias bonsai='cbonsai -l -i -t 1.5 -m "  Še malo"'
 	alias clock='tty-clock -c -f %F'
 	alias mutt='neomutt'

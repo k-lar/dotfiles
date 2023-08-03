@@ -26,7 +26,10 @@ fi
 
 thunar --daemon &
 feh --bg-fill ~/Pictures/gruvbox_walls/stairs.jpg &
-emacs --daemon && notify-send --icon=/usr/share/emacs/28.2/etc/images/icons/hicolor/scalable/apps/emacs.ico "Emacs daemon started" &
+
+emacs_version=$(emacs --version | grep -oE '[0-9]+\.[0-9]+')
+emacs_icon="/usr/share/emacs/${emacs_version}/etc/images/icons/hicolor/scalable/apps/emacs.ico"
+emacs --daemon && notify-send --icon="$emacs_icon" "Emacs daemon started" &
 
 sh -c '$HOME/.config/polybar/launch.sh' &
 

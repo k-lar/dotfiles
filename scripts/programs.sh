@@ -23,7 +23,8 @@ DE_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "mtpfs" "lightdm" "polybar"
 WAYLAND_PKGS=("hyprland-bin" "hyprpicker-git" "wl-clipboard" "rofi-lbonn-wayland-git"
 "foot" "waybar" "swaylock-effects" "swaybg")
 
-TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai" "mdp")
+TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai" "mdp"
+"texlive-fontsrecommended")
 
 MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng" "ctags"
 "cscope" "global")

@@ -123,7 +123,7 @@ label = %percentage%%
 type = internal/memory
 interval = 2
 format-padding = 2
-format-prefix = " "
+format-prefix = " "
 format-foreground = ${colors.foreground}
 label = %percentage_used%%
 
@@ -284,7 +284,7 @@ click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org
 
 [module/battery]
 type = internal/battery
-full-at = 100
+full-at = 90
 time-format = %H:%M
 battery = BAT0
 adapter = ADP0
@@ -306,7 +306,7 @@ ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
-;ramp-capacity-4 = 
+; ramp-capacity-4 = 
 
 ramp-capacity-0-foreground = ${colors.foreground}
 ramp-capacity-foreground   = ${colors.foreground}

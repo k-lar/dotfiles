@@ -10,7 +10,7 @@
 
 CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor" "thunar"
 "thunar-volman" "gvfs" "gvfs-mtp" "alacritty" "when" "git" "rofi" "nomacs" "xclip" "pamixer"
-"unrar" "zip" "unzip" "ncdu" "keepass" "file-roller" "exa" "ripgrep" "fzf" "btop" "tmux" "xcape"
+"unrar" "zip" "unzip" "ncdu" "keepassxc" "file-roller" "exa" "ripgrep" "fzf" "btop" "tmux" "xcape"
 "pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs-nativecomp" "gnome-disk-utility"
 "network-manager-applet" "bash-completion" "alsa-utils" "polkit" "xfce-polkit" "python-pipx")
 

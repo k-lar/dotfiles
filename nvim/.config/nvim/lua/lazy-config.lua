@@ -25,7 +25,7 @@ require('lazy').setup({
     'echasnovski/mini.surround',
     'ggandor/leap.nvim',
     {'dhruvasagar/vim-table-mode', lazy = true},
-    {'dkarter/bullets.vim', lazy = true},
+    {'dkarter/bullets.vim', ft = "markdown"},
     {'nvim-treesitter/playground', lazy = true},
 
     { -- Highlight, edit, and navigate code

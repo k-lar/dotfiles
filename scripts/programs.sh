@@ -45,6 +45,26 @@ if [[ ! -d "/opt/yay" ]]; then
     fi
 fi
 
+# Check if XDG user dirs are present
+if [[ ! -d "~/.config/user-dirs.dirs" ]]; then
+    echo "XDG user directories not present on system."
+    read -r -p  "Would you like to create them? [Y/n]: " xdg_choice
+    if ! [ "$xdg_choice" == "n" ]; then
+        sudo pacman -S xdg-user-dirs &&
+        xdg-user-dirs-update &&
+        echo "XDG directories created successfully! Locations:" &&
+        xdg-user-dir DESKTOP &&
+        xdg-user-dir DOWNLOAD &&
+        xdg-user-dir TEMPLATES &&
+        xdg-user-dir PUBLICSHARE &&
+        xdg-user-dir DOCUMENTS &&
+        xdg-user-dir MUSIC &&
+        xdg-user-dir PICTURES &&
+        xdg-user-dir VIDEOS &&
+        echo ""
+    fi
+fi
+
 echo "List all the packages that can be installed?"
 read -r -p "[y/N]: " confirm_selection
 if [ "$confirm_selection" == "y" ]; then

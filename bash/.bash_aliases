@@ -1,5 +1,5 @@
 # General aliases
-	alias ls='exa -g'
+	alias ls='eza -g'
 	alias nnn='nnn -e'
 	alias cat="bat"
 	alias v='nvim'
@@ -10,7 +10,7 @@
 	alias bonsai='cbonsai -l -i -t 1.5 -m "  Še malo"'
 	alias clock='tty-clock -c -f %F'
 	alias mutt='neomutt'
-	alias lsn='exa --sort newest'
+	alias lsn='eza --sort newest'
 	alias htop='btop'
     alias dots='cd ~/.dotfiles'
 	alias newsboat='newsboat -r'

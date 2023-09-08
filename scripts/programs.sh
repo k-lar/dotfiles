@@ -36,7 +36,7 @@ if [[ ! -d "/opt/yay" ]]; then
     echo "It seems that yay is not installed on your system."
     read -r -p  "Would you like to install it? [y/N]: " yay_choice
     if [ "$yay_choice" == "y" ]; then
-        sudo pacman -S base-devel git &&
+        sudo pacman --noconfirm -S base-devel git &&
         cd /opt &&
         sudo git clone https://aur.archlinux.org/yay.git &&
         sudo chown -R "$(whoami)":users ./yay &&
@@ -50,7 +50,7 @@ if [[ ! -d "~/.config/user-dirs.dirs" ]]; then
     echo "XDG user directories not present on system."
     read -r -p  "Would you like to create them? [Y/n]: " xdg_choice
     if ! [ "$xdg_choice" == "n" ]; then
-        sudo pacman -S xdg-user-dirs &&
+        sudo pacman --noconfirm -S xdg-user-dirs &&
         xdg-user-dirs-update &&
         echo "XDG directories created successfully! Locations:" &&
         xdg-user-dir DESKTOP &&
@@ -65,6 +65,20 @@ if [[ ! -d "~/.config/user-dirs.dirs" ]]; then
     fi
 fi
 
+# Check if gruvbox wallpapers are present
+if [[ ! -d "~/Pictures/gruvbox_walls/" ]]; then
+    echo "Gruvbox wallpapers not present."
+    read -r -p  "Would you like to download them? [Y/n]: " walls_choice
+    if ! [ "$walls_choice" == "n" ]; then
+        if ! type git > /dev/null; then
+            sudo pacman --noconfirm -S git
+        fi
+        git clone https://gitlab.com/k_lar/gruvbox_walls ~/Pictures/gruvbox_walls
+        echo ""
+    fi
+fi
+
+# Installation script
 echo "List all the packages that can be installed?"
 read -r -p "[y/N]: " confirm_selection
 if [ "$confirm_selection" == "y" ]; then

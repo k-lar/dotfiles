@@ -46,7 +46,7 @@ if [[ ! -d "/opt/yay" ]]; then
 fi
 
 # Check if XDG user dirs are present
-if [[ ! -d "~/.config/user-dirs.dirs" ]]; then
+if [[ ! -e "$HOME/.config/user-dirs.dirs" ]]; then
     echo "XDG user directories not present on system."
     read -r -p  "Would you like to create them? [Y/n]: " xdg_choice
     if ! [ "$xdg_choice" == "n" ]; then
@@ -66,14 +66,14 @@ if [[ ! -d "~/.config/user-dirs.dirs" ]]; then
 fi
 
 # Check if gruvbox wallpapers are present
-if [[ ! -d "~/Pictures/gruvbox_walls/" ]]; then
+if [[ ! -d "$HOME/Pictures/gruvbox_walls/" ]]; then
     echo "Gruvbox wallpapers not present."
     read -r -p  "Would you like to download them? [Y/n]: " walls_choice
     if ! [ "$walls_choice" == "n" ]; then
         if ! type git > /dev/null; then
             sudo pacman --noconfirm -S git
         fi
-        git clone https://gitlab.com/k_lar/gruvbox_walls ~/Pictures/gruvbox_walls
+        git clone https://gitlab.com/k_lar/gruvbox_walls "$HOME"/Pictures/gruvbox_walls
         echo ""
     fi
 fi

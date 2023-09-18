@@ -23,6 +23,7 @@ require('lazy').setup({
     'echasnovski/mini.move',
     'echasnovski/mini.comment',
     'echasnovski/mini.surround',
+    'echasnovski/mini.pairs',
     'ggandor/leap.nvim',
     {'dhruvasagar/vim-table-mode', lazy = true},
     {'dkarter/bullets.vim', ft = "markdown"},

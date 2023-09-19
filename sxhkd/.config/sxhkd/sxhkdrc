@@ -95,6 +95,12 @@ super + ctrl + F2
 super + ctrl + F1
   sh -c "~/.dotfiles/scripts/volume.sh mute"
 
+XF86MonBrightnessUp
+  brightnessctl set +5%
+
+XF86MonBrightnessDown
+  brightnessctl set 5%-
+
 super + ctrl + F6
   brightnessctl set +5%
 

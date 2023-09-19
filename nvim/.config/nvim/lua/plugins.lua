@@ -91,5 +91,6 @@ require('mini.move').setup({
 -- mini.surround plugin setup
 require('mini.surround').setup()
 
--- mini.pairs plugin setup
+-- mini.pairs plugin setup (disable pairing ' symbol in certain filetypes)
 require('mini.pairs').setup()
+vim.cmd[[autocmd FileType markdown,plaintext,latex,tex inoremap ' ']]

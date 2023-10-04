@@ -25,6 +25,7 @@ require('lazy').setup({
     'echasnovski/mini.surround',
     'echasnovski/mini.pairs',
     'ggandor/leap.nvim',
+    'stevearc/conform.nvim',
     {'dhruvasagar/vim-table-mode', lazy = true},
     {'dkarter/bullets.vim', ft = "markdown"},
     {'nvim-treesitter/playground', lazy = true},

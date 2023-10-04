@@ -1,7 +1,7 @@
 require("utils")
 
 -- Colors
-o.background = 'dark'
+o.background = "dark"
 o.termguicolors = true
 
 g.gruvbox_pale_style = "dark-pale"
@@ -12,11 +12,10 @@ g.gruvbox_bold_functions = true
 vim.cmd("colorscheme gruvbox-pale")
 
 -- Lualine setup
-require('lualine').setup {
+require("lualine").setup({
     options = {
-        theme  = "gruvbox-dark-pale",
-        section_separators = '',
-        component_separators = ''
+        theme = "gruvbox-dark-pale",
+        section_separators = "",
+        component_separators = "",
     },
-}
-
+})

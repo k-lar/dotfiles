@@ -77,7 +77,7 @@ super + shift + e
   bspc quit
 
 super + shift + r
-  bspc wm -r && sleep 1s && notify-send --icon=/usr/share/icons/Adwaita/32x32/emblems/emblem-important-symbolic.symbolic.png "Restarted bspwm"
+  bspc wm -r && sleep 1s && notify-send --icon ~/.dotfiles/icons/emblem-synchronizing-symbolic.svg "Restarted bspwm"
 
 super + p
   feh --bg-fill --randomize ~/Pictures/gruvbox_walls/*

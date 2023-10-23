@@ -1,8 +1,5 @@
 require("utils")
 
--- Enable mini.comment plugin
-require("mini.comment").setup()
-
 -- Configure Treesitter
 local configs = require("nvim-treesitter.configs")
 configs.setup({
@@ -61,9 +58,6 @@ nnoremap("<leader>fs")("<cmd>lua require('fzf-lua').git_status()<CR>")
 require("gitsigns").setup({ signcolumn = false })
 nnoremap("<leader>G")(":Gitsigns toggle_signs<CR>")
 
--- mini.indentscope config
-require("mini.indentscope").setup()
-
 -- which-key config
 require("which-key").setup()
 
@@ -97,11 +91,7 @@ require("mini.move").setup({
     },
 })
 
--- mini.surround plugin setup
-require("mini.surround").setup()
-
 -- mini.pairs plugin setup (disable pairing ' symbol in certain filetypes)
-require("mini.pairs").setup()
 vim.cmd([[autocmd FileType markdown,plaintext,latex,tex inoremap ' ']])
 
 -- conform.nvim formatter setup

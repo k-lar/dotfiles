@@ -19,17 +19,25 @@ require("lazy").setup({
     "https://gitlab.com/k_lar/dark-pale-gruvbox-lualine.nvim",
     "https://gitlab.com/k_lar/gruvbox-pale",
     "folke/which-key.nvim",
-    "echasnovski/mini.indentscope",
-    "echasnovski/mini.move",
-    "echasnovski/mini.comment",
-    "echasnovski/mini.surround",
-    "echasnovski/mini.pairs",
-    "ggandor/leap.nvim",
     "stevearc/conform.nvim",
+    "ggandor/leap.nvim",
+    "echasnovski/mini.move",
+    { "echasnovski/mini.pairs", opts = {} },
+    { "echasnovski/mini.indentscope", opts = {} },
+    { "echasnovski/mini.comment", opts = {} },
+    { "echasnovski/mini.surround", opts = {} },
     { "dhruvasagar/vim-table-mode", lazy = true },
     { "dkarter/bullets.vim", ft = "markdown" },
     { "nvim-treesitter/playground", lazy = true },
-
+    {
+        "folke/todo-comments.nvim",
+        opts = {
+            keywords = {
+                TODO = { color = "hint" },
+                NOTE = { color = "info" },
+            },
+        },
+    },
     { -- Highlight, edit, and navigate code
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",

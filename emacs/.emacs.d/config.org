@@ -949,6 +949,10 @@ A better terminal than anything that is built-in, but faster and smoother in eve
 #+begin_src emacs-lisp
 (use-package eat
   :ensure t)
+
+;; Make it faster with this (emacs bug at least from 6.11.2023)
+(setq process-adaptive-read-buffering nil)
+(setq read-process-output-max (* 4 1024 1024))
 #+end_src
 
 ** Rainbow delimiters

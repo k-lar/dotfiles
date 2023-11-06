@@ -14,6 +14,9 @@ map("<leader>s")(":setlocal spell! spelllang=sl_si<CR>")({ silent = true }) -- S
 nnoremap("<M-Left>")(":tabprevious<CR>")
 nnoremap("<M-Right>")(":tabnext<CR>")
 
+-- Make gf keybind open files in new tab
+nnoremap("gf")("<C-W>gf")
+
 -- Highlight on yank
 local group = vim.api.nvim_create_augroup("user_cmds", { clear = true })
 

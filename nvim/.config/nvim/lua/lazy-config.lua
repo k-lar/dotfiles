@@ -22,6 +22,7 @@ require("lazy").setup({
     "stevearc/conform.nvim",
     "ggandor/leap.nvim",
     "echasnovski/mini.move",
+    { "vidocqh/auto-indent.nvim", opts = {} },
     { "echasnovski/mini.pairs", opts = {} },
     { "echasnovski/mini.indentscope", opts = {} },
     { "echasnovski/mini.comment", opts = {} },

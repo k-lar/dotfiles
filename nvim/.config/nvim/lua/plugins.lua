@@ -50,7 +50,8 @@ require("fzf-lua").setup({
         },
     },
 })
-nnoremap("<leader>ff")("<cmd>lua require('fzf-lua').files()<CR>")
+nnoremap("<leader>ff")("<cmd>lua require('fzf-lua').files({ cwd = vim.fn.expand('%:p:h') })<CR>")
+nnoremap("<leader>fF")("<cmd>lua require('fzf-lua').files()<CR>")
 nnoremap("<leader>fg")("<cmd>lua require('fzf-lua').grep_project()<CR>")
 nnoremap("<leader>fs")("<cmd>lua require('fzf-lua').git_status()<CR>")
 

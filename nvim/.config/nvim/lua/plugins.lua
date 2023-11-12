@@ -28,9 +28,6 @@ configs.setup({
     },
 })
 
--- Enable leap
-require("leap").add_default_mappings()
-
 -- Enable gitsigns
 require("gitsigns").setup({
     signcolumn = false,

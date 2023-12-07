@@ -30,3 +30,6 @@ require("plugins")
 
 -- Colorscheme setup
 require("colorscheme")
+
+-- LSP and autocompletion setup
+require("lsp")

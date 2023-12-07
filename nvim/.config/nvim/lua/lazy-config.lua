@@ -20,13 +20,17 @@ require("lazy").setup({
     "stevearc/conform.nvim",
     "echasnovski/mini.move",
     { "vidocqh/auto-indent.nvim", opts = {} },
-    { "echasnovski/mini.pairs", opts = {} },
     { "echasnovski/mini.indentscope", opts = {} },
     { "echasnovski/mini.comment", opts = {} },
     { "echasnovski/mini.surround", opts = {} },
     { "dhruvasagar/vim-table-mode", lazy = true },
     { "dhruvasagar/vim-table-mode", ft = "plaintext", "markdown" },
     { "nvim-treesitter/playground", lazy = true },
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        opts = {},
+    },
     {
         "ribru17/bamboo.nvim",
         lazy = false,

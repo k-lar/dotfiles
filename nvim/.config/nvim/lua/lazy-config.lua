@@ -27,7 +27,7 @@ require("lazy").setup({
     { "echasnovski/mini.comment", opts = {} },
     { "echasnovski/mini.surround", opts = {} },
     { "dhruvasagar/vim-table-mode", lazy = true },
-    { "dkarter/bullets.vim", ft = "markdown" },
+    { "dhruvasagar/vim-table-mode", ft = "plaintext", "markdown" },
     { "nvim-treesitter/playground", lazy = true },
     {
         "folke/flash.nvim",

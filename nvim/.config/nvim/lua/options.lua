@@ -30,6 +30,7 @@ o.shiftwidth = 4
 o.undofile = true
 o.linebreak = true
 o.breakindent = true
+o.completeopt = "menuone,noselect"
 
 -- Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 o.splitbelow = true

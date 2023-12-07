@@ -153,8 +153,18 @@ cmp.setup({
     sources = {
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "buffer" },
+    },
+    window = {
+        documentation = cmp.config.window.bordered(),
     },
 })
+
+vim.lsp.handlers["textDocument/hover"] =
+    vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
+vim.lsp.handlers["textDocument/signatureHelp"] =
+    vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })

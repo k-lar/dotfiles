@@ -103,6 +103,9 @@ require("lazy").setup({
             -- Adds LSP completion capabilities
             "hrsh7th/cmp-nvim-lsp",
 
+            -- Adds local buffer symbol completion
+            "hrsh7th/cmp-buffer",
+
             -- Adds a number of user-friendly snippets
             "rafamadriz/friendly-snippets",
         },

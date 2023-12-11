@@ -72,7 +72,7 @@ local servers = {
     volar = {}, -- Vue.js
     gopls = {},
     tsserver = {},
-    html = { filetypes = { "html", "twig", "hbs" } },
+    html = { filetypes = { "html", "twig", "hbs", "vue" } },
     emmet_ls = {},
 
     lua_ls = {
@@ -113,6 +113,7 @@ mason_lspconfig.setup_handlers({
 -- See `:help cmp`
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+require("luasnip").filetype_extend("vue", { "html", "emmet_ls" })
 require("luasnip.loaders.from_vscode").lazy_load()
 luasnip.config.setup({})
 

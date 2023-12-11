@@ -17,6 +17,8 @@ configs.setup({
         "go",
         "typescript",
         "javascript",
+        "vue",
+        "css",
     },
 
     highlight = { -- enable highlighting

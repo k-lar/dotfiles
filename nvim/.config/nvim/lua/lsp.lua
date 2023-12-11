@@ -117,7 +117,11 @@ require("luasnip").filetype_extend("vue", { "html", "emmet_ls" })
 require("luasnip.loaders.from_vscode").lazy_load()
 luasnip.config.setup({})
 
+g.cmptoggle = true -- Init global variable to true -> nvim-cmp on by default
+
 cmp.setup({
+    enabled = function() return g.cmptoggle end,
+
     snippet = {
         expand = function(args) luasnip.lsp_expand(args.body) end,
     },
@@ -175,3 +179,5 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnos
 -- stylua: ignore
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+-- stylua: ignore
+vim.keymap.set("n", "<leader>o", "<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>", { desc = "Toggle nvim-cmp" })

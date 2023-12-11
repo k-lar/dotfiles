@@ -69,9 +69,11 @@ local servers = {
     -- clangd = {},
     -- pyright = {},
     -- rust_analyzer = {},
+    volar = {}, -- Vue.js
     gopls = {},
     tsserver = {},
     html = { filetypes = { "html", "twig", "hbs" } },
+    emmet_ls = {},
 
     lua_ls = {
         Lua = {

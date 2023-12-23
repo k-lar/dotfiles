@@ -19,6 +19,7 @@ configs.setup({
         "javascript",
         "vue",
         "css",
+        "tsx",
     },
 
     highlight = { -- enable highlighting

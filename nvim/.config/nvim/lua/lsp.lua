@@ -74,6 +74,7 @@ local servers = {
     tsserver = {},
     html = { filetypes = { "html", "twig", "hbs", "vue" } },
     emmet_ls = {},
+    eslint = {},
 
     lua_ls = {
         Lua = {

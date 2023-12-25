@@ -69,7 +69,7 @@
         tmux attach -t dev; exec tmux
     }
 
-    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$VIM" ]; then
+    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$VIM" ] && [ -z "$INSIDE_EMACS" ]; then
       # exec tmux
       tmux_start
     fi

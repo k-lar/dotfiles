@@ -33,3 +33,6 @@ require("colorscheme")
 
 -- LSP and autocompletion setup
 require("lsp")
+
+-- Terminal stuff
+require("terminal")

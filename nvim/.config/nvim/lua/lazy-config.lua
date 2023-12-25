@@ -24,9 +24,9 @@ require("lazy").setup({
     { "echasnovski/mini.indentscope", opts = {} },
     { "echasnovski/mini.comment", opts = {} },
     { "echasnovski/mini.surround", opts = {} },
-    { "dhruvasagar/vim-table-mode", lazy = true },
     { "dhruvasagar/vim-table-mode", ft = "plaintext", "markdown" },
     { "nvim-treesitter/playground", lazy = true },
+    { "akinsho/toggleterm.nvim", version = "*", config = true },
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",

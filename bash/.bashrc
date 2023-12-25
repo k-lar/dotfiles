@@ -57,7 +57,7 @@
         tmux attach -t dev; exec tmux
     }
 
-    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$VIMRUNTIME" ]; then
       # exec tmux
       tmux_start
     fi
@@ -67,16 +67,16 @@
     # PS1='[\u@\h \W]\$ '
 
 # Set bash into vim mode
-	set -o vi
+    set -o vi
 
 # Aliases
     source $HOME/.bash_aliases
 
 # System exports
-	export EDITOR="/usr/bin/nvim"
+    export EDITOR="/usr/bin/nvim"
 
 # pfetch configuration
-	export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
+    export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
 
 # A better man function
     function better_man() {
@@ -92,7 +92,7 @@
     fi
 
 # Programs to run at start
-	pfetch
+    pfetch
 
 # Include bash reminders if they exists
     brem --show

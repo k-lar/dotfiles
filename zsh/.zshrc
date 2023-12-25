@@ -40,8 +40,8 @@
 
 # System exports
     export PATH="$HOME/.dotfiles/bin:/home/klar/.local/bin:$PATH"
-	export EDITOR="/usr/bin/nvim"
-	export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
+    export EDITOR="/usr/bin/nvim"
+    export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
     export BROWSER=librewolf
 
 # Source zsh files (plugins)
@@ -69,7 +69,7 @@
         tmux attach -t dev; exec tmux
     }
 
-    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$VIM" ]; then
       # exec tmux
       tmux_start
     fi

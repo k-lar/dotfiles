@@ -59,6 +59,7 @@ for file in "$@"; do
         # Code
         *.c|*.cpp|*.cs) appendToPlaintext "$file";;
         *.py|*.rb|*.java) appendToPlaintext "$file";;
+        *.sh|*.bash|*.dash|*.run) appendToPlaintext "$file";;
         *.go|*.mod|*.sum) appendToPlaintext "$file";;
 
         # Web

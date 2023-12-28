@@ -7,8 +7,8 @@ videos=""
 documents=""
 archives=""
 pdfs=""
-unknown=""
 music=""
+unidentified=""
 
 appendToPlaintext() {
     plaintext="${plaintext} $1"
@@ -40,8 +40,8 @@ appendToMusic() {
     music="${music} $1"
 }
 
-appendToUnknown() {
-    unknown="${unknown} $1"
+appendToUnidenified() {
+    unidentified="${unidentified} $1"
 }
 
 if [ "$#" -eq 0 ]; then
@@ -84,20 +84,22 @@ for file in "$@"; do
         # Music
         *.mp3|*.flac|*.wav|*.aac|*.3gp|*.m4a|*.ogg|*.opus|*.mogg) appendToVideos "$file";;
 
-        *) appendToUnknown "$file";;
+        *) appendToUnidenified "$file";;
     esac
 done
 
-# Loop through unknowns to see if any are identifiable
-for filename in $unknown; do
+# Loop through unidentified to see if any are identifiable
+unknown=""
+for filename in $unidentified; do
     mimeType=$(file -b --mime-type "$filename")
-    case "$filename" in
+    case "$mimeType" in
         text/*) appendToPlaintext "$filename";;
         image/*) appendToImages "$filename";;
         video/*) appendToVideos "$filename";;
         application/vnd.openxmlformats-officedocument.wordprocessingml.document) appendToDocuments "$filename";;
         application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) appendToDocuments "$filename";;
         application/vnd.ms-excel) appendToDocuments "$filename";;
+        *) unknown="${unknown} $filename"
     esac
 done
 

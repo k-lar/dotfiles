@@ -49,6 +49,7 @@ if [ "$#" -eq 0 ]; then
     exit 0
 fi
 
+# TODO: Handle directory arguments
 for file in "$@"; do
     case "$file" in
         # Plaintext

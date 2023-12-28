@@ -41,7 +41,6 @@ appendToMusic() {
 }
 
 appendToUnknown() {
-    # TODO: Add checking to see if it can be identified with 'file --mime $file'
     unknown="${unknown} $1"
 }
 
@@ -86,6 +85,19 @@ for file in "$@"; do
         *.mp3|*.flac|*.wav|*.aac|*.3gp|*.m4a|*.ogg|*.opus|*.mogg) appendToVideos "$file";;
 
         *) appendToUnknown "$file";;
+    esac
+done
+
+# Loop through unknowns to see if any are identifiable
+for filename in $unknown; do
+    mimeType=$(file -b --mime-type "$filename")
+    case "$filename" in
+        text/*) appendToPlaintext "$filename";;
+        image/*) appendToImages "$filename";;
+        video/*) appendToVideos "$filename";;
+        application/vnd.openxmlformats-officedocument.wordprocessingml.document) appendToDocuments "$filename";;
+        application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) appendToDocuments "$filename";;
+        application/vnd.ms-excel) appendToDocuments "$filename";;
     esac
 done
 

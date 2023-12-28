@@ -1,0 +1,108 @@
+#!/bin/sh
+
+# Initialize empty strings
+plaintext=""
+images=""
+videos=""
+documents=""
+archives=""
+pdfs=""
+unknown=""
+music=""
+
+appendToPlaintext() {
+    plaintext="${plaintext} $1"
+}
+
+appendToImages() {
+    images="${images} $1"
+}
+
+appendToVideos() {
+    videos="${videos} $1"
+}
+
+appendToDocuments() {
+    # INFO: This is very dumb as onlyoffice doesn't work with relative paths on CLI.
+    doc="$(realpath $1)"
+    documents="${documents} $doc"
+}
+
+appendToArchives() {
+    archives="${archives} $1"
+}
+
+appendToPdfs() {
+    pdfs="${pdfs} $1"
+}
+
+appendToMusic() {
+    music="${music} $1"
+}
+
+appendToUnknown() {
+    # TODO: Add checking to see if it can be identified with 'file --mime $file'
+    unknown="${unknown} $1"
+}
+
+if [ "$#" -eq 0 ]; then
+    echo "No arguments provided. Please provide one or more arguments."
+    exit 0
+fi
+
+for file in "$@"; do
+    case "$file" in
+        # Plaintext
+        *.txt) appendToPlaintext "$file";;
+        *.md|*.markdown) appendToPlaintext "$file";;
+
+        # Code
+        *.c|*.cpp|*.cs) appendToPlaintext "$file";;
+        *.py|*.rb|*.java) appendToPlaintext "$file";;
+        *.go|*.mod|*.sum) appendToPlaintext "$file";;
+
+        # Web
+        *.html|*.css|*.js) appendToPlaintext "$file" ;;
+
+        # PDFs
+        *.pdf) appendToPdfs "$file" ;;
+
+        # Office documents
+        *.doc|*.docx) appendToDocuments "$file" ;;
+        *.xlsx|*.xls) appendToDocuments "$file" ;;
+        *.pptx|*.ppt) appendToDocuments "$file" ;;
+
+        # PDFs
+        *.zip|*.rar|*.7z) appendToArchives "$file" ;;
+
+        # Images
+        *.jpg|*.jpeg|*.png|*.webp|*.avif) appendToImages "$file";;
+
+        # Videos
+        *.mp4|*.avi|*.mkv|*.webm|*.flv|*.mov|*.m4v) appendToVideos "$file";;
+
+        # Music
+        *.mp3|*.flac|*.wav|*.aac|*.3gp|*.m4a|*.ogg|*.opus|*.mogg) appendToVideos "$file";;
+
+        *) appendToUnknown "$file";;
+    esac
+done
+
+# Open all the files if they exist
+[ -n "$plaintext" ] && nvim -p "$plaintext"
+
+[ -n "$documents" ] && onlyoffice-desktopeditors --force-use-tab "$documents"
+
+[ -n "$images" ] && loupe "$images"
+
+[ -n "$pdf" ] && chromium "$pdfs"
+
+[ -n "$videos" ] && mpv "$videos"
+
+[ -n "$archives" ] && file-roller "$archives"
+
+if [ -n "$unknown" ]; then
+    for thing in $unknown; do
+        printf 'ERROR: %s filetype unknown\n' "$thing"
+    done
+fi

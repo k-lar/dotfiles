@@ -4,8 +4,7 @@
   | / /| |/ _` || '_|  (_-/   | || ' \ | ||  _| _ | || || |/ _` |
   |_\_\|_|\__/_||_|    /__/   |_||_||_||_| \__|(_)|_| \_,_|\__,_|
 
-]]
---
+--]]
 
 -- Bootstrap and set up plugins
 require("lazy-config")
@@ -36,3 +35,6 @@ require("lsp")
 
 -- Terminal stuff
 require("terminal")
+
+-- Telescope
+require("telescope-config")

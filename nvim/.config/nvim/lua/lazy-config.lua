@@ -13,7 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    "ibhagwan/fzf-lua",
     "lewis6991/gitsigns.nvim",
     "nvim-lualine/lualine.nvim",
     "folke/which-key.nvim",
@@ -27,6 +26,18 @@ require("lazy").setup({
     { "dhruvasagar/vim-table-mode", ft = "plaintext", "markdown" },
     { "nvim-treesitter/playground", lazy = true },
     { "akinsho/toggleterm.nvim", version = "*", config = true },
+    {
+        "nvim-telescope/telescope.nvim",
+        branch = "0.1.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make",
+                cond = function() return vim.fn.executable("make") == 1 end,
+            },
+        },
+    },
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",

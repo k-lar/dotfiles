@@ -51,37 +51,6 @@ nnoremap("<leader>gs")(":Gitsigns stage_hunk<CR>")
 nnoremap("<leader>gu")(":Gitsigns undo_stage_hunk<CR>")
 nnoremap("<leader>ph")(":Gitsigns preview_hunk<CR>")
 
--- Fuzzy finding
-local actions = require("fzf-lua.actions")
-require("fzf-lua").setup({
-    actions = {
-        files = {
-            ["default"] = actions.file_tabedit, -- Open in new tab by default
-            ["ctrl-t"] = actions.file_edit, -- Open in current buffer with ctrl-t
-        },
-    },
-})
-
--- Function to get the git root directory
-local function get_git_root()
-    vim.fn.execute("cd" .. vim.fn.expand("%:p:h"))
-    local git_cmd = vim.fn.system("git rev-parse --show-toplevel 2> /dev/null")
-    if vim.v.shell_error == 0 then
-        return vim.fn.trim(git_cmd)
-    else
-        return nil
-    end
-end
-
--- Set the cwd based on whether git root exists or not
-local git_root = get_git_root()
-processed_cwd = git_root or vim.fn.expand("%:p:h")
-
-nnoremap("<leader>ff")("<cmd>lua require('fzf-lua').files({ cwd = processed_cwd })<CR>")
-nnoremap("<leader>fF")("<cmd>lua require('fzf-lua').files()<CR>")
-nnoremap("<leader>fg")("<cmd>lua require('fzf-lua').grep_project()<CR>")
-nnoremap("<leader>fs")("<cmd>lua require('fzf-lua').git_status()<CR>")
-
 -- Gitsigns config
 require("gitsigns").setup({ signcolumn = false })
 nnoremap("<leader>G")(":Gitsigns toggle_signs<CR>")

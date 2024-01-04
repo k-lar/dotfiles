@@ -36,6 +36,18 @@ end
 
 nmap("<leader>n")(":lua ToggleNetrw()<CR>")({ silent = true }) -- Toggle netrw with SPC-n
 
+vim.api.nvim_create_autocmd("filetype", {
+    pattern = "netrw",
+    desc = "Better mappings for netrw",
+    callback = function()
+        local bind = function(lhs, rhs)
+            vim.keymap.set("n", lhs, rhs, { remap = true, buffer = true })
+        end
+        bind("n", "%") -- edit new file
+        bind("r", "R") -- rename file
+    end,
+})
+
 -- Mouse toggle (useful for copying and pasting where vim is not compiled with +clipboard)
 function ToggleMouse()
     if vim.o.mouse == "a" then

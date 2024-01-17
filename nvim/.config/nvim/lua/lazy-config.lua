@@ -19,6 +19,8 @@ require("lazy").setup({
     "stevearc/conform.nvim",
     "echasnovski/mini.move",
     "tpope/vim-sleuth",
+    "dkarter/bullets.vim",
+    "github/copilot.vim",
     { "vidocqh/auto-indent.nvim", opts = {} },
     { "echasnovski/mini.indentscope", opts = {} },
     { "echasnovski/mini.comment", opts = {} },

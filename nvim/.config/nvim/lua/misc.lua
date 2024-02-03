@@ -65,3 +65,18 @@ vim.keymap.set("o", "il", ":normal vil<CR>")
 
 -- Easier end of line movement in visual mode
 vim.keymap.set("v", "E", "$")
+
+-- Show color column at 80 characters if cursor position is more than 70
+vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
+    pattern = "*",
+    callback = function()
+        local col = vim.fn.virtcol(".")
+        if col > 70 and col < 82 then
+            o.colorcolumn = "80"
+        elseif col > 110 then
+            o.colorcolumn = "120"
+        else
+            o.colorcolumn = ""
+        end
+    end,
+})

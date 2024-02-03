@@ -24,5 +24,4 @@ vim.cmd("au FileType markdown setlocal textwidth=100")
 g.markdown_fenced_languages = { "python", "html", "c", "vim", "rust", "bash", "sql" }
 
 -- Folding in markdown
-g.markdown_folding = 1
 map("<leader>fd")(":set nofoldenable!<CR>")({ silent = true })

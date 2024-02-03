@@ -11,7 +11,7 @@ Currently only supporting arch based distros.
 
 1. Clone the repository into your home directory, make it hidden and enter it:  
 ```console
-git clone https://gitlab.com/k_lar/dotfiles; mv dotfiles .dotfiles; cd .dotfiles
+git clone https://gitlab.com/k_lar/dotfiles .dotfiles; cd .dotfiles
 ```
 
 2. Use the script `programs.sh` to download all of my used programs (it also installs yay):  

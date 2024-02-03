@@ -8,7 +8,7 @@
 # List of programs to be downloaded
 # ===============================================================================
 
-CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor" "thunar"
+CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor" "thunar" "cloc"
 "thunar-volman" "gvfs" "gvfs-mtp" "alacritty" "when" "git" "rofi" "loupe" "xclip" "pamixer"
 "unrar" "zip" "unzip" "ncdu" "keepassxc" "file-roller" "eza" "ripgrep" "fzf" "btop" "tmux" "xcape"
 "pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs-nativecomp" "gnome-disk-utility"

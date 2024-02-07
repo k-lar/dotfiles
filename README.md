@@ -85,7 +85,7 @@ cd ..
   This is a neat script ~~stolen~~ taken from ThePrimeagen. It creates a tmux workspace/session with
   the name of the opened folder that you chose, to focus that session on its specific task
 
-- `autostart.sh`
+- `autostart.sh`  
   A simple autostart script that launches all programs listed in `$HOME/.config/autostart` in a line
   by line fashion. Upon launching every program, it creates a file `/dev/shm/.autostarted_bspwm` so
   that it can be checked if the script was executed before. That's the reason for this script's
@@ -99,7 +99,7 @@ cd ..
   fi
   ```
 
-- `run_polkit.sh`
+- `run_polkit.sh`  
   Script that runs the xfce polkit agent on startup, this one creates a `/dev/shm/.polkit_running`
   file and it also doesn't run itself again if the file exists. This is done inside bspwmrc with
   this code snippet:  
@@ -109,18 +109,18 @@ cd ..
   fi
   ```
 
-- `toggle_esc2caps.sh / toggle_caffeine.sh`
+- `toggle_esc2caps.sh / toggle_caffeine.sh`  
   Helper scripts that are bound to keybindings in sxhkdrc that toggle my weird keyboard hack with
   capslock being ESC when pressed and CTRL when held (this toggle is for when I'm playing games that
   are incompatible with this hack or when someone else is on my computer). The other toggle is for
   caffeine, which just makes it so that my PC can't go to sleep.
 
-- `change_shell.sh`
+- `change_shell.sh`  
   I didn't feel like going through the process of changing shells manually when I downloaded zsh,
   so I made a script that does it for me with a simple TUI interface. Needs root privilages to be
   executed.
 
-- `open`
+- `open`  
   My own `xdg-open` clone, it's pretty simple but it works without having to deal with .desktop
   files which are a PAIN.
 

@@ -52,6 +52,7 @@ for dir in ~/.dotfiles/*/; do
             if [ ! "$keyd_choice" = "n" ]; then
                 sudo systemctl enable keyd && sudo systemctl start keyd
                 sudo keyd reload
+                setxkbmap -layout si,ru -variant ,phonetic
                 echo "Successfully enabled and started keyd service"
             fi
             ;;

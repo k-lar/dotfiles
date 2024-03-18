@@ -21,6 +21,7 @@ require("lazy").setup({
     "tpope/vim-sleuth",
     "dkarter/bullets.vim",
     "github/copilot.vim",
+    "nvim-lua/plenary.nvim",
     { "vidocqh/auto-indent.nvim", opts = {} },
     { "echasnovski/mini.indentscope", opts = {} },
     { "echasnovski/mini.comment", opts = {} },
@@ -44,6 +45,11 @@ require("lazy").setup({
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         opts = {},
+    },
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        requires = { "nvim-lua/plenary.nvim" }
     },
     {
         "ribru17/bamboo.nvim",

@@ -18,7 +18,7 @@ DE_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "mtpfs" "lightdm" "polybar"
 "boomer-git" "cava-git" "i3lock-color" "pfetch" "ttf-blex-nerd-font-git"
 "lightdm-gtk-greeter" "lxappearance" "ttf-iosevka-nerd" "ttf-font-awesome"
 "otf-font-awesome" "noto-fonts-main" "gummy-git" "dunst" "gruvbox-dark-icons-gtk"
-"gruvbox-dark-gtk" "ttc-iosevka-ss07" "keyd")
+"gruvbox-dark-gtk" "ttc-iosevka-ss07")
 
 WAYLAND_PKGS=("hyprland-bin" "hyprpicker-git" "wl-clipboard" "rofi-lbonn-wayland-git"
 "foot" "waybar" "swaylock-effects" "swaybg")

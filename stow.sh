@@ -46,17 +46,6 @@ for dir in ~/.dotfiles/*/; do
     case "$dir" in
         misc|bin|scripts|options|icons) printf 'Skipping %s\n' "$dir";;
 
-        keyd)
-            sudo "$stow" -t /etc/keyd "$dir"
-            printf "Enable and start keyd service?\n[Y/n]: "; read -r keyd_choice
-            if [ ! "$keyd_choice" = "n" ]; then
-                sudo systemctl enable keyd && sudo systemctl start keyd
-                sudo keyd reload
-                setxkbmap -layout si,ru -variant ,phonetic
-                echo "Successfully enabled and started keyd service"
-            fi
-            ;;
-
         *) "$stow" "$dir";;
     esac
 done

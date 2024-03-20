@@ -20,8 +20,8 @@ DE_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "mtpfs" "lightdm" "polybar"
 "otf-font-awesome" "noto-fonts-main" "gummy-git" "dunst" "gruvbox-dark-icons-gtk"
 "gruvbox-dark-gtk" "ttc-iosevka-ss07")
 
-WAYLAND_PKGS=("hyprland-bin" "hyprpicker-git" "wl-clipboard" "rofi-lbonn-wayland-git"
-"foot" "waybar" "swaylock-effects" "swaybg")
+WAYLAND_PKGS=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "rofi-lbonn-wayland-git"
+"foot" "waybar" "swaylock-effects" "swaybg" "grim" "slurp" "hyprlock")
 
 TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai" "mdp"
 "texlive-fontsrecommended")

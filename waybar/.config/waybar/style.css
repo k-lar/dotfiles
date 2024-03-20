@@ -13,11 +13,11 @@
 /*
 Arc-Dark Color Scheme
 */
-@define-color background  #1d2021;
-@define-color background2 #262626;
-@define-color shutdown  #cc241d;
+@define-color background #262626;
+@define-color background2 #3c3836;
+@define-color shutdown #cc241d;
 @define-color background3 #458588;
-@define-color text    #ebdbb2;
+@define-color text #ebdbb2;
 
 
 @keyframes blink-warning {
@@ -97,7 +97,7 @@ Arc-Dark Color Scheme
     border-radius: 0px;
     color: @text;
     padding-right: 16px;
-    margin-left: 0;
+    margin-left: 0px;
     margin-right: 0px;
     background-color: @background;
     border-radius: 0px 0px 0px 0px;
@@ -105,7 +105,7 @@ Arc-Dark Color Scheme
 }
 #tray {
     color:  @text;
-    margin-right: 0;
+    margin-right: 0px;
     border-radius: 0px;
     background-color: @background;
 
@@ -145,7 +145,7 @@ Arc-Dark Color Scheme
     border-bottom: 3px transparent;
     color:white;
     margin-left: 5px;
-    padding:7;
+    padding:7px;
 }
 
 #network.disconnected {
@@ -163,38 +163,51 @@ Arc-Dark Color Scheme
     color: @highlight;
 }
 
-
 #workspaces {
+    margin-left: 15px;
     font-size:14px;
     border-radius: 8px;
     background-color: @background;
     color: @text;
     padding: 0px;
-
 }
 
 #workspaces button {
     border-radius: 8px;
     margin: 0px;
     font-weight: normal;
-    color: @text;
+    color: #4a601d;
     font-size: 14px;
     padding-top: 3px;
     padding-bottom: 3px;
-    padding-left: 4;
-    padding-right: 5;
+    padding-left: 4px;
+    padding-right: 5px;
 }
 
-#workspaces button.focused {
-    background-color: @text;
-    color: @background2;
-    border-radius: 8px;
-    margin-top: 2px;
-    margin-bottom: 2px;
+#workspaces button:hover {
+    transition-duration: .1s;
+    color: #81af58;
+    background: none;
+    border: none;
+}
+
+#workspaces button.empty {
+    color: #665C54;
+}
+
+#workspaces button.empty:hover {
+    transition-duration: .1s;
+    color: #928374;
+    background: none;
+    border: none;
+
+}
+
+#workspaces button.active {
+    color: #B8BB26;
 }
 
 #workspaces button.urgent {
-    border-color: @shutdown;
     color: @shutdown;
 }
 
@@ -206,9 +219,7 @@ Arc-Dark Color Scheme
     padding-right: 5px;
     margin-right: 0;
     font-size:13px;
-
 }
-
 
 #backlight.icon {
     padding-right:5px;
@@ -221,6 +232,5 @@ Arc-Dark Color Scheme
     padding-right: 10px;
     background-color: @background;
     font-size:16px;
-
 }
 

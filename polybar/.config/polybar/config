@@ -46,7 +46,7 @@ modules-left =  bspwm xwindow
 ;modules-center = previous playpause next spotify
 ; Mpd
 modules-center = time
-modules-right = eth wlan cpu memory battery pulseaudio powermenu
+modules-right = eth wlan cpu memory battery battery2 pulseaudio powermenu
 
 scroll-up = bspwn-wsnext
 scroll-down = bspwn-wsprev
@@ -341,6 +341,45 @@ label-font = 1
 ; ramp-capacity-3-underline = ${colors.tertiary}
 ; ramp-capacity-4-underline = ${colors.tertiary}
 
+[module/battery2]
+type = internal/battery
+full-at = 90
+time-format = %H:%M
+battery = BAT1
+adapter = ADP0
+format-charging = <animation-charging> <label-charging>
+;label-charging = %percentage%% (%time%)
+label-charging = %percentage%%
+format-discharging = <ramp-capacity>  <label-discharging>
+;label-discharging = %percentage%% (%time%)
+label-discharging = %percentage%%
+format-full = <label-full>
+;label-charging-underline = ${colors.tertiary}
+;label-discharging-underline = ${colors.tertiary}
+
+
+format-charging-underline = ${colors.foreground}
+format-discharging-underline = ${colors.foreground}
+format-full-prefix = "    "
+ramp-capacity-0 = "  "
+ramp-capacity-1 = "  "
+ramp-capacity-2 = "  "
+ramp-capacity-3 = "  "
+; ramp-capacity-4 = 
+
+ramp-capacity-0-foreground = ${colors.foreground}
+ramp-capacity-foreground   = ${colors.foreground}
+bar-capacity-width = 10
+
+animation-charging-0 = "   "
+animation-charging-1 = "   "
+animation-charging-2 = "   "
+animation-charging-3 = "   "
+animation-charging-4 = "   "
+
+animation-charging-framerate = 750
+
+label-font = 1
 
 [settings]
 screenchange-reload = true

@@ -30,3 +30,4 @@ nvim/.config/nvim/autoload/*
 
 # Ignore all updates to autostart file
 options/autostart
+options/.lowspec

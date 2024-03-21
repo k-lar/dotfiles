@@ -20,6 +20,12 @@ if [ ! -e /dev/shm/.autostarted_bspwm ]; then
     sh -c "$HOME/.dotfiles/scripts/autostart.sh" &
 fi
 
+if [ ! -e $HOME/.dotfiles/options/.lowspec ]; then
+    killall picom; sleep 0.1s; picom &
+else
+    killall picom; sleep 0.1s; picom --config $HOME/.dotfiles/picom/.config/picom/lowspec.conf &
+fi
+
 if [ ! -e /dev/shm/.polkit_running ]; then
     sh -c "$HOME/.dotfiles/scripts/run_polkit.sh" &
 fi

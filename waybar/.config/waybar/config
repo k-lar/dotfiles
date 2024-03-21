@@ -9,7 +9,7 @@
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces", "custom/media"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "custom/spacer", "network", "custom/spacer", "cpu", "custom/spacer", "memory", "temperature", "tray"],
+    "modules-right": ["pulseaudio", "custom/spacer", "network", "custom/spacer", "cpu", "custom/spacer", "memory", "temperature", "custom/spacer", "tray"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -111,7 +111,7 @@
     },
 
     "memory": {
-        "format": "{}% ",
+        "format": "{}% ",
         "interval": 2
     },
 

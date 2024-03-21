@@ -203,6 +203,7 @@ Arc-Dark Color Scheme
 
 }
 
+#workspaces button.active:hover,
 #workspaces button.active {
     color: #B8BB26;
 }

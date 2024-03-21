@@ -9,7 +9,7 @@
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces", "custom/media"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "custom/spacer", "network", "custom/spacer", "cpu", "custom/spacer", "memory", "temperature", "custom/spacer", "tray"],
+    "modules-right": ["pulseaudio", "custom/spacer", "network", "custom/spacer", "battery", "battery#bat2", "custom/spacer", "cpu", "memory", "temperature", "custom/spacer", "tray"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -133,10 +133,11 @@
 
     "battery": {
         "states": {
-            // "good": 95,
+            "good": 80,
             "warning": 30,
             "critical": 15
         },
+        "bat": "BAT0",
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
@@ -146,9 +147,26 @@
         "format-icons": ["", "", "", "", ""]
     },
 
+    "battery#bat2": {
+        "states": {
+            "good": 80,
+            "warning": 30,
+            "critical": 15
+        },
+        "bat": "BAT1",
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{essid} ({signalStrength}%)  ",
         "format-ethernet": "{ipaddr}/{cidr} 󰈀 ",
         "tooltip-format": "{ifname} via {gwaddr} 󰈀 ",
         "format-linked": "{ifname} (No IP) 󰈀 ",

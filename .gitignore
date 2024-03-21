@@ -25,6 +25,11 @@ mpv/.config/mpv/*
 !mpv/.config/mpv/input.conf
 !mpv/.config/mpv/mpv.conf
 
+# Ignore rofi clutter files
+rofi/.local/share/*
+rofi/.local/state/*
+!rofi/.local/share/rofi/
+
 # Ignore autoload from nvim
 nvim/.config/nvim/autoload/*
 

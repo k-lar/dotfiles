@@ -21,7 +21,7 @@ DE_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "mtpfs" "lightdm" "polybar"
 "gruvbox-dark-gtk" "ttc-iosevka-ss07")
 
 WAYLAND_PKGS=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "rofi-lbonn-wayland-git"
-"foot" "waybar" "swaylock-effects" "swaybg" "grim" "slurp" "hyprlock" "nwg-look")
+"foot" "waybar" "swaylock-effects" "swaybg" "grim" "slurp" "hyprlock" "nwg-look" "udiskie")
 
 TERM_OFFICE=("texlive-core" "pandoc" "texlive-latexextra" "sc-im" "cbonsai" "mdp"
 "texlive-fontsrecommended")

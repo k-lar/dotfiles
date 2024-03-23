@@ -2,12 +2,12 @@
 
 My personal configuration files, but I guess you can use them too if you'd like 
 
-![Hi there](https://gitlab.com/k_lar/dotfiles/uploads/e6b4124de77bbc0cf3f682f89e156e04/hi_there.gif)
+![Hi there](https://gitlab.com/k_lar/dotfiles/uploads/a4347394bfd9c939455dbdb94bdccffb/dotfiles.gif)
 
 ## Installation
 
-I wrote my own installation script to make it easier to install on a fresh arch install.  
-Currently only supporting arch based distros.  
+I wrote my own installation script to make it easier to install on a fresh Arch install.  
+Currently only supporting Arch based distros.  
 
 1. Clone the repository into your home directory, make it hidden and enter it:  
 ```console
@@ -32,38 +32,44 @@ cd ..
 ./stow.sh
 ```
 
+### Wayland
+
+Finally made the switch to wayland, but support for x11 is still in the dotfiles.
+I'm not getting rid of it, but I won't maintain it unless something breaks horribly.
+`programs.sh` will still default to x11, unless you specifically choose to download
+wayland packages.
+
 ## Programs
 
-- WM: [BSPWM](https://github.com/baskerville/bspwm) (Binary Space Partitioning Window Manager)
-- Compositor: Picom [(FT-Labs fork)](https://github.com/FT-Labs/picom)
-- Hotkey daemon: [sxhkd](https://github.com/baskerville/sxhkd)
+- WM: [Hyprland](https://hyprland.org/)
 - Notification daemon: [dunst](https://github.com/dunst-project/dunst)
 - Music player: ncmpcpp + mpd
-- Program launcher: rofi
-- Terminal: My "fork" of [st](https://gitlab.com/k_lar/st) (The original can be found [here](https://st.suckless.org/))
+- Program launcher: rofi [(wayland fork)](https://github.com/lbonn/rofi)
+- Terminal: [foot](https://codeberg.org/dnkl/foot) + [my fork of st](https://gitlab.com/k_lar/st)
 - Browser: LibreWolf and Chromium
 - Terminal multiplexer: Tmux
-- Panel/Bar: Polybar
+- Panel/Bar: [Waybar](https://github.com/Alexays/Waybar)
 - Dotfiles "manager": Stow
     * I bundle [stash](https://github.com/shawnohare/stash) with my dotfiles so even
     if I'm without internet, I can still manage my dotfiles effectively.
     Is this stupid? Maybe.  
 
-![Vibing](https://gitlab.com/k_lar/dotfiles/uploads/64003ec095d10615a1d4dc1d864060b3/vibing.png)
+![Doing Nothing](https://gitlab.com/k_lar/dotfiles/uploads/a25cc94e8043412fc5ecb329942d1a02/doing_nothing.png)
 
 ## Editor
 
 - NeoVim (for scripting and programming)  
-![Editing with nvim](https://gitlab.com/k_lar/dotfiles/uploads/d494e0de1e03dddbd445ef0cb5a0b1d1/editing_vim.png)  
+![Neovim](https://gitlab.com/k_lar/dotfiles/uploads/1ca7d323a85cff8ea8ecdea9e2fab67f/nvim.png)  
 
 - Emacs (For writing documents and tinkering)  
-![Emacs with btop](https://gitlab.com/k_lar/dotfiles/uploads/7e28969078a3c5eaa70c43132b9e25a0/emacs_btop_git.png)  
+![Emacs](https://gitlab.com/k_lar/dotfiles/uploads/51195516cea1e2d38e84e17293e6cc6e/emacs.png)  
 
 ## My scripts/programs
 
 - `programs.sh`  
-  An install script that can *theoretically* bring you from a minimal arch install with Xorg, to a
-  full setup with a window manager, office tools, notification daemon and much more.  
+  An install script that can *theoretically* bring you from a minimal arch install **with
+  X11 or Wayland**, to a full setup with a window manager, office tools, notification daemon
+  and much more.  
 
 - `volume.sh`  
   A simple script that pops up a notification whenever you change volume with a keyboard shortcut.  
@@ -85,7 +91,7 @@ cd ..
   This is a neat script ~~stolen~~ taken from ThePrimeagen. It creates a tmux workspace/session with
   the name of the opened folder that you chose, to focus that session on its specific task
 
-- `autostart.sh`  
+- `autostart.sh` (for bspwm x11 setup)  
   A simple autostart script that launches all programs listed in `$HOME/.config/autostart` in a line
   by line fashion. Upon launching every program, it creates a file `/dev/shm/.autostarted_bspwm` so
   that it can be checked if the script was executed before. That's the reason for this script's
@@ -99,7 +105,7 @@ cd ..
   fi
   ```
 
-- `run_polkit.sh`  
+- `run_polkit.sh` (for bspwm x11 setup)  
   Script that runs the xfce polkit agent on startup, this one creates a `/dev/shm/.polkit_running`
   file and it also doesn't run itself again if the file exists. This is done inside bspwmrc with
   this code snippet:  
@@ -109,11 +115,17 @@ cd ..
   fi
   ```
 
-- `toggle_esc2caps.sh / toggle_caffeine.sh`  
+- `toggle_esc2caps.sh / toggle_caffeine.sh` (for bspwm x11 setup)  
   Helper scripts that are bound to keybindings in sxhkdrc that toggle my weird keyboard hack with
   capslock being ESC when pressed and CTRL when held (this toggle is for when I'm playing games that
   are incompatible with this hack or when someone else is on my computer). The other toggle is for
   caffeine, which just makes it so that my PC can't go to sleep.
+
+- `random_wall.sh`  
+  It's surprisingly hard to seamlessly replace a wallpaper on Hyprland without
+  showing one of the default Hyprland wallpapers. This script manages to do
+  that by running `swaybg`, storing it's PID and killing all other `swaybg`
+  processes after a tiny delay to not show the default wallpaper.
 
 - `change_shell.sh`  
   I didn't feel like going through the process of changing shells manually when I downloaded zsh,

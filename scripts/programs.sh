@@ -104,23 +104,23 @@ install_pkgs() {
     read -r -p "[y/N]: " confirm_selection
     if [ "$confirm_selection" == "y" ]; then
         printf "\n=========================================\n"
-        printf "\e[1mCORE_PACKAGES: (${#CORE_PACKAGES[@]})\n\e[0m"
+        printf '%b' "\e[1mCORE_PACKAGES: (${#CORE_PACKAGES[@]})\n\e[0m"
         print_array "${CORE_PACKAGES[@]}"
         printf "\n"
 
-        printf "\e[1mDE_PACKAGES: (${#DE_PACKAGES[@]})\n\e[0m"
+        printf '%b' "\e[1mDE_PACKAGES: (${#DE_PACKAGES[@]})\n\e[0m"
         print_array "${DE_PACKAGES[@]}"
         printf "\n"
 
-        printf "\e[1mMISC_PKGS: (${#MISC_PKGS[@]})\n\e[0m"
+        printf '%b' "\e[1mMISC_PKGS: (${#MISC_PKGS[@]})\n\e[0m"
         print_array "${MISC_PKGS[@]}"
         printf "\n"
 
-        printf "\e[1mWAYLAND_PKGS: (${#WAYLAND_PKGS[@]})\n\e[0m"
+        printf '%b' "\e[1mWAYLAND_PKGS: (${#WAYLAND_PKGS[@]})\n\e[0m"
         print_array "${WAYLAND_PKGS[@]}"
         printf "\n"
 
-        printf "\e[1mTERM_OFFICE: (${#TERM_OFFICE[@]})\n\e[0m"
+        printf '%b' "\e[1mTERM_OFFICE: (${#TERM_OFFICE[@]})\n\e[0m"
         print_array "${TERM_OFFICE[@]}"
         printf "=========================================\n"
     fi
@@ -179,8 +179,8 @@ install_pkgs() {
 
     read -r -p ": " pkg_choice
 
-    echo -e "${PACKAGE_MGR[$pkg_choice]} --needed -S" "${USR_PACKAGES[@]}" "--noconfirm\n"
-    runcmd=$(echo -e "${PACKAGE_MGR[$pkg_choice]} --needed -S" "${USR_PACKAGES[@]} --noconfirm")
+    runcmd=$(echo "${PACKAGE_MGR[$pkg_choice]}" "--needed -S" "${USR_PACKAGES[@]}" "--noconfirm")
+    echo "$runcmd"
     echo "Execute this command?"
     read -r -p "[y/N]: " confirm_command
     if [ "$confirm_command" == "y" ]; then

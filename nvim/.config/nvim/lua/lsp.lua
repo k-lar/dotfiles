@@ -188,4 +188,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("n", "<leader>o", "<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>", { desc = "Toggle nvim-cmp" })
 
 g.copilot_no_tab_map = true
+g.copilot_enabled = false
+
 vim.api.nvim_set_keymap("i", "<A-CR>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.keymap.set("n", "<leader>C", "<cmd>lua vim.g.copilot_enabled = not vim.g.copilot_enabled<CR>", { desc = "Toggle copilot" })

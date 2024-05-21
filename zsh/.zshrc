@@ -79,6 +79,30 @@
         /bin/man "$1" || "$1" --help 2>&1 | less
     }
 
+# Daily todo
+    function todo() {
+        if [ "$1" = "search" ]; then
+            selected_file="$(fzf --walker-root=$HOME/todos/)"
+            if [ $? -eq 0 ]; then
+                $EDITOR "$selected_file"
+            fi
+        else
+            date=$(date --iso-8601)
+
+            if [ -d "$HOME/todos/$date" ]; then
+                if [ ! -s "$HOME/todos/$date/todo.md" ]; then
+                    echo -e "# TODO - $date\n\n- [ ] \n" >> "$HOME/todos/$date/todo.md"
+                fi
+
+                $EDITOR "$HOME/todos/$date/todo.md"
+            else
+                mkdir -p "$HOME/todos/$date"
+                echo -e "# TODO - $date\n\n- [ ] \n" >> "$HOME/todos/$date/todo.md"
+                $EDITOR "$HOME/todos/$date/todo.md"
+            fi
+        fi
+    }
+
 # Emacs vterm support
     if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
         function clear(){

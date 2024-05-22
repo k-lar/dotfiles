@@ -10,25 +10,28 @@
 
 CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor"
 "thunar" "cloc" "thunar-volman" "gvfs" "gvfs-mtp" "alacritty" "when" "git"
-"rofi" "loupe" "xclip" "pamixer""unrar" "zip" "unzip" "keepassxc" "file-roller"
-"eza" "ripgrep" "fzf" "btop" "tmux" "xcape""pavucontrol" "flameshot" "bat"
-"stow" "ttf-ibm-plex" "emacs-nativecomp" "gnome-disk-utility" "alsa-utils"
-"network-manager-applet" "bash-completion" "polkit" "xfce-polkit" "python-pipx"
-"ttc-iosevka-ss07" "gdu" "sddm")
+"loupe" "pamixer" "unrar" "zip" "unzip" "keepassxc" "file-roller" "eza"
+"ripgrep" "fzf" "btop" "tmux" "pavucontrol""bat" "stow"
+"emacs-nativecomp" "gnome-disk-utility" "alsa-utils" "network-manager-applet"
+"bash-completion" "polkit" "xfce-polkit" "python-pipx" "ttc-iosevka-ss07"
+"gdu" "sddm" "fastfetch" "dunst" "mtpfs" "ttf-iosevka-nerd" "ttf-font-awesome"
+"otf-font-awesome" "pacman-contrib" "ttf-ibm-plex" "ntfs-3g" "pipewire"
+"pipewire-pulse" "pipewire-alsa" "pipewire-jack" "helvum")
 
-DE_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "mtpfs" "polybar" "boomer-git"
-"cava-git" "i3lock-color" "pfetch" "ttf-blex-nerd-font-git" "lxappearance"
-"ttf-iosevka-nerd" "ttf-font-awesome" "otf-font-awesome" "noto-fonts-main"
-"dunst" "gruvbox-dark-icons-gtk" "gruvbox-dark-gtk" "gummy-git")
+XORG_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "polybar" "lxappearance"
+"xclip" "i3lock-color" "gummy-git" "xcape" "boomer-git" "rofi" "flameshot")
 
-WAYLAND_PKGS=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "udiskie"
+WAYLAND_PACKAGES=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "udiskie"
 "foot" "waybar" "swaybg" "grim" "slurp" "hyprlock" "nwg-look" "rofi-wayland"
-"hypridle")
+"hypridle" "flameshot-git")
+
+STYLE_PACKAGES=("noto-fonts-main" "gruvbox-dark-gtk" "gruvbox-dark-icons-gtk"
+"cava")
 
 TERM_OFFICE=("texlive-core" "pandoc-bin" "texlive-latexextra" "sc-im" "cbonsai"
 "mdp" "texlive-fontsrecommended")
 
-MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng"
+MISC_PACKAGES=("yt-dlp" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng"
 "ctags" "cscope" "global")
 
 # ===============================================================================
@@ -51,6 +54,7 @@ check_yay() {
 
     if [ ! -d "/opt/yay" ]; then
         echo "It seems that yay is not installed on your system."
+        printf '%b' "\e[1mYay is required to install packages that aren't in core!\e[0m\n"
         read -r -p  "Would you like to install it? [y/N]: " yay_choice
         if [ "$yay_choice" == "y" ]; then
             sudo pacman --noconfirm --needed -S base-devel git &&
@@ -118,16 +122,20 @@ install_pkgs() {
         print_array "${CORE_PACKAGES[@]}"
         printf "\n"
 
-        printf '%b' "\e[1mDE_PACKAGES: (${#DE_PACKAGES[@]})\n\e[0m"
-        print_array "${DE_PACKAGES[@]}"
+        printf '%b' "\e[1mXORG_PACKAGES: (${#XORG_PACKAGES[@]})\n\e[0m"
+        print_array "${XORG_PACKAGES[@]}"
         printf "\n"
 
-        printf '%b' "\e[1mMISC_PKGS: (${#MISC_PKGS[@]})\n\e[0m"
-        print_array "${MISC_PKGS[@]}"
+        printf '%b' "\e[1mWAYLAND_PACKAGES: (${#WAYLAND_PACKAGES[@]})\n\e[0m"
+        print_array "${WAYLAND_PACKAGES[@]}"
         printf "\n"
 
-        printf '%b' "\e[1mWAYLAND_PKGS: (${#WAYLAND_PKGS[@]})\n\e[0m"
-        print_array "${WAYLAND_PKGS[@]}"
+        printf '%b' "\e[1mSTYLE_PACKAGES: (${#STYLE_PACKAGES[@]})\n\e[0m"
+        print_array "${STYLE_PACKAGES[@]}"
+        printf "\n"
+
+        printf '%b' "\e[1mMISC_PACKAGES: (${#MISC_PACKAGES[@]})\n\e[0m"
+        print_array "${MISC_PACKAGES[@]}"
         printf "\n"
 
         printf '%b' "\e[1mTERM_OFFICE: (${#TERM_OFFICE[@]})\n\e[0m"
@@ -142,19 +150,29 @@ install_pkgs() {
         USR_PACKAGES+=("$i")
     done
 
-    echo -e "Include DE packages?"
-    read -r -p "[y/N]: " de_choice
-    if [ "$de_choice" == "y" ]; then
-        for i in "${DE_PACKAGES[@]}"; do
+    echo -e "Include Xorg packages?"
+    read -r -p "[y/N]: " xorg_choice
+    if [ "$xorg_choice" == "y" ]; then
+        for i in "${XORG_PACKAGES[@]}"; do
             USR_PACKAGES+=("$i")
         done
+        echo ""
+    else
+        echo ""
+        echo -e "Include wayland packages?"
+        read -r -p "[y/N]: " wl_choice
+        if [ "$wl_choice" == "y" ]; then
+            for i in "${WAYLAND_PACKAGES[@]}"; do
+                USR_PACKAGES+=("$i")
+            done
+        fi
+        echo ""
     fi
-    echo ""
 
-    echo -e "Include wayland packages?"
-    read -r -p "[y/N]: " wl_choice
-    if [ "$wl_choice" == "y" ]; then
-        for i in "${WAYLAND_PKGS[@]}"; do
+    echo -e "Include style packages?"
+    read -r -p "[y/N]: " style_choice
+    if [ "$style_choice" == "y" ]; then
+        for i in "${STYLE_PACKAGES[@]}"; do
             USR_PACKAGES+=("$i")
         done
     fi
@@ -163,7 +181,7 @@ install_pkgs() {
     echo -e "Include misc packages?"
     read -r -p "[y/N]: " misc_choice
     if [ "$misc_choice" == "y" ]; then
-        for i in "${MISC_PKGS[@]}"; do
+        for i in "${MISC_PACKAGES[@]}"; do
             USR_PACKAGES+=("$i")
         done
     fi

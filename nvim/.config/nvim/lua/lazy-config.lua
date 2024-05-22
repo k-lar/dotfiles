@@ -136,6 +136,12 @@ require("lazy").setup({
             -- Adds local buffer symbol completion
             "hrsh7th/cmp-buffer",
 
+            -- Adds emoji completion
+            "hrsh7th/cmp-emoji",
+
+            -- Adds path completion
+            "hrsh7th/cmp-path",
+
             -- Adds a number of user-friendly snippets
             "rafamadriz/friendly-snippets",
         },

@@ -39,9 +39,8 @@
     source $HOME/.bash_aliases
 
 # System exports
-    export PATH="$HOME/.dotfiles/bin:/home/klar/.local/bin:$PATH"
+    export PATH="$HOME/.dotfiles/bin:$HOME.local/bin:$PATH"
     export EDITOR="/usr/bin/nvim"
-    export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
     export BROWSER=librewolf
 
 # Source zsh files (plugins)
@@ -104,7 +103,7 @@
     }
 
 # Emacs vterm support
-    if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+    if [ "$INSIDE_EMACS" = 'vterm' ]; then
         function clear(){
             vterm_printf "51;Evterm-clear-scrollback";
             tput clear;
@@ -112,6 +111,6 @@
     fi
 
 # To run at the start of zsh
-    pfetch
-    brem --show
+    command -v fastfetch >/dev/null 2>&1 && fastfetch || true
+    command -v brem >/dev/null 2>&1 && brem --show || true
 

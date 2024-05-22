@@ -12,7 +12,7 @@
     [[ $- != *i* ]] && return
 
 # PATH variable
-    export PATH="$HOME/.dotfiles/bin:/home/klar/.local/bin:$PATH"
+    export PATH="$HOME/.dotfiles/bin:$HOME/.local/bin:$PATH"
 
 # History configuration (unlimited history)
     export HISTFILESIZE=
@@ -75,9 +75,6 @@
 # System exports
     export EDITOR="/usr/bin/nvim"
 
-# pfetch configuration
-    export PF_INFO="ascii title os host kernel uptime pkgs memory palette"
-
 # A better man function
     function better_man() {
         /bin/man "$1" || "$1" --help 2>&1 | less
@@ -108,7 +105,7 @@
     }
 
 # Emacs vterm support
-    if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+    if [ "$INSIDE_EMACS" = 'vterm' ]; then
         function clear(){
             vterm_printf "51;Evterm-clear-scrollback";
             tput clear;
@@ -116,7 +113,7 @@
     fi
 
 # Programs to run at start
-    pfetch
+    command -v pfetch >/dev/null 2>&1 && pfetch || true
 
 # Include bash reminders if they exists
-    brem --show
+    command -v brem >/dev/null 2>&1 && brem --show || true

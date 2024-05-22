@@ -8,27 +8,28 @@
 # List of programs to be downloaded
 # ===============================================================================
 
-CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor" "thunar" "cloc"
-"thunar-volman" "gvfs" "gvfs-mtp" "alacritty" "when" "git" "rofi" "loupe" "xclip" "pamixer"
-"unrar" "zip" "unzip" "ncdu" "keepassxc" "file-roller" "eza" "ripgrep" "fzf" "btop" "tmux" "xcape"
-"pavucontrol" "flameshot" "bat" "stow" "ttf-ibm-plex" "emacs-nativecomp" "gnome-disk-utility"
-"network-manager-applet" "bash-completion" "alsa-utils" "polkit" "xfce-polkit" "python-pipx")
+CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor"
+"thunar" "cloc" "thunar-volman" "gvfs" "gvfs-mtp" "alacritty" "when" "git"
+"rofi" "loupe" "xclip" "pamixer""unrar" "zip" "unzip" "keepassxc" "file-roller"
+"eza" "ripgrep" "fzf" "btop" "tmux" "xcape""pavucontrol" "flameshot" "bat"
+"stow" "ttf-ibm-plex" "emacs-nativecomp" "gnome-disk-utility" "alsa-utils"
+"network-manager-applet" "bash-completion" "polkit" "xfce-polkit" "python-pipx"
+"ttc-iosevka-ss07" "gdu" "sddm")
 
-DE_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "mtpfs" "lightdm" "polybar"
-"boomer-git" "cava-git" "i3lock-color" "pfetch" "ttf-blex-nerd-font-git"
-"lightdm-gtk-greeter" "lxappearance" "ttf-iosevka-nerd" "ttf-font-awesome"
-"otf-font-awesome" "noto-fonts-main" "gummy-git" "dunst" "gruvbox-dark-icons-gtk"
-"gruvbox-dark-gtk" "ttc-iosevka-ss07")
+DE_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "mtpfs" "polybar" "boomer-git"
+"cava-git" "i3lock-color" "pfetch" "ttf-blex-nerd-font-git" "lxappearance"
+"ttf-iosevka-nerd" "ttf-font-awesome" "otf-font-awesome" "noto-fonts-main"
+"dunst" "gruvbox-dark-icons-gtk" "gruvbox-dark-gtk" "gummy-git")
 
-WAYLAND_PKGS=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "rofi-lbonn-wayland-git"
-"foot" "waybar" "swaylock-effects" "swaybg" "grim" "slurp" "hyprlock" "nwg-look" "udiskie"
+WAYLAND_PKGS=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "udiskie"
+"foot" "waybar" "swaybg" "grim" "slurp" "hyprlock" "nwg-look" "rofi-wayland"
 "hypridle")
 
-TERM_OFFICE=("texlive-core" "pandoc-bin" "texlive-latexextra" "sc-im" "cbonsai" "mdp"
-"texlive-fontsrecommended")
+TERM_OFFICE=("texlive-core" "pandoc-bin" "texlive-latexextra" "sc-im" "cbonsai"
+"mdp" "texlive-fontsrecommended")
 
-MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng" "ctags"
-"cscope" "global")
+MISC_PKGS=("yt-dlp" "ntfs-3g" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng"
+"ctags" "cscope" "global")
 
 # ===============================================================================
 
@@ -60,6 +61,14 @@ check_yay() {
                 makepkg -si
         fi
     fi
+}
+
+setup_questions() {
+    read -r -p  "Are you on a laptop? [y/N]: " laptop_choice
+    if [ "$laptop_choice" == "y" ] && [ ! -e $HOME/.dotfiles/options/laptop ]; then
+        touch $HOME/.dotfiles/options/.laptop
+    fi
+    echo ""
 }
 
 xdg_dirs_check() {
@@ -218,6 +227,7 @@ main() {
             echo "  --yay            Check if yay is installed."
             echo "  --xdg            Check if XDG user directories are present."
             echo "  -w, --wallpaper  Check if gruvbox wallpapers are present."
+            echo "  -s, --setup      Set up conditional files for scripts."
             exit 0
             ;;
         --yay)
@@ -232,9 +242,14 @@ main() {
             wallpaper_check
             exit 0
             ;;
+        -s|--setup)
+            setup_questions
+            exit 0
+            ;;
         *)
             check_yay
             xdg_dirs_check
+            setup_questions
             wallpaper_check
             install_pkgs
             exit 0

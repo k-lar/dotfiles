@@ -249,5 +249,6 @@ g.copilot_no_tab_map = true
 g.copilot_enabled = false
 
 vim.api.nvim_set_keymap("i", "<A-CR>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-vim.keymap.set("n", "<leader>C", "<cmd>lua vim.g.copilot_enabled = not vim.g.copilot_enabled<CR>", { desc = "Toggle copilot" })
+vim.keymap.set("n", "<leader>cx", "<cmd>lua vim.g.copilot_enabled = not vim.g.copilot_enabled<CR>", { desc = "Toggle copilot" })
+vim.keymap.set({"n", "v"}, "<leader>cc", "<cmd>lua require(\"CopilotChat\").toggle()<CR>", { desc = "Toggle copilot chat window" })
 -- stylua: ignore end

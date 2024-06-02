@@ -117,6 +117,18 @@ require("lazy").setup({
             },
         },
     },
+    {
+        "brenoprata10/nvim-highlight-colors",
+        event = "VeryLazy",
+        opts = {
+            render = "virtual",
+            virtual_symbol_position = "eol",
+            virtual_symbol = "■",
+            virtual_symbol_suffix = " ",
+            virtual_symbol_prefix = "",
+            enable_tailwind = true,
+        },
+    },
     { -- Highlight, edit, and navigate code
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",

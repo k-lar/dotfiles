@@ -13,7 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    "lewis6991/gitsigns.nvim",
     "nvim-lualine/lualine.nvim",
     "folke/which-key.nvim",
     "stevearc/conform.nvim",
@@ -23,12 +22,24 @@ require("lazy").setup({
     "github/copilot.vim",
     "nvim-lua/plenary.nvim",
     { "vidocqh/auto-indent.nvim", opts = {} },
-    { "echasnovski/mini.indentscope", opts = {} },
     { "echasnovski/mini.comment", opts = {} },
     { "echasnovski/mini.surround", opts = {} },
     { "dhruvasagar/vim-table-mode", ft = "plaintext", "markdown" },
     { "nvim-treesitter/playground", lazy = true },
     { "akinsho/toggleterm.nvim", version = "*", config = true },
+    { "echasnovski/mini.indentscope", opts = { symbol = "│" } },
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = {
+            signs = {
+                add = { text = "+" },
+                change = { text = "~" },
+                delete = { text = "_" },
+                topdelete = { text = "‾" },
+                changedelete = { text = "~" },
+            },
+        },
+    },
     {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
@@ -97,7 +108,9 @@ require("lazy").setup({
     },
     {
         "folke/todo-comments.nvim",
+        event = "VimEnter",
         opts = {
+            signs = false,
             keywords = {
                 TODO = { color = "hint" },
                 NOTE = { color = "info" },
@@ -115,13 +128,20 @@ require("lazy").setup({
             -- Automatically install LSPs to stdpath for neovim
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
+            "WhoIsSethDaniel/mason-tool-installer.nvim",
 
             -- Useful status updates for LSP
             { "j-hui/fidget.nvim", opts = {} },
 
             -- Additional lua configuration, makes nvim stuff amazing!
-            "folke/neodev.nvim",
+            "folke/lazydev.nvim",
         },
+    },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        enabled = is_in_directory(vim.fn.expand("%:p"), vim.fn.stdpath("config")),
+        opts = {},
     },
     { -- Autocompletion
         "hrsh7th/nvim-cmp",

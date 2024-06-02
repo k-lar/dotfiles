@@ -141,13 +141,16 @@ local servers = {
     },
 }
 
--- Setup neovim lua configuration
-require("neodev").setup()
-
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities =
     vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+-- Ensure there tools are installed by Mason
+local ensure_installed = vim.tbl_keys(servers or {})
+vim.list_extend(ensure_installed, {
+    "stylua", -- Used to format Lua code
+})
 
 -- Ensure the servers above are installed
 require("mason-lspconfig").setup({

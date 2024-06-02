@@ -12,6 +12,12 @@
     HISTFILE=~/.zsh_history
     HISTSIZE=5000
     SAVEHIST=10000000000
+    setopt appendhistory
+    setopt hist_ignore_space
+    setopt hist_ignore_all_dups
+    setopt hist_ignore_dups
+    setopt hist_save_no_dups
+    setopt hist_find_no_dups
 
 # Options
     unsetopt beep
@@ -41,10 +47,13 @@
 # System exports
     export PATH="$HOME/.dotfiles/bin:$HOME.local/bin:$PATH"
     export EDITOR="/usr/bin/nvim"
-    export BROWSER=librewolf
+    export BROWSER="/usr/bin/librewolf"
 
 # Source zsh files (plugins)
     source $HOME/.zsh/zsh-vi-mode.plugin.zsh
+
+# Make zsh-vi-mode not delete long paths
+    WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # Bind keys to stuff
     bindkey "^[[1;3C" forward-word

@@ -6,14 +6,14 @@
 
 --]]
 
--- Bootstrap and set up plugins
-require("lazy-config")
+-- Vim options
+require("options")
 
 -- Various utilities and aliases for lua
 require("utils")
 
--- Vim options
-require("options")
+-- Bootstrap and set up plugins
+require("lazy-config")
 
 -- Custom functions
 require("functions")

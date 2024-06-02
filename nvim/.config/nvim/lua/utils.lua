@@ -25,6 +25,14 @@ function vnoremap(lhs) return base_map(lhs)("v") end
 function map(lhs) return base_map_opt(lhs)("") end
 function nmap(lhs) return base_map_opt(lhs)("n") end
 
+function is_in_directory(filepath, dir)
+    local expanded_dir = vim.fn.resolve(vim.fn.expand(dir))
+    local expanded_filepath = vim.fn.resolve(vim.fn.expand(filepath))
+
+    -- Check if the expanded filepath starts with the expanded directory path
+    return expanded_filepath:sub(1, #expanded_dir) == expanded_dir
+end
+
 -- Create aliases and functions for better readability
 g = vim.g
 o = vim.opt

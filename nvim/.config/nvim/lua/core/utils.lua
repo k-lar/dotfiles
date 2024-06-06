@@ -1,18 +1,14 @@
 -- Functions for mapping keys like in vimscript
 local function base_map(lhs)
     return function(mode)
-        return function(rhs)
-            vim.api.nvim_set_keymap(mode, lhs, rhs, { noremap = true, silent = true })
-        end
+        return function(rhs) vim.api.nvim_set_keymap(mode, lhs, rhs, { noremap = true, silent = true }) end
     end
 end
 
 local function base_map_opt(lhs)
     return function(mode)
         return function(rhs)
-            return function(opts)
-                vim.api.nvim_set_keymap(mode, lhs, rhs, opts or { noremap = true, silent = true })
-            end
+            return function(opts) vim.api.nvim_set_keymap(mode, lhs, rhs, opts or { noremap = true, silent = true }) end
         end
     end
 end

@@ -6,35 +6,23 @@
 
 --]]
 
--- Vim options
-require("options")
-
 -- Various utilities and aliases for lua
-require("utils")
+require("core.utils")
 
--- Bootstrap and set up plugins
-require("lazy-config")
+-- Vim options
+require("core.options")
 
--- Custom functions
-require("functions")
+-- Keymaps (core)
+require("core.keymaps")
 
--- Various settings and QOL stuff
-require("misc")
+-- Misc - Autocommands (core)
+require("core.misc")
 
 -- Markdown config
-require("markdown")
+require("core.markdown")
 
--- Plugin settings and config
-require("plugins")
-
--- Colorscheme setup
-require("colorscheme")
+-- Bootstrap and set up plugins
+require("config.lazy")
 
 -- LSP and autocompletion setup
-require("lsp")
-
--- Terminal stuff
-require("terminal")
-
--- Telescope
-require("telescope-config")
+require("config.lsp")

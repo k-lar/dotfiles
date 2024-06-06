@@ -1,8 +1,11 @@
-require("utils")
+require("core.utils")
 
 -- Map <leader> to space
 g.mapleader = " "
 g.maplocalleader = " "
+
+-- Turn on true colors
+o.termguicolors = true
 
 -- Decrease update time
 o.timeoutlen = 500
@@ -41,6 +44,13 @@ o.splitright = true
 o.wildmode = { "longest", "list", "full" }
 o.wildignore = { "*.pdf", "*.docx" }
 o.omnifunc = "syntaxcomplete#Complete"
+
+-- Netrw config
+g.netrw_liststyle = 3
+g.netrw_banner = 0
+g.netrw_browse_split = 4
+g.netrw_winsize = 25
+g.NetrwIsOpen = false
 
 -- Disables automatic commenting on new line
 vim.cmd("autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o")

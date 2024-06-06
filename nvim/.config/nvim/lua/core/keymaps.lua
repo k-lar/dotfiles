@@ -1,10 +1,13 @@
-require("utils")
+require("core.utils")
 
 -- Set undo break points for certain characters (sensible undo)
 inoremap(",")(",<c-g>u")
 inoremap(".")(".<c-g>u")
 inoremap("!")("!<c-g>u")
 inoremap("?")("?<c-g>u")
+
+-- Toggle netrw with SPC-n
+nmap("<leader>n")(":lua ToggleNetrw()<CR>")({ silent = true, desc = "Toggle Netrw" })
 
 -- Spell checking
 map("<leader>e")(":setlocal spell! spelllang=en_us<CR>")({ silent = true }) -- English
@@ -17,21 +20,8 @@ nnoremap("<M-Right>")(":tabnext<CR>")
 -- Make gf keybind open files in new tab
 nnoremap("gf")("<C-W>gf")
 
--- Highlight on yank
-local group = vim.api.nvim_create_augroup("user_cmds", { clear = true })
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highlight on yank",
-    group = group,
-    callback = function() vim.highlight.on_yank({ higroup = "Visual", timeout = 200 }) end,
-})
-
--- Quick exit from help docs
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "help", "man", "checkhealth" },
-    group = group,
-    command = "nnoremap <buffer> q <cmd>quit<cr>",
-})
+-- Toggle mouse on/off
+nnoremap("<leader>M")(":lua ToggleMouse()<CR>")
 
 -- Better keybindings for object operations
 -- Use b for () and B for {}
@@ -66,17 +56,6 @@ vim.keymap.set("o", "il", ":normal vil<CR>")
 -- Easier end of line movement in visual mode
 vim.keymap.set("v", "E", "$")
 
--- Show color column at 80 characters if cursor position is more than 70
-vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
-    pattern = "*",
-    callback = function()
-        local col = vim.fn.virtcol(".")
-        if col > 70 and col < 82 then
-            o.colorcolumn = "80"
-        elseif col > 110 then
-            o.colorcolumn = "120"
-        else
-            o.colorcolumn = ""
-        end
-    end,
-})
+-- My build script runner
+-- stylua: ignore
+vim.keymap.set("n", "<leader>b", "<cmd>BuildScript()<CR>", { desc = "Run build.sh in project root" })

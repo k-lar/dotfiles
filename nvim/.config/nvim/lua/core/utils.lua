@@ -29,6 +29,8 @@ function is_in_directory(filepath, dir)
     return expanded_filepath:sub(1, #expanded_dir) == expanded_dir
 end
 
+function trim_quotes(s) return s:match('^"(.*)"$') or s:match("^'(.*)'$") or s end
+
 -- Create aliases and functions for better readability
 g = vim.g
 o = vim.opt

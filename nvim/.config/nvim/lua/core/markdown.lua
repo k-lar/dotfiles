@@ -74,6 +74,9 @@ local function create_toc(heading_text)
     else
         print("No headings found in the document.")
     end
+
+    -- Restore the original cursor position
+    vim.api.nvim_win_set_cursor(0, cursor)
 end
 
 vim.api.nvim_create_user_command("GenerateTOC", function(opts)

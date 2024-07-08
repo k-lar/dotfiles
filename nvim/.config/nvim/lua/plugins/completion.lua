@@ -1,6 +1,7 @@
 return {
     { -- Autocompletion
         "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
         dependencies = {
             -- Snippet Engine & its associated nvim-cmp source
             "L3MON4D3/LuaSnip",
@@ -28,13 +29,17 @@ return {
             require("luasnip.loaders.from_vscode").lazy_load()
             luasnip.config.setup({})
 
-            g.cmptoggle = true -- Init global variable to true -> nvim-cmp on by default
+            vim.g.cmptoggle = true -- Init global variable to true -> nvim-cmp on by default
 
             cmp.setup({
-                enabled = function() return g.cmptoggle end,
+                enabled = function()
+                    return vim.g.cmptoggle
+                end,
 
                 snippet = {
-                    expand = function(args) luasnip.lsp_expand(args.body) end,
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
                 },
                 completion = {
                     completeopt = "menu,menuone,noinsert",

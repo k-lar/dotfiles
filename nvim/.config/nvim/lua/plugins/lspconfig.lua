@@ -1,11 +1,14 @@
+local utils = require("core.utils")
+
 return {
     { -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
+        event = "VeryLazy",
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
-            { "williamboman/mason.nvim", opts = {} },
-            { "williamboman/mason-lspconfig.nvim", opts = {} },
-            "WhoIsSethDaniel/mason-tool-installer.nvim",
+            { "williamboman/mason.nvim", event = "VeryLazy", opts = {} },
+            { "williamboman/mason-lspconfig.nvim", event = "VeryLazy", opts = {} },
+            { "WhoIsSethDaniel/mason-tool-installer.nvim", event = "VeryLazy" },
 
             -- Useful status updates for LSP
             { "j-hui/fidget.nvim", opts = {} },
@@ -17,7 +20,7 @@ return {
     {
         "folke/lazydev.nvim",
         ft = "lua",
-        enabled = is_in_directory(vim.fn.expand("%:p"), vim.fn.stdpath("config")),
+        enabled = utils.is_in_directory(vim.fn.expand("%:p"), vim.fn.stdpath("config")),
         opts = {},
     },
 }

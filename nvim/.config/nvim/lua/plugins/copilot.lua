@@ -3,8 +3,8 @@ return {
         "github/copilot.vim",
         lazy = false,
         init = function()
-            g.copilot_no_tab_map = true
-            g.copilot_enabled = false
+            vim.g.copilot_no_tab_map = true
+            vim.g.copilot_enabled = false
             vim.api.nvim_set_keymap("i", "<A-CR>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
         end,
 

@@ -1,5 +1,3 @@
-require("core.utils")
-
 -- Pandoc markdown -> pdf compilation
 vim.cmd([[
     augroup my_markdown
@@ -19,10 +17,10 @@ vim.cmd([[au filetype markdown :iabbrev uline \underline{}<Left>]])
 vim.cmd("au FileType markdown setlocal textwidth=100")
 
 -- Markdown fenced languages list (syntax highlighting code inside markdown docs)
-g.markdown_fenced_languages = { "python", "html", "c", "vim", "rust", "bash", "sql" }
+vim.g.markdown_fenced_languages = { "python", "html", "c", "vim", "rust", "bash", "sql" }
 
 -- Folding in markdown
-map("<leader>fd")(":set nofoldenable!<CR>")({ silent = true })
+vim.keymap.set("n", "<leader>fd", ":set nofoldenable!<CR>", { silent = true })
 
 --- Optional heading text instead of default "Table of contents"
 ---@param heading_text string | nil
@@ -79,8 +77,9 @@ local function create_toc(heading_text)
     vim.api.nvim_win_set_cursor(0, cursor)
 end
 
+local utils = require("core.utils")
 vim.api.nvim_create_user_command("GenerateTOC", function(opts)
     -- Check if an argument is provided; use it or default to nil
-    local heading_text = opts.args ~= "" and trim_quotes(opts.args) or nil
+    local heading_text = opts.args ~= "" and utils.trim_quotes(opts.args) or nil
     create_toc(heading_text)
 end, { nargs = "?" })

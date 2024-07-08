@@ -1,10 +1,11 @@
 return {
-    { "echasnovski/mini.comment", opts = {} },
+    { "echasnovski/mini.comment", event = "VeryLazy", opts = {} },
+    { "echasnovski/mini.indentscope", event = "VeryLazy", opts = { symbol = "│" } },
     { "echasnovski/mini.surround", opts = {} },
-    { "echasnovski/mini.indentscope", opts = { symbol = "│" } },
     {
         "echasnovski/mini.move",
         config = function()
+            vim.g.mini_move_loaded = true
             require("mini.move").setup({
                 mappings = {
                     -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.

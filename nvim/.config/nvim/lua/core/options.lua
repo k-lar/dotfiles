@@ -1,56 +1,70 @@
-require("core.utils")
-
 -- Map <leader> to space
-g.mapleader = " "
-g.maplocalleader = " "
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Turn on true colors
-o.termguicolors = true
+vim.o.termguicolors = true
 
 -- Decrease update time
-o.timeoutlen = 500
-o.updatetime = 200
+vim.opt.timeoutlen = 500
+vim.opt.updatetime = 200
 
 -- Nice defaults
-o.compatible = false
-o.encoding = "utf-8"
-o.number = true
-o.relativenumber = true
-o.clipboard = "unnamedplus"
-o.hidden = true
-o.showmode = false
-o.ignorecase = true
-o.smartcase = true
-o.smarttab = true
-o.smartindent = true
-o.scrolloff = 1
-o.sidescrolloff = 3
-o.mouse = "a"
-o.path = "**"
-o.expandtab = true
-o.tabstop = 4
-o.shiftwidth = 4
-o.undofile = true
-o.linebreak = true
-o.breakindent = true
-o.completeopt = "menuone,noselect"
-o.autochdir = true
+vim.opt.compatible = false
+vim.opt.encoding = "utf-8"
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.hidden = true
+vim.opt.showmode = false
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.smarttab = true
+vim.opt.smartindent = true
+vim.opt.scrolloff = 1
+vim.opt.sidescrolloff = 3
+vim.opt.mouse = "a"
+vim.opt.path = "**"
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.undodir = vim.fn.stdpath("cache") .. "/undo/"
+vim.opt.undofile = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.completeopt = "longest,menuone,noselect,popup"
+vim.opt.autochdir = true
 
 -- Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-o.splitbelow = true
-o.splitright = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- Native autocompletion config (omnifunc)
-o.wildmode = { "longest", "list", "full" }
-o.wildignore = { "*.pdf", "*.docx" }
-o.omnifunc = "syntaxcomplete#Complete"
+vim.opt.wildmode = { "longest", "list", "full" }
+vim.opt.wildignore = { "*.pdf", "*.docx" }
+vim.opt.omnifunc = "syntaxcomplete#Complete"
 
 -- Netrw config
-g.netrw_liststyle = 3
-g.netrw_banner = 0
-g.netrw_browse_split = 4
-g.netrw_winsize = 25
-g.NetrwIsOpen = false
+vim.g.netrw_liststyle = 3
+vim.g.netrw_banner = 0
+vim.g.netrw_browse_split = 4
+vim.g.netrw_winsize = 25
+vim.g.NetrwIsOpen = false
+
+-- Enable native EditorConfig support
+vim.g.editorconfig = 1
+
+-- Needed for fallback of moving lines up and down
+vim.g.mini_move_loaded = false
+
+-- Autoformatting flags
+vim.b.autoformat = true
+vim.g.autoformat = true
 
 -- Disables automatic commenting on new line
-vim.cmd("autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o")
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = "*",
+    callback = function()
+        vim.opt.formatoptions:remove({ "c", "r", "o" })
+    end,
+})

@@ -11,6 +11,7 @@ return {
                 changedelete = { text = "~" },
             },
         },
+        -- stylua: ignore
         keys = {
             { "<leader>G", function() require("gitsigns").toggle_signs() end, desc = "Toggle gitgutter signs" },
             { "<leader>gp", function() require("gitsigns").prev_hunk() end, desc = "Previous hunk" },

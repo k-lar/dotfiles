@@ -6,17 +6,14 @@
 
 --]]
 
--- Various utilities and aliases for lua
-require("core.utils")
-
 -- Vim options
 require("core.options")
 
 -- Keymaps (core)
 require("core.keymaps")
 
--- Misc - Autocommands (core)
-require("core.misc")
+-- Autocommands (core)
+require("core.autocmds")
 
 -- Markdown config
 require("core.markdown")

@@ -13,18 +13,32 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { import = "plugins.colorscheme" },
-    { import = "plugins.treesitter" },
-    { import = "plugins.mini-nvim" },
-    { import = "plugins.telescope" },
-    { import = "plugins.terminal" },
-    { import = "plugins.markdown" },
-    { import = "plugins.completion" },
-    { import = "plugins.git" },
-    { import = "plugins.which-key" },
-    { import = "plugins.formatting" },
-    { import = "plugins.misc" },
-    { import = "plugins.harpoon" },
-    { import = "plugins.lspconfig" },
-    { import = "plugins.copilot" },
-}, {})
+    spec = "plugins",
+    change_detection = {
+        enabled = true,
+        notify = false,
+    },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "getscript",
+                "getscriptPlugin",
+                "gzip",
+                "logipat",
+                "tar",
+                "tarPlugin",
+                "rrhelper",
+                "spellfile_plugin",
+                "vimball",
+                "vimballPlugin",
+                "vimballPlugin",
+                "zip",
+                "zipPlugin",
+                "rplugin",
+                "optwin",
+                "bugreport",
+                "ftpplugin",
+            },
+        },
+    },
+})

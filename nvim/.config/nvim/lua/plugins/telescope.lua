@@ -7,7 +7,9 @@ return {
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make",
-                cond = function() return vim.fn.executable("make") == 1 end,
+                cond = function()
+                    return vim.fn.executable("make") == 1
+                end,
             },
         },
         config = function()
@@ -73,9 +75,11 @@ return {
 
                 local opts = {}
 
-                if is_git_repo() then opts = {
-                    cwd = get_git_root(),
-                } end
+                if is_git_repo() then
+                    opts = {
+                        cwd = get_git_root(),
+                    }
+                end
 
                 require("telescope.builtin").live_grep(opts)
             end

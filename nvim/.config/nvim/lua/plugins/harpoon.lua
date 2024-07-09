@@ -3,7 +3,10 @@ return {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
         requires = { "nvim-lua/plenary.nvim" },
-        config = function() require("harpoon"):setup() end,
+        config = function()
+            require("harpoon"):setup()
+        end,
+        -- stylua: ignore
         keys = {
             { "<leader>a", function() require("harpoon"):list():append() end, desc = "Harpoon a file" },
             {

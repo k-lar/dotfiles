@@ -56,10 +56,14 @@ return {
         local lazydocker = Terminal:new({ cmd = "sudo lazydocker", hidden = true, direction = "float" })
 
         ---@diagnostic disable-next-line
-        function _lazygit_toggle() lazygit:toggle() end
+        function _lazygit_toggle()
+            lazygit:toggle()
+        end
 
         ---@diagnostic disable-next-line
-        function _lazydocker_toggle() lazydocker:toggle() end
+        function _lazydocker_toggle()
+            lazydocker:toggle()
+        end
 
         function _G.set_terminal_keymaps()
             local opts = { noremap = true }
@@ -76,6 +80,7 @@ return {
         vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
     end,
 
+    -- stylua: ignore
     keys = {
         { "<leader>x", "<cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
         { "<leader>gg", function() _lazygit_toggle() end, desc = "Toggle lazygit" },

@@ -33,6 +33,11 @@ rofi/.local/state/*
 # Ignore autoload from nvim
 nvim/.config/nvim/autoload/*
 
+# Ignore nvim spell files
+nvim/.config/nvim/spell/*
+!nvim/.config/nvim/spell/en.utf-8.spl
+!nvim/.config/nvim/spell/sl.utf-8.spl
+
 # Ignore all updates to autostart file
 options/autostart
 options/.lowspec

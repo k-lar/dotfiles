@@ -73,3 +73,7 @@ vim.keymap.set("n", "<A-S-Left>", "<C-w><C-h>", { desc = "Move focus to the left
 vim.keymap.set("n", "<A-S-Right>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<A-S-Down>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<A-S-Up>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
+-- Dynomark mappings
+vim.keymap.set("n", "<leader>v", "<Plug>(DynomarkToggle)", { desc = "Toggle Dynomark" })
+vim.keymap.set("n", "<leader>V", "<Plug>(DynomarkRun)", { desc = "Run dynomark query under cursor" })

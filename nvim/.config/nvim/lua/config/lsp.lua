@@ -93,6 +93,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
             end, "[T]oggle Inlay [H]ints")
         end
+
+        -- Disable changing syntax colors by lsp
+        client.server_capabilities.semanticTokensProvider = nil
     end,
 })
 
@@ -102,7 +105,7 @@ local servers = {
     -- rust_analyzer = {},
     volar = {}, -- Vue.js
     gopls = {},
-    tsserver = {},
+    ts_ls = {},
     html = { filetypes = { "html", "twig", "hbs", "vue" } },
     emmet_ls = {},
     eslint = {},

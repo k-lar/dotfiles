@@ -1,5 +1,3 @@
-local utils = require("core.utils")
-
 return {
     { -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
@@ -20,7 +18,6 @@ return {
     {
         "folke/lazydev.nvim",
         ft = "lua",
-        enabled = utils.is_in_directory(vim.fn.expand("%:p"), vim.fn.stdpath("config")),
         opts = {},
     },
 }

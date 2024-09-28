@@ -11,7 +11,7 @@
 CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor"
 "thunar" "cloc" "thunar-volman" "gvfs" "gvfs-mtp" "alacritty" "when" "git"
 "loupe" "pamixer" "unrar" "zip" "unzip" "keepassxc" "file-roller" "eza"
-"ripgrep" "fzf" "btop" "tmux" "pavucontrol""bat" "stow"
+"ripgrep" "fzf" "btop" "tmux" "pavucontrol""bat" "stow" "tree-sitter-cli"
 "emacs-nativecomp" "gnome-disk-utility" "alsa-utils" "network-manager-applet"
 "bash-completion" "polkit" "xfce-polkit" "python-pipx" "ttc-iosevka-ss07"
 "gdu" "sddm" "fastfetch" "dunst" "mtpfs" "ttf-iosevka-nerd" "ttf-font-awesome"

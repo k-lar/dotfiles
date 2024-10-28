@@ -4,6 +4,7 @@ return {
     { "k-lar/dark-pale-gruvbox-lualine.nvim", lazy = false },
     {
         "nvim-lualine/lualine.nvim",
+        event = "UIEnter",
         opts = {
             options = {
                 theme = "gruvbox-dark-pale",

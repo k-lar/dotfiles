@@ -17,8 +17,9 @@ return {
             { "<leader>gp", function() require("gitsigns").prev_hunk() end, desc = "Previous hunk" },
             { "<leader>gn", function() require("gitsigns").next_hunk() end, desc = "Next hunk" },
             { "<leader>gs", function() require("gitsigns").stage_hunk() end, desc = "Stage hunk" },
-            { "<leader>gu", function() require("gitsigns").undo_stage_hunk() end, desc = "Toggle gitgutter signs" },
-            { "<leader>ph", function() require("gitsigns").preview_hunk() end, desc = "Preview hunk" },
+            { "<leader>gr", function() require("gitsigns").reset_hunk() end, desc = "Reset hunk" },
+            { "<leader>gu", function() require("gitsigns").undo_stage_hunk() end, desc = "Undo staged hunk" },
+            { "<leader>gh", function() require("gitsigns").preview_hunk() end, desc = "Preview hunk" },
         },
     },
 }

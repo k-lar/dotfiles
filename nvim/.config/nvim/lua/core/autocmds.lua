@@ -32,6 +32,13 @@ vim.api.nvim_create_autocmd("FileType", {
     command = "nnoremap <buffer> q <cmd>close<cr>",
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "qf",
+    desc = "Ignore mapping of flash.nvim in qf buffers so you can go to errors with <CR>",
+    group = augroup("qf_enter_keybind"),
+    command = "nnoremap <buffer> <CR> <CR>",
+})
+
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     pattern = "*",
     desc = "Show color column at 80 characters if cursor position is more than 70",

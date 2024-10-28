@@ -93,6 +93,7 @@ return {
             { "<leader>fs", function() require('telescope.builtin').git_files() end, desc = "Search git files" },
             { "<leader>fb", function() require('telescope.builtin').buffers() end, desc = "Search buffers" },
             { "<leader>fh", function() require('telescope.builtin').help_tags() end, desc = "Search help" },
+            { "<leader>fn", function() require('telescope.builtin').find_files({cwd = vim.fn.stdpath 'config'}) end, desc = "Search Neovim files" },
         },
     },
 }

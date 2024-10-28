@@ -13,6 +13,7 @@ return {
                 "<leader>cx",
                 function()
                     vim.g.copilot_enabled = not vim.g.copilot_enabled
+                    print("Copilot status: " .. tostring(vim.g.copilot_enabled))
                 end,
                 desc = "Toggle copilot",
             },
@@ -41,6 +42,7 @@ return {
                     require("CopilotChat").toggle()
                 end,
                 desc = "Toggle copilot chat window",
+                mode = { "n", "v" },
             },
         },
     },

@@ -14,7 +14,6 @@ vim.opt.compatible = false
 vim.opt.encoding = "utf-8"
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.clipboard = "unnamedplus"
 vim.opt.hidden = true
 vim.opt.showmode = false
 vim.opt.ignorecase = true
@@ -35,6 +34,11 @@ vim.opt.breakindent = true
 vim.opt.completeopt = "longest,menuone,noselect,popup"
 vim.opt.autochdir = true
 
+-- Clipboard sync between nvim and OS (using vim.schedule() it decreases startup-time)
+vim.schedule(function()
+    vim.opt.clipboard = "unnamedplus"
+end)
+
 -- Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -54,8 +58,14 @@ vim.g.NetrwIsOpen = false
 -- Enable native EditorConfig support
 vim.g.editorconfig = 1
 
+-- Enable support for nerd fonts
+vim.g.have_nerd_font = true
+
 -- Needed for fallback of moving lines up and down
 vim.g.mini_move_loaded = false
+
+-- For detecting if a plugin for a colorscheme has been used
+vim.g.custom_colorscheme_loaded = false
 
 -- Autoformatting flags
 vim.b.autoformat = true

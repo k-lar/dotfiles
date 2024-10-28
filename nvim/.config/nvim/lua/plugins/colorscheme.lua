@@ -1,33 +1,12 @@
 return {
-    {
-        "ribru17/bamboo.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require("bamboo").setup({
-                style = "multiplex",
-                code_style = {
-                    comments = "none",
-                    conditionals = "none",
-                    keywords = "none",
-                    functions = "bold",
-                    namespaces = "none",
-                    parameters = "none",
-                    strings = "none",
-                    variables = "none",
-                },
-                highlights = {
-                    ["@comment"] = { fg = "$grey" },
-                },
-            })
-            require("bamboo").load()
-        end,
-    },
+    -- If you want to add a custom colorscheme
+    -- make sure you set vim.g.custom_colorscheme_loaded to true
+    { "k-lar/dark-pale-gruvbox-lualine.nvim", lazy = false },
     {
         "nvim-lualine/lualine.nvim",
         opts = {
             options = {
-                theme = "bamboo",
+                theme = "gruvbox-dark-pale",
                 section_separators = "",
                 component_separators = "",
             },

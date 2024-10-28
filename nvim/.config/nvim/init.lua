@@ -23,3 +23,8 @@ require("config.lazy")
 
 -- LSP and autocompletion setup
 require("config.lsp")
+
+-- Set up default colorscheme if not using any plugin colorschemes
+if not vim.g.custom_colorscheme_loaded then
+    require("core.colorscheme")
+end

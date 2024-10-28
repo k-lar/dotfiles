@@ -18,6 +18,8 @@ if vim.fn.has("nvim-0.10") == 1 and vim.g.custom_colorscheme_loaded == false the
             highlight TabLineSel ctermfg=White ctermbg=none
             highlight Visual ctermfg=none ctermbg=Grey guifg=none guibg=#32302F
             highlight ColorColumn ctermbg=Grey guibg=#32302F
+            highlight SignColumn ctermbg=none guibg=none
+            highlight Folded ctermbg=DarkGrey guibg=#393939 ctermfg=Grey guifg=#D5C4A1
         ]])
     end
 end

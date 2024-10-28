@@ -5,6 +5,9 @@ return {
         event = "VeryLazy",
         ---@type Flash.Config
         opts = {
+            search = {
+                multi_window = false,
+            },
             modes = {
                 search = {
                     enabled = false,

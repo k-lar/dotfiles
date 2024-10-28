@@ -2,6 +2,7 @@ return {
     { "echasnovski/mini.comment", event = "VeryLazy", opts = {} },
     { "echasnovski/mini.indentscope", event = "VeryLazy", opts = { symbol = "│" } },
     { "echasnovski/mini.surround", opts = {} },
+    { "echasnovski/mini.icons", opts = {} },
     {
         "echasnovski/mini.move",
         config = function()

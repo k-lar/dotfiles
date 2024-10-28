@@ -33,6 +33,8 @@ vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.completeopt = "longest,menuone,noselect,popup"
 vim.opt.autochdir = true
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Clipboard sync between nvim and OS (using vim.schedule() it decreases startup-time)
 vim.schedule(function()

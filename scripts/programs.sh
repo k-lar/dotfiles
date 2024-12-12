@@ -23,7 +23,7 @@ XORG_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "polybar" "lxappearance"
 
 WAYLAND_PACKAGES=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "udiskie"
 "foot" "waybar" "swaybg" "grim" "slurp" "hyprlock" "nwg-look" "rofi-wayland"
-"hypridle" "flameshot-git")
+"hypridle" "satty")
 
 STYLE_PACKAGES=("noto-fonts-main" "gruvbox-dark-gtk" "gruvbox-dark-icons-gtk"
 "cava")

@@ -108,6 +108,9 @@ local servers = {
     volar = {}, -- Vue.js
     gopls = {},
     ts_ls = {},
+    denols = {
+        root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+    },
     html = { filetypes = { "html", "twig", "hbs", "vue" } },
     emmet_ls = {},
     eslint = {},

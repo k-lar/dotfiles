@@ -26,9 +26,11 @@ style = "Bold"
 
 # custom colours for the colour palette
 [color-palette]
-first= "#cc241d"
-second= "#d65d0e"
-third= "#d79921"
-fourth= "#b8bb26"
-fifth= "#689d6a"
-custom= "#ebdbb2"
+palette = [
+    "#cc241d",
+    "#d65d0e",
+    "#d79921",
+    "#b8bb26",
+    "#689d6a",
+    "#ebdbb2"
+]

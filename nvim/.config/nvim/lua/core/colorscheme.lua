@@ -20,6 +20,7 @@ if vim.fn.has("nvim-0.10") == 1 and vim.g.custom_colorscheme_loaded == false the
             highlight ColorColumn ctermbg=Grey guibg=#32302F
             highlight SignColumn ctermbg=none guibg=none
             highlight Folded ctermbg=DarkGrey guibg=#393939 ctermfg=Grey guifg=#D5C4A1
+            highlight FoldColumn ctermbg=none guibg=none
         ]])
     end
 end

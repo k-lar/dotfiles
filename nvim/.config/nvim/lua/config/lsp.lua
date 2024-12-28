@@ -95,7 +95,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         -- Disable changing syntax colors by lsp
-        client.server_capabilities.semanticTokensProvider = nil
+        if client then
+            client.server_capabilities.semanticTokensProvider = nil
+        end
     end,
 })
 

@@ -1,8 +1,9 @@
 -- Set undo break points for certain characters (sensible undo)
-vim.keymap.set("i", ",", ",<c-g>u")
-vim.keymap.set("i", ".", ".<c-g>u")
-vim.keymap.set("i", "!", "!<c-g>u")
-vim.keymap.set("i", "?", "?<c-g>u")
+local undo_symbols = ",.!?"
+for i = 1, #undo_symbols do
+    local char = undo_symbols:sub(i, i)
+    vim.keymap.set("i", char, char .. "<c-g>u")
+end
 
 -- Spell checking
 vim.keymap.set(

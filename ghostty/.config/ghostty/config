@@ -1,0 +1,26 @@
+# Ghostty config
+
+# Visuals
+theme = GruvboxDark
+background = 262626
+window-decoration = false
+background-opacity = 1
+background-blur-radius= 20
+
+# Behavior
+confirm-close-surface = false
+gtk-single-instance = true
+auto-update = off
+
+# Keybinds
+keybind = unconsumed:ctrl+shift+r=reload_config
+
+# Fonts
+font-family = monospace
+font-family = Symbols Nerd Font Mono
+font-size = 14
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
+# vim: syntax=dosini

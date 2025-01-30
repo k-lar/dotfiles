@@ -11,14 +11,11 @@
  * -------------------------------------------------------------------------- */
 
 /*
-Arc-Dark Color Scheme
+Gruvbox Color Scheme
 */
 @define-color background #262626;
-@define-color background2 #3c3836;
 @define-color shutdown #cc241d;
-@define-color background3 #458588;
 @define-color text #ebdbb2;
-
 
 @keyframes blink-warning {
     70% {
@@ -73,7 +70,6 @@ Arc-Dark Color Scheme
 #cpu,
 #custom-keyboard-layout,
 #memory,
-#mode,
 #network,
 #pulseaudio,
 #temperature,
@@ -93,6 +89,7 @@ Arc-Dark Color Scheme
     background-color: @background;
 
 }
+
 #custom-notification {
     border-radius: 0px;
     color: @text;
@@ -103,6 +100,7 @@ Arc-Dark Color Scheme
     border-radius: 0px 0px 0px 0px;
 
 }
+
 #tray {
     color:  @text;
     margin-right: 0px;
@@ -110,7 +108,6 @@ Arc-Dark Color Scheme
     background-color: @background;
 
 }
-
 
 #network, #memory, #cpu, #pulseaudio{
     background-color: @background;
@@ -139,15 +136,6 @@ Arc-Dark Color Scheme
     margin-right: 0px;
 }
 
-
-#mode {
-    background: @highlight;
-    border-bottom: 3px transparent;
-    color:white;
-    margin-left: 5px;
-    padding:7px;
-}
-
 #network.disconnected {
     color: #d65d0e;
 }
@@ -157,10 +145,6 @@ Arc-Dark Color Scheme
     padding-top:6px;
     padding-right: 4px;
     border-radius: 0px 8px 8px 0px;
-}
-
-#pulseaudio.muted {
-    color: @highlight;
 }
 
 #workspaces {

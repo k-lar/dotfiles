@@ -1,15 +1,12 @@
 {
-    // vi: ft=jsonc
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
     "height": 32, // Waybar height (to be removed for auto height)
-    "width": 1920, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
 
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces", "custom/media"],
     "modules-center": ["clock"],
-    // "modules-right": ["network", "custom/spacer", "cpu", "memory", "custom/spacer", "battery", "battery#bat2", "pulseaudio", "custom/spacer", "temperature", "custom/spacer", "tray"],
     "modules-right": ["network", "custom/spacer", "cpu", "memory", "custom/spacer", "battery", "battery#bat2", "pulseaudio#audio", "pulseaudio#microphone", "custom/spacer", "group/expand-temperature", "custom/spacer", "group/expand-tray"],
 
     // Modules configuration
@@ -91,7 +88,6 @@
             "on-scroll"         : 1,
             "on-click-right"    : "mode",
             "format": {
-                // Without colors
                 "days":      "<span color='#EBDBB2'><b>{}</b></span>",
                 "months":    "<span color='#689D6A'><b>{}</b></span>",
                 "weeks":     "<span color='#EBDBB2'><b>{}</b></span>",
@@ -204,12 +200,16 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "interval": 2,
-        "format-wifi": "{essid} ({signalStrength}%)  ",
-        "format-ethernet": "{ifname} 󰈀 ",
+        "format-wifi": "{essid} ({signalStrength}%) {icon} ",
+        "format-ethernet": "{ifname} {icon} ",
         "tooltip-format": "{ifname}\nIP: {ipaddr}/{cidr} via {gwaddr}",
-        "format-linked": "{ifname} (No IP) 󰈀 ",
+        "format-linked": "{ifname} (No IP) {icon} ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "(<span color='#B8BB26'>{bandwidthDownBytes}</span> <span color='#CC241D'> {bandwidthUpBytes}</span>) {ifname} 󰈀 "
+        "format-icons": {
+            "ethernet": "󰈀",
+            "wifi": ""
+        },
+        "format-alt": "(<span color='#B8BB26'>{bandwidthDownBytes}</span> <span color='#CC241D'> {bandwidthUpBytes}</span>) {ifname} {icon} "
     },
 
     "pulseaudio#audio": {

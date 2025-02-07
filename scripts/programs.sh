@@ -17,7 +17,7 @@ CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor"
 "gdu" "sddm" "fastfetch" "dunst" "mtpfs" "ttf-iosevka-nerd" "ttf-font-awesome"
 "otf-font-awesome" "pacman-contrib" "ttf-ibm-plex" "ntfs-3g" "pipewire"
 "pipewire-pulse" "pipewire-alsa" "pipewire-jack" "helvum" "ghostty"
-"ttf-nerd-fonts-symbols", "ttf-nerd-fonts-symbols-common"
+"ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-common"
 "ttf-ibmplex-mono-nerd")
 
 XORG_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "polybar" "lxappearance"
@@ -28,7 +28,7 @@ WAYLAND_PACKAGES=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "udiskie"
 "hypridle" "satty")
 
 STYLE_PACKAGES=("noto-fonts-main" "gruvbox-dark-gtk" "gruvbox-dark-icons-gtk"
-"cava")
+"cava" "sddm-sugar-dark")
 
 TERM_OFFICE=("texlive-core" "pandoc-bin" "texlive-latexextra" "sc-im" "cbonsai"
 "mdp" "texlive-fontsrecommended")
@@ -69,10 +69,42 @@ check_yay() {
     fi
 }
 
+sddm_apply_theme() {
+    # Check if yay is installed
+    if ! type yay > /dev/null; then
+        echo "Can't check for sddm theme without yay installed."
+        exit 1
+    fi
+
+    # Check if command exited with 0 (success)
+    if yay -Qi sddm-sugar-dark > /dev/null; then
+        echo "SDDM Dark Sugar theme is installed on your system."
+        # Check if the theme is already enabled
+        if ! grep -q "Current=sugar-dark" /etc/sddm.conf; then
+            read -r -p  "Would you like to enable it? [y/N]: " sddm_theme_choice
+            if [ "$sddm_theme_choice" == "y" ] || [ "$sddm_theme_choice" == "Y" ]; then
+                printf "[Theme]\nCurrent=sugar-dark\n" | sudo tee -a /etc/sddm.conf > /dev/null
+                echo "SDDM Dark Sugar theme enabled!"
+            fi
+        else
+            echo "SDDM Dark Sugar theme is already enabled!"
+        fi
+    else
+        echo "SDDM Dark Sugar theme is not installed on your system."
+        read -r -p  "Would you like to install and enable it? [y/N]: " sddm_theme_choice
+        if [ "$sddm_theme_choice" == "y" ] || [ "$sddm_theme_choice" == "Y" ]; then
+            yay -S --noconfirm sddm-sugar-dark
+            printf "[Theme]\nCurrent=sugar-dark\n" | sudo tee -a /etc/sddm.conf > /dev/null
+            echo "SDDM Dark Sugar theme installed and enabled!"
+        fi
+    fi
+    echo ""
+}
+
 setup_questions() {
     read -r -p  "Are you on a laptop? [y/N]: " laptop_choice
-    if [ "$laptop_choice" == "y" ] && [ ! -e $HOME/.dotfiles/options/laptop ]; then
-        touch $HOME/.dotfiles/options/.laptop
+    if [ "$laptop_choice" == "y" ] && [ ! -e "$HOME/.dotfiles/options/laptop" ]; then
+        touch "$HOME/.dotfiles/options/.laptop"
     fi
     echo ""
 }
@@ -209,7 +241,7 @@ install_pkgs() {
 
     read -r -p ": " pkg_choice
 
-    runcmd=$(echo "${PACKAGE_MGR[$pkg_choice]}" "--needed -S" "${USR_PACKAGES[@]}" "--noconfirm")
+    runcmd=$(echo "${PACKAGE_MGR[$pkg_choice]}" "--needed -Syu" "${USR_PACKAGES[@]}" "--noconfirm")
     echo "$runcmd"
     echo "Execute this command?"
     read -r -p "[y/N]: " confirm_command
@@ -246,6 +278,7 @@ main() {
             echo "  -h, --help       Display this help message."
             echo "  --yay            Check if yay is installed."
             echo "  --xdg            Check if XDG user directories are present."
+            echo "  --sddm-theme     Apply sddm theme (sddm-sugar-dark)."
             echo "  -w, --wallpaper  Check if gruvbox wallpapers are present."
             echo "  -s, --setup      Set up conditional files for scripts."
             exit 0
@@ -256,6 +289,10 @@ main() {
             ;;
         --xdg)
             xdg_dirs_check
+            exit 0
+            ;;
+        --sddm-theme)
+            sddm_apply_theme
             exit 0
             ;;
         -w|--wallpaper)
@@ -272,6 +309,7 @@ main() {
             setup_questions
             wallpaper_check
             install_pkgs
+            sddm_apply_theme
             exit 0
             ;;
     esac

@@ -38,6 +38,10 @@ MISC_PACKAGES=("yt-dlp" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng"
 
 # ===============================================================================
 
+print_version() {
+    printf "0.1.0\n"
+}
+
 check_yay() {
     # Check if yay is installed
     if [ -d "/opt/yay" ]; then
@@ -253,6 +257,44 @@ install_pkgs() {
     fi
 }
 
+is_version_older() {
+    v1="$1"
+    v2="$2"
+
+    # Use sort -V (natural version sorting) to compare versions
+    if [[ "$(printf '%s\n%s\n' "$v1" "$v2" | sort -V | head -n1)" == "$v1" && "$v1" != "$v2" ]]; then
+        return 0  # v1 is older
+    else
+        return 1  # v1 is not older
+    fi
+}
+
+check_for_updates() {
+    curl -s https://raw.githubusercontent.com/k-lar/dotfiles/refs/heads/master/scripts/programs.sh > /tmp/programs.sh
+    new_version=$(bash /tmp/programs.sh --version)
+    current_version=$(print_version)
+
+    if is_version_older "$current_version" "$new_version"; then
+        echo "A new version of this script is available!"
+        echo "Current version: $current_version"
+        echo "New version: $new_version"
+        echo "Would you like to update this script?"
+        read -r -p "[y/N]: " update_choice
+        if [ "$update_choice" == "y" ] || [ "$update_choice" == "Y" ]; then
+            cp /tmp/programs.sh "$HOME/.dotfiles/scripts/programs.sh"
+            rm /tmp/programs.sh
+            echo "Script updated successfully!"
+            echo "Please run the script again."
+            exit 0
+        else
+            rm /tmp/programs.sh
+        fi
+    else
+        echo "You are running the latest version of this script."
+    fi
+    exit 0
+}
+
 print_array() {
     total=0
     count=0
@@ -279,8 +321,10 @@ main() {
             echo "  --yay            Check if yay is installed."
             echo "  --xdg            Check if XDG user directories are present."
             echo "  --sddm-theme     Apply sddm theme (sddm-sugar-dark)."
+            echo "  -u, --update     Check for updates for this script."
             echo "  -w, --wallpaper  Check if gruvbox wallpapers are present."
             echo "  -s, --setup      Set up conditional files for scripts."
+            echo "  -v, --version    Display the version of this script."
             exit 0
             ;;
         --yay)
@@ -301,6 +345,14 @@ main() {
             ;;
         -s|--setup)
             setup_questions
+            exit 0
+            ;;
+        -u|--update)
+            check_for_updates
+            exit 0
+            ;;
+        -v|--version)
+            print_version
             exit 0
             ;;
         *)

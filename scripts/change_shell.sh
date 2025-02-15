@@ -10,7 +10,8 @@ if [ ! "$change_choice" = "y" ]; then
 else
     printf "What shell do you want to switch to?\n"
     printf "[1] - /bin/bash\n"
-    printf "[2] - /bin/zsh\n: "
+    printf "[2] - /bin/zsh\n"
+    printf "[3] - /bin/fish\n: "
     read -r shell_choice
 
     case "$shell_choice" in
@@ -40,8 +41,24 @@ else
         fi
         ;;
 
-    esac
+        3)
+        sh -c "chsh -s /bin/fish"
+        if [ ! -e "$HOME"/.config/tmux/shell_choice.conf ]; then
+            mkdir -p "$HOME"/.config/tmux/
+            touch "$HOME"/.config/tmux/shell_choice.conf
+            echo "set-option -g default-shell /bin/fish" > "$HOME"/.config/tmux/shell_choice.conf
+            echo "Sucessfully set shell to: /bin/fish"
+        else
+            echo "set-option -g default-shell /bin/fish" > "$HOME"/.config/tmux/shell_choice.conf
+            echo "Sucessfully set shell to: /bin/fish"
+        fi
+        ;;
 
+        *)
+        echo "Invalid choice! Exiting script..." && exit 1
+        ;;
+
+    esac
 
     if [ "$TERM_PROGRAM" = "tmux" ]; then
         echo "WARNING: you will have to restart tmux for your shell to change!"

@@ -13,6 +13,9 @@ if status is-interactive
         source /usr/share/fish/vendor_completions.d
     end
 
+    # Source my custom functions
+    source $HOME/.dotfiles/fish/.config/fish/functions.fish
+
     # Set the cursor shapes for the different vi modes.
     set fish_cursor_default       block
     set fish_cursor_insert        line        blink
@@ -40,71 +43,12 @@ if status is-interactive
     # My aliases
     source $HOME/.dotfiles/bash/.bash_aliases
 
-    # Run tmux at start
-    function tmux_start
-        tmux has-session -t dev 2>/dev/null; or tmux new-session -s dev
-        if tmux list-sessions | grep -q "dev";
-            tmux attach -t dev
-        else
-            tmux new-session
-        end
-    end
-
     if type -q tmux; and not set -q TMUX; and not set -q VIM; and not set -q INSIDE_EMACS
         tmux_start
     end
 
     # System exports
     set -gx EDITOR "/usr/bin/nvim"
-
-    # A better man function
-    function better_man
-        command man $argv[1] 2>/dev/null; or $argv[1] --help 2>&1 | less
-    end
-
-    # Test true colors in terminal
-    function test_truecolor
-        awk 'BEGIN{
-            s="/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/";
-            for (colnum = 0; colnum<77; colnum++) {
-                r = 255-(colnum*255/76);
-                g = (colnum*510/76);
-                b = (colnum*255/76);
-                if (g>255) g = 510-g;
-                printf "\033[48;2;%d;%d;%dm", r,g,b;
-                printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
-                printf "%s\033[0m", substr(s,colnum+1,1);
-            }
-            printf "\n";
-        }'
-    end
-
-    # Make temp dir for testing and misc
-    function cdtemp
-        cd (mktemp -d)
-    end
-
-    # Daily todo
-    function todo
-        if test "$argv[1]" = "search"
-            set selected_file (fzf --walker-root=$HOME/todos/)
-            if test $status -eq 0
-                $EDITOR "$selected_file"
-            end
-        else
-            set date (date --iso-8601)
-            if test -d "$HOME/todos/$date"
-                if not test -s "$HOME/todos/$date/todo.md"
-                    echo -e "# TODO - $date\n\n- [ ] \n" >> "$HOME/todos/$date/todo.md"
-                end
-                $EDITOR "$HOME/todos/$date/todo.md"
-            else
-                mkdir -p "$HOME/todos/$date"
-                echo -e "# TODO - $date\n\n- [ ] \n" >> "$HOME/todos/$date/todo.md"
-                $EDITOR "$HOME/todos/$date/todo.md"
-            end
-        end
-    end
 
     # Emacs vterm support
     if test "$INSIDE_EMACS" = "vterm"
@@ -146,6 +90,10 @@ if status is-interactive
     if type -q brem
         brem --show
     end
+end
+
+function fish_user_key_bindings
+    bind -M insert \cw backward-kill-word
 end
 
 function fish_mode_prompt

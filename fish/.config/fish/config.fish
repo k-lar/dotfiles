@@ -14,7 +14,7 @@ if status is-interactive
     end
 
     # Source my custom functions
-    source $HOME/.dotfiles/fish/.config/fish/functions.fish
+    source $HOME/.dotfiles/fish/.config/fish/functions/functions.fish
 
     # Set the cursor shapes for the different vi modes.
     set fish_cursor_default       block

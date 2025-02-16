@@ -18,14 +18,14 @@ CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor"
 "otf-font-awesome" "pacman-contrib" "ttf-ibm-plex" "ntfs-3g" "pipewire"
 "pipewire-pulse" "pipewire-alsa" "pipewire-jack" "helvum" "ghostty"
 "ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-common"
-"ttf-ibmplex-mono-nerd")
+"ttf-ibmplex-mono-nerd" "cliphist")
 
 XORG_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "polybar" "lxappearance"
 "xclip" "i3lock-color" "gummy-git" "xcape" "boomer-git" "rofi" "flameshot")
 
 WAYLAND_PACKAGES=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "udiskie"
 "waybar" "swaybg" "grim" "slurp" "hyprlock" "nwg-look" "rofi-wayland"
-"hypridle" "satty")
+"hypridle" "satty" "uwsm")
 
 STYLE_PACKAGES=("noto-fonts-main" "gruvbox-dark-gtk" "gruvbox-dark-icons-gtk"
 "cava" "sddm-sugar-dark")
@@ -34,12 +34,12 @@ TERM_OFFICE=("texlive-core" "pandoc-bin" "texlive-latexextra" "sc-im" "cbonsai"
 "mdp" "texlive-fontsrecommended")
 
 MISC_PACKAGES=("yt-dlp" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng"
-"ctags" "cscope" "global")
+"ctags" "cscope" "global" "fish")
 
 # ===============================================================================
 
 print_version() {
-    printf "0.1.0\n"
+    printf "0.1.1\n"
 }
 
 check_yay() {

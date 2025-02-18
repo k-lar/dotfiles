@@ -13,19 +13,20 @@ CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor"
 "loupe" "pamixer" "unrar" "zip" "unzip" "keepassxc" "file-roller" "eza"
 "ripgrep" "fzf" "btop" "tmux" "pavucontrol" "bat" "stow" "tree-sitter-cli"
 "emacs-nativecomp" "gnome-disk-utility" "alsa-utils" "network-manager-applet"
-"bash-completion" "polkit" "xfce-polkit" "python-pipx" "ttc-iosevka-ss07"
+"bash-completion" "polkit" "python-pipx" "ttc-iosevka-ss07"
 "gdu" "sddm" "fastfetch" "dunst" "mtpfs" "ttf-iosevka-nerd" "ttf-font-awesome"
 "otf-font-awesome" "pacman-contrib" "ttf-ibm-plex" "ntfs-3g" "pipewire"
 "pipewire-pulse" "pipewire-alsa" "pipewire-jack" "helvum" "ghostty"
 "ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-common"
-"ttf-ibmplex-mono-nerd" "cliphist")
+"ttf-ibmplex-mono-nerd")
 
-XORG_PACKAGES=("bspwm" "sxhkd" "picom-ftlabs-git" "polybar" "lxappearance"
-"xclip" "i3lock-color" "gummy-git" "xcape" "boomer-git" "rofi" "flameshot")
+XORG_PACKAGES=("bspwm" "sxhkd" "picom" "polybar" "lxappearance"
+"xclip" "i3lock-color" "gummy-git" "xcape" "boomer-git" "rofi" "flameshot"
+"xfce-polkit")
 
 WAYLAND_PACKAGES=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "udiskie"
 "waybar" "swaybg" "grim" "slurp" "hyprlock" "nwg-look" "rofi-wayland"
-"hypridle" "satty" "uwsm")
+"hypridle" "satty" "uwsm" "hyprpolkitagent" "cliphist")
 
 STYLE_PACKAGES=("noto-fonts-main" "gruvbox-dark-gtk" "gruvbox-dark-icons-gtk"
 "cava" "sddm-sugar-dark")
@@ -39,7 +40,7 @@ MISC_PACKAGES=("yt-dlp" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng"
 # ===============================================================================
 
 print_version() {
-    printf "0.1.1\n"
+    printf "0.1.2\n"
 }
 
 check_yay() {

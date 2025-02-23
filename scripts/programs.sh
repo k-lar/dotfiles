@@ -40,36 +40,60 @@ MISC_PACKAGES=("yt-dlp" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng"
 # ===============================================================================
 
 print_version() {
-    printf "0.1.2\n"
+    printf "0.1.3\n"
+}
+
+user_prompt() {
+    prompt_message=$1
+    default_option=${2^^}
+
+    if [ "$default_option" == "Y" ]; then
+        y_n_prompt="[Y/n]"
+    elif [ "$default_option" == "N" ]; then
+        y_n_prompt="[y/N]"
+    else
+        echo "No default option provided for user_prompt."
+        exit 1
+    fi
+
+    user_input=""
+
+    read -r -p "$prompt_message $y_n_prompt: " user_input
+    user_input=${user_input:-$default_option} # Set default option if user input is empty
+    case "${user_input,,}" in
+        y*) echo "y" ;;
+        n*) echo "n" ;;
+        *) echo "${default_option,,}" ;; # Return default option in lowercase
+    esac
 }
 
 check_yay() {
     # Check if yay is installed
     if [ -d "/opt/yay" ]; then
         echo "Yay is installed on your system."
-        read -r -p  "Would you like to reinstall it? [y/N]: " yay_reinstall_choice
+        yay_reinstall_choice=$(user_prompt "Would you like to reinstall it?" "n")
         if [ "$yay_reinstall_choice" == "y" ]; then
             sudo rm -rf /opt/yay
             sudo pacman --noconfirm --needed -S base-devel git &&
-                cd /opt &&
-                sudo git clone https://aur.archlinux.org/yay.git &&
-                sudo chown -R "$(whoami)":users ./yay &&
-                cd yay &&
-                makepkg -si
+            cd /opt &&
+            sudo git clone https://aur.archlinux.org/yay.git &&
+            sudo chown -R "$(whoami)":users ./yay &&
+            cd yay &&
+            makepkg -si
         fi
     fi
 
     if [ ! -d "/opt/yay" ]; then
         echo "It seems that yay is not installed on your system."
         printf '%b' "\e[1mYay is required to install packages that aren't in core!\e[0m\n"
-        read -r -p  "Would you like to install it? [y/N]: " yay_choice
+        yay_choice=$(user_prompt "Would you like to install it?" "n")
         if [ "$yay_choice" == "y" ]; then
             sudo pacman --noconfirm --needed -S base-devel git &&
-                cd /opt &&
-                sudo git clone https://aur.archlinux.org/yay.git &&
-                sudo chown -R "$(whoami)":users ./yay &&
-                cd yay &&
-                makepkg -si
+            cd /opt &&
+            sudo git clone https://aur.archlinux.org/yay.git &&
+            sudo chown -R "$(whoami)":users ./yay &&
+            cd yay &&
+            makepkg -si
         fi
     fi
 }
@@ -86,8 +110,8 @@ sddm_apply_theme() {
         echo "SDDM Dark Sugar theme is installed on your system."
         # Check if the theme is already enabled
         if ! grep -q "Current=sugar-dark" /etc/sddm.conf; then
-            read -r -p  "Would you like to enable it? [y/N]: " sddm_theme_choice
-            if [ "$sddm_theme_choice" == "y" ] || [ "$sddm_theme_choice" == "Y" ]; then
+            sddm_theme_choice=$(user_prompt "Would you like to enable it?" "n")
+            if [ "$sddm_theme_choice" == "y" ]; then
                 printf "[Theme]\nCurrent=sugar-dark\n" | sudo tee -a /etc/sddm.conf > /dev/null
                 echo "SDDM Dark Sugar theme enabled!"
             fi
@@ -96,8 +120,8 @@ sddm_apply_theme() {
         fi
     else
         echo "SDDM Dark Sugar theme is not installed on your system."
-        read -r -p  "Would you like to install and enable it? [y/N]: " sddm_theme_choice
-        if [ "$sddm_theme_choice" == "y" ] || [ "$sddm_theme_choice" == "Y" ]; then
+        sddm_theme_choice=$(user_prompt "Would you like to install and enable it?" "n")
+        if [ "$sddm_theme_choice" == "y" ]; then
             yay -S --noconfirm sddm-sugar-dark
             printf "[Theme]\nCurrent=sugar-dark\n" | sudo tee -a /etc/sddm.conf > /dev/null
             echo "SDDM Dark Sugar theme installed and enabled!"
@@ -107,7 +131,7 @@ sddm_apply_theme() {
 }
 
 setup_questions() {
-    read -r -p  "Are you on a laptop? [y/N]: " laptop_choice
+    laptop_choice=$(user_prompt "Are you on a laptop?" "n")
     if [ "$laptop_choice" == "y" ] && [ ! -e "$HOME/.dotfiles/options/laptop" ]; then
         touch "$HOME/.dotfiles/options/.laptop"
     fi
@@ -118,20 +142,20 @@ xdg_dirs_check() {
     # Check if XDG user dirs are present
     if [[ ! -e "$HOME/.config/user-dirs.dirs" ]]; then
         echo "XDG user directories not present on system."
-        read -r -p  "Would you like to create them? [Y/n]: " xdg_choice
+        xdg_choice=$(user_prompt "Would you like to create them?" "y")
         if ! [ "$xdg_choice" == "n" ]; then
             sudo pacman --noconfirm --needed -S xdg-user-dirs &&
-                xdg-user-dirs-update &&
-                echo "XDG directories created successfully! Locations:" &&
-                xdg-user-dir DESKTOP &&
-                xdg-user-dir DOWNLOAD &&
-                xdg-user-dir TEMPLATES &&
-                xdg-user-dir PUBLICSHARE &&
-                xdg-user-dir DOCUMENTS &&
-                xdg-user-dir MUSIC &&
-                xdg-user-dir PICTURES &&
-                xdg-user-dir VIDEOS &&
-                echo ""
+            xdg-user-dirs-update &&
+            echo "XDG directories created successfully! Locations:" &&
+            xdg-user-dir DESKTOP &&
+            xdg-user-dir DOWNLOAD &&
+            xdg-user-dir TEMPLATES &&
+            xdg-user-dir PUBLICSHARE &&
+            xdg-user-dir DOCUMENTS &&
+            xdg-user-dir MUSIC &&
+            xdg-user-dir PICTURES &&
+            xdg-user-dir VIDEOS &&
+            echo ""
         fi
     fi
 }
@@ -140,7 +164,7 @@ wallpaper_check() {
     # Check if gruvbox wallpapers are present
     if [[ ! -d "$HOME/Pictures/gruvbox_walls/" ]]; then
         echo "Gruvbox wallpapers not present."
-        read -r -p  "Would you like to download them? [Y/n]: " walls_choice
+        walls_choice=$(user_prompt "Would you like to download them?" "y")
         if ! [ "$walls_choice" == "n" ]; then
             if ! type git > /dev/null; then
                 sudo pacman --noconfirm --needed -S git
@@ -153,8 +177,7 @@ wallpaper_check() {
 
 install_pkgs() {
     # Installation script
-    echo "List all the packages that can be installed?"
-    read -r -p "[y/N]: " confirm_selection
+    confirm_selection=$(user_prompt "List all the packages that can be installed?" "n")
     if [ "$confirm_selection" == "y" ]; then
         printf "\n=========================================\n"
         printf '%b' "\e[1mCORE_PACKAGES: (${#CORE_PACKAGES[@]})\n\e[0m"
@@ -189,8 +212,7 @@ install_pkgs() {
         USR_PACKAGES+=("$i")
     done
 
-    echo -e "Include Xorg packages?"
-    read -r -p "[y/N]: " xorg_choice
+    xorg_choice=$(user_prompt "Include Xorg packages?" "n")
     if [ "$xorg_choice" == "y" ]; then
         for i in "${XORG_PACKAGES[@]}"; do
             USR_PACKAGES+=("$i")
@@ -208,8 +230,7 @@ install_pkgs() {
         echo ""
     fi
 
-    echo -e "Include style packages?"
-    read -r -p "[y/N]: " style_choice
+    style_choice=$(user_prompt "Include style packages?" "n")
     if [ "$style_choice" == "y" ]; then
         for i in "${STYLE_PACKAGES[@]}"; do
             USR_PACKAGES+=("$i")
@@ -217,8 +238,7 @@ install_pkgs() {
     fi
     echo ""
 
-    echo -e "Include misc packages?"
-    read -r -p "[y/N]: " misc_choice
+    misc_choice=$(user_prompt "Include misc packages?" "n")
     if [ "$misc_choice" == "y" ]; then
         for i in "${MISC_PACKAGES[@]}"; do
             USR_PACKAGES+=("$i")
@@ -226,8 +246,7 @@ install_pkgs() {
     fi
     echo ""
 
-    echo -e "Include terminal office packages? "
-    read -r -p "[y/N]: " office_choice
+    office_choice=$(user_prompt "Include terminal office packages?" "n")
     if [ "$office_choice" == "y" ]; then
       for i in "${TERM_OFFICE[@]}"; do
           USR_PACKAGES+=("$i")
@@ -241,15 +260,25 @@ install_pkgs() {
 
     for ((i = 0; i < ${#PACKAGE_MGR[@]}; ++i)); do
         position="$i"
+        if [[ "$xorg_choice" == "y" || "$wl_choice" == "y" || "$style_choice" == "y" || "$misc_choice" == "y" || "$office_choice" == "y" ]] && [ "$position" -eq 0 ]; then
+           continue
+        fi
         echo "$position - ${PACKAGE_MGR[$i]}"
     done
 
     read -r -p ": " pkg_choice
 
+    # If any of the optional packages are selected, set the package manager to yay
+    # by default
+    if [[ "$xorg_choice" == "y" || "$wl_choice" == "y" || "$style_choice" == "y" || "$misc_choice" == "y" || "$office_choice" == "y" ]]; then
+        if [[ $pkg_choice -eq 0 || -z $pkg_choice ]]; then
+            pkg_choice=1
+        fi
+    fi
+
     runcmd=$(echo "${PACKAGE_MGR[$pkg_choice]}" "--needed -Syu" "${USR_PACKAGES[@]}" "--noconfirm")
     echo "$runcmd"
-    echo "Execute this command?"
-    read -r -p "[y/N]: " confirm_command
+    confirm_command=$(user_prompt "Execute this command?" "n")
     if [ "$confirm_command" == "y" ]; then
         sh -c "$runcmd"
     else

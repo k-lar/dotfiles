@@ -43,6 +43,12 @@ if status is-interactive
     # My aliases
     source $HOME/.dotfiles/bash/.bash_aliases
 
+    # Make !! work in fish
+    function last_history_item
+        echo $history[1]
+    end
+    abbr -a !! --position anywhere --function last_history_item
+
     if type -q tmux; and not set -q TMUX; and not set -q VIM; and not set -q INSIDE_EMACS
         tmux_start
     end

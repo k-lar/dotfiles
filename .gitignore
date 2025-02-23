@@ -38,7 +38,6 @@ nvim/.config/nvim/spell/*
 !nvim/.config/nvim/spell/en.utf-8.spl
 !nvim/.config/nvim/spell/sl.utf-8.spl
 
-# Ignore all updates to autostart file
-options/autostart
-options/.lowspec
-options/klar_wallpapers
+# Ignore all files in options folder
+# Used for temp files or files that toggle some functionality in my scripts
+options/*

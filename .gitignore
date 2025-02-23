@@ -38,6 +38,9 @@ nvim/.config/nvim/spell/*
 !nvim/.config/nvim/spell/en.utf-8.spl
 !nvim/.config/nvim/spell/sl.utf-8.spl
 
+# Ignore fish variables file
+fish/.config/fish/fish_variables
+
 # Ignore all files in options folder
 # Used for temp files or files that toggle some functionality in my scripts
 options/*

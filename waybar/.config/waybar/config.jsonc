@@ -149,8 +149,10 @@
     "temperature": {
         // "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "warning-threshold": 70,
         "critical-threshold": 80,
         "format-critical": "<span color='#CC241D'>{temperatureC}°C {icon}</span>",
+        "format-warning": "<span color='#D79921'>{temperatureC}°C {icon}</span>",
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", "", "", ""],
 	"interval": 2,
@@ -187,10 +189,10 @@
             "critical": 15
         },
         "bat": "BAT1",
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
+        "format": " {capacity}% {icon} ",
+        "format-charging": " {capacity}%  ",
+        "format-plugged": " {capacity}%  ",
+        "format-alt": " {time} {icon} ",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],

@@ -118,17 +118,25 @@ Gruvbox Color Scheme
 
 }
 
+#temperature,
+#battery {
+    background-color: @background;
+    color: @text;
+    padding-left: 0px;
+    margin-right: 0px;
+}
+
 #cpu {
     padding-left: 0px;
     margin-right: 0px;
 }
 
 #memory {
-
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
+
 #network {
     border-radius: 0px 0px 0px 0px;
     padding-left: 10px;
@@ -145,6 +153,7 @@ Gruvbox Color Scheme
     padding-top:6px;
     padding-right: 4px;
     border-radius: 0px 8px 8px 0px;
+    margin-top: 3px;
 }
 
 #workspaces {

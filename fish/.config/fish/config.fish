@@ -75,18 +75,32 @@ if status is-interactive
         set $color normal
     end
 
-    # Set some syntax highlighting colors myself (I don't like any other colors)
-    set fish_color_autosuggestion white
+    # Set some syntax highlighting colors myself
+    set fish_color_normal normal
+    set fish_color_redirection normal
+    set fish_color_command normal
+    set fish_color_param normal
+    set fish_color_quote B8BB26
+    set fish_color_end FD7F19
     set fish_color_error red
+    set fish_color_comment 8A7C6E
+    set fish_color_operator 83A598
+    set fish_color_escape 83A598
+    set fish_color_cwd green
+    set fish_color_cwd_root red
+    set fish_color_cancel --reverse
+    set fish_color_autosuggestion 8A7C6E
+    set fish_color_match --background 3C3836
+    set fish_pager_color_selected_background --reverse
 
     # Disable underlining of path
     set fish_color_valid_path
 
     # Set the color of the progress bar in the pager
-    set fish_pager_color_progress white
+    set fish_pager_color_progress normal
 
     # Set the color of the completion menu selection
-    set fish_color_selection --background white
+    set fish_color_selection --background normal
 
     # Programs to run at start
     if type -q fastfetch

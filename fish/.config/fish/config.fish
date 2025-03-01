@@ -147,6 +147,13 @@ function fish_prompt
                 printf "]"
 
             case replace
+                set_color red
+                printf "["
+                set_color normal
+                printf '%s' $display
+                set_color red
+                printf "]"
+
             case replace_one
                 set_color red
                 printf "["

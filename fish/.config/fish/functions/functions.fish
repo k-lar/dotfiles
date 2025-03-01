@@ -1,12 +1,22 @@
 # A better man function
 function better_man
-    command man $argv[1] 2>/dev/null; or $argv[1] --help 2>&1 | less
+    # Try to display the man page for the given command
+    command man $argv[1] 2> /dev/null
+
+    # If the man page is not found, display the help message for the command
+    or begin
+        if type -q $argv[1]
+            $argv[1] --help 2>&1
+        else
+            echo "Command '$argv[1]' not found"
+        end
+    end
 end
 
 # Test true colors in terminal
 function test_truecolor
     awk 'BEGIN{
-        s="/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/";
+        s="                                                                             ";
         for (colnum = 0; colnum<77; colnum++) {
             r = 255-(colnum*255/76);
             g = (colnum*510/76);
@@ -39,10 +49,20 @@ function todo
                 echo -e "# TODO - $date\n\n- [ ] \n" >> "$HOME/todos/$date/todo.md"
             end
             $EDITOR "$HOME/todos/$date/todo.md"
+
+            # If the file contains only "# TODO - $date\n\n- [ ] \n", delete it
+            if string match -q -- (printf '# TODO - %s\n\n- [ ] \n' "$date") (cat "$HOME/todos/$date/todo.md")
+                rm "$HOME/todos/$date"
+            end
         else
             mkdir -p "$HOME/todos/$date"
             echo -e "# TODO - $date\n\n- [ ] \n" >> "$HOME/todos/$date/todo.md"
             $EDITOR "$HOME/todos/$date/todo.md"
+
+            # If the file contains only "# TODO - $date\n\n- [ ] \n", delete it
+            if string match -q -- (printf '# TODO - %s\n\n- [ ] \n' "$date") (cat "$HOME/todos/$date/todo.md")
+                rm "$HOME/todos/$date"
+            end
         end
     end
 end

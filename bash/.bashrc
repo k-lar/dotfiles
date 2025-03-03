@@ -118,10 +118,18 @@
                 fi
 
                 $EDITOR "$HOME/todos/$date/todo.md"
+
+                if [ "$(cat $HOME/todos/$date/todo.md)" = "$(printf '# TODO - %s\n\n- [ ] \n' "$date")" ]; then
+                    rm -rf "$HOME/todos/$date"
+                fi
             else
                 mkdir -p "$HOME/todos/$date"
                 echo -e "# TODO - $date\n\n- [ ] \n" >> "$HOME/todos/$date/todo.md"
                 $EDITOR "$HOME/todos/$date/todo.md"
+
+                if [ "$(cat $HOME/todos/$date/todo.md)" = "$(printf '# TODO - %s\n\n- [ ] \n' "$date")" ]; then
+                    rm -rf "$HOME/todos/$date"
+                fi
             fi
         fi
     }

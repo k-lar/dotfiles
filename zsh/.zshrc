@@ -77,7 +77,7 @@
         tmux attach -t dev; exec tmux
     }
 
-    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$VIM" ] && [ -z "$INSIDE_EMACS" ]; then
+    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$VIM" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$NO_TMUX" ]; then
       # exec tmux
       tmux_start
     fi
@@ -125,10 +125,18 @@
                 fi
 
                 $EDITOR "$HOME/todos/$date/todo.md"
+
+                if [ "$(cat $HOME/todos/$date/todo.md)" = "$(printf '# TODO - %s\n\n- [ ] \n' "$date")" ]; then
+                    rm -rf "$HOME/todos/$date"
+                fi
             else
                 mkdir -p "$HOME/todos/$date"
                 echo -e "# TODO - $date\n\n- [ ] \n" >> "$HOME/todos/$date/todo.md"
                 $EDITOR "$HOME/todos/$date/todo.md"
+
+                if [ "$(cat $HOME/todos/$date/todo.md)" = "$(printf '# TODO - %s\n\n- [ ] \n' "$date")" ]; then
+                    rm -rf "$HOME/todos/$date"
+                fi
             fi
         fi
     }

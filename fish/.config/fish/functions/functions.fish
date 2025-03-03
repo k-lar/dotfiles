@@ -52,7 +52,7 @@ function todo
 
             # If the file contains only "# TODO - $date\n\n- [ ] \n", delete it
             if string match -q -- (printf '# TODO - %s\n\n- [ ] \n' "$date") (cat "$HOME/todos/$date/todo.md")
-                rm "$HOME/todos/$date"
+                rm -rf "$HOME/todos/$date"
             end
         else
             mkdir -p "$HOME/todos/$date"
@@ -61,7 +61,7 @@ function todo
 
             # If the file contains only "# TODO - $date\n\n- [ ] \n", delete it
             if string match -q -- (printf '# TODO - %s\n\n- [ ] \n' "$date") (cat "$HOME/todos/$date/todo.md")
-                rm "$HOME/todos/$date"
+                rm -rf "$HOME/todos/$date"
             end
         end
     end

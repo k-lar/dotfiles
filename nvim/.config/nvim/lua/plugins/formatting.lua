@@ -32,7 +32,6 @@ end, { desc = "Toggle autoformat in all buffers" })
 
 return {
     { "tpope/vim-sleuth" },
-    { "vidocqh/auto-indent.nvim", opts = {} },
     {
         "stevearc/conform.nvim",
         opts = {
@@ -43,7 +42,7 @@ return {
                 python = { "black" },
                 go = { "gofmt", "goimports" },
                 -- Use a sub-list to run only the first available formatter
-                javascript = { { "prettierd", "prettier" } },
+                javascript = { "prettierd", "prettier", "biome", stop_after_first = true },
             },
             format_on_save = function(bufnr)
                 local disable_filetypes = { c = true, cpp = true }

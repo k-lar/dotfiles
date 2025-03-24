@@ -152,4 +152,4 @@
 # To run at the start of zsh
     command -v fastfetch >/dev/null 2>&1 && fastfetch || true
     command -v brem >/dev/null 2>&1 && brem --show || true
-
+    command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd zsh)" || true

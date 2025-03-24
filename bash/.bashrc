@@ -147,3 +147,6 @@
 
 # Include bash reminders if they exists
     command -v brem >/dev/null 2>&1 && brem --show || true
+
+# Start zoxide if it's installed
+    command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd bash)" || true

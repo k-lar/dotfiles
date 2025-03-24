@@ -110,6 +110,10 @@ if status is-interactive
     if type -q brem
         brem --show
     end
+
+    if type -q zoxide
+        zoxide init --cmd cd fish | source
+    end
 end
 
 function fish_user_key_bindings

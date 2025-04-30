@@ -26,7 +26,7 @@ XORG_PACKAGES=("bspwm" "sxhkd" "picom" "polybar" "lxappearance"
 
 WAYLAND_PACKAGES=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "udiskie"
 "waybar" "swaybg" "grim" "slurp" "hyprlock" "nwg-look" "rofi-wayland"
-"hypridle" "satty" "uwsm" "hyprpolkitagent" "cliphist")
+"hypridle" "satty" "uwsm" "hyprpolkitagent" "cliphist" "hyprsunset")
 
 STYLE_PACKAGES=("noto-fonts-main" "gruvbox-dark-gtk" "gruvbox-dark-icons-gtk"
 "cava" "sddm-sugar-dark")

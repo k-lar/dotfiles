@@ -20,6 +20,9 @@ vim.keymap.set(
     { desc = "Toggle Slovene spellchecking", silent = true }
 ) -- Slovene
 
+-- Yank without moving cursor
+vim.keymap.set("x", "y", "ygv<Esc>", { desc = "Yank without moving the cursor", noremap = true, silent = true })
+
 -- Tab controls (Alt+Left/Right)
 vim.keymap.set("n", "<M-Left>", "<Cmd>tabprevious<CR>")
 vim.keymap.set("n", "<M-Right>", "<Cmd>tabnext<CR>")

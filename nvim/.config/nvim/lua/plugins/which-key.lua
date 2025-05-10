@@ -39,6 +39,7 @@ return {
                 },
             },
             triggers = {
+                { "<auto>", mode = "nixsotc" },
                 -- See mini.surround bindings
                 { "s", mode = { "n", "v" } },
             },

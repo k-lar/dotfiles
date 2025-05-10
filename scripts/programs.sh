@@ -18,7 +18,7 @@ CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor"
 "otf-font-awesome" "pacman-contrib" "ttf-ibm-plex" "ntfs-3g" "pipewire"
 "pipewire-pulse" "pipewire-alsa" "pipewire-jack" "helvum" "ghostty"
 "ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-common"
-"ttf-ibmplex-mono-nerd" "zoxide")
+"ttf-ibmplex-mono-nerd" "zoxide" "ouch" "yazi")
 
 XORG_PACKAGES=("bspwm" "sxhkd" "picom" "polybar" "lxappearance"
 "xclip" "i3lock-color" "gummy-git" "xcape" "boomer-git" "rofi" "flameshot"

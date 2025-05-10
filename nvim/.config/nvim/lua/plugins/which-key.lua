@@ -38,6 +38,10 @@ return {
                     F12 = "<F12>",
                 },
             },
+            triggers = {
+                -- See mini.surround bindings
+                { "s", mode = { "n", "v" } },
+            },
             spec = {
                 { "<leader>F", group = "[F]ormatting" },
                 { "<leader>S", group = "[S]pell" },

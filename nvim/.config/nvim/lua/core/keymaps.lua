@@ -5,6 +5,14 @@ for i = 1, #undo_symbols do
     vim.keymap.set("i", char, char .. "<c-g>u")
 end
 
+-- Fix `[` and `]` keybinds for Slovenian/Croatian keyboards
+vim.keymap.set("n", "č", "[", { remap = true })
+vim.keymap.set("n", "ć", "]", { remap = true })
+vim.keymap.set("v", "č", "[", { remap = true })
+vim.keymap.set("v", "ć", "]", { remap = true })
+vim.keymap.set("o", "č", "[", { remap = true })
+vim.keymap.set("o", "ć", "]", { remap = true })
+
 -- Spell checking
 vim.keymap.set(
     "n",

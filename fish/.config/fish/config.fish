@@ -42,6 +42,7 @@ if status is-interactive
 
     # My aliases
     source $HOME/.dotfiles/bash/.bash_aliases
+    alias av='env NVIM_APPNAME=nvim-alt nvim'
 
     # Make !! work in fish
     function last_history_item
@@ -100,7 +101,7 @@ if status is-interactive
     set fish_pager_color_progress normal
 
     # Set the color of the completion menu selection
-    set fish_color_selection --background normal
+    set fish_color_selection --background 2F2C2C
 
     # Programs to run at start
     if type -q fastfetch
@@ -118,6 +119,9 @@ end
 
 function fish_user_key_bindings
     bind -M insert \cw backward-kill-word
+    bind -s --preset -M visual -m default y "fish_clipboard_copy; commandline -f end-selection repaint-mode"
+    bind -M normal -m default p fish_clipboard_paste repaint
+    bind -M insert -m default alt-p fish_clipboard_paste repaint
 end
 
 function fish_mode_prompt
@@ -184,3 +188,4 @@ function fish_prompt
 
     printf "%s" (set_color --bold yellow)"λ "(set_color normal)
 end
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk

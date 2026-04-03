@@ -18,18 +18,18 @@ make_wallpapers_file() {
     sed -i '$d' "$wallpapers_file"
 }
 
-# Check if swww-daemon is running
-if ! pgrep swww-daemon > /dev/null; then
-    if ! command -v swww > /dev/null; then
-        echo "swww is not installed"
+# Check if awww-daemon is running
+if ! pgrep awww-daemon > /dev/null; then
+    if ! command -v awww > /dev/null; then
+        echo "awww is not installed"
         exit 1
     fi
 
-    swww-daemon &
+    awww-daemon &
 fi
 
 if [ "$1" = "default" ]; then
-    swww img --transition-type wipe --transition-angle 30 --transition-step 90 --transition-fps 90 "$default_wall"
+    awww img --transition-type wipe --transition-angle 30 --transition-step 90 --transition-fps 90 "$default_wall"
     exit 0
 elif [ "$1" = "random" ]; then
     # Check if the file already exists or if it's empty
@@ -45,7 +45,7 @@ elif [ "$1" = "random" ]; then
     sed -i "/$escaped_wallpaper/d" "$HOME"/.dotfiles/options/klar_wallpapers
 
     # Set the wallpaper
-    swww img --transition-type wipe --transition-angle 30 --transition-step 120 --transition-fps 90 "$wallpaper"
+    awww img --transition-type wipe --transition-angle 30 --transition-step 120 --transition-fps 90 "$wallpaper"
     exit 0
 elif [ "$1" = "help" ] || [ "$1" = "--help" ]; then
     echo "Usage: $0 [default|random]"

@@ -6,25 +6,24 @@
 
 --]]
 
--- Vim options
+-- Core configs that should always work, even if plugins are not working
+require("core.utils")
 require("core.options")
-
--- Keymaps (core)
 require("core.keymaps")
-
--- Autocommands (core)
+require("core.colorscheme")
 require("core.autocmds")
-
--- Markdown config
 require("core.markdown")
+require("core.pack")
 
--- Bootstrap and set up plugins
-require("config.lazy")
-
--- LSP and autocompletion setup
-require("config.lsp")
-
--- Set up default colorscheme if not using any plugin colorschemes
-if not vim.g.custom_colorscheme_loaded then
-    require("core.colorscheme")
-end
+-- Plugins
+require("plugins.mini")
+require("plugins.pick")
+require("plugins.gitsigns")
+require("plugins.dynomark")
+require("plugins.treesitter")
+require("plugins.which-key")
+require("plugins.blink")
+require("plugins.misc")
+require("plugins.lspconfig")
+require("plugins.lualine")
+require("plugins.toggleterm")

@@ -89,3 +89,10 @@ vim.keymap.set("n", "<A-S-Up>", "<C-w><C-k>", { desc = "Move focus to the upper 
 -- Dynomark mappings
 vim.keymap.set("n", "<leader>v", "<Plug>(DynomarkToggle)", { desc = "Toggle Dynomark" })
 vim.keymap.set("n", "<leader>V", "<Plug>(DynomarkRun)", { desc = "Run dynomark query under cursor" })
+
+-- Copilot toggle and accept in insert mode
+vim.keymap.set("i", "<A-CR>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.keymap.set("n", "<leader>cx", function()
+    vim.g.copilot_enabled = not vim.g.copilot_enabled
+    print("Copilot status: " .. tostring(vim.g.copilot_enabled))
+end, { desc = "Toggle copilot" })

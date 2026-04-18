@@ -1,20 +1,34 @@
--- Pandoc markdown -> pdf compilation
-vim.cmd([[
-    augroup my_markdown
-        autocmd!
-        autocmd FileType markdown nnoremap <silent><F9> :<c-u>call system('pandoc -s '.expand('%:p:S').' -o '.expand('%:p:r:S').'.pdf')<cr>
-        autocmd FileType markdown nnoremap <silent><F8> :<c-u>call system('zathura '.expand('%:p:r:S').'.pdf &')<cr>
-    augroup END
-]])
+local augroup = function(name)
+    return vim.api.nvim_create_augroup("klar_" .. name, { clear = true })
+end
 
--- Markdown syntax and configuration
-vim.cmd([[au BufNewFile,BufRead,BufEnter *.md syn match markdownIgnore "\w\@<=\w\@="]])
-vim.cmd([[au filetype markdown :iabbrev txtred \textcolor{red}{}<Left>]])
-vim.cmd([[au filetype markdown :iabbrev txtblu \textcolor{blue}{}<Left>]])
-vim.cmd([[au filetype markdown :iabbrev uline \underline{}<Left>]])
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    group = augroup("markdown"),
+    desc = "Markdown settings, keymaps and abbreviations",
+    callback = function()
+        -- Larger text width for easier readability
+        vim.opt_local.textwidth = 100
 
--- Larger text width in terminal for easier readability (In markdown files)
-vim.cmd("au FileType markdown setlocal textwidth=100")
+        -- Pandoc: compile to PDF
+        vim.keymap.set("n", "<F9>", function()
+            vim.fn.system("pandoc -s " .. vim.fn.shellescape(vim.fn.expand("%:p")) .. " -o " .. vim.fn.shellescape(vim.fn.expand("%:p:r")) .. ".pdf")
+        end, { buffer = true, silent = true, desc = "Compile markdown to PDF" })
+
+        -- Open compiled PDF in Zathura
+        vim.keymap.set("n", "<F8>", function()
+            vim.fn.system("zathura " .. vim.fn.shellescape(vim.fn.expand("%:p:r")) .. ".pdf &")
+        end, { buffer = true, silent = true, desc = "Open PDF in Zathura" })
+
+        -- LaTeX abbreviations (no Lua API for iabbrev)
+        vim.cmd("iabbrev <buffer> txtred \\textcolor{red}{}<Left>")
+        vim.cmd("iabbrev <buffer> txtblu \\textcolor{blue}{}<Left>")
+        vim.cmd("iabbrev <buffer> uline \\underline{}<Left>")
+
+        -- Suppress zero-width word boundary matches in markdown syntax
+        vim.cmd([[syn match markdownIgnore "\w\@<=\w\@="]])
+    end,
+})
 
 -- Markdown fenced languages list (syntax highlighting code inside markdown docs)
 vim.g.markdown_fenced_languages = { "python", "html", "c", "vim", "rust", "bash", "sql" }

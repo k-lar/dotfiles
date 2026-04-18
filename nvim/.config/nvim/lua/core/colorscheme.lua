@@ -1,5 +1,5 @@
 -- Apply retrobox if on newer version than 0.10
-if vim.fn.has("nvim-0.10") == 1 and vim.g.custom_colorscheme_loaded == false then
+if vim.fn.has("nvim-0.10") == 1 then
     vim.cmd([[colorscheme retrobox]])
 
     if vim.g.colors_name == "retrobox" then

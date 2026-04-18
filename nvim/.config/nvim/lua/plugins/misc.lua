@@ -1,49 +1,49 @@
-return {
-    { "danymat/neogen", config = true, cmd = "Neogen" },
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        ---@type Flash.Config
-        opts = {
+local neogen = try_require("neogen")
+if neogen then
+    neogen.setup()
+end
+
+local flash = try_require("flash")
+if flash then
+    flash.setup({
+        search = {
+            multi_window = false,
+        },
+        modes = {
             search = {
-                multi_window = false,
-            },
-            modes = {
-                search = {
-                    enabled = false,
-                },
+                enabled = false,
             },
         },
-        -- stylua: ignore
-        keys = {
-            { "<Enter>", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-            { "<S-Enter>", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    })
+
+    -- stylua: ignore start
+    vim.keymap.set({ "n", "x", "o" }, "<Enter>",   function() flash.jump()              end, { desc = "Flash" })
+    vim.keymap.set({ "n", "x", "o" }, "<S-Enter>", function() flash.treesitter()        end, { desc = "Flash Treesitter" })
+    vim.keymap.set("o",               "r",         function() flash.remote()            end, { desc = "Remote Flash" })
+    vim.keymap.set({ "o", "x" },      "R",         function() flash.treesitter_search() end, { desc = "Treesitter Search" })
+    vim.keymap.set("c",               "<C-s>",     function() flash.toggle()            end, { desc = "Toggle Flash Search" })
+    -- stylua: ignore end
+end
+
+local todo_comments = try_require("todo-comments")
+if todo_comments then
+    todo_comments.setup({
+        signs = false,
+        keywords = {
+            TODO = { color = "hint" },
+            NOTE = { color = "info" },
         },
-    },
-    {
-        "folke/todo-comments.nvim",
-        event = "VimEnter",
-        opts = {
-            signs = false,
-            keywords = {
-                TODO = { color = "hint" },
-                NOTE = { color = "info" },
-            },
-        },
-    },
-    {
-        "brenoprata10/nvim-highlight-colors",
-        event = "VeryLazy",
-        opts = {
-            render = "virtual",
-            virtual_symbol_position = "eol",
-            virtual_symbol = "■",
-            virtual_symbol_suffix = " ",
-            virtual_symbol_prefix = "",
-            enable_tailwind = true,
-        },
-    },
-}
+    })
+end
+
+local highlight_colors = try_require("nvim-highlight-colors")
+if highlight_colors then
+    highlight_colors.setup({
+        render = "virtual",
+        virtual_symbol_position = "eol",
+        virtual_symbol = "■",
+        virtual_symbol_suffix = " ",
+        virtual_symbol_prefix = "",
+        enable_tailwind = true,
+    })
+end

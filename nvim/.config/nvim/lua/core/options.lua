@@ -73,6 +73,12 @@ vim.g.custom_colorscheme_loaded = false
 vim.b.autoformat = true
 vim.g.autoformat = true
 
+-- vim-table-mode
+vim.g.table_mode_corner = "|"
+
+-- bullets.vim
+vim.g.bullets_renumber_on_change = 0
+
 -- Disables automatic commenting on new line
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = "*",
@@ -80,3 +86,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
         vim.opt.formatoptions:remove({ "c", "r", "o" })
     end,
 })
+
+-- Copilot settings, must be set before copilot.vim is sourced
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_enabled = false

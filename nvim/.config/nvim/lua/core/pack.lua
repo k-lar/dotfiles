@@ -42,4 +42,5 @@ vim.pack.add({
     { src = "https://github.com/k-lar/dark-pale-gruvbox-lualine.nvim" },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/akinsho/toggleterm.nvim" },
+    { src = "https://github.com/mluders/comfy-line-numbers.nvim" },
 })

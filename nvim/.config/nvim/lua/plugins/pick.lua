@@ -38,9 +38,15 @@ local function grep_from_git_root()
     vim.fn.system("git rev-parse --is-inside-work-tree")
     local opts = nil
     if vim.v.shell_error == 0 then
-        local dot_git  = vim.fn.finddir(".git", ".;")
-        local git_root = vim.fn.fnamemodify(dot_git, ":h")
-        opts = { source = { cwd = git_root } }
+        local dot_git = vim.fn.finddir(".git", ".;")
+        if type(dot_git) == "table" then
+            dot_git = dot_git[1] or ""
+        end
+
+        if dot_git ~= "" then
+            local git_root = vim.fn.fnamemodify(dot_git, ":h")
+            opts = { source = { cwd = git_root } }
+        end
     end
     pick.builtin.grep_live(nil, opts)
 end

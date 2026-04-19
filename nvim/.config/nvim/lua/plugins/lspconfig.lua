@@ -139,11 +139,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- Diagnostic keymaps
 -- stylua: ignore starts
-vim.keymap.set("n", "[d",         vim.diagnostic.goto_prev,   { desc = "Go to previous diagnostic" })
-vim.keymap.set("n", "]d",         vim.diagnostic.goto_next,   { desc = "Go to next diagnostic" })
-vim.keymap.set("n", "<leader>e",  vim.diagnostic.open_float,  { desc = "Open floating diagnostic" })
+vim.keymap.set("n", "[d",         function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Go to previous diagnostic" })
+vim.keymap.set("n", "]d",         function() vim.diagnostic.jump({ count = 1 }) end,  { desc = "Go to next diagnostic" })
+vim.keymap.set("n", "<leader>e",  function() vim.diagnostic.open_float({ scope = "cursor" }) end, { desc = "Open floating diagnostic" })
 vim.keymap.set("n", "<leader>q",  vim.diagnostic.setloclist,  { desc = "Open diagnostics list" })
 -- stylua: ignore end
 

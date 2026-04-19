@@ -137,7 +137,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     callback = function()
         vim.defer_fn(function()
-            vim.diagnostic.open_float(nil, { focusable = false })
+            vim.diagnostic.open_float({ focusable = false })
         end, 1000)
     end,
 })

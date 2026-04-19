@@ -1,11 +1,3 @@
----Require a module, returning it on success or nil on failure.
----@param mod string
----@return unknown?
-function try_require(mod)
-    local ok, result = pcall(require, mod)
-    return ok and result or nil
-end
-
 if not vim.pack then
     return
 end

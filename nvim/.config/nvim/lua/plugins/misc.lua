@@ -47,3 +47,11 @@ if highlight_colors then
         enable_tailwind = true,
     })
 end
+
+local comfy_line_numbers = try_require("comfy-line-numbers")
+if comfy_line_numbers then
+    comfy_line_numbers.setup({
+        up_key = "<Up>",
+        down_key = "<Down>",
+    })
+end

@@ -44,3 +44,6 @@ fish/.config/fish/fish_variables
 # Ignore all files in options folder
 # Used for temp files or files that toggle some functionality in my scripts
 options/*
+
+# Ignore MacOS .DS_Store
+.DS_Store

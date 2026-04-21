@@ -24,7 +24,7 @@ vim.pack.add({
     { src = "https://github.com/dhruvasagar/vim-table-mode" },
     { src = "https://github.com/dkarter/bullets.vim" },
     { src = "https://github.com/k-lar/dynomark.nvim" },
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
     { src = "https://github.com/folke/which-key.nvim" },
     { src = "https://github.com/saghen/blink.cmp", version = "v1" },
     { src = "https://github.com/moyiz/blink-emoji.nvim" },

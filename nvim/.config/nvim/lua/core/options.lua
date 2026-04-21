@@ -19,6 +19,7 @@ vim.opt.showmode = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.smarttab = true
+vim.opt.backspace = "indent,eol,start"
 vim.opt.smartindent = true
 vim.opt.scrolloff = 1
 vim.opt.sidescrolloff = 3
@@ -80,7 +81,7 @@ vim.g.table_mode_corner = "|"
 vim.g.bullets_renumber_on_change = 0
 
 -- Disables automatic commenting on new line
-vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd( "FileType" , {
     pattern = "*",
     callback = function()
         vim.opt.formatoptions:remove({ "c", "r", "o" })

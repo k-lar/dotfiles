@@ -32,7 +32,13 @@ hl.on("hyprland.start", function ()
     -- Clipboard
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
+
+    -- Special workspace for nvim scratchpad
     hl.exec_cmd("hyprctl dispatch exec \"[workspace special silent] foot --title=nvim-scratch nvim\"")
+
+    -- Start recording with noctalia-shell's screen recorder plugin (replay buffer)
+    -- Start after 1 minute to ensure it starts after the plugin is loaded
+    hl.exec_cmd("sleep 60 && qs -c noctalia-shell ipc call plugin:screen-recorder startReplay")
 end)
 
 -- General Hyprland config
@@ -130,6 +136,8 @@ hl.bind("Print", hl.exec_cmd("grim -g \"$(slurp)\" -t ppm - | satty --filename -
 hl.bind(mainMod .. " + Shift + W", hl.exec_cmd("pkill waybar && waybar"))
 hl.bind(mainMod .. " + Shift + S", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + V", hl.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
+hl.bind(mainMod .. " + R", hl.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-recorder startReplay"))
+hl.bind(mainMod .. " + Shift + R", hl.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-recorder saveReplay"))
 
 -- Bind workspace switching and moving windows to workspaces
 for i = 1, 10 do

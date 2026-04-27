@@ -41,7 +41,7 @@ MISC_PACKAGES=("yt-dlp" "ncmpcpp" "dash" "zsh" "inetutils" "caffeine-ng"
 # ===============================================================================
 
 print_version() {
-    printf "0.1.3\n"
+    printf "0.1.4\n"
 }
 
 user_prompt() {

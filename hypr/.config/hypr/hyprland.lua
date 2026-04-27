@@ -92,6 +92,11 @@ hl.config({
     },
 })
 
+-- Set up 10 persistent workspaces
+for i = 1, 10 do
+    hl.workspace_rule({ workspace = tostring(i), peristent = true })
+end
+
 -- Variables
 local terminal = "foot"
 local launcher = "rofi -show run -show-icons"

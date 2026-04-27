@@ -17,18 +17,19 @@ CORE_PACKAGES=("neovim" "mpv" "feh" "zathura" "zathura-pdf-mupdf" "xcolor"
 "gdu" "sddm" "fastfetch" "dunst" "mtpfs" "ttf-iosevka-nerd" "ttf-font-awesome"
 "otf-font-awesome" "pacman-contrib" "ttf-ibm-plex" "ntfs-3g" "pipewire"
 "pipewire-pulse" "pipewire-alsa" "pipewire-jack" "helvum" "ghostty"
-"ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-common"
-"ttf-ibmplex-mono-nerd" "zoxide" "ouch" "yazi")
+"ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-common" "noto-fonts"
+"ttf-ibmplex-mono-nerd" "zoxide" "ouch" "yazi" "rofi" "noto-fonts-cjk"
+"noto-fonts-emoji" "noto-fonts-extra")
 
 XORG_PACKAGES=("bspwm" "sxhkd" "picom" "polybar" "lxappearance"
 "xclip" "i3lock-color" "gummy-git" "xcape" "boomer-git" "rofi" "flameshot"
 "xfce-polkit")
 
 WAYLAND_PACKAGES=("hyprland" "hyprpicker" "hyprpaper" "wl-clipboard" "udiskie"
-"waybar" "swaybg" "grim" "slurp" "hyprlock" "nwg-look" "rofi-wayland"
+"grim" "slurp" "hyprlock" "nwg-look" "noctalia-shell"
 "hypridle" "satty" "uwsm" "hyprpolkitagent" "cliphist" "hyprsunset" "awww")
 
-STYLE_PACKAGES=("noto-fonts-main" "gruvbox-dark-gtk" "gruvbox-dark-icons-gtk"
+STYLE_PACKAGES=("gruvbox-dark-gtk" "gruvbox-dark-icons-gtk"
 "cava" "sddm-sugar-dark")
 
 TERM_OFFICE=("texlive-core" "pandoc-bin" "texlive-latexextra" "sc-im" "cbonsai"

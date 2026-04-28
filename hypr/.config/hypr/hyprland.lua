@@ -182,6 +182,9 @@ hl.bind(mainMod .. " + Shift + left", hl.dsp.window.swap({ "l" }))
 hl.bind(mainMod .. " + Shift + up", hl.dsp.window.swap({ "u" }))
 hl.bind(mainMod .. " + Shift + down", hl.dsp.window.swap({ "d" }))
 
+-- # Tag current window as private which should hide it from screensharing
+hl.bind(mainMod .. " + H", hl.dsp.window.tag({ "private" }))
+
 -- Window rules
 hl.window_rule({
     float = true,
@@ -194,6 +197,14 @@ hl.window_rule({
     float = true,
     center = true,
     match = { class = "^(file-roller)$" }
+})
+
+-- Windows tagged with private should be hidden when screen sharing and have a red border to tell that to me
+hl.window_rule({
+    match = { tag = "private" },
+    no_screen_share = true,
+    border_color = { colors = {"rgba(ffff0000)", "rgba(ff000099)"}},
+    border_size = 2
 })
 
 local common_modals = {

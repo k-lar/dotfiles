@@ -203,7 +203,7 @@ hl.window_rule({
 hl.window_rule({
     match = { tag = "private" },
     no_screen_share = true,
-    border_color = { colors = {"rgba(ffff0000)", "rgba(ff000099)"}},
+    border_color = { colors = { "rgba(ff000099)" }},
     border_size = 2
 })
 

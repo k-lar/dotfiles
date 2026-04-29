@@ -96,3 +96,8 @@ vim.keymap.set("n", "<leader>cx", function()
     vim.g.copilot_enabled = not vim.g.copilot_enabled
     print("Copilot status: " .. tostring(vim.g.copilot_enabled))
 end, { desc = "Toggle copilot" })
+
+-- Multiword step by step repeated replacement (use with . repeat)
+vim.keymap.set("n", "<C-n>", "*Ncgn", { desc = "Select next occurrence of the word under the cursor and start replacing it" })
+vim.keymap.set("x", "<C-n>", [[y/\V<C-R>"<CR>cgn]], { desc = "Select next occurrence of the selected word and start replacing it" })
+vim.keymap.set("i", "<C-n>", [[<Esc>*Ncgn]], { desc = "Select next occurrence of the word under the cursor and start replacing it" })

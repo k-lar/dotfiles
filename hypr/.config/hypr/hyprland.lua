@@ -115,7 +115,9 @@ hl.bind(mainMod .. "+ Return", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- NOTE: You can do stuff like this with the returned handler:
 -- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. "+ SHIFT + Q", hl.dsp.window.kill())
+
+-- HACK: idk if this will work since no documentation on what a signal is but this seems alright
+hl.bind(mainMod .. "+ SHIFT + Q", hl.dsp.window.signal({ signal = 9 }))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("emacsclient -c -a 'emacs'"))
@@ -169,6 +171,11 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"),   { locked = tru
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"),       { locked = true })
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl set +10%"), { repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 10%-"), { repeating = true })
+
+-- Zoom controls
+hl.bind(mainMod .. " + plus",   hl.dsp.exec_cmd("hyprctl keyword cursor:zoom_factor $(hyprctl -j getoption cursor:zoom_factor | jq -r '.float * (2 | sqrt)')"), { repeating = true })
+hl.bind(mainMod .. " + minus",  hl.dsp.exec_cmd("hyprctl keyword cursor:zoom_factor $(hyprctl -j getoption cursor:zoom_factor | jq -r '[.float / (2 | sqrt), 1] | max')"), { repeating = true })
+hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("hyprctl keyword cursor:zoom_factor 1")) -- Reset zoom
 
 -- Move/resize windows with keyboard
 hl.bind(mainMod .. " + right", hl.dsp.window.resize({ x = 10, y = 0, relative = true}), { repeating = true })

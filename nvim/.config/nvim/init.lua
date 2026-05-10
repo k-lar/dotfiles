@@ -6,6 +6,9 @@
 
 --]]
 
+-- Enable faster startup by caching compiled Lua modules
+vim.loader.enable()
+
 -- Core configs that should always work, even if plugins are not working
 require("core.utils")
 require("core.options")

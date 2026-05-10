@@ -44,3 +44,92 @@ vim.pack.add({
     { src = "https://github.com/akinsho/toggleterm.nvim" },
     { src = "https://github.com/mluders/comfy-line-numbers.nvim" },
 })
+
+-- Some intuitive helper commands for vim.pack
+local function complete_packages(match)
+  return vim.iter(vim.pack.get())
+    :map(function(pack) return pack.spec.name end)
+    :filter(function(pack) return pack:find(match) end)
+    :totable()
+end
+
+vim.api.nvim_create_user_command(
+  'Pack',
+  function(info)
+    local subcmd = info.fargs[1]
+    local args = vim.list_slice(info.fargs, 2)
+
+    if subcmd == 'update' then
+      vim.pack.update(#args > 0 and args or nil, {
+        force = info.bang,
+      })
+
+    elseif subcmd == 'delete' then
+      if #args == 0 then
+        vim.notify(
+          'Pack delete requires at least one package',
+          vim.log.levels.ERROR
+        )
+        return
+      end
+
+      vim.pack.del(args, {
+        force = info.bang,
+      })
+
+    elseif subcmd == 'install' then
+      if #args == 0 then
+        vim.notify(
+          'Pack install requires at least one source',
+          vim.log.levels.ERROR
+        )
+        return
+      end
+
+      local specs = vim.iter(args)
+        :map(function(src)
+          return { src = src }
+        end)
+        :totable()
+
+      vim.pack.add(specs, {
+        confirm = not info.bang,
+      })
+
+    else
+      vim.notify(
+        ('Unknown Pack subcommand: %s'):format(subcmd or ''),
+        vim.log.levels.ERROR
+      )
+    end
+  end,
+  {
+    desc = 'Manage packages',
+    nargs = '+',
+    bang = true,
+    complete = function(arglead, cmdline)
+      local parts = vim.split(cmdline, '%s+')
+
+      -- Complete subcommands
+      if #parts <= 2 then
+        return vim.tbl_filter(function(cmd)
+          return cmd:find(arglead) == 1
+        end, {
+          'update',
+          'delete',
+          'install',
+        })
+      end
+
+      local subcmd = parts[2]
+
+      -- Package completion for update/delete
+      if subcmd == 'update' or subcmd == 'delete' then
+        return complete_packages(arglead)
+      end
+
+      -- No completion for install sources
+      return {}
+    end,
+  }
+)

@@ -79,6 +79,18 @@ vim.g.table_mode_corner = "|"
 
 -- bullets.vim
 vim.g.bullets_renumber_on_change = 0
+vim.g.bullets_enabled_file_types = {
+    'markdown',
+    'text',
+    'gitcommit',
+    'scratch'
+}
+vim.g.bullets_set_mappings = 0
+vim.g.bullets_custom_mappings = {
+    { "nmap", "<leader>bx", "<Plug>(bullets-toggle-checkbox)" },
+    { "imap", "<cr>", "<Plug>(bullets-newline)" },
+
+}
 
 -- Disables automatic commenting on new line
 vim.api.nvim_create_autocmd( "FileType" , {

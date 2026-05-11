@@ -1,3 +1,12 @@
+local utils = require("hyprland_utils")
+require("modules.show_active_window")
+
+local scripts = {
+    hyprsunset = "~/.dotfiles/rofi/.config/rofi/scripts/rofi-hyprsunset",
+    wallpaper  = "~/.dotfiles/scripts/better_random_wall.sh",
+    spongebob  = "~/.dotfiles/scripts/spongebob_case.sh"
+}
+
 -- Monitor config
 hl.monitor({
     output   = "",
@@ -7,37 +16,45 @@ hl.monitor({
 })
 
 -- Environment variables
-hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("GTK_THEME", "gruvbox-dark-gtk")
-hl.env("QT_QPA_PLATFORM", "wayland;xcb")
-hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
-hl.env("XDG_SESSION_TYPE", "wayland")
-hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+local function envs(vars)
+	for k, v in pairs(vars) do
+		hl.env(k, v)
+	end
+end
+
+envs({
+    XCURSOR_SIZE = "24",
+    HYPRCURSOR_SIZE = "24",
+    GTK_THEME = "gruvbox-dark-gtk",
+    QT_QPA_PLATFORM = "wayland;xcb",
+    XDG_CURRENT_DESKTOP = "Hyprland",
+    XDG_SESSION_TYPE = "wayland",
+    XDG_SESSION_DESKTOP = "Hyprland"
+})
 
 -- Autostart these apps
 hl.on("hyprland.start", function()
-    hl.dsp.exec_cmd("discord")
-    hl.dsp.exec_cmd("if [ -e $HOME/.dotfiles/options/.laptop ]; then hypridle -c ${XDG_CONFIG_HOME}/hypr/hypridle_laptop.conf; else hypridle; fi")
-    hl.dsp.exec_cmd("qs -c noctalia-shell")
-    hl.dsp.exec_cmd("awww-daemon")
-    hl.dsp.exec_cmd("emacs --daemon")
-    hl.dsp.exec_cmd("kdeconnect-indicator")
-    hl.dsp.exec_cmd("nm-applet")
-    hl.dsp.exec_cmd("udiskie --smart-tray --file-manager=thunar")
-    hl.dsp.exec_cmd("systemctl --user enable --now hyprpolkitagent.service")
-    hl.dsp.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+        hl.exec_cmd("discord")
+        hl.exec_cmd("if [ -e $HOME/.dotfiles/options/.laptop ]; then hypridle -c ${XDG_CONFIG_HOME}/hypr/hypridle_laptop.conf; else hypridle; fi")
+        hl.exec_cmd("qs -c noctalia-shell")
+        hl.exec_cmd("awww-daemon")
+        hl.exec_cmd("emacs --daemon")
+        hl.exec_cmd("kdeconnect-indicator")
+        hl.exec_cmd("nm-applet")
+        hl.exec_cmd("udiskie --smart-tray --file-manager=thunar")
+        hl.exec_cmd("systemctl --user enable --now hyprpolkitagent.service")
+        hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 
-    -- Clipboard
-    hl.dsp.exec_cmd("wl-paste --type text --watch cliphist store")
-    hl.dsp.exec_cmd("wl-paste --type image --watch cliphist store")
+        -- Clipboard
+        hl.exec_cmd("wl-paste --type text --watch cliphist store")
+        hl.exec_cmd("wl-paste --type image --watch cliphist store")
 
-    -- Special workspace for nvim scratchpad
-    hl.dsp.exec_cmd("hyprctl dispatch exec \"[workspace special silent] foot --title=nvim-scratch nvim\"")
+        -- Special workspace for nvim scratchpad
+        -- hl.dsp.exec_cmd({ cmd = "foot --title=nvim-scratch nvim", rules = { workspace = "special silent" } })
 
-    -- Start recording with noctalia-shell's screen recorder plugin (replay buffer)
-    -- Start after 1 minute to ensure it starts after the plugin is loaded
-    hl.dsp.exec_cmd("sleep 60 && qs -c noctalia-shell ipc call plugin:screen-recorder startReplay")
+        -- Start recording with noctalia-shell's screen recorder plugin (replay buffer)
+        -- Start after 1 minute to ensure it starts after the plugin is loaded
+        hl.exec_cmd("sleep 60 && qs -c noctalia-shell ipc call plugin:screen-recorder startReplay")
 end)
 
 -- General Hyprland config
@@ -58,10 +75,10 @@ hl.config({
     },
 
     general = {
-        gaps_in  = 5,
-        gaps_out = 12,
+        gaps_in  = 3,
+        gaps_out = 10,
 
-        border_size = -1,
+        border_size = 2,
 
         col = {
             active_border   = { colors = { "rgba(00000000)", "rgba(00000000)" }},
@@ -79,6 +96,7 @@ hl.config({
 
     decoration = {
         rounding = 10,
+        shadow = { enabled = false }
     },
 
     animations = {
@@ -119,7 +137,7 @@ local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- HACK: idk if this will work since no documentation on what a signal is but this seems alright
 hl.bind(mainMod .. "+ SHIFT + Q", hl.dsp.window.signal({ signal = 9 }))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + F",  hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("emacsclient -c -a 'emacs'"))
 hl.bind(mainMod .. " + Tab", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + Space", hl.dsp.window.fullscreen({ action = "toggle" }))
@@ -127,11 +145,10 @@ hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(browser2))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("sh -c \"~/.dotfiles/rofi/.config/rofi/scripts/rofi-hyprsunset\""))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("sh -c \"~/.dotfiles/scripts/better_random_wall.sh random\""))
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("sh -c \"~/.dotfiles/scripts/better_random_wall.sh default\""))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("sh -c \"~/.dotfiles/scripts/spongebob_case.sh\""))
-hl.bind(mainMod .. " + space", hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("sh -c \"" .. scripts.hyprsunset .. "\""))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(scripts.wallpaper .. " random"))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd(scripts.wallpaper .. " default"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(scripts.spongebob))
 hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("rofi -show p -modi \"p:~/.config/rofi/scripts/rofi-power-menu --choices=shutdown/reboot/suspend/logout\""))
 hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("pkill waybar && waybar"))
@@ -143,7 +160,7 @@ hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("qs -c noctalia-shell ipc cal
 -- Bind workspace switching and moving windows to workspaces
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + "         .. key,     hl.dsp.focus({ workspace = i}))
+    hl.bind(mainMod .. " + "         .. key,     hl.dsp.focus({ workspace = i }))
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
 
@@ -163,19 +180,25 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Media keys
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"), { repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"), { repeating = true })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"),       { locked = true })
+hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"), { repeating = true })
+hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"), { repeating = true })
+hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
+hl.bind("XF86AudioPlay",         hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPrev",         hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+hl.bind("XF86AudioNext",         hl.dsp.exec_cmd("playerctl next"),       { locked = true })
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl set +10%"), { repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 10%-"), { repeating = true })
 
 -- Zoom controls
-hl.bind(mainMod .. " + plus",   hl.dsp.exec_cmd("hyprctl keyword cursor:zoom_factor $(hyprctl -j getoption cursor:zoom_factor | jq -r '.float * (2 | sqrt)')"), { repeating = true })
-hl.bind(mainMod .. " + minus",  hl.dsp.exec_cmd("hyprctl keyword cursor:zoom_factor $(hyprctl -j getoption cursor:zoom_factor | jq -r '[.float / (2 | sqrt), 1] | max')"), { repeating = true })
-hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("hyprctl keyword cursor:zoom_factor 1")) -- Reset zoom
+hl.bind(mainMod .. " + plus", function()
+    utils.scale_cursor_zoom(0.2)
+end, { repeating = true })
+hl.bind(mainMod .. " + minus", function()
+    utils.scale_cursor_zoom(-0.2)
+end, { repeating = true })
+hl.bind(mainMod .. " + period", function()
+    utils.set_cursor_zoom_factor(1.0)
+end) -- Reset zoom
 
 -- Move/resize windows with keyboard
 hl.bind(mainMod .. " + right", hl.dsp.window.resize({ x = 10, y = 0, relative = true}), { repeating = true })
@@ -189,7 +212,7 @@ hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.window.swap({ direction = "left" }
 hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.window.swap({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.window.swap({ direction = "down" }))
 
--- # Tag current window as private which should hide it from screensharing
+-- Tag current window as private which should hide it from screensharing
 hl.bind(mainMod .. " + H", hl.dsp.window.tag({ tag = "private" }))
 
 -- Window rules
@@ -210,8 +233,7 @@ hl.window_rule({
 hl.window_rule({
     match = { tag = "private" },
     no_screen_share = true,
-    border_color = { colors = { "rgba(ff000099)" }},
-    border_size = 2
+    border_color = "rgba(ff000099) rgba(ff000099)",
 })
 
 local common_modals = {

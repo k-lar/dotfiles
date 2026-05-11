@@ -89,7 +89,7 @@ hl.config({
         resize_on_border = false,
 
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
-        allow_tearing = false,
+        allow_tearing = true,
 
         layout = "dwindle",
     },
@@ -258,4 +258,9 @@ hl.window_rule({
     size = "1280 720",
     match = { title = "^(nvim-scratch)$" },
     workspace = "special"
+})
+
+hl.window_rule({
+    match = { title = "Brawlhalla" },
+    immediate = true
 })

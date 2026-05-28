@@ -50,7 +50,7 @@ hl.on("hyprland.start", function()
         hl.exec_cmd("wl-paste --type image --watch cliphist store")
 
         -- Special workspace for nvim scratchpad
-        -- hl.dsp.exec_cmd({ cmd = "foot --title=nvim-scratch nvim", rules = { workspace = "special silent" } })
+        hl.dsp.exec_cmd("foot --title=nvim-scratch nvim")
 
         -- Start recording with noctalia-shell's screen recorder plugin (replay buffer)
         -- Start after 1 minute to ensure it starts after the plugin is loaded
@@ -152,7 +152,7 @@ hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(scripts.spongebob))
 hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("rofi -show p -modi \"p:~/.config/rofi/scripts/rofi-power-menu --choices=shutdown/reboot/suspend/logout\""))
 hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("pkill waybar && waybar"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.workspace.toggle_special("special"))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-recorder startReplay"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-recorder saveReplay"))
@@ -257,10 +257,30 @@ hl.window_rule({
     float = true,
     size = "1280 720",
     match = { title = "^(nvim-scratch)$" },
-    workspace = "special"
+    workspace = "special silent"
 })
 
 hl.window_rule({
     match = { title = "Brawlhalla" },
     immediate = true
+})
+
+hl.window_rule({
+    match = { class = "^(discord)$" },
+    workspace = "1 silent"
+})
+
+hl.window_rule({
+    match = { class = "^(librewolf)$" },
+    workspace = "2 silent"
+})
+
+hl.window_rule({
+    match = { class = "^(chromium)$" },
+    workspace = "3 silent"
+})
+
+hl.window_rule({
+    match = { class = "^(steam)$" },
+    workspace = "4 silent"
 })

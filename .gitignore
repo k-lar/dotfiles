@@ -47,3 +47,9 @@ options/*
 
 # Ignore MacOS .DS_Store
 .DS_Store
+
+# Ignore everything but specific files in yazi config
+yazi/.config/yazi/*
+!yazi/.config/yazi/yazi.toml
+!yazi/.config/yazi/theme.toml
+!yazi/.config/yazi/keymaps.toml

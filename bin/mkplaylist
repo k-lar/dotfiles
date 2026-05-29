@@ -1,0 +1,75 @@
+#!/bin/bash
+set -e
+
+# This script creates a playlist file for the current directory (.m3u)
+# Usage: mkplaylist [options] [playlist_name]
+# Options:
+# -h, --help: Show this help message and exit
+# -V, --version: Show version information and exit
+# -a, --all: Include all files in the playlist (default is to include only audio files)
+# -v, --video: Include video files in the playlist
+# -ext, --extensions: Specify file extensions to include in the playlist (comma-separated, e.g., "mp3,flac,wav")
+# Example: mkplaylist -ext "mp3,flac" my_playlist.m3u
+# If no playlist name is provided, it defaults to "playlist.m3u"
+
+# Default file extensions for audio and video
+audio_extensions="mp3,flac,wav,aac,m4a"
+video_extensions="mp4,mkv,avi,flv,webm"
+
+# Default to audio files only
+extensions="$audio_extensions"
+
+# Parse options
+while [ "$1" != "" ]; do
+    case $1 in
+        -h | --help )
+            echo "Usage: mkplaylist [options] [playlist_name]"
+            echo "Options:"
+            echo "  -h, --help: Show this help message and exit"
+            echo "  -v, --version: Show version information and exit"
+            echo "  -ext, --extensions: Specify file extensions to include in the playlist (comma-separated, e.g., \"mp3,flac,wav\")"
+            echo "Example: mkplaylist -ext \"mp3,flac\" my_playlist.m3u"
+            exit 0
+            ;;
+        -V | --version )
+            echo "mkplaylist version 1.0"
+            exit 0
+            ;;
+        -ext | --extensions )
+            shift
+            extensions="$1"
+            ;;
+        -a | --all )
+            extensions="$audio_extensions,$video_extensions"
+            ;;
+        -v | --video )
+            extensions="$video_extensions"
+            ;;
+        * )
+            break
+            ;;
+    esac
+    shift
+done
+
+playlist_name="${1:-playlist.m3u}"
+if [ -f "$playlist_name" ]; then
+    echo "Error: $playlist_name already exists. Please choose a different name."
+    exit 1
+fi
+
+# Create the playlist file
+touch "$playlist_name"
+
+# Convert the comma-separated extensions into a find command format
+find_command=""
+IFS=',' read -ra ext_array <<< "$extensions"
+for ext in "${ext_array[@]}"; do
+    if [ -n "$find_command" ]; then
+        find_command="$find_command -o "
+    fi
+    find_command="$find_command -iname \"*.$ext\""
+done
+
+# Use the find command to search for files with the specified extensions and append them to the playlist
+eval "find . -type f \( $find_command \) -print >> \"$playlist_name\""

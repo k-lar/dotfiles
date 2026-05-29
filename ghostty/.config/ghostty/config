@@ -1,10 +1,11 @@
 # Ghostty config
+# vim: syntax=dosini
 
 # Visuals
-theme = GruvboxDark
+theme = Gruvbox Dark
 background = 262626
 window-decoration = false
-background-opacity = 1
+background-opacity = 0.8
 background-blur-radius= 20
 
 # Behavior
@@ -18,9 +19,10 @@ keybind = unconsumed:ctrl+shift+r=reload_config
 # Fonts
 font-family = monospace
 font-family = Symbols Nerd Font Mono
-font-size = 14
+font-size = 13
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
 
-# vim: syntax=dosini
+alpha-blending = linear-corrected
+window-padding-color = extend-always

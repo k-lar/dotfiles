@@ -9,7 +9,7 @@ set -e
 # -a, --all: Include all files in the playlist (default is to include only audio files)
 # -v, --video: Include video files in the playlist
 # -ext, --extensions: Specify file extensions to include in the playlist (comma-separated, e.g., "mp3,flac,wav")
-# Example: mkplaylist -ext "mp3,flac" my_playlist.m3u
+# Example: mkplaylist -ext "mp3,flac" my_playlist
 # If no playlist name is provided, it defaults to "playlist.m3u"
 
 # Default file extensions for audio and video
@@ -53,6 +53,9 @@ while [ "$1" != "" ]; do
 done
 
 playlist_name="${1:-playlist.m3u}"
+if [[ "$playlist_name" != *.m3u ]]; then
+    playlist_name="${playlist_name}.m3u"
+fi
 if [ -f "$playlist_name" ]; then
     echo "Error: $playlist_name already exists. Please choose a different name."
     exit 1

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+image="cover.jpg"
+
+if [ "$1" = "-i" ] && [ -n "$2" ]; then
+    image="$2"
+    shift 2
+fi
+
+if [ ! -f "$image" ]; then
+    echo "Error: $image not found."
+    exit 1
+fi
+
+# Loop through all .flac or .mp3 files
+for song in *.mp3 *.flac; do
+    # Skip if no .mp3 or .flac files found
+    [ -e "$song" ] || continue
+
+    echo "Processing: $song"
+
+    # Remove any existing cover art
+    if [[ "$song" == *.mp3 ]]; then
+        eyeD3 --remove-all-images "$song"
+    elif [[ "$song" == *.flac ]]; then
+        metaflac --remove --block-type=PICTURE "$song"
+    fi
+
+    # Add new cover art
+    if [[ "$song" == *.mp3 ]]; then
+        eyeD3 --add-image="$image:FRONT_COVER" "$song"
+    elif [[ "$song" == *.flac ]]; then
+        metaflac --import-picture-from="$image" "$song"
+    fi
+done
+
+echo "Done."

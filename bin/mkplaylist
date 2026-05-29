@@ -26,7 +26,9 @@ while [ "$1" != "" ]; do
             echo "Usage: mkplaylist [options] [playlist_name]"
             echo "Options:"
             echo "  -h, --help: Show this help message and exit"
-            echo "  -v, --version: Show version information and exit"
+            echo "  -V, --version: Show version information and exit"
+            echo "  -a, --all: Include all files in the playlist (default is to include only audio files)"
+            echo "  -v, --video: Include only video files in the playlist"
             echo "  -ext, --extensions: Specify file extensions to include in the playlist (comma-separated, e.g., \"mp3,flac,wav\")"
             echo "Example: mkplaylist -ext \"mp3,flac\" my_playlist.m3u"
             exit 0

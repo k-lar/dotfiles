@@ -29,9 +29,9 @@ if not mason_lspconfig or not lspconfig then
 end
 
 local servers = {
-    -- clangd = {},
     -- pyright = {},
     -- rust_analyzer = {},
+    clangd = {},
     gopls   = {},
     ts_ls   = {},
     denols  = {

@@ -16,13 +16,18 @@ blink.setup({
     end,
 
     keymap = {
-        preset = "super-tab",
+        preset = "default",
         -- Arrow keys should only move the cursor, not select completion items
         ["<Up>"] = { "fallback" },
         ["<Down>"] = { "fallback" },
-        -- Scroll docs (mirrors <C-d>/<C-f> from nvim-cmp)
-        ["<C-d>"] = { "scroll_documentation_up", "fallback" },
-        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+        -- Use Tab and Shift-Tab to navigate completion items and snippets
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+        -- Hide autocomplete with ESC
+        ["<Esc>"] = { "hide", "fallback" },
+        -- Scroll docs
+        ["<PageUp>"] = { "scroll_documentation_up", "fallback" },
+        ["<PageDown>"] = { "scroll_documentation_down", "fallback" },
         -- Confirm with <S-CR>
         ["<S-CR>"] = { "accept", "fallback" },
     },

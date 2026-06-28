@@ -34,7 +34,12 @@ envs({
 
 -- Autostart these apps
 hl.on("hyprland.start", function()
-        hl.exec_cmd("discordcanary")
+        -- Export full session env early so DBus-activated services (portal) get Wayland/Hyprland context
+        hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+        hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP")
+        hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland.service xdg-desktop-portal.service")
+
+        hl.exec_cmd("sleep 2 && discordcanary")
         hl.exec_cmd("if [ -e $HOME/.dotfiles/options/.laptop ]; then hypridle -c ${XDG_CONFIG_HOME}/hypr/hypridle_laptop.conf; else hypridle; fi")
         hl.exec_cmd("noctalia-shell")
         hl.exec_cmd("awww-daemon")
@@ -50,7 +55,7 @@ hl.on("hyprland.start", function()
         hl.exec_cmd("wl-paste --type image --watch cliphist store")
 
         -- Special workspace for nvim scratchpad
-        hl.dsp.exec_cmd("foot --title=nvim-scratch nvim")
+        hl.exec_cmd("foot --title=nvim-scratch nvim")
 
         -- Start recording with noctalia-shell's screen recorder plugin (replay buffer)
         -- Start after 1 minute to ensure it starts after the plugin is loaded

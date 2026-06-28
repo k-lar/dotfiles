@@ -34,7 +34,7 @@ envs({
 
 -- Autostart these apps
 hl.on("hyprland.start", function()
-        hl.exec_cmd("discord")
+        hl.exec_cmd("discordcanary")
         hl.exec_cmd("if [ -e $HOME/.dotfiles/options/.laptop ]; then hypridle -c ${XDG_CONFIG_HOME}/hypr/hypridle_laptop.conf; else hypridle; fi")
         hl.exec_cmd("noctalia-shell")
         hl.exec_cmd("awww-daemon")

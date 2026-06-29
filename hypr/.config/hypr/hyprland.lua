@@ -290,3 +290,21 @@ hl.window_rule({
     match = { class = "^(steam)$" },
     workspace = "4 silent"
 })
+
+-- Prevent locking while any window is fullscreen
+hl.window_rule({
+    name = "Idle inhibit fullscreen",
+    match = {
+        class = ".*",
+    },
+    idle_inhibit = "fullscreen",
+})
+
+-- Prevent locking while a YouTube tab is focused
+hl.window_rule({
+    name = "Idle inhibit YouTube",
+    match = {
+        title = ".*YouTube.*",
+    },
+    idle_inhibit = "focus",
+})

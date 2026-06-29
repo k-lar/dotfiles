@@ -50,12 +50,17 @@ if status is-interactive
     end
     abbr -a !! --position anywhere --function last_history_item
 
-    if type -q tmux; and not set -q TMUX; and not set -q VIM; and not set -q INSIDE_EMACS
+    if type -q tmux; and not set -q TMUX; and not set -q VIM; and not set -q INSIDE_EMACS; and not test "$TERM_PROGRAM" = "vscode"
         tmux_start
     end
 
+    # If on macOS, append texbin to PATH
+    if test (uname) = "Darwin"
+        set -gx PATH "/Library/TeX/texbin" $PATH
+    end
+
     # System exports
-    set -gx EDITOR "/usr/bin/nvim"
+    set -gx EDITOR "nvim"
 
     # Emacs vterm support
     if test "$INSIDE_EMACS" = "vterm"

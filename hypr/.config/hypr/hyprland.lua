@@ -39,7 +39,7 @@ hl.on("hyprland.start", function()
         hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP")
         hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland.service xdg-desktop-portal.service")
 
-        hl.exec_cmd("sleep 2 && discordcanary")
+        hl.exec_cmd("sleep 2 && discord")
         hl.exec_cmd("if [ -e $HOME/.dotfiles/options/.laptop ]; then hypridle -c ${XDG_CONFIG_HOME}/hypr/hypridle_laptop.conf; else hypridle; fi")
         hl.exec_cmd("noctalia-shell")
         hl.exec_cmd("awww-daemon")
@@ -264,6 +264,18 @@ hl.window_rule({
     size = "1280 720",
     match = { title = "^(nvim-scratch)$" },
     workspace = "special silent"
+})
+
+hl.window_rule({
+    name = "Picture-in-Picture",
+    match = {
+        title = [[^([Pp]icture[-\s]?[Ii]n[-\s]?[Pp]icture)(.*)$]]
+    },
+    float = true,
+    pin = true,
+    focus_on_activate = false,
+    no_initial_focus = true,
+    suppress_event = "activate"
 })
 
 hl.window_rule({

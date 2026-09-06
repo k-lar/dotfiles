@@ -41,7 +41,7 @@ hl.on("hyprland.start", function()
 
         hl.exec_cmd("sleep 2 && discord")
         hl.exec_cmd("if [ -e $HOME/.dotfiles/options/.laptop ]; then hypridle -c ${XDG_CONFIG_HOME}/hypr/hypridle_laptop.conf; else hypridle; fi")
-        hl.exec_cmd("noctalia-shell")
+        hl.exec_cmd("noctalia")
         hl.exec_cmd("awww-daemon")
         hl.exec_cmd("emacs --daemon")
         hl.exec_cmd("kdeconnect-indicator")
@@ -59,7 +59,7 @@ hl.on("hyprland.start", function()
 
         -- Start recording with noctalia-shell's screen recorder plugin (replay buffer)
         -- Start after 1 minute to ensure it starts after the plugin is loaded
-        hl.exec_cmd("sleep 60 && qs -c noctalia-shell ipc call plugin:screen-recorder startReplay")
+        hl.exec_cmd("sleep 60 && noctalia msg plugin noctalia/screen_recorder:service all replay-start")
 end)
 
 -- General Hyprland config
@@ -159,8 +159,9 @@ hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" -t ppm - | satty --filena
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("pkill waybar && waybar"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.workspace.toggle_special("special"))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-recorder startReplay"))
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-recorder saveReplay"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("noctalia msg plugin noctalia/screen_recorder:service all replay-start"))
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("noctalia msg plugin noctalia/screen_recorder:service all replay-save"))
+
 
 -- Bind workspace switching and moving windows to workspaces
 for i = 1, 10 do

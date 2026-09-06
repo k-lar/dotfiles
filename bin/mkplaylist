@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 # This script creates a playlist file for the current directory (.m3u)

@@ -130,6 +130,6 @@ drawer = true
 show_label = false
 
 [widget.workspaces]
-empty_color = "primary"
+empty_color = "#B57614"
 occupied_color = "primary"
 show_labels = false

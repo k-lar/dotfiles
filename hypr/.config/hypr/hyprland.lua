@@ -321,3 +321,10 @@ hl.window_rule({
     },
     idle_inhibit = "focus",
 })
+
+-- Noctalia Settings
+hl.window_rule({
+    match = { class = "dev.noctalia.Noctalia" },
+    float = true,
+    size = { 1080, 920 },
+})

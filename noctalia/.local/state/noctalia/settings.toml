@@ -4,6 +4,7 @@ config_version = 14
 enable_overdrive = true
 
 [bar.default]
+center = [ "clock", "bar" ]
 end = [ "recorder", "battery", "bluetooth", "network", "volume", "brightness", "clipboard", "notifications", "tray" ]
 margin_ends = 0
 radius_top_left = 0
@@ -22,6 +23,17 @@ enabled = true
 [control_center.calendar]
 show_events_card = false
 show_week_numbers = true
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
 
 [location]
 address = "Ljubljana"
@@ -88,6 +100,9 @@ restore_portal = true
 video_qp = 10
 video_source = "focused"
 
+[plugins]
+enabled = [ "noctalia/screen_recorder", "yuuto/calculator" ]
+
 [shell]
 lang = "en"
 
@@ -106,6 +121,9 @@ enabled = false
 
     [wallpaper.last]
     path = "/nix/store/6c40hhhkl4n4qaj96hql18a4n9gakg7c-noctalia-5.0.1/share/noctalia/assets/noctalia-wallpaper.png"
+
+[widget.bar]
+type = "yuuto/calculator:bar"
 
 [widget.brightness]
 show_label = false

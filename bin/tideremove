@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Usage: ./tideremove /path/to/music
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: $0 /path/to/folder"
+    exit 1
+fi
+
+DIR="$1"
+
+if [[ ! -d "$DIR" ]]; then
+    echo "Error: '$DIR' is not a directory."
+    exit 1
+fi
+
+tidekeeper_count=0
+source_count=0
+total_count=0
+
+while IFS= read -r -d '' file; do
+    echo "Deleting: $file"
+    rm -- "$file"
+
+    if [[ "$file" == *.tidekeeper.json ]]; then
+        ((tidekeeper_count++))
+    elif [[ "$file" == *.source.json ]]; then
+        ((source_count++))
+    fi
+
+    ((total_count++))
+done < <(
+    find "$DIR" -type f \( \
+        -name '*.tidekeeper.json' -o \
+        -name '*.source.json' \
+    \) -print0
+)
+
+echo
+echo "Deleted $tidekeeper_count Tidekeeper JSON file(s)."
+echo "Deleted $source_count source JSON file(s)."
+echo "Total deleted: $total_count file(s)."

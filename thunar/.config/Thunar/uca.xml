@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+  <action>
+    <icon>utilities-terminal</icon>
+    <name>Open Terminal Here</name>
+    <command>foot --working-directory %f</command>
+    <description>Open a terminal in the selected folder</description>
+    <patterns>*</patterns>
+    <directories />
+    <audio-files />
+    <image-files />
+    <other-files />
+    <text-files />
+    <video-files />
+  </action>
+  <action>
+    <icon>audio-x-generic</icon>
+    <name>Coverify</name>
+    <command>foot --working-directory %d -- /home/klar/.dotfiles/bin/coverify</command>
+    <description>Write cover art to MP3 and FLAC files in this folder</description>
+    <patterns>*</patterns>
+    <directories />
+    <audio-files />
+  </action>
+  <action>
+    <icon>edit-delete</icon>
+    <name>Remove Tidekeeper Files</name>
+    <command>foot --working-directory %f -- /home/klar/.dotfiles/bin/tideremove %f</command>
+    <description>Delete Tidekeeper JSON files from this folder</description>
+    <patterns>*</patterns>
+    <directories />
+    <audio-files />
+  </action>
+</actions>
